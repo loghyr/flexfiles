@@ -34,18 +34,17 @@
     of such a protocol, yet the requirements for the protocol are specified in
     <xref target="RFC5661" /> and clarified in <xref target='pNFSLayouts' />.
   </t>
-</section>
 
 <!--
 
-<section anchor='sec:defs' title='Definitions'>
-  <t>
-    <list style='hanging'>
-      <t hangText='control protocol:'>
-      </t>
-    </list>
-  </t>
-</section>
+  <section anchor='sec:defs' title='Definitions'>
+    <t>
+      <list style='hanging'>
+        <t hangText='control protocol:'>
+        </t>
+      </list>
+    </t>
+  </section>
 -->
 
   <section title="Requirements Language">
@@ -57,4 +56,5 @@
       interpreted as described in <xref target="RFC2119" />.
     </t>
   </section>
+</section>
 

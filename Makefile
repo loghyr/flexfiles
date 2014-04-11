@@ -88,6 +88,7 @@ IDXMLSRC_BASE = \
 	flexfiles_middle_method.xml \
 	flexfiles_middle_xdr_desc.xml \
 	flexfiles_middle_devices.xml \
+	flexfiles_middle_layout.xml \
 	flexfiles_middle_existing.xml \
 	flexfiles_middle_security.xml \
 	flexfiles_middle_iana.xml \
