@@ -1,0 +1,43 @@
+<!-- Copyright (C) The IETF Trust (2014) -->
+<!-- Copyright (C) The Internet Society (2014) -->
+
+<section title="Striping Topologies Extensibility">
+  <t>
+    New striping topologies that are not specified in this document
+    may be specified using @@@.
+
+    These must be documented in the IETF by submitting an RFC augmenting
+    this protocol provided that:
+
+    <list style='symbols'>
+      <t>
+        New striping topologies MUST be wire-protocol compatible with the
+        Flexible Files Layout protocol as specified in this document.
+      </t>
+
+      <t>
+        Some members of the data structures specified here may be declared
+        as optional or manadatory-not-to-be-used.
+      </t>
+
+      <t>
+        Upon acceptance by the IETF as a RFC, new striping topology constants
+        MUST be registered as describe in <xref target="sec:iana" />.
+      </t>
+    </list>
+  </t>
+</section>
+
+<section anchor="sec:iana" title="IANA Considerations">
+  <t>
+    As described in <xref target="RFC5661" />,
+    new layout type numbers have been assigned by IANA.
+    This document defines the protocol associated with the existing
+    layout type number, LAYOUT4_FLEX_FILES.
+  </t>
+
+  <t>
+    A new IANA registry should be assigned to register new data map striping
+    topologies described by the enumerated type: @@@.
+  </t>
+</section>

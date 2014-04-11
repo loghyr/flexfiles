@@ -1,0 +1,35 @@
+<!-- Copyright (C) The IETF Trust (2014) -->
+<!-- Copyright (C) The Internet Society (2014) -->
+
+<section title="Acknowledgments">
+  <t>
+    The pNFS Objects Layout was authored and revised by Brent Welch, Jim Zelenka,
+    Benny Halevy, and Boaz Harrosh.
+  </t>
+
+  <t>
+    Those who provided miscellaneous comments to early drafts of this document include:
+        Matt W. Benjamin,
+        Adam Emerson,
+        Tom Haynes,
+        J. Bruce Fields,
+        and
+        Lev Solomonov.
+  </t>
+
+</section>
+
+<section title="RFC Editor Notes">
+
+<t>
+[RFC Editor: please remove this section prior to publishing
+this document as an RFC]
+
+</t>
+
+<t>
+[RFC Editor: prior to publishing this document as an RFC, please replace all occurrences of RFCTBD10
+with RFCxxxx where xxxx is the RFC number of this document]
+</t>
+
+</section>

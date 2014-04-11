@@ -1,0 +1,60 @@
+<!-- Copyright (C) The IETF Trust (2014) -->
+<!-- Copyright (C) The Internet Society (2014) -->
+
+<section anchor="sec:intro" title="Introduction">
+  <t>
+    In pNFS, the file server returns typed layout structures that
+    describe where file data is located.
+    There are different layouts for different storage systems and methods
+    of arranging data on storage devices.
+    This document defines the layout used with file-based data servers
+    that are accessed using the Network File System (NFS) Protocol:
+    NFSv3 (<xref target="RFC1813" />), NFSv4
+    (<xref target="RFC3530" />) and its newer minor version -
+    NFSv4.1 (<xref target="RFC5661" />).
+  </t>
+
+  <t>
+    In contrast to the LAYOUT4_NFSV4_1_FILES layout type
+    (<xref target="RFC5661" />)
+    that also uses NFSv4.1 to access the data server,
+    the Flexible Files layout defines a model of device metadata and
+    striping patterns that is inspired by the object layout
+    (<xref target="RFC5664" />)
+    that provide flexible, per-file striping patterns and simple device
+    information suitable aggregating standalone NFS servers into
+    a centrally managed pNFS cluster.
+  </t>
+
+  <t>
+    To provide a global state model equivalent to that of the files layout
+    a back-end control protocol may be implemented between the metadata
+    server (MDS) and NFSv4.1 data servers (DSs).
+    It is out of scope for this document to specify the wire protocol
+    of such a protocol, yet the requirements for the protocol are specified in
+    <xref target="RFC5661" /> and clarified in <xref target='pNFSLayouts' />.
+  </t>
+</section>
+
+<!--
+
+<section anchor='sec:defs' title='Definitions'>
+  <t>
+    <list style='hanging'>
+      <t hangText='control protocol:'>
+      </t>
+    </list>
+  </t>
+</section>
+-->
+
+  <section title="Requirements Language">
+    <t>
+      The key words &quot;MUST&quot;, &quot;MUST NOT&quot;,
+      &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
+      &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;,
+      &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document are to be
+      interpreted as described in <xref target="RFC2119" />.
+    </t>
+  </section>
+
