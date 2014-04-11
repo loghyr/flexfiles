@@ -212,7 +212,7 @@
     </t>
 
     <t>
-    For NFSv3 Data Servers, pfcf_auth provides the rpc credentials
+    For NFSv3 Data Servers, pfcf_auth provides the RPC credentials
     to be used by the client to access the Component Objects.
     For NFSv4.x Data Servers, the server SHOULD use the AUTH_NONE
     flavor and a zero length opaque body to minimize the returned
@@ -462,7 +462,7 @@ Note: W is added above to avoid negative numbers modulo math.
     object by setting the number of parity components (P) to 2
     instead of 1 for RAID-5 and computing the Parity Cycle length
     as the Lowest Common Multiple
-    of pfl_num_comps and P, devided by P, as described below.
+    of pfl_num_comps and P, divided by P, as described below.
     Note: This algorithm can be used also for RAID-5 where P=1.
     </t>
 
@@ -664,7 +664,7 @@ Data Server ran out of free capacity during the operation.
 PNFS_FF_ERR_BAD_STATEID indicates the stateid is not valid.
    </t>
    <t>
-PNFS_FF_ERR_NO_ACCESS indicates the rpc credentials do not allow
+PNFS_FF_ERR_NO_ACCESS indicates the RPC credentials do not allow
 the requested operation.  This may happen when the client is fenced
 off.
 The client will need to return the layout and get a new one with fresh credentials.
@@ -773,7 +773,7 @@ aggregate number of bytes transferred within the reported byte range.
 When object I/O operations failed, "pflr_ioerr_report&lt;&gt;" is used to report these errors
 to the metadata server as an array of elements of type pnfs_ff_ioerr4.
 Each element in the array represents an error that occurred on
-the Compoent Object identified by &lt;ioe_deviceid, ioe_fhandle&gt;.
+the Component Object identified by &lt;ioe_deviceid, ioe_fhandle&gt;.
 If no errors are to be reported, the size of the pflr_ioerr_report&lt;&gt; array
 is set to zero.
 The client MAY also use "pflr_iostats_report&lt;&gt;"

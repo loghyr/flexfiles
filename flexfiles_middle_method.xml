@@ -10,7 +10,7 @@
   </t>
 
   <t>
-    For the purpose of this discussion, we will distguish between
+    For the purpose of this discussion, we will distinguish between
     user files served by the metadata server, to be referred to as
     User Files; vs. user files served by Data Servers, to be referred to as
     Component Objects.
@@ -57,8 +57,8 @@
     <t>
       With NFSv4.x Data Servers, the Metadata Server sets the user
       and group owners, mode bits, and ACL of the Component Objects
-      to be the same as the User File. And the client must autheticate
-      with the Data Server nad go through the same authorization
+      to be the same as the User File. And the client must authenticate
+      with the Data Server and go through the same authorization
       process it would go through via the Metadata Server.
     </t>
   </section>
