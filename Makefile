@@ -6,8 +6,11 @@ MONTH=`date +%B`
 DAY=`date +%d`
 PREVVERS=01
 VERS=02
-BASEDOC=draft-bhalevy-nfsv4-flex-files
+
 XML2RFC=xml2rfc
+
+BASEDOC=draft-bhalevy-nfsv4-flex-files
+DOC_PREFIX=flexfiles
 
 autogen/%.xml : %.x
 	@mkdir -p autogen
@@ -66,41 +69,41 @@ $(BASEDOC)-$(VERS).html: $(BASEDOC)-$(VERS).xml
 $(BASEDOC)-$(VERS).nr: $(BASEDOC)-$(VERS).xml
 	${XML2RFC} --nroff $(BASEDOC)-$(VERS).xml -o $@
 
-flexfiles_front_autogen.xml: flexfiles_front.xml Makefile
-	sed -e s/DAYVAR/${DAY}/g -e s/MONTHVAR/${MONTH}/g -e s/YEARVAR/${YEAR}/g < flexfiles_front.xml > flexfiles_front_autogen.xml
+${DOC_PREFIX}_front_autogen.xml: ${DOC_PREFIX}_front.xml Makefile
+	sed -e s/DAYVAR/${DAY}/g -e s/MONTHVAR/${MONTH}/g -e s/YEARVAR/${YEAR}/g < ${DOC_PREFIX}_front.xml > ${DOC_PREFIX}_front_autogen.xml
 
-flexfiles_rfc_start_autogen.xml: flexfiles_rfc_start.xml Makefile
-	sed -e s/VERSIONVAR/${VERS}/g < flexfiles_rfc_start.xml > flexfiles_rfc_start_autogen.xml
+${DOC_PREFIX}_rfc_start_autogen.xml: ${DOC_PREFIX}_rfc_start.xml Makefile
+	sed -e s/VERSIONVAR/${VERS}/g < ${DOC_PREFIX}_rfc_start.xml > ${DOC_PREFIX}_rfc_start_autogen.xml
 
 AUTOGEN =	\
-		flexfiles_front_autogen.xml \
-		flexfiles_rfc_start_autogen.xml
+		${DOC_PREFIX}_front_autogen.xml \
+		${DOC_PREFIX}_rfc_start_autogen.xml
 
-START_PREGEN = flexfiles_rfc_start.xml
-START=	flexfiles_rfc_start_autogen.xml
-END=	flexfiles_rfc_end.xml
+START_PREGEN = ${DOC_PREFIX}_rfc_start.xml
+START=	${DOC_PREFIX}_rfc_start_autogen.xml
+END=	${DOC_PREFIX}_rfc_end.xml
 
-FRONT_PREGEN = flexfiles_front.xml
+FRONT_PREGEN = ${DOC_PREFIX}_front.xml
 
 IDXMLSRC_BASE = \
-	flexfiles_middle_start.xml \
-	flexfiles_middle_introduction.xml \
-	flexfiles_middle_method.xml \
-	flexfiles_middle_xdr_desc.xml \
-	flexfiles_middle_devices.xml \
-	flexfiles_middle_layout.xml \
-	flexfiles_middle_existing.xml \
-	flexfiles_middle_security.xml \
-	flexfiles_middle_iana.xml \
-	flexfiles_middle_end.xml \
-	flexfiles_back_front.xml \
-	flexfiles_back_references.xml \
-	flexfiles_back_acks.xml \
-	flexfiles_back_back.xml
+	${DOC_PREFIX}_middle_start.xml \
+	${DOC_PREFIX}_middle_introduction.xml \
+	${DOC_PREFIX}_middle_method.xml \
+	${DOC_PREFIX}_middle_xdr_desc.xml \
+	${DOC_PREFIX}_middle_devices.xml \
+	${DOC_PREFIX}_middle_layout.xml \
+	${DOC_PREFIX}_middle_existing.xml \
+	${DOC_PREFIX}_middle_security.xml \
+	${DOC_PREFIX}_middle_iana.xml \
+	${DOC_PREFIX}_middle_end.xml \
+	${DOC_PREFIX}_back_front.xml \
+	${DOC_PREFIX}_back_references.xml \
+	${DOC_PREFIX}_back_acks.xml \
+	${DOC_PREFIX}_back_back.xml
 
-IDCONTENTS = flexfiles_front_autogen.xml $(IDXMLSRC_BASE)
+IDCONTENTS = ${DOC_PREFIX}_front_autogen.xml $(IDXMLSRC_BASE)
 
-IDXMLSRC = flexfiles_front.xml $(IDXMLSRC_BASE)
+IDXMLSRC = ${DOC_PREFIX}_front.xml $(IDXMLSRC_BASE)
 
 draft-tmp.xml: $(START) Makefile $(END) $(IDCONTENTS)
 		rm -f $@ $@.tmp
