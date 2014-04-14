@@ -3,7 +3,7 @@
 
 <section title="Flexible Files Layout" anchor="sec:flexLayout">
   <t>
-    The layout4 type is defined in the <xref target="RFC5662" /> as follows:
+    The layout4 type is defined in <xref target="RFC5662" /> as follows:
   </t>
 
   <figure>

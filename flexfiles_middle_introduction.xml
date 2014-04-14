@@ -9,18 +9,17 @@
     of arranging data on storage devices.
     This document defines the layout used with file-based data servers
     that are accessed using the Network File System (NFS) Protocol:
-    NFSv3 (<xref target="RFC1813" />), NFSv4
-    (<xref target="RFC3530" />) and its newer minor version -
-    NFSv4.1 (<xref target="RFC5661" />).
+    NFSv3 <xref target="RFC1813" />, NFSv4
+    <xref target="RFC3530" /> and NFSv4.1 <xref target="RFC5661" />.
   </t>
 
   <t>
     In contrast to the LAYOUT4_NFSV4_1_FILES layout type
-    (<xref target="RFC5661" />)
+    <xref target="RFC5661" />
     that also uses NFSv4.1 to access the data server,
     the Flexible Files layout defines a model of device metadata and
     striping patterns that is inspired by the object layout
-    (<xref target="RFC5664" />)
+    <xref target="RFC5664" />
     that provide flexible, per-file striping patterns and simple device
     information suitable aggregating standalone NFS servers into
     a centrally managed pNFS cluster.

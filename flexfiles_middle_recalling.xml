@@ -1,0 +1,82 @@
+<!-- Copyright (C) The IETF Trust (2014) -->
+<!-- Copyright (C) The Internet Society (2014) -->
+
+<section title="Recalling Layouts">
+  <t>
+    The Flexible Files metadata server should recall outstanding layouts
+    in the following cases:
+
+    <list style='symbols'>
+      <t>
+        When the file's security policy changes, i.e., Access Control Lists
+        (ACLs) or permission mode bits are set.
+      </t>
+
+      <t>
+        When the file's layout changes, rendering outstanding layouts invalid.
+      </t>
+
+      <t>
+        When there are sharing conflicts. For example, the server will issue
+        stripe-aligned layout segments for RAID-5 objects.  To prevent
+        corruption of the file's parity, multiple clients must not hold
+        valid write layouts for the same stripes.  An outstanding READ/WRITE
+        (RW) layout should be recalled when a conflicting LAYOUTGET is
+        received from a different client for LAYOUTIOMODE4_RW and for a
+        byte range overlapping with the outstanding layout segment.
+      </t>
+    </list>
+  </t>
+
+  <section title="CB_RECALL_ANY" anchor="CB_RECALL_ANY">
+    <t>
+      The metadata server can use the CB_RECALL_ANY callback operation
+      to notify the client to return some or all of its layouts.
+      The <xref target="RFC5661" /> defines the following types:
+    </t>
+
+    <figure>
+      <artwork>
+const RCA4_TYPE_MASK_FF_LAYOUT_MIN     = -2;
+const RCA4_TYPE_MASK_FF_LAYOUT_MAX     = -1;
+[[RFC Editor: please insert assigned constants]]
+
+struct  CB_RECALL_ANY4args      {
+    uint32_t        craa_objects_to_keep;
+    bitmap4         craa_type_mask;
+};
+      </artwork>
+    </figure>
+
+    <t>
+      Typically, CB_RECALL_ANY will be used to recall client state when
+      the server needs to reclaim resources. The craa_type_mask bitmap
+      specifies the type of resources that are recalled and the
+      craa_objects_to_keep value specifies how many of the recalled objects
+      the client is allowed to keep.  The Flexible Files layout type mask
+      flags are defined as follows.  They represent the iomode of the
+      recalled layouts.  In response, the client SHOULD return layouts
+      of the recalled iomode that it needs the least, keeping at most
+      craa_objects_to_keep object-based layouts.
+    </t>
+
+    <figure>
+      <artwork>
+/// enum pnfs_ff_cb_recall_any_mask {
+///     PNFS_FF_RCA4_TYPE_MASK_READ = -2,
+///     PNFS_FF_RCA4_TYPE_MASK_RW   = -1
+[[RFC Editor: please insert assigned constants]]
+/// };
+///
+      </artwork>
+    </figure>
+
+    <t>
+      The PNFS_FF_RCA4_TYPE_MASK_READ flag notifies the client to
+      return layouts of iomode LAYOUTIOMODE4_READ.  Similarly, the
+      PNFS_FF_RCA4_TYPE_MASK_RW flag notifies the client to return
+      layouts of iomode LAYOUTIOMODE4_RW.  When both mask flags are
+      set, the client is notified to return layouts of either iomode.
+    </t>
+  </section>
+</section>

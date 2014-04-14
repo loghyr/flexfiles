@@ -40,11 +40,11 @@
       specification defines the semantics for pfda_versions 3 and
       4.  If pfda_version equals 3 then server MUST set pfda_minorversion
       to 0 and the client MUST access the data server using the
-      NFSv3 protocol (<xref target="RFC1813" />).  If pfda_version
+      NFSv3 protocol <xref target="RFC1813" />.  If pfda_version
       equals 4 then the server MUST set pfda_minorversion to either
       0 or 1 and the client MUST access the data server using NFSv4
-      (<xref target="RFC3530" />) or NFSv4.1
-      (<xref target="RFC5661" />), respectively.
+      <xref target="RFC3530" /> or NFSv4.1
+      <xref target="RFC5661" />, respectively.
     </t>
 
     <t>

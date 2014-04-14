@@ -48,7 +48,7 @@
         bypass the server for data access can increase both performance
         and parallelism, but requires additional client functionality
         for data access, some of which is dependent on the class
-        of storage used, a.k.a., the Layout Type.  The main pNFS
+        of storage used, i.e., the Layout Type.  The main pNFS
         operations and data types in NFSv4 Minor version 1 specify
         a layout-type-independent layer; layout-type-specific
         information is conveyed using opaque data structures whose

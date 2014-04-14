@@ -3,8 +3,8 @@
 
 <section anchor="xdr_desc" title="XDR Description of the Flexible Files Layout Protocol">
   <t>
-    This document contains the external data representation
-    (<xref target='RFC4506' />) description of the NFSv4.1 flexible files
+    This document contains the external data representation (XDR)
+    <xref target='RFC4506' /> description of the NFSv4.1 flexible files
     layout protocol.  The XDR description is embedded in this
     document in a way that makes it simple for the reader to extract
     into a ready-to-compile form.  The reader can feed this document
@@ -43,7 +43,7 @@ sh extract.sh &lt; spec.txt &gt; pnfs_flex_files_prot.x
 
   <t>
     Note that the XDR code contained in this document depends on
-    types from the NFSv4.1 nfs4_prot.x file (<xref target='RFC5662' />).
+    types from the NFSv4.1 nfs4_prot.x file (see <xref target='RFC5662' />).
     This includes both nfs types that end with a 4, such as
     offset4, length4, etc., as well as more generic types such as
     uint32_t and uint64_t.

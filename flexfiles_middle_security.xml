@@ -3,13 +3,14 @@
 
 <section anchor="sec:fencing" title="Client Fencing">
   <t>
-    In cases where clients are uncommunicative and their lease has expired
-    or when clients fail to return recalled layouts within a lease period
-    at the least (see "Recalling a Layout" in <xref target='RFC5661' />), the
-    server MAY revoke client layouts and/or device address mappings and reassign
-    these resources to other clients.
-    To avoid data corruption, the metadata server MUST fence off the revoked
-    clients from the respective objects as described in <xref target='sec:sec_models' />.
+    In cases where clients are uncommunicative and their lease has
+    expired or when clients fail to return recalled layouts within
+    a lease period, at the least the server MAY revoke client layouts
+    and/or device address mappings and reassign these resources to
+    other clients (see "Recalling a Layout" in
+    <xref target='RFC5661' />).  To avoid data corruption, the metadata
+    server MUST fence off the revoked clients from the respective
+    objects as described in <xref target='sec:sec_models' />.
  </t>
 </section>
 
