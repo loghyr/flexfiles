@@ -43,7 +43,7 @@ sh extract.sh &lt; spec.txt &gt; pnfs_flex_files_prot.x
 
   <t>
     Note that the XDR code contained in this document depends on
-    types from the NFSv4.1 nfs4_prot.x file (see <xref target='RFC5662' />).
+    types from the NFSv4.1 nfs4_prot.x file <xref target='RFC5662' />.
     This includes both nfs types that end with a 4, such as
     offset4, length4, etc., as well as more generic types such as
     uint32_t and uint64_t.
@@ -51,12 +51,11 @@ sh extract.sh &lt; spec.txt &gt; pnfs_flex_files_prot.x
 
   <section anchor="code_copyright" title="Code Components Licensing Notice">
     <t>
-      The XDR description, marked with lines beginning with the sequence
-      "///", as well as scripts for extracting the XDR description
+      Both the XDR description and the scripts used for extracting the XDR description
       are Code Components as described in Section 4 of
       <xref target="LEGAL">"Legal Provisions Relating to IETF Documents"</xref>.
-      These Code Components are licensed according to the terms of Section
-      4 of "Legal Provisions Relating to IETF Documents".
+      These Code Components are licensed according to the terms of that
+      document.
     </t>
     <figure>
       <artwork>

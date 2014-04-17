@@ -10,7 +10,7 @@
     This document defines the layout used with file-based data servers
     that are accessed using the Network File System (NFS) Protocol:
     NFSv3 <xref target="RFC1813" />, NFSv4
-    <xref target="RFC3530" /> and NFSv4.1 <xref target="RFC5661" />.
+    <xref target="RFC3530" />, and NFSv4.1 <xref target="RFC5661" />.
   </t>
 
   <t>

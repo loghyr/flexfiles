@@ -13,7 +13,8 @@
 ///     LAYOUT4_OSD2_OBJECTS    = 2,
 ///     LAYOUT4_BLOCK_VOLUME    = 3,
 ///     LAYOUT4_FLEX_FILES      = 4
-[[RFC Editor: please insert layouttype assigned by IANA]]
+[[RFC Editor: please modify the LAYOUT4_FLEX_FILES
+  to be the layouttype assigned by IANA]]
 /// };
 ///
 /// struct layout_content4 {
@@ -32,7 +33,7 @@
 
    <t>
      This document defines structure associated with the layouttype4
-     value LAYOUT4_FLEX_FILES.  NFSv4.1 <xref target="RFC5661" />
+     value LAYOUT4_FLEX_FILES.  <xref target="RFC5661" />
      specifies the loc_body structure as an XDR type "opaque".  The
      opaque layout is uninterpreted by the generic pNFS client
      layers, but obviously must be interpreted by the flexible files

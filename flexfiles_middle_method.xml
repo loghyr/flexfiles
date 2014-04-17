@@ -73,9 +73,9 @@
       With NFSv4 Data Servers, the Metadata Server, in response to the state
       changing operation, executes them against the respective Component
       Objects on the Data Server(s).  It then sends the Data Server
-      open stateid as part of the layout (see pfcf_stateid) and
-      it is then used by the client for executing READ/WRITE operations
-      against the Data Server.
+      open stateid as part of the layout (see the pfcf_stateid in
+      <xref target='pnfs_ff_layout' />) and it is then used by the
+      client for executing READ/WRITE operations against the Data Server.
     </t>
 
     <t>
