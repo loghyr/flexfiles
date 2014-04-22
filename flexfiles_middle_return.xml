@@ -115,6 +115,12 @@ struct LAYOUTRETURN4args {
           to a local problem on the initiator (i.e., client) side,
           e.g., when running out of memory.  The client MUST guarantee
           that the Data Server WRITE operation was never sent.
+
+          <cref anchor='AI2 ' source='TH'>
+            Besides not needing an "i.e." followed by an "e.g.",
+            is initiator a term we can employ here? Sounds
+            very objecty!
+          </cref>
         </t>
       </list>
     </t>
