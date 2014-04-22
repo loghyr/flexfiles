@@ -458,10 +458,10 @@ Note: W is added above to avoid negative numbers modulo math.
     <section anchor="PFSP_RAID_PQ" title="PFSP_RAID_PQ">
       <t>
         PFSP_RAID_PQ is a double-parity scheme that uses the Reed-Solomon
-        P+Q encoding scheme <xref target='ErrorCorrectingCodes' />.  In
+        P+Q encoding scheme <xref target='MacWilliams77' />.  In
         this layout, the last two component objects hold the P and Q
         data, respectively.  P is parity computed with XOR.  The Q
-        computation is described in detail in <xref target='MathOfRAID-6' />.
+        computation is described in detail in <xref target='Anvin09' />.
         The same polynomial "x^8+x^4+x^3+x^2+1" and Galois field
         size of 2^8 are used here.  Clients may simply choose to read
         data through the metadata server if two or more components are
@@ -508,7 +508,7 @@ Q: The device index holding the Q component
 
       <t>
         Many alternative encoding schemes exist for P &gt;= 2
-        <xref target='ErasureCodingLibraries' />.  These involve P or Q
+        <xref target='Plank07' />.  These involve P or Q
         equations different than those used in PFSP_RAID_PQ.  Thus, if
         one of these schemes is to be used in the future, a distinct
         value must be added to pnfs_ff_striping_pattern for it. While

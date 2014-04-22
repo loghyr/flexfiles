@@ -139,7 +139,7 @@
     <seriesInfo name="RFC" value="5664"/>
   </reference>
 
-  <reference anchor='ErrorCorrectingCodes'>
+  <reference anchor='MacWilliams77'>
     <front>
       <title>The Theory of Error-Correcting Codes, Part I</title>
       <author initials='F. J.' surname='MacWilliams' fullname='F. J. MacWilliams'>
@@ -166,7 +166,7 @@
     </reference>
 
 
-  <reference anchor='MathOfRAID-6'
+  <reference anchor='Anvin09'
              target='http://kernel.org/pub/linux/kernel/people/hpa/raid6.pdf'>
     <front>
       <title>The Mathematics of RAID-6</title>
@@ -177,7 +177,7 @@
     </front>
   </reference>
 
-  <reference anchor='ErasureCodingLibraries'>
+  <reference anchor='Plank07'>
     <front>
       <title>A Performance Evaluation and Examination of Open-source Erasure Coding Libraries for Storage</title>
       <author initials='' surname="Plank, James S., and Luo, Jianqiang and Schuman, Catherine D. and
