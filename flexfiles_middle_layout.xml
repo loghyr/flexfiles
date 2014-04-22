@@ -1,7 +1,7 @@
 <!-- Copyright (C) The IETF Trust (2014) -->
 <!-- Copyright (C) The Internet Society (2014) -->
 
-<section title="Flexible Files Layout" anchor="sec:flexLayout">
+<section title="Flexible File Layout Type" anchor="sec:flexLayout">
   <t>
     The layout4 type is defined in <xref target="RFC5662" /> as follows:
   </t>
@@ -36,9 +36,14 @@
      value LAYOUT4_FLEX_FILES.  <xref target="RFC5661" />
      specifies the loc_body structure as an XDR type "opaque".  The
      opaque layout is uninterpreted by the generic pNFS client
-     layers, but obviously must be interpreted by the flexible files
-     layout driver.  This section defines the structure of this
+     layers, but obviously must be interpreted by the Flexible File
+     Layout Type driver.  This section defines the structure of this
      opaque value, pnfs_ff_layout4.
+
+     <cref anchor='AI1 ' source='TH'>
+       What is a driver? I.e., I know what it is, but have we
+       defined it? Are we talking implementation here?
+     </cref>
    </t>
 
    <section title="pnfs_ff_layout" anchor="pnfs_ff_layout">

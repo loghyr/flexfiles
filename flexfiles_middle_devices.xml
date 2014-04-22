@@ -59,7 +59,7 @@
 
   <section title="Data Server Multipathing" anchor="sec:DSM">
     <t>
-      The flexible file layout supports multipathing to multiple
+      The Flexible File Layout Type supports multipathing to multiple
       data server addresses.  Data-server-level multipathing is
       used for bandwidth scaling via trunking and for higher
       availability of use in the case of a data-server failure.

@@ -1,7 +1,7 @@
 <!-- Copyright (C) The IETF Trust (2014) -->
 <!-- Copyright (C) The Internet Society (2014) -->
 
-<section title="Flexible Files Layout Return">
+<section title="Flexible Files Layout Type Return">
   <t>
     layoutreturn_file4 is used in the LAYOUTRETURN operation
     to convey layout-type specific information to the server.

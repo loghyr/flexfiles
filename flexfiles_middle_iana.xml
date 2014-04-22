@@ -12,7 +12,7 @@
     <list style='symbols'>
       <t>
         New striping topologies MUST be wire-protocol compatible with the
-        Flexible Files Layout protocol as specified in this document.
+        Flexible File Layout Type as specified in this document.
       </t>
 
       <t>

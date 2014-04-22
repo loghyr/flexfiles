@@ -1,7 +1,7 @@
 <!-- Copyright (C) The IETF Trust (2014) -->
 <!-- Copyright (C) The Internet Society (2014) -->
 
-<section title="Flexible Files Creation Layout Hint">
+<section title="Flexible File Layout Type Creation Hint">
   <t>
     The layouthint4 type is defined in the
     <xref target="RFC5661" /> as follows:
@@ -68,7 +68,7 @@ struct layouthint4 {
     <t>
       This type conveys hints for the desired data map.  All parameters
       are optional so the client can give values for only the parameters
-      it cares about, e.g. it can provide a hint for the desired number
+      it cares about, e.g., it can provide a hint for the desired number
       of mirrored components, regardless of the striping pattern selected
       for the file.  The server should make an attempt to honor the hints,
       but it can ignore any or all of them at its own discretion and

@@ -3,10 +3,10 @@
 
 <section title="Method of Operation">
   <t>
-    This section describes the semantics and format of flexible
-    file-based layouts for pNFS.  Flexible file-based layouts use
-    the LAYOUT4_FLEX_FILES layout type.  The LAYOUT4_FLEX_FILES
-    type defines striping data across multiple NFS Data Servers.
+    This section describes the semantics and format of the Flexible
+    File Layout Type for pNFS: LAYOUT4_FLEX_FILES.
+    The new Layout Type defines striping data across
+    multiple NFS Data Servers.
   </t>
 
   <t>

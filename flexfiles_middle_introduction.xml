@@ -17,7 +17,7 @@
     In contrast to the LAYOUT4_NFSV4_1_FILES layout type
     <xref target="RFC5661" />
     that also uses NFSv4.1 to access the data server,
-    the Flexible Files layout defines a model of device metadata and
+    the Flexible File Layout Type defines a model of device metadata and
     striping patterns that is inspired by the object layout
     <xref target="RFC5664" />
     that provide flexible, per-file striping patterns and simple device
