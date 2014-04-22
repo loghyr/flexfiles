@@ -39,19 +39,20 @@
       of the Component Objects is allowed read/write access and the
       gid owner is allowed read only access.  As part of the layout,
       the client is provided with the rpc credentials to be used
-      (XREF pfcf_auth) to access the Object.  Fencing off clients
-      is achieved by using SETATTR by the server to change the uid
-      and/or gid owners of the Component Objects to implicitly
-      revoke the outstanding rpc credentials.  Note: it is recommended
-      to implement common access control methods at the Data Server
-      filesystem exports level to allow only the Metadata Server
-      root (super user) access to the Data Server, and to set the
-      owner of all directories holding Component Objects to the
-      root user.  This security method, when using weak auth flavors
-      such as AUTH_SYS, provides a practical model to enforce access
-      control and fence off cooperative clients, but it can not
-      protect against malicious clients; hence it provides a level
-      of security equivalent to NFSv3.
+      (see pfcf_auth in  <xref target='pnfs_ff_layout' />) to access
+      the Object.  Fencing off clients is achieved by using SETATTR
+      by the server to change the uid and/or gid owners of the
+      Component Objects to implicitly revoke the outstanding rpc
+      credentials.  Note: it is recommended to implement common
+      access control methods at the Data Server filesystem exports
+      level to allow only the Metadata Server root (super user)
+      access to the Data Server, and to set the owner of all
+      directories holding Component Objects to the root user.  This
+      security method, when using weak auth flavors such as AUTH_SYS,
+      provides a practical model to enforce access control and fence
+      off cooperative clients, but it can not protect against
+      malicious clients; hence it provides a level of security
+      equivalent to NFSv3.
     </t>
 
     <t>
