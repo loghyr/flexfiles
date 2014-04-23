@@ -8,26 +8,26 @@
 
   <figure>
     <artwork>
-/// enum layouttype4 {
-///     LAYOUT4_NFSV4_1_FILES   = 1,
-///     LAYOUT4_OSD2_OBJECTS    = 2,
-///     LAYOUT4_BLOCK_VOLUME    = 3,
-///     LAYOUT4_FLEX_FILES      = 4
+    enum layouttype4 {
+        LAYOUT4_NFSV4_1_FILES   = 1,
+        LAYOUT4_OSD2_OBJECTS    = 2,
+        LAYOUT4_BLOCK_VOLUME    = 3,
+        LAYOUT4_FLEX_FILES      = 4
 [[RFC Editor: please modify the LAYOUT4_FLEX_FILES
   to be the layouttype assigned by IANA]]
-/// };
-///
-/// struct layout_content4 {
-///     layouttype4             loc_type;
-///     opaque                  loc_body&lt;&gt;;
-/// };
-///
-/// struct layout4 {
-///     offset4                 lo_offset;
-///     length4                 lo_length;
-///     layoutiomode4           lo_iomode;
-///     layout_content4         lo_content;
-/// };
+    };
+   
+    struct layout_content4 {
+        layouttype4             loc_type;
+        opaque                  loc_body&lt;&gt;;
+    };
+   
+    struct layout4 {
+        offset4                 lo_offset;
+        length4                 lo_length;
+        layoutiomode4           lo_iomode;
+        layout_content4         lo_content;
+    };
     </artwork>
    </figure>
 
