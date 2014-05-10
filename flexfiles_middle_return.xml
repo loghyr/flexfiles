@@ -18,6 +18,11 @@ struct layoutreturn_file4 {
         opaque          lrf_body&lt;&gt;;
 };
 
+    </artwork>
+  </figure>
+
+  <figure>
+    <artwork>
 union layoutreturn4 switch(layoutreturn_type4 lr_returntype) {
         case LAYOUTRETURN4_FILE:
                 layoutreturn_file4      lr_layout;
@@ -25,6 +30,11 @@ union layoutreturn4 switch(layoutreturn_type4 lr_returntype) {
                 void;
 };
 
+    </artwork>
+  </figure>
+
+  <figure>
+    <artwork>
 struct LAYOUTRETURN4args {
         /* CURRENT_FH: file */
         bool                    lora_reclaim;
