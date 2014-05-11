@@ -152,6 +152,11 @@ struct LAYOUTRETURN4args {
     </figure>
 
     <t>
+      <cref anchor='AI3 ' source='TH'>
+        Note that ioe_fhandle doesn't work as that should
+        be given in the operation!
+      </cref>
+
       The pnfs_ff_ioerr4 structure is used to return error indications
       for Component Objects that generated errors during data
       transfers.  These are hints to the metadata server that there
