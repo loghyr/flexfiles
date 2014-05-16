@@ -52,7 +52,7 @@ struct LAYOUTRETURN4args {
   <section anchor="pflr_errno" title="pflr_errno">
     <figure>
       <artwork>
-/// enum pflr_errno {
+/// enum pnfs_ff_errno {
 ///     PNFS_FF_ERR_EIO            = 1,
 ///     PNFS_FF_ERR_NOT_FOUND      = 2,
 ///     PNFS_FF_ERR_NO_SPACE       = 3,
@@ -66,7 +66,7 @@ struct LAYOUTRETURN4args {
     </figure>
 
     <t>
-      pflr_errno4 is used to represent error types when read/write
+      pnfs_ff_errno is used to represent error types when read/write
       errors are reported to the metadata server.  The error codes
       serve as hints to the metadata server that may help it in
       diagnosing the exact reason for the error and in repairing it.

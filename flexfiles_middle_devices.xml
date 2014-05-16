@@ -4,16 +4,16 @@
 <section title="Device Addressing and Discovery">
   <t>
     Data operations to a data server require the client to know the
-    network address of the data server.  The GETDEVICEINFO NFSv4.1
-    operation is used by the client to retrieve that information.
+    network address of the data server.  The NFSv4.1 GETDEVICEINFO 
+    operation (Section 18.40 of <xref target="RFC5661" />) is
+    used by the client to retrieve that information.
   </t>
 
   <section title="pnfs_ff_device_addr" anchor="pnfs_ff_device_addr">
     <t>
       The pnfs_ff_device_addr data structure is returned by the server
-      as the storage-protocol-specific opaque field da_addr_body in the
-      device_addr4 structure by a successful GETDEVICEINFO operation
-      <xref target="RFC5661" />.
+      as the storage protocol specific opaque field da_addr_body in the
+      device_addr4 structure by a successful GETDEVICEINFO operation.
     </t>
 
     <figure>
@@ -43,8 +43,8 @@
       NFSv3 protocol <xref target="RFC1813" />.  If pfda_version
       equals 4 then the server MUST set pfda_minorversion to either
       0 or 1 and the client MUST access the data server using NFSv4
-      <xref target="RFC3530" /> or NFSv4.1
-      <xref target="RFC5661" />, respectively.
+      <xref target="RFC3530" /> or NFSv4.1 <xref target="RFC5661" />,
+      respectively.
     </t>
 
     <t>
