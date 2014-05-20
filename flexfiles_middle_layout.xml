@@ -57,12 +57,22 @@
 ///     FFSP_RAID_PQ         = 6
 /// };
 ///
+       </artwork>
+     </figure>
+
+     <figure>
+       <artwork>
 /// enum ff_comp_type {
 ///     FF_COMP_MISSING = 0,
 ///     FF_COMP_PACKED  = 1,
 ///     FF_COMP_FULL    = 2
 /// };
 ///
+       </artwork>
+     </figure>
+
+     <figure>
+       <artwork>
 /// struct ff_comp_full {
 ///     deviceid4               ffcf_deviceid;
 ///     nfs_fh4                 ffcf_fhandle;
@@ -71,6 +81,11 @@
 ///     uint32_t                ffcf_metric;
 /// };
 ///
+       </artwork>
+     </figure>
+
+     <figure>
+       <artwork>
 /// union ff_comp switch (ff_comp_type ffc_type) {
 ///    case FF_COMP_MISSING:
 ///         void;
@@ -82,6 +97,11 @@
 ///         ff_comp_full            ffcp_full;
 /// };
 ///
+       </artwork>
+     </figure>
+
+     <figure>
+       <artwork>
 /// struct ff_layout {
 ///     ff_striping_pattern         ffl_striping_pattern;
 ///     uint32_t                    ffl_num_comps;
@@ -143,7 +163,7 @@
 
      <t>
        ffl_mirror_cnt represents the number of mirrors each component
-       in the stripe has.  If there is no mirroring then pfm_mirror_cnt
+       in the stripe has.  If there is no mirroring then ffl_mirror_cnt
        MUST be 0.  Otherwise, the number of entries listed in ffl_comps
        MUST be a multiple of (ffl_mirror_cnt + 1).
      </t>
@@ -181,8 +201,8 @@
      </t>
 
      <t>
-       When a component object is unavailable pfc_type is set to
-       PNFS_FF_COMP_MISSING and no other information for this component
+       When a component object is unavailable ffc_type is set to
+       FF_COMP_MISSING and no other information for this component
        is returned.  When a data redundancy scheme is being used,
        as represented by ffl_striping_pattern, the client MAY use a
        respective data recovery algorithm to reconstruct data that
@@ -192,8 +212,8 @@
      </t>
 
      <t>
-       The server MUST set the same pfc_type for all available components to
-       either PNFS_FF_COMP_PACKED or PNFS_FF_COMP_FULL.
+       The server MUST set the same ffc_type for all available components to
+       either FF_COMP_PACKED or FF_COMP_FULL.
      </t>
 
      <t>
@@ -210,21 +230,21 @@
      </t>
 
      <t>
-       pfcp_deviceid or pfcf_deviceid provide the
+       ffcp_deviceid or ffcf_deviceid provide the
        deviceid of the data server holding the Component Object.
      </t>
 
      <t>
        When standalone data servers are used, either over NFSv4 or
        NFSv4.1, ffl_global_fh SHOULD be set to an empty filehandle
-       and it MUST be ignored by the client and pfcf_fhandle provides
+       and it MUST be ignored by the client and ffcf_fhandle provides
        the filehandle of the Data Server file holding the Component
-       Object, and pfcf_stateid provides the stateid to be used by
+       Object, and ffcf_stateid provides the stateid to be used by
        the client to access the file.
      </t>
 
      <t>
-       For NFSv3 Data Servers, pfcf_auth provides the RPC credentials
+       For NFSv3 Data Servers, ffcf_auth provides the RPC credentials
        to be used by the client to access the Component Objects.
        For NFSv4.x Data Servers, the server SHOULD use the AUTH_NONE
        flavor and a zero length opaque body to minimize the returned
@@ -232,12 +252,12 @@
      </t>
 
      <t>
-       When ffl_mirror_cnt is not zero pfcf_metric indicates the
+       When ffl_mirror_cnt is not zero ffcf_metric indicates the
        distance to the client the distance of the respective component
-       object, otherwise the server MUST set pfcf_metric to zero.
+       object, otherwise the server MUST set ffcf_metric to zero.
        When reading data, the client the client is advised to read
-       from components with the lowest pfcf_metric.  When there are
-       several components with the same pfcf_metric client implementations
+       from components with the lowest ffcf_metric.  When there are
+       several components with the same ffcf_metric client implementations
        may implement a load distribution algorithm to evenly distribute
        the read load across several devices and by so provide larger
        bandwidth.
@@ -261,7 +281,7 @@
        RAID systems.
      </t>
 
-     <section anchor="sec:sparseStriping" title="PFSP_SPARSE_STRIPING">
+     <section anchor="sec:sparseStriping" title="FFSP_SPARSE_STRIPING">
        <t>
          The mapping from the logical offset within a file (L)
          to the Component Object C and object-specific offset
@@ -300,17 +320,17 @@ O: The component offset corresponding to L
        </t>
 
        <t>
-         PFSP_SPARSE_STRIPING means there is no
+         FFSP_SPARSE_STRIPING means there is no
          parity data, so all bytes in the component objects are
          data bytes located by the above equations for C and O.
-         If a component object is marked as PNFS_FF_COMP_MISSING,
+         If a component object is marked as FF_COMP_MISSING,
          the pNFS client MUST either return an I/O error if this component
          is attempted to be read or, alternatively, it can
          retry the READ against the pNFS server.
        </t>
      </section>
 
-    <section anchor="sec:denseStriping" title="PFSP_DENSE_STRIPING">
+    <section anchor="sec:denseStriping" title="FFSP_DENSE_STRIPING">
       <t>
         The mapping from the logical
         offset within a file (L) to the component object C and
@@ -348,10 +368,10 @@ O: The component offset corresponding to L
       </t>
 
       <t>
-        PFSP_DENSE_STRIPING means there is no parity data, so all
+        FFSP_DENSE_STRIPING means there is no parity data, so all
         bytes in the component objects are data bytes located by
         the above equations for C and O.  If a component object is
-        marked as PNFS_FF_COMP_MISSING, the pNFS client MUST either
+        marked as FF_COMP_MISSING, the pNFS client MUST either
         return an I/O error if this component is attempted to be
         read or, alternatively, it can retry the READ against the
         pNFS server.
@@ -369,9 +389,9 @@ O: The component offset corresponding to L
       </t>
     </section>
 
-    <section anchor="PFSP_RAID_4" title="PFSP_RAID_4">
+    <section anchor="FFSP_RAID_4" title="FFSP_RAID_4">
       <t>
-        PFSP_RAID_4 means that the last component object in the
+        FFSP_RAID_4 means that the last component object in the
         stripe contains parity information computed over the rest
         of the stripe with an XOR operation.  If a Component Object
         is unavailable, the client can read the rest of the stripe
@@ -403,9 +423,9 @@ I: parity device index
       </figure>
     </section>
 
-    <section anchor="PFSP_RAID_5" title="PFSP_RAID_5">
+    <section anchor="FFSP_RAID_5" title="FFSP_RAID_5">
       <t>
-        PNFS_OBJ_RAID_5 means that the position of the parity data is
+        OBJ_RAID_5 means that the position of the parity data is
         rotated on each stripe.  In the first stripe, the last component
         holds the parity.  In the second stripe, the next-to-last
         component holds the parity, and so on.  In this scheme, all
@@ -455,9 +475,9 @@ Note: W is added above to avoid negative numbers modulo math.
       </figure>
     </section>
 
-    <section anchor="PFSP_RAID_PQ" title="PFSP_RAID_PQ">
+    <section anchor="FFSP_RAID_PQ" title="FFSP_RAID_PQ">
       <t>
-        PFSP_RAID_PQ is a double-parity scheme that uses the Reed-Solomon
+        FFSP_RAID_PQ is a double-parity scheme that uses the Reed-Solomon
         P+Q encoding scheme <xref target='MacWilliams77' />.  In
         this layout, the last two component objects hold the P and Q
         data, respectively.  P is parity computed with XOR.  The Q
@@ -509,7 +529,7 @@ Q: The device index holding the Q component
       <t>
         Many alternative encoding schemes exist for P &gt;= 2
         <xref target='Plank07' />.  These involve P or Q
-        equations different than those used in PFSP_RAID_PQ.  Thus, if
+        equations different than those used in FFSP_RAID_PQ.  Thus, if
         one of these schemes is to be used in the future, a distinct
         value must be added to ff_striping_pattern for it. While
         Reed-Solomon codes are well understood, recently discovered

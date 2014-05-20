@@ -34,6 +34,11 @@ struct layouthint4 {
 ///         void;
 /// };
 ///
+      </artwork>
+    </figure>
+
+    <figure>
+      <artwork>
 /// union ff_stripe_unit_hint switch (bool ffsu_valid) {
 ///     case TRUE:
 ///         length4              ffsu_stripe_unit;
@@ -41,6 +46,11 @@ struct layouthint4 {
 ///         void;
 /// };
 ///
+      </artwork>
+    </figure>
+
+    <figure>
+      <artwork>
 /// union ff_mirror_cnt_hint switch (bool ffmc_valid) {
 ///     case TRUE:
 ///         uint32_t             ffomc_mirror_cnt;
@@ -48,6 +58,11 @@ struct layouthint4 {
 ///         void;
 /// };
 ///
+      </artwork>
+    </figure>
+
+    <figure>
+      <artwork>
 /// union ff_striping_pattern_hint switch (bool ffsp_valid) {
 ///     case TRUE:
 ///         ff_striping_pattern  ffsp_striping_pattern;
@@ -55,6 +70,11 @@ struct layouthint4 {
 ///         void;
 /// };
 ///
+      </artwork>
+    </figure>
+
+    <figure>
+      <artwork>
 /// struct ff_layouthint {
 ///     ff_max_comps_hint         fflh_max_comps_hint;
 ///     ff_stripe_unit_hint       fflh_stripe_unit_hint;

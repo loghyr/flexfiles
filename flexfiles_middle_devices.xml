@@ -29,26 +29,25 @@
     </figure>
 
     <t>
-      The pfda_netaddrs field is used to locate the data server.
+      The ffda_netaddrs field is used to locate the data server.
       It MUST be set by the server to a list holding one or more
       of the device network addresses.
     </t>
 
     <t>
-      The pfda_version and pfda_minorversion represent the NFS
+      The ffda_version and ffda_minorversion represent the NFS
       protocol to be used to access the data server.  This layout
-      specification defines the semantics for pfda_versions 3 and
-      4.  If pfda_version equals 3 then server MUST set pfda_minorversion
+      specification defines the semantics for ffda_versions 3 and
+      4.  If ffda_version equals 3 then server MUST set ffda_minorversion
       to 0 and the client MUST access the data server using the
-      NFSv3 protocol <xref target="RFC1813" />.  If pfda_version
-      equals 4 then the server MUST set pfda_minorversion to either
-      0 or 1 and the client MUST access the data server using NFSv4
-      <xref target="RFC3530" /> or NFSv4.1 <xref target="RFC5661" />,
-      respectively.
+      NFSv3 protocol <xref target="RFC1813" />.  If ffda_version
+      equals 4 then the server MUST set ffda_minorversion to one of
+      the NFSv4 minor version numbers and the client MUST access the
+      data server using NFSv4.
     </t>
 
     <t>
-      The pfda_path MAY be set by the server to an exported path
+      The ffda_path MAY be set by the server to an exported path
       on the data server for device identification.  If provided,
       the path MUST exist and be accessible to the client.  If the
       path does not exist, the client MUST ignore this device
@@ -70,7 +69,7 @@
     </t>
 
     <t>
-      To support data server multipathing, pfda_netaddrs contains
+      To support data server multipathing, ffda_netaddrs contains
       an array of one more data server network addresses.  This
       array (data type multipath_list4) represents a list of data
       servers (each identified by a network address), with the
@@ -83,15 +82,15 @@
       destination to send data server requests.  If some network
       addresses are less optimal paths to the data than others,
       then the MDS SHOULD NOT include those network addresses in
-      pfda_netaddrs.  If less optimal network addresses exist to
+      ffda_netaddrs.  If less optimal network addresses exist to
       provide failover, the RECOMMENDED method to offer the addresses
       is to provide them in a replacement device-ID-to-device-address
       mapping, or a replacement device ID.  When a client finds no
       response from the data server using all addresses available
-      in pfda_netaddrs, it SHOULD send a GETDEVICEINFO to attempt
+      in ffda_netaddrs, it SHOULD send a GETDEVICEINFO to attempt
       to replace the existing device-ID-to-device-address mappings.
       If the MDS detects that all network paths represented by
-      pfda_netaddrs are unavailable, the MDS SHOULD send a
+      ffda_netaddrs are unavailable, the MDS SHOULD send a
       CB_NOTIFY_DEVICEID (if the client has indicated it wants
       device ID notifications for changed device IDs) to change the
       device-ID-to-device-address mappings to the available addresses.
@@ -102,7 +101,7 @@
     </t>
 
     <t>
-      Generally, if two network addresses appear in pfda_netaddrs,
+      Generally, if two network addresses appear in ffda_netaddrs,
       they will designate the same data server.  When the data server
       is accessed over NFSv4.1 or higher minor version the two data
       server addresses will support the implementation of client ID

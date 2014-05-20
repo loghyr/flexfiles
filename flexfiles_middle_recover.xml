@@ -8,7 +8,7 @@
     Metadata Server to recover from the I/O errors.  When the
     LAYOUT4_FLEX_FILES layout type is used, the client MUST report
     the I/O errors to the server at LAYOUTRETURN time using the
-    pflr_ioerr4 structure (see <xref target="pflr_errno" />).
+    ff_ioerr structure (see <xref target="ff_ioerr" />).
   </t>
 
   <t>

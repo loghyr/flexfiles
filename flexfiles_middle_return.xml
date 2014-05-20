@@ -59,7 +59,7 @@ struct LAYOUTRETURN4args {
     server as defined below.
   </t>
 
-  <section anchor="pflr_errno" title="pflr_errno">
+  <section anchor="ff_errno" title="ff_errno">
     <figure>
       <artwork>
 /// enum ff_errno {
@@ -152,7 +152,7 @@ struct LAYOUTRETURN4args {
     </figure>
 
     <t>
-      The ff_ioerr4 structure is used to return error indications
+      The ff_ioerr structure is used to return error indications
       for Component Objects that generated errors during data
       transfers.  These are hints to the metadata server that there
       are problems with that object.  For each error, "ffie_deviceid",
@@ -164,7 +164,7 @@ struct LAYOUTRETURN4args {
     </t>
 
     <t>
-      Component byte ranges in the optional ff_ioerr4 structure
+      Component byte ranges in the optional ff_ioerr structure
       are used for recovering the object and MUST be set by the
       client to cover all failed I/O operations to the component.
     </t>
