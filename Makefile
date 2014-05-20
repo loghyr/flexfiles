@@ -37,13 +37,6 @@ nr: $(BASEDOC)-$(VERS).nr
 
 xml: $(BASEDOC)-$(VERS).xml
 
-clobber:
-	$(RM) $(BASEDOC)-$(VERS).txt \
-		$(BASEDOC)-$(VERS).html \
-		$(BASEDOC)-$(VERS).nr
-	export SPECVERS := $(VERS)
-	export VERS := $(VERS)
-
 clean:
 	rm -f $(AUTOGEN)
 	rm -rf autogen
@@ -133,16 +126,32 @@ genhtml: Makefile gendraft html txt draft-$(VERS).tar
 		$(BASEDOC)-dot-x-05.txt \
 		draft-$(VERS).tar.gz
 
-testx: 
+testx: flex_files_prot.x
 	rm -rf testx.d
 	mkdir testx.d
+	( \
+		cat ~/Documents/ietf/NFSv4.2/dotx.d/nfsv42.x flex_files_prot.x > ff.x ; \
+		if [ -f /usr/include/rpc/auth_sys.h ]; then \
+			cp ff.x testx.d ; \
+		else \
+			sed s/authsys/authunix/g < ff.x | \
+			sed s/auth_sys/auth_unix/g | \
+			sed s/AUTH_SYS/AUTH_UNIX/g | \
+			sed s/gss_svc/Gss_Svc/g > testx.d/ff.x ; \
+		fi ; \
+	)
 	( cd testx.d ; \
-		rpcgen -a labelednfs.x ; \
+		rpcgen -a ff.x ; )
+	( cd testx.d ; \
+		rpcgen -a ff.x ; \
+		if [ ! -f /usr/include/rpc/auth_sys.h ]; then \
+			ln Make* make ; \
+			CFLAGS="-I /usr/include/gssglue -I /usr/include/tirpc" ; export CFLAGS ; \
+		fi ; \
 		$(MAKE) -f make* )
 
 spellcheck: $(IDXMLSRC)
-	for f in $(IDXMLSRC); do echo "Spell Check of $$f"; spell +dictionary.txt $$f; done
-
+	for f in $(IDXMLSRC); do echo "Spell Check of $$f"; aspell check -p dictionary.pws $$f; done
 AUXFILES = \
 	dictionary.txt \
 	gendraft \

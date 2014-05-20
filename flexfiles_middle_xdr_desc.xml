@@ -110,9 +110,9 @@ sh extract.sh &lt; spec.txt &gt; pnfs_flex_files_prot.x
 ///  * The following include statements are for example only.
 ///  * The actual XDR definition files are generated separately
 ///  * and independently and are likely to have a different name.
+///  * %#include &lt;nfsv42.x&gt;
+///  * %#include &lt;rpc_prot.x&gt;
 ///  */
-/// %#include &lt;nfs4_prot.x&gt;
-/// %#include &lt;rpc_prot.x&gt;
 ///
       </artwork>
     </figure>
