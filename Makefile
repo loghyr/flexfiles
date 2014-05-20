@@ -23,7 +23,7 @@ autogen/%.xml : %.x
 	| expand > $@
 	@rm -f $@.tmp
 
-all: html txt
+all: html txt flex_files_prot.x
 
 #
 # Build the stuff needed to ensure integrity of document.
@@ -62,6 +62,9 @@ pall:
 
 $(BASEDOC)-$(VERS).txt: $(BASEDOC)-$(VERS).xml
 	${XML2RFC} --text  $(BASEDOC)-$(VERS).xml -o $@
+
+flex_files_prot.x: $(BASEDOC)-$(VERS).txt
+	./extract.sh < $(BASEDOC)-$(VERS).txt > $@
 
 $(BASEDOC)-$(VERS).html: $(BASEDOC)-$(VERS).xml
 	${XML2RFC}  --html $(BASEDOC)-$(VERS).xml -o $@
