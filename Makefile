@@ -130,7 +130,9 @@ testx: flex_files_prot.x
 	rm -rf testx.d
 	mkdir testx.d
 	( \
-		cat ~/Documents/ietf/NFSv4.2/dotx.d/nfsv42.x flex_files_prot.x > ff.x ; \
+		echo "%#include <rpc/auth.h>" > auth.x ; \
+		echo "%typedef struct opaque_auth opaque_auth;" >> auth.x ; \
+		cat auth.x ~/Documents/ietf/NFSv4.2/dotx.d/nfsv42.x flex_files_prot.x > ff.x ; \
 		if [ -f /usr/include/rpc/auth_sys.h ]; then \
 			cp ff.x testx.d ; \
 		else \
