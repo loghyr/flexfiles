@@ -20,46 +20,46 @@ struct layouthint4 {
     The layouthint4 structure is used by the client to pass a hint
     about the type of layout it would like created for a particular
     file.  If the loh_type layout type is LAYOUT4_FLEX_FILES, then
-    the loh_body opaque value is defined by the pnfs_ff_layouthint
+    the loh_body opaque value is defined by the ff_layouthint
     type.
   </t>
 
-  <section anchor="pnfs_ff_layouthint" title="pnfs_ff_layouthint">
+  <section anchor="ff_layouthint" title="ff_layouthint">
     <figure>
       <artwork>
-/// union pnfs_ff_max_comps_hint switch (bool pfmx_valid) {
+/// union ff_max_comps_hint switch (bool ffmx_valid) {
 ///     case TRUE:
-///         uint32_t            omx_max_comps;
+///         uint32_t             ffmx_max_comps;
 ///     case FALSE:
 ///         void;
 /// };
 ///
-/// union pnfs_ff_stripe_unit_hint switch (bool pfsu_valid) {
+/// union ff_stripe_unit_hint switch (bool ffsu_valid) {
 ///     case TRUE:
-///         length4             osu_stripe_unit;
+///         length4              ffsu_stripe_unit;
 ///     case FALSE:
 ///         void;
 /// };
 ///
-/// union pnfs_ff_mirror_cnt_hint switch (bool pfmc_valid) {
+/// union ff_mirror_cnt_hint switch (bool ffmc_valid) {
 ///     case TRUE:
-///         uint32_t            omc_mirror_cnt;
+///         uint32_t             ffomc_mirror_cnt;
 ///     case FALSE:
 ///         void;
 /// };
 ///
-/// union pnfs_ff_striping_pattern_hint switch (bool pfsp_valid) {
+/// union ff_striping_pattern_hint switch (bool ffsp_valid) {
 ///     case TRUE:
-///         pnfs_ff_striping_pattern    pfsp_striping_pattern;
+///         ff_striping_pattern  ffsp_striping_pattern;
 ///     case FALSE:
 ///         void;
 /// };
 ///
-/// struct pnfs_ff_layouthint {
-///     pnfs_ff_max_comps_hint         pflh_max_comps_hint;
-///     pnfs_ff_stripe_unit_hint       pflh_stripe_unit_hint;
-///     pnfs_ff_mirror_cnt_hint        pflh_mirror_cnt_hint;
-///     pnfs_ff_striping_pattern_hint  pflh_striping_pattern_hint;
+/// struct ff_layouthint {
+///     ff_max_comps_hint         fflh_max_comps_hint;
+///     ff_stripe_unit_hint       fflh_stripe_unit_hint;
+///     ff_mirror_cnt_hint        fflh_mirror_cnt_hint;
+///     ff_striping_pattern_hint  fflh_striping_pattern_hint;
 /// };
 ///
       </artwork>

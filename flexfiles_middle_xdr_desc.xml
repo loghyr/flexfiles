@@ -26,7 +26,7 @@ grep '^ *///' $* | sed 's?^ */// ??' | sed 's?^ *///$??'
 
   <figure>
     <artwork>
-sh extract.sh &lt; spec.txt &gt; pnfs_flex_files_prot.x
+sh extract.sh &lt; spec.txt &gt; flex_files_prot.x
     </artwork>
   </figure>
 
@@ -103,7 +103,7 @@ sh extract.sh &lt; spec.txt &gt; pnfs_flex_files_prot.x
 ///  */
 ///
 /// /*
-///  * pnfs_flex_files_prot.x
+///  * flex_files_prot.x
 ///  */
 ///
 /// /*

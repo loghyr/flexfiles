@@ -40,7 +40,7 @@
       of the Component Objects is allowed read/write access and the
       gid owner is allowed read only access.  As part of the layout,
       the client is provided with the rpc credentials to be used
-      (see pfcf_auth in  <xref target='pnfs_ff_layout' />) to access
+      (see pfcf_auth in  <xref target='ff_layout' />) to access
       the Object.  Fencing off clients is achieved by using SETATTR
       by the server to change the uid and/or gid owners of the
       Component Objects to implicitly revoke the outstanding rpc
@@ -76,7 +76,7 @@
       changing operation, executes them against the respective Component
       Objects on the Data Server(s).  It then sends the Data Server
       open stateid as part of the layout (see the pfcf_stateid in
-      <xref target='pnfs_ff_layout' />) and it is then used by the
+      <xref target='ff_layout' />) and it is then used by the
       client for executing READ/WRITE operations against the Data Server.
     </t>
 

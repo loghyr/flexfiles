@@ -9,20 +9,20 @@
     used by the client to retrieve that information.
   </t>
 
-  <section title="pnfs_ff_device_addr" anchor="pnfs_ff_device_addr">
+  <section title="ff_device_addr" anchor="ff_device_addr">
     <t>
-      The pnfs_ff_device_addr data structure is returned by the server
+      The ff_device_addr data structure is returned by the server
       as the storage protocol specific opaque field da_addr_body in the
       device_addr4 structure by a successful GETDEVICEINFO operation.
     </t>
 
     <figure>
       <artwork>
-/// struct pnfs_ff_device_addr {
-///     multipath_list4         pfda_netaddrs;
-///     uint32_t                pfda_version;
-///     uint32_t                pfda_minorversion;
-///     pathname4               pfda_path;
+/// struct ff_device_addr {
+///     multipath_list4         ffda_netaddrs;
+///     uint32_t                ffda_version;
+///     uint32_t                ffda_minorversion;
+///     pathname4               ffda_path;
 /// };
 ///
       </artwork>

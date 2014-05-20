@@ -62,9 +62,9 @@ struct  CB_RECALL_ANY4args      {
 
     <figure>
       <artwork>
-/// enum pnfs_ff_cb_recall_any_mask {
-///     PNFS_FF_RCA4_TYPE_MASK_READ = -2,
-///     PNFS_FF_RCA4_TYPE_MASK_RW   = -1
+/// enum ff_cb_recall_any_mask {
+///     FF_RCA4_TYPE_MASK_READ = -2,
+///     FF_RCA4_TYPE_MASK_RW   = -1
 [[RFC Editor: please insert assigned constants]]
 /// };
 ///

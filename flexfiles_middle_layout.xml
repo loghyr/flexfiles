@@ -38,7 +38,7 @@
      opaque layout is uninterpreted by the generic pNFS client
      layers, but obviously must be interpreted by the Flexible File
      Layout Type driver.  This section defines the structure of this
-     opaque value, pnfs_ff_layout4.
+     opaque value, ff_layout4.
 
      <cref anchor='AI1 ' source='TH'>
        What is a driver? I.e., I know what it is, but have we
@@ -46,57 +46,57 @@
      </cref>
    </t>
 
-   <section title="pnfs_ff_layout" anchor="pnfs_ff_layout">
+   <section title="ff_layout" anchor="ff_layout">
      <figure>
        <artwork>
-/// enum pnfs_ff_striping_pattern {
-///     PFSP_SPARSE_STRIPING = 1,
-///     PFSP_DENSE_STRIPING  = 2,
-///     PFSP_RAID_4          = 4,
-///     PFSP_RAID_5          = 5,
-///     PFSP_RAID_PQ         = 6
+/// enum ff_striping_pattern {
+///     FFSP_SPARSE_STRIPING = 1,
+///     FFSP_DENSE_STRIPING  = 2,
+///     FFSP_RAID_4          = 4,
+///     FFSP_RAID_5          = 5,
+///     FFSP_RAID_PQ         = 6
 /// };
 ///
-/// enum pnfs_ff_comp_type {
-///     PNFS_FF_COMP_MISSING = 0,
-///     PNFS_FF_COMP_PACKED  = 1,
-///     PNFS_FF_COMP_FULL    = 2
+/// enum ff_comp_type {
+///     FF_COMP_MISSING = 0,
+///     FF_COMP_PACKED  = 1,
+///     FF_COMP_FULL    = 2
 /// };
 ///
-/// struct pnfs_ff_comp_full {
-///     deviceid4               pfcf_deviceid;
-///     nfs_fh4                 pfcf_fhandle;
-///     stateid4                pfcf_stateid;
-///     opaque_auth             pfcf_auth;
-///     uint32_t                pfcf_metric;
+/// struct ff_comp_full {
+///     deviceid4               ffcf_deviceid;
+///     nfs_fh4                 ffcf_fhandle;
+///     stateid4                ffcf_stateid;
+///     opaque_auth             ffcf_auth;
+///     uint32_t                ffcf_metric;
 /// };
 ///
-/// union pnfs_ff_comp switch (pnfs_ff_comp_type pfc_type) {
-///    case PNFS_FF_COMP_MISSING:
+/// union ff_comp switch (ff_comp_type ffc_type) {
+///    case FF_COMP_MISSING:
 ///         void;
 ///
-///    case PNFS_FF_COMP_PACKED:
-///         deviceid4               pfcp_deviceid;
+///    case FF_COMP_PACKED:
+///         deviceid4               ffcp_deviceid;
 ///
-///    case PNFS_FF_COMP_FULL:
-///         pnfs_ff_comp_full       pfcp_full;
+///    case FF_COMP_FULL:
+///         ff_comp_full            ffcp_full;
 /// };
 ///
-/// struct pnfs_ff_layout {
-///     pnfs_ff_striping_pattern    pfl_striping_pattern;
-///     uint32_t                    pfl_num_comps;
-///     uint32_t                    pfl_mirror_cnt;
-///     length4                     pfl_stripe_unit;
-///     nfs_fh4                     pfl_global_fh;
-///     uint32_t                    pfl_comps_index;
-///     pnfs_ff_comp                pfl_comps&lt;&gt;;
+/// struct ff_layout {
+///     ff_striping_pattern         ffl_striping_pattern;
+///     uint32_t                    ffl_num_comps;
+///     uint32_t                    ffl_mirror_cnt;
+///     length4                     ffl_stripe_unit;
+///     nfs_fh4                     ffl_global_fh;
+///     uint32_t                    ffl_comps_index;
+///     ff_comp                     ffl_comps&lt;&gt;;
 /// };
 ///
        </artwork>
      </figure>
 
      <t>
-       The pnfs_ff_layout structure specifies a layout over a set
+       The ff_layout structure specifies a layout over a set
        of Component Objects.  The layout parameterizes the algorithm
        that maps the file's contents within the returned byte range,
        as represented by lo_offset and lo_length, over the Component
@@ -123,68 +123,68 @@
        where loss of a single component object results in data loss,
        the layout parameters support mirroring and more advanced
        redundancy schemes that protect against loss of component
-       objects.  pfl_striping_pattern represents the algorithm to
+       objects.  ffl_striping_pattern represents the algorithm to
        be used for mapping byte offsets in the file address space
        to corresponding component objects in the returned layout and
-       byte offsets in the component's address space.  pfl_striping_pattern
+       byte offsets in the component's address space.  ffl_striping_pattern
        also represents methods for storing and retrieving redundant
        data that can be used to recover from failure or loss of
        component objects.
      </t>
 
      <t>
-       pfl_num_comps is the total number of component objects the
+       ffl_num_comps is the total number of component objects the
        file is striped over within the returned byte range, not
-       counting mirrored components (See pfl_mirror_cnt below).  Note
+       counting mirrored components (See ffl_mirror_cnt below).  Note
        that the server MAY grow the file by adding more components
        to the stripe while clients hold valid layouts until the file
        has reached its final stripe width.
      </t>
 
      <t>
-       pfl_mirror_cnt represents the number of mirrors each component
+       ffl_mirror_cnt represents the number of mirrors each component
        in the stripe has.  If there is no mirroring then pfm_mirror_cnt
-       MUST be 0.  Otherwise, the number of entries listed in pfl_comps
-       MUST be a multiple of (pfl_mirror_cnt + 1).
+       MUST be 0.  Otherwise, the number of entries listed in ffl_comps
+       MUST be a multiple of (ffl_mirror_cnt + 1).
      </t>
 
      <t>
-       pfl_stripe_unit is the number of bytes placed on one component
+       ffl_stripe_unit is the number of bytes placed on one component
        before advancing to the next one in the list of components.
        When the file is striped over a single component object
-       (pfl_num_comps equals to 1), the stripe unit has no use and
+       (ffl_num_comps equals to 1), the stripe unit has no use and
        the server SHOULD set it to the server default value or to
-       zero; otherwise, pfl_stripe_unit MUST NOT be set to zero.
+       zero; otherwise, ffl_stripe_unit MUST NOT be set to zero.
      </t>
 
      <t>
-       The pfl_comps field represents an array of component objects.
+       The ffl_comps field represents an array of component objects.
        The data placement algorithm that maps file data onto component
        objects assumes that each component object occurs exactly
        once in the array of components.  Therefore, component objects
-       MUST appear in the pfl_comps array only once.  The components
+       MUST appear in the ffl_comps array only once.  The components
        array may represent all objects comprising the file, in which
-       case pfl_comps_index is set to zero and the number of entries
-       in the pfl_comps array is equal to pfl_num_comps * (pfl_mirror_cnt
-       + 1).  The server MAY return fewer components than pfl_num_comps,
+       case ffl_comps_index is set to zero and the number of entries
+       in the ffl_comps array is equal to ffl_num_comps * (ffl_mirror_cnt
+       + 1).  The server MAY return fewer components than ffl_num_comps,
        provided that the returned byte range represented by lo_offset
        and lo_count maps in whole into the set of returned component
-       objects.  In this case, pfl_comps_index represents the logical
-       position of the returned components array, pfl_comps, within
+       objects.  In this case, ffl_comps_index represents the logical
+       position of the returned components array, ffl_comps, within
        the full array of components that comprise the file.
-       pfl_comps_index MUST be a multiple of (pfl_mirror_cnt + 1).
+       ffl_comps_index MUST be a multiple of (ffl_mirror_cnt + 1).
      </t>
 
      <t>
-       Each component object in the pfl_comps array is described by the
-       pnfs_ff_comp type.
+       Each component object in the ffl_comps array is described by the
+       ff_comp type.
      </t>
 
      <t>
        When a component object is unavailable pfc_type is set to
        PNFS_FF_COMP_MISSING and no other information for this component
        is returned.  When a data redundancy scheme is being used,
-       as represented by pfl_striping_pattern, the client MAY use a
+       as represented by ffl_striping_pattern, the client MAY use a
        respective data recovery algorithm to reconstruct data that
        is logically stored on the missing component using user data
        and redundant data stored on the available components in the
@@ -203,9 +203,9 @@
        case, the client MUST use the open, delegation, or lock stateid
        returned by the metadata server for the file for accessing
        the Data Servers for READ and WRITE; the global filehandle
-       to be used by the client is provided by pfl_global_fh.  If
+       to be used by the client is provided by ffl_global_fh.  If
        the metadata server filehandle for the file is being used by
-       all data servers then pfl_global_fh MAY be set to an empty
+       all data servers then ffl_global_fh MAY be set to an empty
        filehandle.
      </t>
 
@@ -216,7 +216,7 @@
 
      <t>
        When standalone data servers are used, either over NFSv4 or
-       NFSv4.1, pfl_global_fh SHOULD be set to an empty filehandle
+       NFSv4.1, ffl_global_fh SHOULD be set to an empty filehandle
        and it MUST be ignored by the client and pfcf_fhandle provides
        the filehandle of the Data Server file holding the Component
        Object, and pfcf_stateid provides the stateid to be used by
@@ -232,7 +232,7 @@
      </t>
 
      <t>
-       When pfl_mirror_cnt is not zero pfcf_metric indicates the
+       When ffl_mirror_cnt is not zero pfcf_metric indicates the
        distance to the client the distance of the respective component
        object, otherwise the server MUST set pfcf_metric to zero.
        When reading data, the client the client is advised to read
@@ -250,7 +250,7 @@
      </t>
 
      <t>
-       pnfs_ff_striping_pattern determines the algorithm and placement
+       ff_striping_pattern determines the algorithm and placement
        of redundant data.  This section defines the different
        redundancy algorithms.  Note: The term "RAID" (Redundant Array
        of Independent Disks) is used in this document to represent
@@ -274,16 +274,16 @@
 L: logical offset into the file
 
 W: stripe width
-    W = pfl_num_comps
+    W = ffl_num_comps
 
 S: number of bytes in a stripe
-    S = W * pfl_stripe_unit
+    S = W * ffl_stripe_unit
 
 N: stripe number
     N = L / S
 
 C: component index corresponding to L
-   C = (L % S) / pfl_stripe_unit
+   C = (L % S) / ffl_stripe_unit
 
 O: The component offset corresponding to L
    O = L
@@ -292,7 +292,7 @@ O: The component offset corresponding to L
 
        <t>
          Note that this computation does not accommodate the same
-         object appearing in the pfl_comps array multiple times.
+         object appearing in the ffl_comps array multiple times.
          Therefore the server may not return layouts with the same
          object appearing multiple times. If needed the server can
          return multiple layout segments each covering a single
@@ -322,25 +322,25 @@ O: The component offset corresponding to L
 L: logical offset into the file
 
 W: stripe width
-    W = pfl_num_comps
+    W = ffl_num_comps
 
 S: number of bytes in a stripe
-    S = W * pfl_stripe_unit
+    S = W * ffl_stripe_unit
 
 N: stripe number
     N = L / S
 
 C: component index corresponding to L
-   C = (L % S) / pfl_stripe_unit
+   C = (L % S) / ffl_stripe_unit
 
 O: The component offset corresponding to L
-   O = (N * pfl_stripe_unit) + (L % pfl_stripe_unit)
+   O = (N * ffl_stripe_unit) + (L % ffl_stripe_unit)
         </artwork>
       </figure>
 
       <t>
         Note that this computation does not accommodate the same
-        object appearing in the pfl_comps array multiple times.
+        object appearing in the ffl_comps array multiple times.
         Therefore the server may not return layouts with the same
         object appearing multiple times. If needed the server can
         return multiple layout segments each covering a single
@@ -473,7 +473,7 @@ Note: W is added above to avoid negative numbers modulo math.
         map a file offset to the correct component object by setting
         the number of parity components (P) to 2 instead of 1 for RAID-5
         and computing the Parity Cycle length as the Lowest Common
-        Multiple of pfl_num_comps and P, divided by P, as described
+        Multiple of ffl_num_comps and P, divided by P, as described
         below.  Note: This algorithm can be used also for RAID-5 where
         P=1.
       </t>
@@ -511,7 +511,7 @@ Q: The device index holding the Q component
         <xref target='Plank07' />.  These involve P or Q
         equations different than those used in PFSP_RAID_PQ.  Thus, if
         one of these schemes is to be used in the future, a distinct
-        value must be added to pnfs_ff_striping_pattern for it. While
+        value must be added to ff_striping_pattern for it. While
         Reed-Solomon codes are well understood, recently discovered
         schemes such as Liberation codes are more computationally
         efficient for small group_widths, and Cauchy Reed-Solomon codes
@@ -522,32 +522,32 @@ Q: The device index holding the Q component
 
   <section anchor="Mirroring" title="Mirroring">
     <t>
-      The pfl_mirror_cnt is used to replicate a file by replicating
+      The ffl_mirror_cnt is used to replicate a file by replicating
       its Component Objects.  If there is no mirroring, then
-      pfs_mirror_cnt MUST be 0.  If pfl_mirror_cnt is greater than
-      zero, then the size of the pfl_comps array MUST be a multiple
-      of (pfl_mirror_cnt + 1).  Thus, for a classic mirror on two
-      objects, pfl_mirror_cnt is one.  Note that mirroring can be
+      pfs_mirror_cnt MUST be 0.  If ffl_mirror_cnt is greater than
+      zero, then the size of the ffl_comps array MUST be a multiple
+      of (ffl_mirror_cnt + 1).  Thus, for a classic mirror on two
+      objects, ffl_mirror_cnt is one.  Note that mirroring can be
       defined over any striping pattern.
     </t>
 
     <t>
       Replicas are adjacent in the olo_components array, and the
       value C produced by the above equations is not a direct index
-      into the pfl_comps array.  Instead, the following equations
+      into the ffl_comps array.  Instead, the following equations
       determine the replica component index RCi, where i ranges
-      from 0 to pfl_mirror_cnt.
+      from 0 to ffl_mirror_cnt.
     </t>
 
     <figure>
       <artwork>
-FW = size of pfl_comps array / (pfl_mirror_cnt+1)
+FW = size of ffl_comps array / (ffl_mirror_cnt+1)
 
 C = component index for striping or two-level striping
     as calculated using above equations
 
-i ranges from 0 to pfl_mirror_cnt, inclusive
-RCi = C * (pfl_mirror_cnt+1) + i
+i ranges from 0 to ffl_mirror_cnt, inclusive
+RCi = C * (ffl_mirror_cnt+1) + i
       </artwork>
     </figure>
   </section>
