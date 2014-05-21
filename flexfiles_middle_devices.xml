@@ -3,8 +3,8 @@
 
 <section title="Device Addressing and Discovery">
   <t>
-    Data operations to a data server require the client to know the
-    network address of the data server.  The NFSv4.1 GETDEVICEINFO 
+    Data operations to a storage device require the client to know the
+    network address of the storage device.  The NFSv4.1 GETDEVICEINFO 
     operation (Section 18.40 of <xref target="RFC5661" />) is
     used by the client to retrieve that information.
   </t>
@@ -28,55 +28,55 @@
     </figure>
 
     <t>
-      The ffda_netaddrs field is used to locate the data server.
+      The ffda_netaddrs field is used to locate the storage device.
       It MUST be set by the server to a list holding one or more
       of the device network addresses.
     </t>
 
     <t>
       The ffda_version and ffda_minorversion represent the NFS
-      protocol to be used to access the data server.  This layout
+      protocol to be used to access the storage device.  This layout
       specification defines the semantics for ffda_versions 3 and
       4.  If ffda_version equals 3 then server MUST set ffda_minorversion
-      to 0 and the client MUST access the data server using the
+      to 0 and the client MUST access the storage device using the
       NFSv3 protocol <xref target="RFC1813" />.  If ffda_version
       equals 4 then the server MUST set ffda_minorversion to one of
       the NFSv4 minor version numbers and the client MUST access the
-      data server using NFSv4.
+      storage device using NFSv4.
     </t>
   </section>
 
-  <section title="Data Server Multipathing" anchor="sec:DSM">
+  <section title="Storage Device Multipathing" anchor="sec:DSM">
     <t>
       The Flexible File Layout Type supports multipathing to multiple
-      data server addresses.  Data-server-level multipathing is
+      storage device addresses.  storage device level multipathing is
       used for bandwidth scaling via trunking and for higher
-      availability of use in the case of a data-server failure.
-      Multipathing allows the client to switch to another data
-      server address which may be that of another data server that
+      availability of use in the case of a storage device failure.
+      Multipathing allows the client to switch to another storage
+      device address which may be that of another storage device that
       is exporting the same data stripe unit, without having to
       contact the metadata server for a new layout.
     </t>
 
     <t>
-      To support data server multipathing, ffda_netaddrs contains
-      an array of one more data server network addresses.  This
-      array (data type multipath_list4) represents a list of data
-      servers (each identified by a network address), with the
-      possibility that some data servers will appear in the list
+      To support storage device multipathing, ffda_netaddrs contains
+      an array of one more storage device network addresses.  This
+      array (data type multipath_list4) represents a list of storage
+      device (each identified by a network address), with the
+      possibility that some storage device will appear in the list
       multiple times.
     </t>
 
     <t>
       The client is free to use any of the network addresses as a
-      destination to send data server requests.  If some network
+      destination to send storage device requests.  If some network
       addresses are less optimal paths to the data than others,
       then the MDS SHOULD NOT include those network addresses in
       ffda_netaddrs.  If less optimal network addresses exist to
       provide failover, the RECOMMENDED method to offer the addresses
       is to provide them in a replacement device-ID-to-device-address
       mapping, or a replacement device ID.  When a client finds no
-      response from the data server using all addresses available
+      response from the storage device using all addresses available
       in ffda_netaddrs, it SHOULD send a GETDEVICEINFO to attempt
       to replace the existing device-ID-to-device-address mappings.
       If the MDS detects that all network paths represented by
@@ -91,17 +91,16 @@
     </t>
 
     <t>
-      Generally, if two network addresses appear in ffda_netaddrs,
-      they will designate the same data server.  When the data server
-      is accessed over NFSv4.1 or higher minor version the two data
-      server addresses will support the implementation of client ID
-      or session trunking (the latter is RECOMMENDED) as defined in
-      <xref target="RFC5661" />.  The two data server addresses will
-      share the same server owner or major ID of the server owner.
-      It is not always necessary for the two data server addresses
-      to designate the same server with trunking being used.  For
-      example, the data could be read-only, and the data consist of
-      exact replicas.
+      Generally, if two network addresses appear in ffda_netaddrs, they
+      will designate the same storage device.  When the storage device
+      is accessed over NFSv4.1 or higher minor version the two storage
+      device addresses will support the implementation of client ID or
+      session trunking (the latter is RECOMMENDED) as defined in <xref
+      target="RFC5661" />.  The two storage device addresses will share
+      the same server owner or major ID of the server owner.  It is not
+      always necessary for the two storage device addresses to designate
+      the same storage device with trunking being used.  For example,
+      the data could be read-only, and the data consist of exact replicas.
     </t>
   </section>
 </section>

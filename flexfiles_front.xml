@@ -55,7 +55,7 @@
         layout type specification.  This document specifies the
         Flexible File Layout Type as a companion to the
         main NFSv4 Minor version 1 specification for use of pNFS
-        with Data Servers over NFSv4 or higher minor versions using
+        with storage devices over NFSv4 or higher minor versions using
         flexible, per-file striping topology.
       </t>
     </abstract>

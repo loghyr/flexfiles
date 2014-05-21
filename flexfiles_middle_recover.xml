@@ -4,8 +4,8 @@
 <section title="Recovering from Client I/O Errors">
   <t>
     The pNFS client may encounter errors when directly accessing
-    the Data Servers.  However, it is the responsibility of the
-    Metadata Server to recover from the I/O errors.  When the
+    the storage devices.  However, it is the responsibility of the
+    metadata server to recover from the I/O errors.  When the
     LAYOUT4_FLEX_FILES layout type is used, the client MUST report
     the I/O errors to the server at LAYOUTRETURN time using the
     ff_ioerr structure (see <xref target="ff_ioerr" />).
@@ -35,7 +35,7 @@
     layout, or the client MAY just retry the I/O operation(s) using
     regular NFS READ or WRITE operations via the metadata server.
     The client SHOULD attempt to retrieve a new layout and retry
-    the I/O operation using the Data Server first and only if the
+    the I/O operation using the storage device first and only if the
     error persists, retry the I/O operation via the metadata server.
   </t>
 </section>
