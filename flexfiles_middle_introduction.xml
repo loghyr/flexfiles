@@ -7,10 +7,11 @@
     (MDS) returns Layout Type structures that describe where file
     data is located.  There are different Layout Types for different
     storage systems and methods of arranging data on storage devices.
-    This document defines the Layout Type used with file-based data
+    This document defines the Flexible File Layout Type used with file-based data
     servers that are accessed using the Network File System (NFS)
     Protocol: NFSv3 <xref target="RFC1813" />, NFSv4 <xref
-    target="RFC3530" />, and NFSv4.1 <xref target="RFC5661" />.
+    target="RFC3530" />, NFSv4.1 <xref target="RFC5661" />, and
+    NFSv4.2 <xref target="NFSv42" />.
   </t>
 
   <t>
