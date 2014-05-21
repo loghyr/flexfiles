@@ -3,34 +3,34 @@
 
 <section anchor="sec:intro" title="Introduction">
   <t>
-    In the parallel Network File System (pNFS), the Metadata Server
-    (MDS) returns Layout Type structures that describe where file
-    data is located.  There are different Layout Types for different
+    In the parallel Network File System (pNFS), the metadata server
+    returns Layout Type structures that describe where file data
+    is located.  There are different Layout Types for different
     storage systems and methods of arranging data on storage devices.
-    This document defines the Flexible File Layout Type used with file-based data
-    servers that are accessed using the Network File System (NFS)
-    Protocol: NFSv3 <xref target="RFC1813" />, NFSv4 <xref
-    target="RFC3530" />, NFSv4.1 <xref target="RFC5661" />, and
-    NFSv4.2 <xref target="NFSv42" />.
+    This document defines the Flexible File Layout Type used with
+    file-based data servers that are accessed using the Network File
+    System (NFS) protocols: NFSv3 <xref target="RFC1813" />, NFSv4 <xref
+    target="RFC3530" />, NFSv4.1 <xref target="RFC5661" />, and NFSv4.2
+    <xref target="NFSv42" />.
   </t>
 
   <t>
-    In contrast to the File Layout Type <xref target="RFC5661" />
-    that also uses NFSv4.1 to access the data server, the Flexible
-    File Layout Type defines a model of device metadata and striping
-    patterns that is inspired by the Object Layout Type
-    <xref target="RFC5664" /> that provides flexible, per-file striping
-    patterns and simple device information suitable for aggregating
-    standalone NFS servers into a centrally managed pNFS cluster.
+    In contrast to the File Layout Type <xref target="RFC5661" /> that
+    also uses NFSv4.1 to access the data server, the Flexible File Layout
+    Type defines a model of device metadata and striping patterns that
+    is inspired by the Object Layout Type <xref target="RFC5664" /> to
+    provide both flexible, per-file striping patterns and simple device
+    information suitable for aggregating standalone NFS servers into a
+    centrally managed pNFS cluster.
   </t>
 
   <t>
-    To provide a global state model equivalent to that of the files layout
-    a back-end control protocol may be implemented between the metadata
-    server (MDS) and NFSv4.1 data servers (DSs).
-    It is out of scope for this document to specify the wire protocol
-    of such a protocol, yet the requirements for the protocol are specified in
-    <xref target="RFC5661" /> and clarified in <xref target='pNFSLayouts' />.
+    To provide a global state model equivalent to that of the Files
+    Layout Type, a back-end control protocol MAY be implemented between
+    the metadata server and NFSv4.1 storage devices.  It is out
+    of scope for this document to specify the wire protocol of such a
+    protocol, yet the requirements for the protocol are specified in <xref
+    target="RFC5661" /> and clarified in <xref target='pNFSLayouts' />.
   </t>
 
   <section anchor='sec:defs' title='Definitions'>
