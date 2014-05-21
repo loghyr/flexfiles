@@ -3,7 +3,7 @@
 
 <section title="Recalling Layouts">
   <t>
-    The Flexible File Layout Type Metadata Server should
+    The Flexible File Layout Type metadata server should
     recall outstanding layouts in the following cases:
 
     <list style='symbols'>

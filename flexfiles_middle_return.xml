@@ -83,7 +83,7 @@ struct LAYOUTRETURN4args {
 
       <list style="hanging">
         <t hangText='FF_ERR_EIO'>
-          indicates the operation failed because the Data Server
+          indicates the operation failed because the storage device
           experienced a failure trying to access the object.  The
           most common source of these errors is media errors, but
           other internal errors might cause this as well.  In this
@@ -94,11 +94,11 @@ struct LAYOUTRETURN4args {
 
         <t hangText='FF_ERR_NOT_FOUND'>
           indicates the object ID specifies a Component Object that
-          does not exist on the Data Server.
+          does not exist on the storage device.
         </t>
 
         <t hangText='FF_ERR_NO_SPACE'>
-          indicates the operation failed because the Data Server
+          indicates the operation failed because the storage device
           ran out of free capacity during the operation.
         </t>
 
@@ -115,8 +115,8 @@ struct LAYOUTRETURN4args {
 
         <t hangText='FF_ERR_UNREACHABLE'>
           indicates the client did not complete the I/O operation
-          at the Data Server due to a communication failure.  Whether
-          or not the I/O operation was executed by the Data Server
+          at the storage device due to a communication failure.  Whether
+          or not the I/O operation was executed by the storage device
           is undetermined.
         </t>
 
@@ -124,7 +124,7 @@ struct LAYOUTRETURN4args {
           indicates the client did not issue the I/O operation due
           to a local problem on the initiator (i.e., client) side,
           e.g., when running out of memory.  The client MUST guarantee
-          that the Data Server WRITE operation was never sent.
+          that the storage device WRITE operation was never sent.
 
           <cref anchor='AI2 ' source='TH'>
             Besides not needing an "i.e." followed by an "e.g.",
@@ -159,7 +159,7 @@ struct LAYOUTRETURN4args {
       "ffie_fhandle", "ffie_comp_offset", and "ffie_comp_length"
       represent the Component Object and byte range within the
       object in which the error occurred; "ffie_iswrite" is set to
-      "true" if the failed Data Server operation was data modifying,
+      "true" if the failed storage device operation was data modifying,
       and "ffie_errno" represents the type of error.
     </t>
 
@@ -188,7 +188,7 @@ struct LAYOUTRETURN4args {
 
     <t>
       With pNFS, the data transfers are performed directly between the
-      pNFS client and the data servers.  Therefore, the metadata server
+      pNFS client and the storage devices.  Therefore, the metadata server
       has no visibility to the I/O stream and cannot use any statistical
       information about client I/O to optimize data storage location.
       ff_iostats4 MAY be used by the client to report I/O statistics
