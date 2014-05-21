@@ -52,9 +52,9 @@
 /// enum ff_striping_pattern {
 ///     FFSP_SPARSE_STRIPING = 1,
 ///     FFSP_DENSE_STRIPING  = 2,
-///     FFSP_RAID_4          = 4,
-///     FFSP_RAID_5          = 5,
-///     FFSP_RAID_PQ         = 6
+///     FFSP_RAID_4          = 3,
+///     FFSP_RAID_5          = 4,
+///     FFSP_RAID_PQ         = 5
 /// };
 ///
        </artwork>
