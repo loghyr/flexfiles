@@ -4,15 +4,14 @@
 <section title="Method of Operation">
   <t>
     This section describes the semantics and format of the Flexible
-    File Layout Type for pNFS: LAYOUT4_FLEX_FILES.
-    The new Layout Type defines striping data across
-    multiple NFS storage devices.
+    File Layout Type for pNFS: LAYOUT4_FLEX_FILES.  The new Layout Type
+    defines striping data across multiple NFS storage devices.
   </t>
 
   <t>
     For the purpose of this discussion, we will distinguish between
     user files served by the metadata server, to be referred to as
-    User Files; vs. user files served by Data Servers, to be referred
+    User Files; vs. user files served by storage devices, to be referred
     to as Component Objects.
   </t>
 
@@ -20,17 +19,16 @@
     Component Objects are addressable by their NFS filehandle.  Each
     Component Object may store a whole User File or parts of it,
     in case the User File is striped across multiple Component
-    Objects.  The striping pattern is provided by pfl_striping_pattern
+    Objects.  The striping pattern is provided by ffl_striping_pattern
     as defined below.
   </t>
 
   <t>
-    Data Servers may be accessed using different versions of the
-    NFS protocol.  It is required that the server MUST use Data
-    Servers of the same NFS version and minor version for striping
-    data within each layout.  The NFS version and minor version
-    define the respective security, state, and locking models to
-    be used, as described below.
+    Storage devices MAY be accessed using different versions of the
+    NFS protocol.  The server MUST use storage devices of the same NFS
+    version and minor version for striping data within each layout.
+    The NFS version and minor version define the respective security,
+    state, and locking models to be used, as described below.
   </t>
 
   <section anchor='sec:sec_models' title="Security models">
