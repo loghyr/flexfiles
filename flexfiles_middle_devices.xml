@@ -22,7 +22,6 @@
 ///     multipath_list4         ffda_netaddrs;
 ///     uint32_t                ffda_version;
 ///     uint32_t                ffda_minorversion;
-///     pathname4               ffda_path;
 /// };
 ///
       </artwork>
@@ -44,15 +43,6 @@
       equals 4 then the server MUST set ffda_minorversion to one of
       the NFSv4 minor version numbers and the client MUST access the
       data server using NFSv4.
-    </t>
-
-    <t>
-      The ffda_path MAY be set by the server to an exported path
-      on the data server for device identification.  If provided,
-      the path MUST exist and be accessible to the client.  If the
-      path does not exist, the client MUST ignore this device
-      information and any layouts referring to the respective
-      deviceid until valid device information is acquired.
     </t>
   </section>
 
