@@ -22,6 +22,7 @@
 ///     multipath_list4         ffda_netaddrs;
 ///     uint32_t                ffda_version;
 ///     uint32_t                ffda_minorversion;
+///     bool                    ffda_tightly_coupled;
 /// };
 ///
       </artwork>
@@ -43,6 +44,16 @@
       equals 4 then the server MUST set ffda_minorversion to one of
       the NFSv4 minor version numbers and the client MUST access the
       storage device using NFSv4.
+    </t>
+
+    <t>
+      ffda_tightly_coupled informs the client as to whether the metadata
+      server is tightly coupled with the storage devices or not. Note
+      that even if the data protocol is at least NFSv4.1, it may
+      still be the case that there is no control protocol present. If
+      ffda_tightly_coupled is not set, then the client MUST commit writes
+      to the storage devices for the file before sending a LAYOUTCOMMIT
+      to the metadata server.
     </t>
   </section>
 
