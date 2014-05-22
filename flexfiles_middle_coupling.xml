@@ -1,10 +1,22 @@
 <!-- Copyright (C) The IETF Trust (2014) -->
 <!-- Copyright (C) The Internet Society (2014) -->
 
-<section title="Method of Operation">
+<section title="Coupling of Storage Devices">
   <t>
+    The coupling of the metadata server with the storage devices
+    can be either tight or loose. In a tight coupling, there is
+    a control protocol present to manage security, LAYOUTCOMMITs,
+    etc. I.e., the servers are probably all provided by the same
+    vendor. With a loose coupling, the only control protocol might
+    be a version of NFS. As such, semantics for fencing,
+    LAYOUTCOMMITs, etc., MUST be defined.
+  </t>
+
+  <t>
+    <cref anchor='AI4 ' source='TH'>Rework this rest of the section -
+    also: User Files == metadata and Component Object == data file.</cref>
     This section describes the semantics and format of the Flexible
-    File Layout Type for pNFS: LAYOUT4_FLEX_FILES.  The new Layout Type
+    File Layout Type for pNFS: LAYOUT4_FLEX_FILES.  It
     defines striping data across multiple NFS storage devices.
   </t>
 
@@ -30,6 +42,25 @@
     The NFS version and minor version define the respective security,
     state, and locking models to be used, as described below.
   </t>
+
+  <section anchor='sec:layoutcommit' title='LAYOUTCOMMIT'>
+    <t>
+      With a tightly coupled system, when the metadata server
+      receives a LAYOUTCOMMIT (see Section 18.42 of
+      <xref target='RFC5661' />), the semantics of the File
+      Layout Type MUST be met (see Section 12.5.4 of
+      <xref target='RFC5661' />). With a loosely coupled
+      system, a LAYOUTCOMMIT to the metadata server MUST
+      be proceeded with a COMMIT to the storage device. I.e.,
+      it is the responsibility of the client to make sure
+      the data file is stable before the metadata server
+      begins to query the storage devices about the
+      changes to the file.  Note that if the client has
+      not done a COMMIT to the storage device, then the
+      LAYOUTCOMMIT might not be synchronized to the last
+      WRITE operation to the storage device.
+    </t>
+  </section>
 
   <section anchor='sec:sec_models' title="Security models">
     <t>
