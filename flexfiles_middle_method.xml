@@ -6,30 +6,31 @@
     This section describes the semantics and format of the Flexible
     File Layout Type for pNFS: LAYOUT4_FLEX_FILES.
     The new Layout Type defines striping data across
-    multiple NFS Data Servers.
+    multiple NFS storage devices.
   </t>
 
   <t>
     For the purpose of this discussion, we will distinguish between
     user files served by the metadata server, to be referred to as
-    User Files; vs. user files served by Data Servers, to be referred to as
-    Component Objects.
+    User Files; vs. user files served by Data Servers, to be referred
+    to as Component Objects.
   </t>
 
   <t>
-    Component Objects are addressable by their NFS filehandle.
-    Each Component Object may store a whole User File or parts of it, in
-    case the User File is striped across multiple Component Objects.
-    The striping pattern is provided by pfl_striping_pattern as defined
-    below.
+    Component Objects are addressable by their NFS filehandle.  Each
+    Component Object may store a whole User File or parts of it,
+    in case the User File is striped across multiple Component
+    Objects.  The striping pattern is provided by pfl_striping_pattern
+    as defined below.
   </t>
 
   <t>
-    Data Servers may be accessed using different versions of the NFS protocol.
-    It is required that the server MUST use Data Servers of the same NFS
-    version and minor version for striping data within each layout.
-    The NFS version and minor version define the respective security,
-    state, and locking models to be used, as described below.
+    Data Servers may be accessed using different versions of the
+    NFS protocol.  It is required that the server MUST use Data
+    Servers of the same NFS version and minor version for striping
+    data within each layout.  The NFS version and minor version
+    define the respective security, state, and locking models to
+    be used, as described below.
   </t>
 
   <section anchor='sec:sec_models' title="Security models">
@@ -39,7 +40,7 @@
       of the Component Objects is allowed read/write access and the
       gid owner is allowed read only access.  As part of the layout,
       the client is provided with the rpc credentials to be used
-      (see pfcf_auth in  <xref target='pnfs_ff_layout' />) to access
+      (see pfcf_auth in  <xref target='ff_layout' />) to access
       the Object.  Fencing off clients is achieved by using SETATTR
       by the server to change the uid and/or gid owners of the
       Component Objects to implicitly revoke the outstanding rpc
@@ -75,7 +76,7 @@
       changing operation, executes them against the respective Component
       Objects on the Data Server(s).  It then sends the Data Server
       open stateid as part of the layout (see the pfcf_stateid in
-      <xref target='pnfs_ff_layout' />) and it is then used by the
+      <xref target='ff_layout' />) and it is then used by the
       client for executing READ/WRITE operations against the Data Server.
     </t>
 
@@ -86,10 +87,11 @@
     </t>
 
     <t>
-      NFSv4.1 Clustered Data Servers that do identify themselves with the
-      EXCHGID4_FLAG_USE_PNFS_DS flag to EXCHANGE_ID use a back-end
-      control protocol as described in <xref target="RFC5661" />
-      to implement a global stateid model as defined there.
+      NFSv4.1 Clustered Data Servers that do identify themselves
+      with the EXCHGID4_FLAG_USE_PNFS_DS flag to EXCHANGE_ID use a
+      back-end control protocol as described in
+      <xref target="RFC5661" /> to implement a global stateid
+      model as defined there.
     </t>
   </section>
 </section>

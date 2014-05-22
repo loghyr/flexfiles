@@ -49,40 +49,40 @@ struct LAYOUTRETURN4args {
 
   <t>
     If the lora_layout_type layout type is LAYOUT4_FLEX_FILES, then
-    the lrf_body opaque value is defined by the pnfs_ff_layoutreturn4
+    the lrf_body opaque value is defined by the ff_layoutreturn4
     type.
   </t>
 
   <t>
-    The pnfs_ff_layoutreturn4 type allows the client to report I/O
+    The ff_layoutreturn4 type allows the client to report I/O
     error information or layout usage statistics back to the metadata
     server as defined below.
   </t>
 
-  <section anchor="pflr_errno" title="pflr_errno">
+  <section anchor="ff_errno" title="ff_errno">
     <figure>
       <artwork>
-/// enum pflr_errno {
-///     PNFS_FF_ERR_EIO            = 1,
-///     PNFS_FF_ERR_NOT_FOUND      = 2,
-///     PNFS_FF_ERR_NO_SPACE       = 3,
-///     PNFS_FF_ERR_BAD_STATEID    = 4,
-///     PNFS_FF_ERR_NO_ACCESS      = 5,
-///     PNFS_FF_ERR_UNREACHABLE    = 6,
-///     PNFS_FF_ERR_RESOURCE       = 7
+/// enum ff_errno {
+///     FF_ERR_EIO            = 1,
+///     FF_ERR_NOT_FOUND      = 2,
+///     FF_ERR_NO_SPACE       = 3,
+///     FF_ERR_BAD_STATEID    = 4,
+///     FF_ERR_NO_ACCESS      = 5,
+///     FF_ERR_UNREACHABLE    = 6,
+///     FF_ERR_RESOURCE       = 7
 /// };
 ///
       </artwork>
     </figure>
 
     <t>
-      pflr_errno4 is used to represent error types when read/write
+      ff_errno is used to represent error types when read/write
       errors are reported to the metadata server.  The error codes
       serve as hints to the metadata server that may help it in
       diagnosing the exact reason for the error and in repairing it.
 
       <list style="hanging">
-        <t hangText='PNFS_FF_ERR_EIO'>
+        <t hangText='FF_ERR_EIO'>
           indicates the operation failed because the Data Server
           experienced a failure trying to access the object.  The
           most common source of these errors is media errors, but
@@ -92,35 +92,35 @@ struct LAYOUTRETURN4args {
           default error code.
         </t>
 
-        <t hangText='PNFS_FF_ERR_NOT_FOUND'>
+        <t hangText='FF_ERR_NOT_FOUND'>
           indicates the object ID specifies a Component Object that
           does not exist on the Data Server.
         </t>
 
-        <t hangText='PNFS_FF_ERR_NO_SPACE'>
+        <t hangText='FF_ERR_NO_SPACE'>
           indicates the operation failed because the Data Server
           ran out of free capacity during the operation.
         </t>
 
-        <t hangText='PNFS_FF_ERR_BAD_STATEID'>
+        <t hangText='FF_ERR_BAD_STATEID'>
           indicates the stateid is not valid.
         </t>
 
-        <t hangText='PNFS_FF_ERR_NO_ACCESS'>
+        <t hangText='FF_ERR_NO_ACCESS'>
           indicates the RPC credentials do not allow the requested
           operation.  This may happen when the client is fenced
           off.  The client will need to return the layout and get
           a new one with fresh credentials.
         </t>
 
-        <t hangText='PNFS_FF_ERR_UNREACHABLE'>
+        <t hangText='FF_ERR_UNREACHABLE'>
           indicates the client did not complete the I/O operation
           at the Data Server due to a communication failure.  Whether
           or not the I/O operation was executed by the Data Server
           is undetermined.
         </t>
 
-        <t hangText='PNFS_FF_ERR_RESOURCE'>
+        <t hangText='FF_ERR_RESOURCE'>
           indicates the client did not issue the I/O operation due
           to a local problem on the initiator (i.e., client) side,
           e.g., when running out of memory.  The client MUST guarantee
@@ -136,16 +136,16 @@ struct LAYOUTRETURN4args {
     </t>
   </section>
 
-  <section anchor="pnfs_ff_ioerr" title="pnfs_ff_ioerr">
+  <section anchor="ff_ioerr" title="ff_ioerr">
     <figure>
       <artwork>
-/// struct pnfs_ff_ioerr {
-///     deviceid4           ioe_deviceid;
-///     nfs_fh4             ioe_fhandle;
-///     offset4             ioe_comp_offset;
-///     length4             ioe_comp_length;
-///     bool                ioe_iswrite;
-///     pnfs_ff_errno       ioe_errno;
+/// struct ff_ioerr {
+///     deviceid4           ffie_deviceid;
+///     nfs_fh4             ffie_fhandle;
+///     offset4             ffie_comp_offset;
+///     length4             ffie_comp_length;
+///     bool                ffie_iswrite;
+///     ff_errno            ffie_errno;
 /// };
 ///
       </artwork>
@@ -153,39 +153,39 @@ struct LAYOUTRETURN4args {
 
     <t>
       <cref anchor='AI3 ' source='TH'>
-        Note that ioe_fhandle doesn't work as that should
+        Note that ffie_fhandle doesn't work as that should
         be given in the operation!
       </cref>
 
-      The pnfs_ff_ioerr4 structure is used to return error indications
+      The ff_ioerr structure is used to return error indications
       for Component Objects that generated errors during data
       transfers.  These are hints to the metadata server that there
-      are problems with that object.  For each error, "ioe_deviceid",
-      "ioe_fhandle", "ioe_comp_offset", and "ioe_comp_length"
+      are problems with that object.  For each error, "ffie_deviceid",
+      "ffie_fhandle", "ffie_comp_offset", and "ffie_comp_length"
       represent the Component Object and byte range within the
-      object in which the error occurred; "ioe_iswrite" is set to
+      object in which the error occurred; "ffie_iswrite" is set to
       "true" if the failed Data Server operation was data modifying,
-      and "ioe_errno" represents the type of error.
+      and "ffie_errno" represents the type of error.
     </t>
 
     <t>
-      Component byte ranges in the optional pnfs_ff_ioerr4 structure
+      Component byte ranges in the optional ff_ioerr structure
       are used for recovering the object and MUST be set by the
       client to cover all failed I/O operations to the component.
     </t>
   </section>
 
-  <section anchor="pnfs_ff_iostats" title="pnfs_ff_iostats">
+  <section anchor="ff_iostats" title="ff_iostats">
     <figure>
       <artwork>
-/// struct pnfs_ff_iostats {
-///     offset4             ios_offset;
-///     length4             ios_length;
-///     uint32_t            ios_duration;
-///     uint32_t            ios_rd_count;
-///     uint64_t            ios_rd_bytes;
-///     uint32_t            ios_wr_count;
-///     uint64_t            ios_wr_bytes;
+/// struct ff_iostats {
+///     offset4             ffis_offset;
+///     length4             ffis_length;
+///     uint32_t            ffis_duration;
+///     uint32_t            ffis_rd_count;
+///     uint64_t            ffis_rd_bytes;
+///     uint32_t            ffis_wr_count;
+///     uint64_t            ffis_wr_bytes;
 /// };
 ///
       </artwork>
@@ -196,7 +196,7 @@ struct LAYOUTRETURN4args {
       pNFS client and the data servers.  Therefore, the metadata server
       has no visibility to the I/O stream and cannot use any statistical
       information about client I/O to optimize data storage location.
-      pnfs_ff_iostats4 MAY be used by the client to report I/O statistics
+      ff_iostats4 MAY be used by the client to report I/O statistics
       back to the metadata server upon returning the layout.  Since it
       is infeasible for the client to report every I/O that used the
       layout, the client MAY identify "hot" byte ranges for which to
@@ -207,36 +207,36 @@ struct LAYOUTRETURN4args {
       run-time management interface to control these parameters.  For
       example, a client can define the default byte range resolution to
       be 1 MB in size and the thresholds for reporting to be 1 MB/second
-      or 10 I/O operations per second.  For each byte range, ios_offset
-      and ios_length represent the starting offset of the range and the
-      range length in bytes.  ios_duration represents the number of seconds
-      the reported burst of I/O lasted.  ios_rd_count, ios_rd_bytes,
-      ios_wr_count, and ios_wr_bytes represent, respectively, the number
+      or 10 I/O operations per second.  For each byte range, ffis_offset
+      and ffis_length represent the starting offset of the range and the
+      range length in bytes.  ffis_duration represents the number of seconds
+      the reported burst of I/O lasted.  ffis_rd_count, ffis_rd_bytes,
+      ffis_wr_count, and ffis_wr_bytes represent, respectively, the number
       of contiguous read and write I/Os and the respective aggregate
       number of bytes transferred within the reported byte range.
     </t>
   </section>
 
-  <section anchor="pnfs_ff_layoutreturn" title="pnfs_ff_layoutreturn">
+  <section anchor="ff_layoutreturn" title="ff_layoutreturn">
     <figure>
       <artwork>
-/// struct pnfs_ff_layoutreturn {
-///     pnfs_ff_ioerr               pflr_ioerr_report&lt;&gt;;
-///     pnfs_ff_iostats             pflr_iostats_report&lt;&gt;;
+/// struct ff_layoutreturn {
+///     ff_ioerr               fflr_ioerr_report&lt;&gt;;
+///     ff_iostats             fflr_iostats_report&lt;&gt;;
 /// };
 ///
       </artwork>
     </figure>
 
     <t>
-      When object I/O operations failed, "pflr_ioerr_report&lt;&gt;" is
+      When object I/O operations failed, "fflr_ioerr_report&lt;&gt;" is
       used to report these errors to the metadata server as an array of
-      elements of type pnfs_ff_ioerr4.  Each element in the array represents
+      elements of type ff_ioerr4.  Each element in the array represents
       an error that occurred on the Component Object identified by
-      &lt;ioe_deviceid, ioe_fhandle&gt;.  If no errors are to be reported,
-      the size of the pflr_ioerr_report&lt;&gt; array is set to zero.
-      The client MAY also use "pflr_iostats_report&lt;&gt;" to report a
-      list of I/O statistics as an array of elements of type pnfs_ff_iostats4.
+      &lt;ffie_deviceid, ffie_fhandle&gt;.  If no errors are to be reported,
+      the size of the fflr_ioerr_report&lt;&gt; array is set to zero.
+      The client MAY also use "fflr_iostats_report&lt;&gt;" to report a
+      list of I/O statistics as an array of elements of type ff_iostats4.
       Each element in the array represents statistics for a particular
       byte range.  Byte ranges are not guaranteed to be disjoint and MAY
       repeat or intersect.
