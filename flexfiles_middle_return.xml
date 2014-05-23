@@ -74,6 +74,11 @@ struct LAYOUTRETURN4args {
     </figure>
 
     <t>
+      <cref anchor='AI3 ' source='TH'>
+        Note that ffie_fhandle doesn't work as that should
+        be given in the operation!
+      </cref>
+
       The ff_ioerr structure is used to return error indications
       for Component Objects that generated errors during data
       transfers.  These are hints to the metadata server that there
@@ -109,7 +114,7 @@ struct LAYOUTRETURN4args {
 
     <t>
       With pNFS, the data transfers are performed directly between the
-      pNFS client and the data servers.  Therefore, the metadata server
+      pNFS client and the storage devices.  Therefore, the metadata server
       has no visibility to the I/O stream and cannot use any statistical
       information about client I/O to optimize data storage location.
       ff_iostats4 MAY be used by the client to report I/O statistics

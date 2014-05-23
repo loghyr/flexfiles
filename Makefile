@@ -84,7 +84,7 @@ FRONT_PREGEN = ${DOC_PREFIX}_front.xml
 IDXMLSRC_BASE = \
 	${DOC_PREFIX}_middle_start.xml \
 	${DOC_PREFIX}_middle_introduction.xml \
-	${DOC_PREFIX}_middle_method.xml \
+	${DOC_PREFIX}_middle_coupling.xml \
 	${DOC_PREFIX}_middle_xdr_desc.xml \
 	${DOC_PREFIX}_middle_devices.xml \
 	${DOC_PREFIX}_middle_layout.xml \

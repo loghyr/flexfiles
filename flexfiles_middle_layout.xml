@@ -52,9 +52,9 @@
 /// enum ff_striping_pattern {
 ///     FFSP_SPARSE_STRIPING = 1,
 ///     FFSP_DENSE_STRIPING  = 2,
-///     FFSP_RAID_4          = 4,
-///     FFSP_RAID_5          = 5,
-///     FFSP_RAID_PQ         = 6
+///     FFSP_RAID_4          = 3,
+///     FFSP_RAID_5          = 4,
+///     FFSP_RAID_PQ         = 5
 /// };
 ///
        </artwork>
@@ -217,36 +217,36 @@
      </t>
 
      <t>
-       When NFSv4.1 Clustered Data Servers are used, the metadata
-       server implements the global state model where all data servers
+       When NFSv4.1 Clustered storage devices are used, the metadata
+       server implements the global state model where all storage devices
        share the same stateid and filehandle for the file.  In such
        case, the client MUST use the open, delegation, or lock stateid
        returned by the metadata server for the file for accessing
-       the Data Servers for READ and WRITE; the global filehandle
+       the storage devices for READ and WRITE; the global filehandle
        to be used by the client is provided by ffl_global_fh.  If
        the metadata server filehandle for the file is being used by
-       all data servers then ffl_global_fh MAY be set to an empty
+       all storage devices then ffl_global_fh MAY be set to an empty
        filehandle.
      </t>
 
      <t>
        ffcp_deviceid or ffcf_deviceid provide the
-       deviceid of the data server holding the Component Object.
+       deviceid of the storage device holding the Component Object.
      </t>
 
      <t>
-       When standalone data servers are used, either over NFSv4 or
+       When standalone storage devices are used, either over NFSv4 or
        NFSv4.1, ffl_global_fh SHOULD be set to an empty filehandle
        and it MUST be ignored by the client and ffcf_fhandle provides
-       the filehandle of the Data Server file holding the Component
+       the filehandle of the storage device file holding the Component
        Object, and ffcf_stateid provides the stateid to be used by
        the client to access the file.
      </t>
 
      <t>
-       For NFSv3 Data Servers, ffcf_auth provides the RPC credentials
+       For NFSv3 storage devices, ffcf_auth provides the RPC credentials
        to be used by the client to access the Component Objects.
-       For NFSv4.x Data Servers, the server SHOULD use the AUTH_NONE
+       For NFSv4.x storage devices, the server SHOULD use the AUTH_NONE
        flavor and a zero length opaque body to minimize the returned
        structure length.  The client MUST ignore pfxf_auth in this case.
      </t>
@@ -275,7 +275,7 @@
        redundancy algorithms.  Note: The term "RAID" (Redundant Array
        of Independent Disks) is used in this document to represent
        an array of Component Objects that store data for an individual
-       User File.  The objects are stored on independent Data Servers.
+       User File.  The objects are stored on independent storage devices.
        User File data is encoded and striped across the array of
        Component Objects using algorithms developed for block-based
        RAID systems.
@@ -380,7 +380,7 @@ O: The component offset corresponding to L
       <t>
         Note that the layout depends on the file size, which the
         client learns from the generic return parameters of LAYOUTGET,
-        by doing GETATTR commands to the Metadata Server.  The
+        by doing GETATTR commands to the metadata server.  The
         client uses the file size to decide if it should fill holes
         with zeros or return a short read.  Striping patterns can
         cause cases where Component Objects are shorter than other
