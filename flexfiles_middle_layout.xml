@@ -78,7 +78,6 @@
 ///     nfs_fh4                 ffcf_fhandle;
 ///     stateid4                ffcf_stateid;
 ///     opaque_auth             ffcf_auth;
-///     uint32_t                ffcf_metric;
 /// };
 ///
        </artwork>
@@ -249,18 +248,6 @@
        For NFSv4.x storage devices, the server SHOULD use the AUTH_NONE
        flavor and a zero length opaque body to minimize the returned
        structure length.  The client MUST ignore pfxf_auth in this case.
-     </t>
-
-     <t>
-       When ffl_mirror_cnt is not zero ffcf_metric indicates the
-       distance to the client the distance of the respective component
-       object, otherwise the server MUST set ffcf_metric to zero.
-       When reading data, the client the client is advised to read
-       from components with the lowest ffcf_metric.  When there are
-       several components with the same ffcf_metric client implementations
-       may implement a load distribution algorithm to evenly distribute
-       the read load across several devices and by so provide larger
-       bandwidth.
      </t>
    </section>
 
