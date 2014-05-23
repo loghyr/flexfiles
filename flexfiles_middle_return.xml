@@ -59,83 +59,6 @@ struct LAYOUTRETURN4args {
     server as defined below.
   </t>
 
-  <section anchor="ff_errno" title="ff_errno">
-    <figure>
-      <artwork>
-/// enum ff_errno {
-///     FF_ERR_EIO            = 1,
-///     FF_ERR_NOT_FOUND      = 2,
-///     FF_ERR_NO_SPACE       = 3,
-///     FF_ERR_BAD_STATEID    = 4,
-///     FF_ERR_NO_ACCESS      = 5,
-///     FF_ERR_UNREACHABLE    = 6,
-///     FF_ERR_RESOURCE       = 7
-/// };
-///
-      </artwork>
-    </figure>
-
-    <t>
-      ff_errno is used to represent error types when read/write
-      errors are reported to the metadata server.  The error codes
-      serve as hints to the metadata server that may help it in
-      diagnosing the exact reason for the error and in repairing it.
-
-      <list style="hanging">
-        <t hangText='FF_ERR_EIO'>
-          indicates the operation failed because the Data Server
-          experienced a failure trying to access the object.  The
-          most common source of these errors is media errors, but
-          other internal errors might cause this as well.  In this
-          case, the metadata server should go examine the broken
-          object more closely; hence, it should be used as the
-          default error code.
-        </t>
-
-        <t hangText='FF_ERR_NOT_FOUND'>
-          indicates the object ID specifies a Component Object that
-          does not exist on the Data Server.
-        </t>
-
-        <t hangText='FF_ERR_NO_SPACE'>
-          indicates the operation failed because the Data Server
-          ran out of free capacity during the operation.
-        </t>
-
-        <t hangText='FF_ERR_BAD_STATEID'>
-          indicates the stateid is not valid.
-        </t>
-
-        <t hangText='FF_ERR_NO_ACCESS'>
-          indicates the RPC credentials do not allow the requested
-          operation.  This may happen when the client is fenced
-          off.  The client will need to return the layout and get
-          a new one with fresh credentials.
-        </t>
-
-        <t hangText='FF_ERR_UNREACHABLE'>
-          indicates the client did not complete the I/O operation
-          at the Data Server due to a communication failure.  Whether
-          or not the I/O operation was executed by the Data Server
-          is undetermined.
-        </t>
-
-        <t hangText='FF_ERR_RESOURCE'>
-          indicates the client did not issue the I/O operation due
-          to a local problem on the initiator (i.e., client) side,
-          e.g., when running out of memory.  The client MUST guarantee
-          that the Data Server WRITE operation was never sent.
-
-          <cref anchor='AI2 ' source='TH'>
-            Besides not needing an "i.e." followed by an "e.g.",
-            is initiator a term we can employ here? Sounds
-            very objecty!
-          </cref>
-        </t>
-      </list>
-    </t>
-  </section>
-
   <section anchor="ff_ioerr" title="ff_ioerr">
     <figure>
       <artwork>
@@ -144,8 +67,7 @@ struct LAYOUTRETURN4args {
 ///     nfs_fh4             ffie_fhandle;
 ///     offset4             ffie_comp_offset;
 ///     length4             ffie_comp_length;
-///     bool                ffie_iswrite;
-///     ff_errno            ffie_errno;
+///     device_error4       ffie_errors;
 /// };
 ///
       </artwork>
@@ -158,9 +80,8 @@ struct LAYOUTRETURN4args {
       are problems with that object.  For each error, "ffie_deviceid",
       "ffie_fhandle", "ffie_comp_offset", and "ffie_comp_length"
       represent the Component Object and byte range within the
-      object in which the error occurred; "ffie_iswrite" is set to
-      "true" if the failed Data Server operation was data modifying,
-      and "ffie_errno" represents the type of error.
+      object in which the error occurred; "ffie_errors" represents
+      the operation and type of error.
     </t>
 
     <t>
