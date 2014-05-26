@@ -101,12 +101,12 @@
     </t>
 
     <t>
-      With NFSv4 storage devices, the metadata server, in response to the state
-      changing operation, executes them against the respective Component
-      Objects on the storage devices.  It then sends the storage device
-      open stateid as part of the layout (see the pfcf_stateid in
-      <xref target='ff_layout' />) and it is then used by the
-      client for executing READ/WRITE operations against the storage device.
+      With NFSv4 storage devices, the metadata server, in response to
+      the state changing operation, executes them against the respective
+      Component Objects on the storage devices.  It then sends the storage
+      device open stateid as part of the layout (see the ffcf_stateid
+      in <xref target='ff_layout' />) and it is then used by the client
+      for executing READ/WRITE operations against the storage device.
     </t>
 
     <t>
