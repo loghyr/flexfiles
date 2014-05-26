@@ -247,7 +247,7 @@
        to be used by the client to access the Component Objects.
        For NFSv4.x storage devices, the server SHOULD use the AUTH_NONE
        flavor and a zero length opaque body to minimize the returned
-       structure length.  The client MUST ignore pfxf_auth in this case.
+       structure length.  The client MUST ignore ffcf_auth in this case.
      </t>
    </section>
 
