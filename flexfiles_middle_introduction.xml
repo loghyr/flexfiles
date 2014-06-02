@@ -100,7 +100,7 @@
         </t>
 
         <t hangText='loose coupling:'>
-          is when the metadata server and the storage devices 
+          is when the metadata server and the storage devices
           do not have a control protocol present.
         </t>
 
@@ -151,7 +151,7 @@
         </t>
 
         <t hangText='tight coupling:'>
-          is when the metadata server and the storage devices 
+          is when the metadata server and the storage devices
           do have a control protocol present.
         </t>
       </list>

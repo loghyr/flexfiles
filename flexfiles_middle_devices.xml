@@ -4,7 +4,7 @@
 <section title="Device Addressing and Discovery">
   <t>
     Data operations to a storage device require the client to know the
-    network address of the storage device.  The NFSv4.1 GETDEVICEINFO 
+    network address of the storage device.  The NFSv4.1 GETDEVICEINFO
     operation (Section 18.40 of <xref target="RFC5661" />) is
     used by the client to retrieve that information.
   </t>
@@ -56,7 +56,7 @@
       to the metadata server. I.e., the writes MUST be committed by
       the client to stable storage via issuing WRITEs with stable_how
       == FILE_SYNC or by issuing a COMMIT after WRITEs with stable_how
-      != FILE_SYNC (see Section 3.3.7 of <xref target='RFC1813' />). 
+      != FILE_SYNC (see Section 3.3.7 of <xref target='RFC1813' />).
     </t>
   </section>
 
