@@ -17,13 +17,7 @@
       </t>
 
       <t>
-        When there are sharing conflicts. For example, the server will issue
-        stripe-aligned layout segments for RAID-5 objects.  To prevent
-        corruption of the file's parity, multiple clients must not hold
-        valid write layouts for the same stripes.  An outstanding READ/WRITE
-        (RW) layout should be recalled when a conflicting LAYOUTGET is
-        received from a different client for LAYOUTIOMODE4_RW and for a
-        byte range overlapping with the outstanding layout segment.
+        When there are sharing conflicts.
       </t>
     </list>
   </t>

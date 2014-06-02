@@ -13,9 +13,8 @@
 
   <t>
     The metadata server analyzes the error and determines the
-    required recovery operations such as repairing any parity
-    inconsistencies, recovering media failures, or reconstructing
-    missing objects.
+    required recovery operations such as recovering media failures
+    or reconstructing missing objects.
   </t>
 
   <t>

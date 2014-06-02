@@ -51,10 +51,7 @@
        <artwork>
 /// enum ff_striping_pattern {
 ///     FFSP_SPARSE_STRIPING = 1,
-///     FFSP_DENSE_STRIPING  = 2,
-///     FFSP_RAID_4          = 3,
-///     FFSP_RAID_5          = 4,
-///     FFSP_RAID_PQ         = 5
+///     FFSP_DENSE_STRIPING  = 2
 /// };
 ///
        </artwork>
@@ -62,18 +59,7 @@
 
      <figure>
        <artwork>
-/// enum ff_comp_type {
-///     FF_COMP_MISSING = 0,
-///     FF_COMP_PACKED  = 1,
-///     FF_COMP_FULL    = 2
-/// };
-///
-       </artwork>
-     </figure>
-
-     <figure>
-       <artwork>
-/// struct ff_comp_full {
+/// struct ff_components {
 ///     deviceid4               ffcf_deviceid;
 ///     nfs_fh4                 ffcf_fhandle;
 ///     stateid4                ffcf_stateid;
@@ -85,30 +71,12 @@
 
      <figure>
        <artwork>
-/// union ff_comp switch (ff_comp_type ffc_type) {
-///    case FF_COMP_MISSING:
-///         void;
-///
-///    case FF_COMP_PACKED:
-///         deviceid4               ffcp_deviceid;
-///
-///    case FF_COMP_FULL:
-///         ff_comp_full            ffcp_full;
-/// };
-///
-       </artwork>
-     </figure>
-
-     <figure>
-       <artwork>
 /// struct ff_layout {
 ///     ff_striping_pattern         ffl_striping_pattern;
+///     length4                     ffl_stripe_unit;
 ///     uint32_t                    ffl_num_comps;
 ///     uint32_t                    ffl_mirror_cnt;
-///     length4                     ffl_stripe_unit;
-///     nfs_fh4                     ffl_global_fh;
-///     uint32_t                    ffl_comps_index;
-///     ff_comp                     ffl_comps&lt;&gt;;
+///     ff_components               ffl_comps&lt;&gt;;
 /// };
 ///
        </artwork>
@@ -140,24 +108,23 @@
      <t>
        In addition to mapping data using simple striping schemes
        where loss of a single component object results in data loss,
-       the layout parameters support mirroring and more advanced
-       redundancy schemes that protect against loss of component
-       objects.  ffl_striping_pattern represents the algorithm to
-       be used for mapping byte offsets in the file address space
-       to corresponding component objects in the returned layout and
-       byte offsets in the component's address space.  ffl_striping_pattern
-       also represents methods for storing and retrieving redundant
-       data that can be used to recover from failure or loss of
-       component objects.
+       the layout parameters support mirroring to protect against
+       loss of component objects.  ffl_striping_pattern represents
+       the algorithm to be used for mapping byte offsets in the
+       file address space to corresponding component objects in the
+       returned layout and byte offsets in the component's address
+       space.
      </t>
 
      <t>
        ffl_num_comps is the total number of component objects the
        file is striped over within the returned byte range, not
-       counting mirrored components (See ffl_mirror_cnt below).  Note
-       that the server MAY grow the file by adding more components
-       to the stripe while clients hold valid layouts until the file
-       has reached its final stripe width.
+       counting mirrored components (See ffl_mirror_cnt below).
+
+       <cref anchor='AI5 ' source='TH'>
+         The assumption here is that all components are
+         equally mirrored.
+       </cref>
      </t>
 
      <t>
@@ -178,68 +145,25 @@
 
      <t>
        The ffl_comps field represents an array of component objects.
-       The data placement algorithm that maps file data onto component
-       objects assumes that each component object occurs exactly
-       once in the array of components.  Therefore, component objects
-       MUST appear in the ffl_comps array only once.  The components
-       array may represent all objects comprising the file, in which
-       case ffl_comps_index is set to zero and the number of entries
-       in the ffl_comps array is equal to ffl_num_comps * (ffl_mirror_cnt
-       + 1).  The server MAY return fewer components than ffl_num_comps,
-       provided that the returned byte range represented by lo_offset
-       and lo_count maps in whole into the set of returned component
-       objects.  In this case, ffl_comps_index represents the logical
-       position of the returned components array, ffl_comps, within
-       the full array of components that comprise the file.
-       ffl_comps_index MUST be a multiple of (ffl_mirror_cnt + 1).
+       Each component objects MUST appear in the ffl_comps array
+       only once.  The number of entries in the ffl_comps array is
+       equal to ffl_num_comps * (ffl_mirror_cnt + 1).
      </t>
 
      <t>
        Each component object in the ffl_comps array is described by the
-       ff_comp type.
+       ff_components type.
      </t>
 
      <t>
-       When a component object is unavailable ffc_type is set to
-       FF_COMP_MISSING and no other information for this component
-       is returned.  When a data redundancy scheme is being used,
-       as represented by ffl_striping_pattern, the client MAY use a
-       respective data recovery algorithm to reconstruct data that
-       is logically stored on the missing component using user data
-       and redundant data stored on the available components in the
-       containing stripe.
+       ffcf_deviceid provides the deviceid of the storage device
+       holding the Component Object.
      </t>
 
      <t>
-       The server MUST set the same ffc_type for all available components to
-       either FF_COMP_PACKED or FF_COMP_FULL.
-     </t>
-
-     <t>
-       When NFSv4.1 Clustered storage devices are used, the metadata
-       server implements the global state model where all storage devices
-       share the same stateid and filehandle for the file.  In such
-       case, the client MUST use the open, delegation, or lock stateid
-       returned by the metadata server for the file for accessing
-       the storage devices for READ and WRITE; the global filehandle
-       to be used by the client is provided by ffl_global_fh.  If
-       the metadata server filehandle for the file is being used by
-       all storage devices then ffl_global_fh MAY be set to an empty
-       filehandle.
-     </t>
-
-     <t>
-       ffcp_deviceid or ffcf_deviceid provide the
-       deviceid of the storage device holding the Component Object.
-     </t>
-
-     <t>
-       When standalone storage devices are used, either over NFSv4 or
-       NFSv4.1, ffl_global_fh SHOULD be set to an empty filehandle
-       and it MUST be ignored by the client and ffcf_fhandle provides
-       the filehandle of the storage device file holding the Component
-       Object, and ffcf_stateid provides the stateid to be used by
-       the client to access the file.
+       ffcf_fhandle provides the filehandle of the storage device
+       file holding the Component Object, and ffcf_stateid provides
+       the stateid to be used by the client to access the file.
      </t>
 
      <t>
@@ -248,24 +172,16 @@
        For NFSv4.x storage devices, the server SHOULD use the AUTH_NONE
        flavor and a zero length opaque body to minimize the returned
        structure length.  The client MUST ignore ffcf_auth in this case.
+
+       <cref anchor='AI6 ' source='TH'>
+         Even for tightly coupled systems, that cannot be correct!
+       </cref>
      </t>
    </section>
 
    <section title="Striping Topologies" anchor="sec:stripingTopologies">
      <t>
        This section describes the different data mapping schemes in detail.
-     </t>
-
-     <t>
-       ff_striping_pattern determines the algorithm and placement
-       of redundant data.  This section defines the different
-       redundancy algorithms.  Note: The term "RAID" (Redundant Array
-       of Independent Disks) is used in this document to represent
-       an array of Component Objects that store data for an individual
-       User File.  The objects are stored on independent storage devices.
-       User File data is encoded and striped across the array of
-       Component Objects using algorithms developed for block-based
-       RAID systems.
      </t>
 
      <section anchor="sec:sparseStriping" title="FFSP_SPARSE_STRIPING">
@@ -304,16 +220,6 @@ O: The component offset corresponding to L
          object appearing multiple times. If needed the server can
          return multiple layout segments each covering a single
          instance of the object.
-       </t>
-
-       <t>
-         FFSP_SPARSE_STRIPING means there is no
-         parity data, so all bytes in the component objects are
-         data bytes located by the above equations for C and O.
-         If a component object is marked as FF_COMP_MISSING,
-         the pNFS client MUST either return an I/O error if this component
-         is attempted to be read or, alternatively, it can
-         retry the READ against the pNFS server.
        </t>
      </section>
 
@@ -355,16 +261,6 @@ O: The component offset corresponding to L
       </t>
 
       <t>
-        FFSP_DENSE_STRIPING means there is no parity data, so all
-        bytes in the component objects are data bytes located by
-        the above equations for C and O.  If a component object is
-        marked as FF_COMP_MISSING, the pNFS client MUST either
-        return an I/O error if this component is attempted to be
-        read or, alternatively, it can retry the READ against the
-        pNFS server.
-      </t>
-
-      <t>
         Note that the layout depends on the file size, which the
         client learns from the generic return parameters of LAYOUTGET,
         by doing GETATTR commands to the metadata server.  The
@@ -375,163 +271,13 @@ O: The component offset corresponding to L
         part of the Component Object.
       </t>
     </section>
-
-    <section anchor="FFSP_RAID_4" title="FFSP_RAID_4">
-      <t>
-        FFSP_RAID_4 means that the last component object in the
-        stripe contains parity information computed over the rest
-        of the stripe with an XOR operation.  If a Component Object
-        is unavailable, the client can read the rest of the stripe
-        units in the damaged stripe and recompute the missing stripe
-        unit by XORing the other stripe units in the stripe.  Or
-        the client can replay the READ against the pNFS server that
-        will presumably perform the reconstructed read on the
-        client's behalf.
-      </t>
-
-      <t>
-        When parity is present in the file, then the number of
-        parity devices is taken into account in the above equations
-        when calculating (D), the number of data devices in a stripe,
-        as follows:
-      </t>
-
-      <figure>
-        <artwork>
-P: number of parity devices in each stripe
-   P = 1
-
-D: number of data devices in a stripe
-   D = W - P
-
-I: parity device index
-   I = D
-        </artwork>
-      </figure>
-    </section>
-
-    <section anchor="FFSP_RAID_5" title="FFSP_RAID_5">
-      <t>
-        OBJ_RAID_5 means that the position of the parity data is
-        rotated on each stripe.  In the first stripe, the last component
-        holds the parity.  In the second stripe, the next-to-last
-        component holds the parity, and so on.  In this scheme, all
-        stripe units are rotated so that I/O is evenly spread across
-        objects as the file is read sequentially.  The rotated parity
-        layout is illustrated here, with hexadecimal numbers indicating
-        the stripe unit.
-      </t>
-
-      <figure>
-        <artwork>
-0 1 2 P
-4 5 P 3
-8 P 6 7
-P 9 a b
-        </artwork>
-      </figure>
-
-      <t>
-        Note that the math for RAID_5 is similar to RAID_4 only
-        that the device indices for each stripe are rotated backwards.
-        So start with the equations above for RAID_4, then compute
-        the rotation as described below.
-      </t>
-
-      <figure>
-        <artwork>
-P: number of parity devices in each stripe
-   P = 1
-
-PC: Parity Cycle
-    PC = W
-
-R: The parity rotation index
-   (N is as computed in above equations for RAID-4)
-   R = N % PC
-
-I: parity device index
-   I = (W + W - (R + 1) * P) % W
-
-Cr: The rotated device index
-    (C is as computed in the above equations for RAID-4)
-    Cr = (W + C - (R * P)) % W
-
-Note: W is added above to avoid negative numbers modulo math.
-        </artwork>
-      </figure>
-    </section>
-
-    <section anchor="FFSP_RAID_PQ" title="FFSP_RAID_PQ">
-      <t>
-        FFSP_RAID_PQ is a double-parity scheme that uses the Reed-Solomon
-        P+Q encoding scheme <xref target='MacWilliams77' />.  In
-        this layout, the last two component objects hold the P and Q
-        data, respectively.  P is parity computed with XOR.  The Q
-        computation is described in detail in <xref target='Anvin09' />.
-        The same polynomial "x^8+x^4+x^3+x^2+1" and Galois field
-        size of 2^8 are used here.  Clients may simply choose to read
-        data through the metadata server if two or more components are
-        missing or damaged.
-      </t>
-
-      <t>
-        The equations given above for embedded parity can be used to
-        map a file offset to the correct component object by setting
-        the number of parity components (P) to 2 instead of 1 for RAID-5
-        and computing the Parity Cycle length as the Lowest Common
-        Multiple of ffl_num_comps and P, divided by P, as described
-        below.  Note: This algorithm can be used also for RAID-5 where
-        P=1.
-      </t>
-
-      <figure>
-        <artwork>
-P: number of parity devices
-   P = 2
-
-PC: Parity cycle:
-    PC = LCM(W, P) / P
-
-Q: The device index holding the Q component
-   (I is as computed in the above equations for RAID-5)
-   Qdev = (I + 1) % W
-        </artwork>
-      </figure>
-    </section>
-
-    <section title="RAID Usage and Implementation Notes">
-      <t>
-        RAID layouts with redundant data in their stripes require
-        additional serialization of updates to ensure correct operation.
-        Otherwise, if two clients simultaneously write to the same
-        logical range of an object, the result could include different
-        data in the same ranges of mirrored tuples, or corrupt parity
-        information.  It is the responsibility of the metadata server
-        to enforce serialization requirements such as this. For example,
-        the metadata server may do so by not granting overlapping write
-        layouts within mirrored objects.
-      </t>
-
-      <t>
-        Many alternative encoding schemes exist for P &gt;= 2
-        <xref target='Plank07' />.  These involve P or Q
-        equations different than those used in FFSP_RAID_PQ.  Thus, if
-        one of these schemes is to be used in the future, a distinct
-        value must be added to ff_striping_pattern for it. While
-        Reed-Solomon codes are well understood, recently discovered
-        schemes such as Liberation codes are more computationally
-        efficient for small group_widths, and Cauchy Reed-Solomon codes
-        are more computationally efficient for higher values of P.
-      </t>
-    </section>
   </section>
 
   <section anchor="Mirroring" title="Mirroring">
     <t>
       The ffl_mirror_cnt is used to replicate a file by replicating
       its Component Objects.  If there is no mirroring, then
-      pfs_mirror_cnt MUST be 0.  If ffl_mirror_cnt is greater than
+      ffl_mirror_cnt MUST be 0.  If ffl_mirror_cnt is greater than
       zero, then the size of the ffl_comps array MUST be a multiple
       of (ffl_mirror_cnt + 1).  Thus, for a classic mirror on two
       objects, ffl_mirror_cnt is one.  Note that mirroring can be

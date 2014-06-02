@@ -139,19 +139,6 @@
     <seriesInfo name="RFC" value="5664"/>
   </reference>
 
-  <reference anchor='MacWilliams77'>
-    <front>
-      <title>The Theory of Error-Correcting Codes, Part I</title>
-      <author initials='F. J.' surname='MacWilliams' fullname='F. J. MacWilliams'>
-        <organization> </organization>
-      </author>
-      <author initials='N. J. A.' surname='Sloane' fullname='N. J. A. Sloane'>
-        <organization> </organization>
-      </author>
-      <date year='1977'/>
-    </front>
-  </reference>
-
     <reference anchor='NFSv42'>
       <front>
         <title>NFS Version 4 Minor Version 2</title>
@@ -177,30 +164,6 @@
       <format type='TXT'
         target='http://www.ietf.org/internet-drafts/draft-haynes-nfsv4-layout-types-02.txt' />
     </reference>
-
-
-  <reference anchor='Anvin09'
-             target='http://kernel.org/pub/linux/kernel/people/hpa/raid6.pdf'>
-    <front>
-      <title>The Mathematics of RAID-6</title>
-      <author initials='H. P.' surname='Anvin' fullname='H. Peter Anvin'>
-        <organization>zytor.com</organization>
-      </author>
-      <date year='2009' month='May'/>
-    </front>
-  </reference>
-
-  <reference anchor='Plank07'>
-    <front>
-      <title>A Performance Evaluation and Examination of Open-source Erasure Coding Libraries for Storage</title>
-      <author initials='' surname="Plank, James S., and Luo, Jianqiang and Schuman, Catherine D. and
-Xu, Lihao and Wilcox-O'Hearn, Zooko">
-        <organization> </organization>
-      </author>
-      <date year='2007'/>
-    </front>
-  </reference>
-
 </references>
 
 <references title="Informative References">
