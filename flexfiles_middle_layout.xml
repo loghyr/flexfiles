@@ -145,7 +145,7 @@
 
      <t>
        The ffl_comps field represents an array of component objects.
-       Each component objects MUST appear in the ffl_comps array
+       Each component object MUST appear in the ffl_comps array
        only once.  The number of entries in the ffl_comps array is
        equal to ffl_num_comps * (ffl_mirror_cnt + 1).
      </t>
@@ -162,8 +162,13 @@
 
      <t>
        ffcf_fhandle provides the filehandle of the storage device
-       file holding the Component Object, and ffcf_stateid provides
-       the stateid to be used by the client to access the file.
+       file holding the Component Object. For tight coupling,
+       ffcf_stateid provides the stateid to be used by the client
+       to access the file. For loose coupling and a NFSv4 storage
+       device, the client may use an anonymous stateid to perform
+       I/O on the storage device as there is no use for the metadata
+       server stateid (no control protocol). In such a scenario,
+       the server MUST set the ffcf_stateid to be zero.
      </t>
 
      <t>
@@ -216,7 +221,7 @@ O: The component offset corresponding to L
        <t>
          Note that this computation does not accommodate the same
          object appearing in the ffl_comps array multiple times.
-         Therefore the server may not return layouts with the same
+         Therefore the server MUST not return layouts with the same
          object appearing multiple times. If needed the server can
          return multiple layout segments each covering a single
          instance of the object.
@@ -254,7 +259,7 @@ O: The component offset corresponding to L
       <t>
         Note that this computation does not accommodate the same
         object appearing in the ffl_comps array multiple times.
-        Therefore the server may not return layouts with the same
+        Therefore the server MUST not return layouts with the same
         object appearing multiple times. If needed the server can
         return multiple layout segments each covering a single
         instance of the object.
@@ -285,7 +290,7 @@ O: The component offset corresponding to L
     </t>
 
     <t>
-      Replicas are adjacent in the olo_components array, and the
+      Replicas are adjacent in the ff_comps array, and the
       value C produced by the above equations is not a direct index
       into the ffl_comps array.  Instead, the following equations
       determine the replica component index RCi, where i ranges
