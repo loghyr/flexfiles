@@ -29,284 +29,102 @@
         layout_content4         lo_content;
     };
     </artwork>
-   </figure>
+  </figure>
 
-   <t>
-     This document defines structure associated with the layouttype4
-     value LAYOUT4_FLEX_FILES.  <xref target="RFC5661" />
-     specifies the loc_body structure as an XDR type "opaque".  The
-     opaque layout is uninterpreted by the generic pNFS client
-     layers, but obviously must be interpreted by the Flexible File
-     Layout Type driver.  This section defines the structure of this
-     opaque value, ff_layout4.
+  <t>
+    This document defines structure associated with the layouttype4
+    value LAYOUT4_FLEX_FILES.  <xref target="RFC5661" /> specifies
+    the loc_body structure as an XDR type "opaque".  The opaque
+    layout is uninterpreted by the generic pNFS client layers, but
+    obviously must be interpreted by the Flexible File Layout Type
+    implementation.  This section defines the structure of this
+    opaque value, ff_layout4.
+  </t>
 
-     <cref anchor='AI1 ' source='TH'>
-       What is a driver? I.e., I know what it is, but have we
-       defined it? Are we talking implementation here?
-     </cref>
-   </t>
-
-   <section title="ff_layout" anchor="ff_layout">
-     <figure>
-       <artwork>
-/// enum ff_striping_pattern {
-///     FFSP_SPARSE_STRIPING = 1,
-///     FFSP_DENSE_STRIPING  = 2
+  <section title="ff_layout4" anchor="ff_layout4">
+    <figure>
+      <artwork>
+/// struct ff_mirror4 {
+///     deviceid4               ffm_deviceid;
+///     nfs_fh4                 ffm_fhandle;
+///     stateid4                ffm_stateid;
+///     opaque_auth             ffm_auth;
 /// };
 ///
-       </artwork>
-     </figure>
+      </artwork>
+    </figure>
 
-     <figure>
-       <artwork>
-/// struct ff_components {
-///     deviceid4               ffcf_deviceid;
-///     nfs_fh4                 ffcf_fhandle;
-///     stateid4                ffcf_stateid;
-///     opaque_auth             ffcf_auth;
+    <figure>
+      <artwork>
+/// struct ff_layout4 {
+///     ff_mirror4              ffl_mirrors&lt;&gt;;
 /// };
 ///
-       </artwork>
-     </figure>
+      </artwork>
+    </figure>
 
-     <figure>
-       <artwork>
-/// struct ff_layout {
-///     ff_striping_pattern         ffl_striping_pattern;
-///     length4                     ffl_stripe_unit;
-///     uint32_t                    ffl_num_comps;
-///     uint32_t                    ffl_mirror_cnt;
-///     ff_components               ffl_comps&lt;&gt;;
-/// };
-///
-       </artwork>
-     </figure>
+    <t>
+      The ff_layout4 structure specifies a layout over a set
+      of Component Objects.  The layout parameterizes the algorithm
+      that maps the file's contents within the returned byte range,
+      as represented by lo_offset and lo_length, over the Component
+      Objects.
+    </t>
 
-     <t>
-       The ff_layout structure specifies a layout over a set
-       of Component Objects.  The layout parameterizes the algorithm
-       that maps the file's contents within the returned byte range,
-       as represented by lo_offset and lo_length, over the Component
-       Objects.
-     </t>
+    <t>
+      It is possible that the file is concatenated from more than
+      one layout segment.  Each layout segment MAY represent different
+      striping parameters, applying respectively only to the layout
+      segment byte range.
+    </t>
 
-     <t>
-       It is possible that the file is concatenated from more than
-       one layout segment.  Each layout segment MAY represent different
-       striping parameters, applying respectively only to the layout
-       segment byte range.
-     </t>
+    <t>
+      This section provides a brief introduction to the layout
+      parameters.  In addition to mapping data using simple striping
+      schemes where loss of a single component object results in
+      data loss, the layout parameters support mirroring to protect
+      against loss of component objects.
+    </t>
 
-     <t>
-       This section provides a brief introduction to the layout
-       parameters.  See <xref target="sec:stripingTopologies" /> for
-       a more detailed description of the different striping schemes
-       and the respective interpretation of the layout parameters
-       for each striping scheme.
-     </t>
+    <t>
+      The ffl_mirrors field represents an array of state information
+      for each mirrored copy of the file. Each element is described
+      by a ff_mirror type.
+    </t>
 
-     <t>
-       In addition to mapping data using simple striping schemes
-       where loss of a single component object results in data loss,
-       the layout parameters support mirroring to protect against
-       loss of component objects.  ffl_striping_pattern represents
-       the algorithm to be used for mapping byte offsets in the
-       file address space to corresponding component objects in the
-       returned layout and byte offsets in the component's address
-       space.
-     </t>
+    <t>
+      ffm_deviceid provides the deviceid of the storage device
+      holding the Component Object.
+    </t>
 
-     <t>
-       ffl_num_comps is the total number of component objects the
-       file is striped over within the returned byte range, not
-       counting mirrored components (See ffl_mirror_cnt below).
+    <t>
+      ffm_fhandle provides the filehandle of the storage device
+      file holding the Component Object. For tight coupling,
+      ffm_stateid provides the stateid to be used by the client
+      to access the file. For loose coupling and a NFSv4 storage
+      device, the client may use an anonymous stateid to perform
+      I/O on the storage device as there is no use for the metadata
+      server stateid (no control protocol). In such a scenario,
+      the server MUST set the ffm_stateid to be zero.
+    </t>
 
-       <cref anchor='AI5 ' source='TH'>
-         The assumption here is that all components are
-         equally mirrored.
-       </cref>
-     </t>
+    <t>
+      For NFSv3 storage devices, ffm_auth provides the RPC credentials
+      to be used by the client to access the Component Objects.
+      For NFSv4.x storage devices, the server SHOULD use the AUTH_NONE
+      flavor and a zero length opaque body to minimize the returned
+      structure length.  The client MUST ignore ffm_auth in this case.
 
-     <t>
-       ffl_mirror_cnt represents the number of mirrors each component
-       in the stripe has.  If there is no mirroring then ffl_mirror_cnt
-       MUST be 0.  Otherwise, the number of entries listed in ffl_comps
-       MUST be a multiple of (ffl_mirror_cnt + 1).
-     </t>
-
-     <t>
-       ffl_stripe_unit is the number of bytes placed on one component
-       before advancing to the next one in the list of components.
-       When the file is striped over a single component object
-       (ffl_num_comps equals to 1), the stripe unit has no use and
-       the server SHOULD set it to the server default value or to
-       zero; otherwise, ffl_stripe_unit MUST NOT be set to zero.
-     </t>
-
-     <t>
-       The ffl_comps field represents an array of component objects.
-       Each component object MUST appear in the ffl_comps array
-       only once.  The number of entries in the ffl_comps array is
-       equal to ffl_num_comps * (ffl_mirror_cnt + 1).
-     </t>
-
-     <t>
-       Each component object in the ffl_comps array is described by the
-       ff_components type.
-     </t>
-
-     <t>
-       ffcf_deviceid provides the deviceid of the storage device
-       holding the Component Object.
-     </t>
-
-     <t>
-       ffcf_fhandle provides the filehandle of the storage device
-       file holding the Component Object. For tight coupling,
-       ffcf_stateid provides the stateid to be used by the client
-       to access the file. For loose coupling and a NFSv4 storage
-       device, the client may use an anonymous stateid to perform
-       I/O on the storage device as there is no use for the metadata
-       server stateid (no control protocol). In such a scenario,
-       the server MUST set the ffcf_stateid to be zero.
-     </t>
-
-     <t>
-       For NFSv3 storage devices, ffcf_auth provides the RPC credentials
-       to be used by the client to access the Component Objects.
-       For NFSv4.x storage devices, the server SHOULD use the AUTH_NONE
-       flavor and a zero length opaque body to minimize the returned
-       structure length.  The client MUST ignore ffcf_auth in this case.
-
-       <cref anchor='AI6 ' source='TH'>
-         Even for tightly coupled systems, that cannot be correct!
-       </cref>
-     </t>
-   </section>
-
-   <section title="Striping Topologies" anchor="sec:stripingTopologies">
-     <t>
-       This section describes the different data mapping schemes in detail.
-     </t>
-
-     <section anchor="sec:sparseStriping" title="FFSP_SPARSE_STRIPING">
-       <t>
-         The mapping from the logical offset within a file (L)
-         to the Component Object C and object-specific offset
-         O is direct and straight forward as defined by the
-         following equations:
-       </t>
-
-       <figure>
-         <artwork>
-L: logical offset into the file
-
-W: stripe width
-    W = ffl_num_comps
-
-S: number of bytes in a stripe
-    S = W * ffl_stripe_unit
-
-N: stripe number
-    N = L / S
-
-C: component index corresponding to L
-   C = (L % S) / ffl_stripe_unit
-
-O: The component offset corresponding to L
-   O = L
-         </artwork>
-       </figure>
-
-       <t>
-         Note that this computation does not accommodate the same
-         object appearing in the ffl_comps array multiple times.
-         Therefore the server MUST not return layouts with the same
-         object appearing multiple times. If needed the server can
-         return multiple layout segments each covering a single
-         instance of the object.
-       </t>
-     </section>
-
-    <section anchor="sec:denseStriping" title="FFSP_DENSE_STRIPING">
-      <t>
-        The mapping from the logical
-        offset within a file (L) to the component object C and
-        object-specific offset O is defined by the following equations:
-      </t>
-
-      <figure>
-        <artwork>
-L: logical offset into the file
-
-W: stripe width
-    W = ffl_num_comps
-
-S: number of bytes in a stripe
-    S = W * ffl_stripe_unit
-
-N: stripe number
-    N = L / S
-
-C: component index corresponding to L
-   C = (L % S) / ffl_stripe_unit
-
-O: The component offset corresponding to L
-   O = (N * ffl_stripe_unit) + (L % ffl_stripe_unit)
-        </artwork>
-      </figure>
-
-      <t>
-        Note that this computation does not accommodate the same
-        object appearing in the ffl_comps array multiple times.
-        Therefore the server MUST not return layouts with the same
-        object appearing multiple times. If needed the server can
-        return multiple layout segments each covering a single
-        instance of the object.
-      </t>
-
-      <t>
-        Note that the layout depends on the file size, which the
-        client learns from the generic return parameters of LAYOUTGET,
-        by doing GETATTR commands to the metadata server.  The
-        client uses the file size to decide if it should fill holes
-        with zeros or return a short read.  Striping patterns can
-        cause cases where Component Objects are shorter than other
-        components because a hole happens to correspond to the last
-        part of the Component Object.
-      </t>
-    </section>
+      <cref anchor='AI6 ' source='TH'>
+        Even for tightly coupled systems, that cannot be correct!
+      </cref>
+    </t>
   </section>
 
   <section anchor="Mirroring" title="Mirroring">
     <t>
       The ffl_mirror_cnt is used to replicate a file by replicating
-      its Component Objects.  If there is no mirroring, then
-      ffl_mirror_cnt MUST be 0.  If ffl_mirror_cnt is greater than
-      zero, then the size of the ffl_comps array MUST be a multiple
-      of (ffl_mirror_cnt + 1).  Thus, for a classic mirror on two
-      objects, ffl_mirror_cnt is one.  Note that mirroring can be
-      defined over any striping pattern.
+      its Component Objects.
     </t>
-
-    <t>
-      Replicas are adjacent in the ff_comps array, and the
-      value C produced by the above equations is not a direct index
-      into the ffl_comps array.  Instead, the following equations
-      determine the replica component index RCi, where i ranges
-      from 0 to ffl_mirror_cnt.
-    </t>
-
-    <figure>
-      <artwork>
-FW = size of ffl_comps array / (ffl_mirror_cnt+1)
-
-C = component index for striping or two-level striping
-    as calculated using above equations
-
-i ranges from 0 to ffl_mirror_cnt, inclusive
-RCi = C * (ffl_mirror_cnt+1) + i
-      </artwork>
-    </figure>
   </section>
 </section>

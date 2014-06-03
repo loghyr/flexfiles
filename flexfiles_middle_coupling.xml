@@ -69,7 +69,7 @@
       of the Component Objects is allowed read/write access and the
       gid owner is allowed read only access.  As part of the layout,
       the client is provided with the rpc credentials to be used
-      (see ffcf_auth in  <xref target='ff_layout' />) to access
+      (see ffm_auth in  <xref target='ff_layout4' />) to access
       the Object.  Fencing off clients is achieved by using SETATTR
       by the server to change the uid and/or gid owners of the
       Component Objects to implicitly revoke the outstanding rpc
@@ -104,8 +104,8 @@
       With NFSv4 storage devices, the metadata server, in response to
       the state changing operation, executes them against the respective
       Component Objects on the storage devices.  It then sends the storage
-      device open stateid as part of the layout (see the ffcf_stateid
-      in <xref target='ff_layout' />) and it is then used by the client
+      device open stateid as part of the layout (see the ffm_stateid
+      in <xref target='ff_layout4' />) and it is then used by the client
       for executing READ/WRITE operations against the storage device.
     </t>
 
