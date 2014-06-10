@@ -98,42 +98,58 @@ struct LAYOUTRETURN4args {
   <section anchor="ff_iostats" title="ff_iostats">
     <figure>
       <artwork>
-/// struct ff_iostats {
+/// struct ff_iostats4 {
 ///     offset4             ffis_offset;
 ///     length4             ffis_length;
+///     stateid4            ffis_stateid;
 ///     uint32_t            ffis_duration;
-///     uint32_t            ffis_rd_count;
-///     uint64_t            ffis_rd_bytes;
-///     uint32_t            ffis_wr_count;
-///     uint64_t            ffis_wr_bytes;
+///     io_info4            ffis_read;
+///     io_info4            ffis_write;
+///     layoutupdate4       ffis_layoutupdate;
 /// };
 ///
       </artwork>
     </figure>
 
     <t>
-      With pNFS, the data transfers are performed directly between the
-      pNFS client and the storage devices.  Therefore, the metadata server
-      has no visibility to the I/O stream and cannot use any statistical
-      information about client I/O to optimize data storage location.
-      ff_iostats4 MAY be used by the client to report I/O statistics
-      back to the metadata server upon returning the layout.  Since it
-      is infeasible for the client to report every I/O that used the
-      layout, the client MAY identify "hot" byte ranges for which to
-      report I/O statistics.  The definition and/or configuration mechanism
-      of what is considered "hot" and the size of the reported byte range
-      is out of the scope of this document.  It is suggested for client
-      implementation to provide reasonable default values and an optional
-      run-time management interface to control these parameters.  For
-      example, a client can define the default byte range resolution to
-      be 1 MB in size and the thresholds for reporting to be 1 MB/second
-      or 10 I/O operations per second.  For each byte range, ffis_offset
-      and ffis_length represent the starting offset of the range and the
-      range length in bytes.  ffis_duration represents the number of seconds
-      the reported burst of I/O lasted.  ffis_rd_count, ffis_rd_bytes,
-      ffis_wr_count, and ffis_wr_bytes represent, respectively, the number
-      of contiguous read and write I/Os and the respective aggregate
-      number of bytes transferred within the reported byte range.
+      Recall that <xref target='NFSv42' /> defines io_info4 as:
+    </t>
+
+    <figure>
+      <artwork>
+   struct io_info4 {
+           uint32_t        ii_count;
+           uint64_t        ii_bytes;
+   };
+      </artwork>
+    </figure>
+
+    <t>
+      With pNFS, the data transfers are performed directly between
+      the pNFS client and the storage devices.  Therefore, the
+      metadata server has no visibility to the I/O stream and cannot
+      use any statistical information about client I/O to optimize
+      data storage location.  ff_iostats4 MAY be used by the client
+      to report I/O statistics back to the metadata server upon
+      returning the layout.  Since it is infeasible for the client
+      to report every I/O that used the layout, the client MAY
+      identify "hot" byte ranges for which to report I/O statistics.
+      The definition and/or configuration mechanism of what is
+      considered "hot" and the size of the reported byte range is
+      out of the scope of this document.  It is suggested for client
+      implementation to provide reasonable default values and an
+      optional run-time management interface to control these
+      parameters.  For example, a client can define the default
+      byte range resolution to be 1 MB in size and the thresholds
+      for reporting to be 1 MB/second or 10 I/O operations per
+      second.  For each byte range, ffis_offset and ffis_length
+      represent the starting offset of the range and the range
+      length in bytes.  ffis_duration represents the number of
+      seconds the reported burst of I/O lasted.  ffis_read.ii_count,
+      ffis_read.ii_bytes, ffis_write.ii_count, and ffis_write.ii_bytes
+      represent, respectively, the number of contiguous read and
+      write I/Os and the respective aggregate number of bytes
+      transferred within the reported byte range.
     </t>
   </section>
 
