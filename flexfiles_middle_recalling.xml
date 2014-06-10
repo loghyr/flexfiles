@@ -36,22 +36,20 @@ const RCA4_TYPE_MASK_FF_LAYOUT_MAX     = -1;
 [[RFC Editor: please insert assigned constants]]
 
 struct  CB_RECALL_ANY4args      {
-    uint32_t        craa_objects_to_keep;
+    uint32_t        craa_layouts_to_keep;
     bitmap4         craa_type_mask;
 };
       </artwork>
     </figure>
 
     <t>
-      Typically, CB_RECALL_ANY will be used to recall client state when
-      the server needs to reclaim resources. The craa_type_mask bitmap
-      specifies the type of resources that are recalled and the
-      craa_objects_to_keep value specifies how many of the recalled objects
-      the client is allowed to keep.  The Flexible File Layout Type mask
-      flags are defined as follows.  They represent the iomode of the
-      recalled layouts.  In response, the client SHOULD return layouts
-      of the recalled iomode that it needs the least, keeping at most
-      craa_objects_to_keep object-based layouts.
+      Typically, CB_RECALL_ANY will be used to recall client state
+      when the server needs to reclaim resources. The craa_type_mask
+      bitmap specifies the type of resources that are recalled and
+      the craa_layouts_to_keep value specifies how many of the
+      recalled Flexible File Layouts the client is allowed to keep.
+      The Flexible File Layout Type mask flags are defined as
+      follows:
     </t>
 
     <figure>
@@ -64,6 +62,13 @@ struct  CB_RECALL_ANY4args      {
 ///
       </artwork>
     </figure>
+
+    <t>
+      They represent the iomode of the recalled layouts.  In response,
+      the client SHOULD return layouts of the recalled iomode that
+      it needs the least, keeping at most craa_layouts_to_keep
+      Flexible File Layouts.
+    </t>
 
     <t>
       The PNFS_FF_RCA4_TYPE_MASK_READ flag notifies the client to

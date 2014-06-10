@@ -64,11 +64,9 @@
     </figure>
 
     <t>
-      The ff_layout4 structure specifies a layout over a set
-      of Component Objects.  The layout parameterizes the algorithm
-      that maps the file's contents within the returned byte range,
-      as represented by lo_offset and lo_length, over the Component
-      Objects.
+      The ff_layout4 structure specifies a layout over a set of
+      mirrored copies of the data file.  This mirroring protects
+      against loss of data files.
     </t>
 
     <t>
@@ -79,14 +77,6 @@
     </t>
 
     <t>
-      This section provides a brief introduction to the layout
-      parameters.  In addition to mapping data using simple striping
-      schemes where loss of a single component object results in
-      data loss, the layout parameters support mirroring to protect
-      against loss of component objects.
-    </t>
-
-    <t>
       The ffl_mirrors field represents an array of state information
       for each mirrored copy of the file. Each element is described
       by a ff_mirror type.
@@ -94,37 +84,30 @@
 
     <t>
       ffm_deviceid provides the deviceid of the storage device
-      holding the Component Object.
+      holding the data file.
     </t>
 
     <t>
-      ffm_fhandle provides the filehandle of the storage device
-      file holding the Component Object. For tight coupling,
-      ffm_stateid provides the stateid to be used by the client
-      to access the file. For loose coupling and a NFSv4 storage
-      device, the client may use an anonymous stateid to perform
-      I/O on the storage device as there is no use for the metadata
-      server stateid (no control protocol). In such a scenario,
-      the server MUST set the ffm_stateid to be zero.
+      ffm_fhandle provides the filehandle of the data file on the
+      given storage device. For tight coupling, ffm_stateid provides
+      the stateid to be used by the client to access the file. For
+      loose coupling and a NFSv4 storage device, the client may use
+      an anonymous stateid to perform I/O on the storage device as
+      there is no use for the metadata server stateid (no control
+      protocol). In such a scenario, the server MUST set the
+      ffm_stateid to be zero.
     </t>
 
     <t>
       For NFSv3 storage devices, ffm_auth provides the RPC credentials
-      to be used by the client to access the Component Objects.
-      For NFSv4.x storage devices, the server SHOULD use the AUTH_NONE
-      flavor and a zero length opaque body to minimize the returned
-      structure length.  The client MUST ignore ffm_auth in this case.
+      to be used by the client to access the data files.  For NFSv4.x
+      storage devices, the server SHOULD use the AUTH_NONE flavor
+      and a zero length opaque body to minimize the returned structure
+      length.  The client MUST ignore ffm_auth in this case.
 
       <cref anchor='AI6 ' source='TH'>
         Even for tightly coupled systems, that cannot be correct!
       </cref>
-    </t>
-  </section>
-
-  <section anchor="Mirroring" title="Mirroring">
-    <t>
-      The ffl_mirror_cnt is used to replicate a file by replicating
-      its Component Objects.
     </t>
   </section>
 </section>

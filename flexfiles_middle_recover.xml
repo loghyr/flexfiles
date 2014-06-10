@@ -14,7 +14,7 @@
   <t>
     The metadata server analyzes the error and determines the
     required recovery operations such as recovering media failures
-    or reconstructing missing objects.
+    or reconstructing missing data files.
   </t>
 
   <t>

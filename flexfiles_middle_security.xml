@@ -9,7 +9,7 @@
     and/or device address mappings and reassign these resources to
     other clients (see "Recalling a Layout" in <xref target='RFC5661' />).
     To avoid data corruption, the metadata server MUST fence
-    off the revoked clients from the respective objects as described
+    off the revoked clients from the respective data files as described
     in <xref target='sec:sec_models' />.
  </t>
 </section>
@@ -37,18 +37,18 @@
     client is not allowed the requested iomode.  If the LAYOUTGET
     operation succeeds the client receives, as part of the layout,
     a set of credentials allowing it I/O access to the specified
-    objects corresponding to the requested iomode.  When the client
+    data files corresponding to the requested iomode.  When the client
     acts on I/O operations on behalf of its local users, it MUST
     authenticate and authorize the user by issuing respective OPEN
     and ACCESS calls to the metadata server, similar to having NFSv4
     data delegations.  If access is allowed, the client uses the
     corresponding (READ or RW) credentials to perform the I/O
-    operations at the object storage devices.  When the metadata
+    operations at the data files storage devices.  When the metadata
     server receives a request to change a file's permissions or
     ACL, it SHOULD recall all layouts for that file and it MUST
     fence off the clients holding outstanding layouts for the
     respective file by implicitly invalidating the outstanding
-    credentials on all Component Objects comprising before committing
+    credentials on all data files comprising before committing
     to the new permissions and ACL.  Doing this will ensure that
     clients re-authorize their layouts according to the modified
     permissions and ACL by requesting new layouts.  Recalling the

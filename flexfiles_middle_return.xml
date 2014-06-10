@@ -80,19 +80,19 @@ struct LAYOUTRETURN4args {
       </cref>
 
       The ff_ioerr structure is used to return error indications
-      for Component Objects that generated errors during data
+      for data files that generated errors during data
       transfers.  These are hints to the metadata server that there
-      are problems with that object.  For each error, "ffie_deviceid",
+      are problems with that file.  For each error, "ffie_deviceid",
       "ffie_fhandle", "ffie_comp_offset", and "ffie_comp_length"
-      represent the Component Object and byte range within the
-      object in which the error occurred; "ffie_errors" represents
+      represent the data file and byte range within the
+      file in which the error occurred; "ffie_errors" represents
       the operation and type of error.
     </t>
 
     <t>
-      Component byte ranges in the optional ff_ioerr structure
-      are used for recovering the object and MUST be set by the
-      client to cover all failed I/O operations to the component.
+      Data file ranges in the optional ff_ioerr structure
+      are used for recovering the data file and MUST be set by the
+      client to cover all failed I/O operations to the data file.
     </t>
   </section>
 
@@ -150,10 +150,10 @@ struct LAYOUTRETURN4args {
     </figure>
 
     <t>
-      When object I/O operations failed, "fflr_ioerr_report&lt;&gt;" is
+      When data file I/O operations fail, "fflr_ioerr_report&lt;&gt;" is
       used to report these errors to the metadata server as an array of
       elements of type ff_ioerr4.  Each element in the array represents
-      an error that occurred on the Component Object identified by
+      an error that occurred on the data file identified by
       &lt;ffie_deviceid, ffie_fhandle&gt;.  If no errors are to be reported,
       the size of the fflr_ioerr_report&lt;&gt; array is set to zero.
       The client MAY also use "fflr_iostats_report&lt;&gt;" to report a

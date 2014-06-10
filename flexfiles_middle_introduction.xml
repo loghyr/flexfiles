@@ -15,13 +15,13 @@
   </t>
 
   <t>
-    In contrast to the File Layout Type <xref target="RFC5661" /> that
-    also uses NFSv4.1 to access the data server, the Flexible File Layout
-    Type defines a model of device metadata and striping patterns that
-    is inspired by the Object Layout Type <xref target="RFC5664" /> to
-    provide both flexible, per-file striping patterns and simple device
-    information suitable for aggregating standalone NFS servers into a
-    centrally managed pNFS cluster.
+    In contrast to the File Layout Type <xref target="RFC5661" />
+    that also uses NFSv4.1 to access the data server, the Flexible
+    File Layout Type defines a simple device information model
+    suitable for aggregating standalone NFS servers into a centrally
+    managed pNFS cluster. In particular, unlike the File Layout Type,
+    the Flexible File Layout Type does not provide striping of the
+    data file across multiple storage devices.
   </t>
 
   <t>
@@ -43,7 +43,7 @@
           <xref target='pNFSLayouts' />).
         </t>
 
-        <t hangText='(file) data:'>
+        <t hangText='data file:'>
           is that part of the file system object which describes
           the payload and not the object. E.g., it is the file
           contents.
@@ -104,7 +104,7 @@
           do not have a control protocol present.
         </t>
 
-        <t hangText='(file) metadata:'>
+        <t hangText='metadata file:'>
           is that part of the file system object which describes
           the object and not the payload. E.g., it could be the
           time since last modification, access, etc.
