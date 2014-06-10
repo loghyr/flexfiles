@@ -90,6 +90,8 @@ IDXMLSRC_BASE = \
 	${DOC_PREFIX}_middle_layout.xml \
 	${DOC_PREFIX}_middle_recover.xml \
 	${DOC_PREFIX}_middle_return.xml \
+	${DOC_PREFIX}_middle_layouterror.xml \
+	${DOC_PREFIX}_middle_layoutstats.xml \
 	${DOC_PREFIX}_middle_hint.xml \
 	${DOC_PREFIX}_middle_recalling.xml \
 	${DOC_PREFIX}_middle_security.xml \

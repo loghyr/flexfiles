@@ -1,0 +1,13 @@
+<!-- Copyright (C) The IETF Trust (2014) -->
+<!-- Copyright (C) The Internet Society (2014) -->
+
+<section anchor='sec:layouterror' title="Flexible Files Layout Type LAYOUTERROR">
+  <t>
+    If the client is using NFSv4.2 to communicate with the
+    metadata server, then instead of waiting for a LAYOUTRETURN
+    to send error information to the metadata server (see
+    <xref target='ff_ioerr' />), it can use LAYOUTERROR (see
+    Section 16.6 of <xref target='NFSv42' />)
+    to communicate that information.
+  </t>
+</section>
