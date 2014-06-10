@@ -58,11 +58,11 @@ struct LAYOUTRETURN4args {
   <section anchor="ff_ioerr" title="ff_ioerr">
     <figure>
       <artwork>
-/// struct ff_ioerr {
-///     offset4             ffie_offset;
-///     length4             ffie_length;
-///     stateid4            ffie_stateid;
-///     device_error4       ffie_errors;
+/// struct ff_ioerr4 {
+/// 	offset4			ffie_offset;
+/// 	length4			ffie_length;
+/// 	stateid4		ffie_stateid;
+/// 	device_error4	ffie_errors;
 /// };
 ///
       </artwork>
@@ -83,7 +83,7 @@ struct LAYOUTRETURN4args {
     </figure>
 
     <t>
-      The ff_ioerr structure is used to return error indications
+      The ff_ioerr4 structure is used to return error indications
       for data files that generated errors during data transfers.
       These are hints to the metadata server that there are problems
       with that file.  For each error, ffie_deviceid,
@@ -99,13 +99,13 @@ struct LAYOUTRETURN4args {
     <figure>
       <artwork>
 /// struct ff_iostats4 {
-///     offset4             ffis_offset;
-///     length4             ffis_length;
-///     stateid4            ffis_stateid;
-///     uint32_t            ffis_duration;
-///     io_info4            ffis_read;
-///     io_info4            ffis_write;
-///     layoutupdate4       ffis_layoutupdate;
+/// 	offset4			ffis_offset;
+/// 	length4			ffis_length;
+/// 	stateid4		ffis_stateid;
+/// 	uint32_t		ffis_duration;
+/// 	io_info4		ffis_read;
+/// 	io_info4		ffis_write;
+/// 	layoutupdate4	ffis_layoutupdate;
 /// };
 ///
       </artwork>
@@ -166,8 +166,8 @@ struct LAYOUTRETURN4args {
     <figure>
       <artwork>
 /// struct ff_layoutreturn {
-///     ff_ioerr               fflr_ioerr_report&lt;&gt;;
-///     ff_iostats             fflr_iostats_report&lt;&gt;;
+/// 	ff_ioerr		fflr_ioerr_report&lt;&gt;;
+/// 	ff_iostats		fflr_iostats_report&lt;&gt;;
 /// };
 ///
       </artwork>

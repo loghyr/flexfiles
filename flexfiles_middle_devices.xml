@@ -19,10 +19,10 @@
     <figure>
       <artwork>
 /// struct ff_device_addr {
-///     multipath_list4         ffda_netaddrs;
-///     uint32_t                ffda_version;
-///     uint32_t                ffda_minorversion;
-///     bool                    ffda_tightly_coupled;
+/// 	multipath_list4	ffda_netaddrs;
+/// 	uint32_t		ffda_version;
+/// 	uint32_t		ffda_minorversion;
+/// 	bool			ffda_tightly_coupled;
 /// };
 ///
       </artwork>

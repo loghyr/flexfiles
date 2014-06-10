@@ -27,11 +27,11 @@ struct layouthint4 {
   <section anchor="ff_layouthint4" title="ff_layouthint4">
     <figure>
       <artwork>
-/// union ff_mirror_cnt_hint switch (bool ffmc_valid) {
-///     case TRUE:
-///         uint32_t             ffomc_mirror_cnt;
-///     case FALSE:
-///         void;
+/// union ff_mirrors_hint switch (bool ffmc_valid) {
+/// 	case TRUE:
+/// 		uint32_t	ffmc_mirrors;
+/// 	case FALSE:
+/// 		void;
 /// };
 ///
       </artwork>
@@ -40,7 +40,7 @@ struct layouthint4 {
     <figure>
       <artwork>
 /// struct ff_layouthint4 {
-///     ff_mirror_cnt_hint        fflh_mirror_cnt_hint;
+/// 	ff_mirrors_hint	fflh_mirrors_hint;
 /// };
 ///
       </artwork>

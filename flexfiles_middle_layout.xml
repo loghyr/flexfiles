@@ -45,10 +45,10 @@
     <figure>
       <artwork>
 /// struct ff_mirror4 {
-///     deviceid4               ffm_deviceid;
-///     nfs_fh4                 ffm_fhandle;
-///     stateid4                ffm_stateid;
-///     opaque_auth             ffm_auth;
+/// 	deviceid4		ffm_deviceid;
+/// 	nfs_fh4			ffm_fhandle;
+/// 	stateid4		ffm_stateid;
+/// 	opaque_auth		ffm_auth;
 /// };
 ///
       </artwork>
@@ -57,7 +57,7 @@
     <figure>
       <artwork>
 /// struct ff_layout4 {
-///     ff_mirror4              ffl_mirrors&lt;&gt;;
+/// 	ff_mirror4		ffl_mirrors&lt;&gt;;
 /// };
 ///
       </artwork>
