@@ -86,7 +86,7 @@ struct LAYOUTRETURN4args {
       The ff_ioerr4 structure is used to return error indications
       for data files that generated errors during data transfers.
       These are hints to the metadata server that there are problems
-      with that file.  For each error, ffie_deviceid,
+      with that file.  For each error, ffie_errors.de_deviceid,
       ffie_offset, and ffie_length represent the data file and byte
       range within the file in which the error occurred; ffie_errors
       represents the operation and type of error. The use of
@@ -174,17 +174,17 @@ struct LAYOUTRETURN4args {
     </figure>
 
     <t>
-      When data file I/O operations fail, fflr_ioerr_report&lt;&gt; is
-      used to report these errors to the metadata server as an array of
-      elements of type ff_ioerr4.  Each element in the array represents
-      an error that occurred on the data file identified by
-      &lt;ffie_deviceid, ffie_fhandle&gt;.  If no errors are to be reported,
-      the size of the fflr_ioerr_report&lt;&gt; array is set to zero.
-      The client MAY also use fflr_iostats_report&lt;&gt; to report a
-      list of I/O statistics as an array of elements of type ff_iostats4.
-      Each element in the array represents statistics for a particular
-      byte range.  Byte ranges are not guaranteed to be disjoint and MAY
-      repeat or intersect.
+      When data file I/O operations fail, fflr_ioerr_report&lt;&gt;
+      is used to report these errors to the metadata server as an
+      array of elements of type ff_ioerr4.  Each element in the
+      array represents an error that occurred on the data file
+      identified by ffie_errors.de_deviceid.  If no errors are to
+      be reported, the size of the fflr_ioerr_report&lt;&gt; array
+      is set to zero.  The client MAY also use fflr_iostats_report&lt;&gt;
+      to report a list of I/O statistics as an array of elements
+      of type ff_iostats4.  Each element in the array represents
+      statistics for a particular byte range.  Byte ranges are not
+      guaranteed to be disjoint and MAY repeat or intersect.
     </t>
   </section>
 </section>
