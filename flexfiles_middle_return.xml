@@ -87,10 +87,10 @@ struct LAYOUTRETURN4args {
       for data files that generated errors during data transfers.
       These are hints to the metadata server that there are problems
       with that file.  For each error, ffie_errors.de_deviceid,
-      ffie_offset, and ffie_length represent the data file and byte
-      range within the file in which the error occurred; ffie_errors
-      represents the operation and type of error. The use of
-      device_error4 is described in Section 16.6 of
+      ffie_offset, and ffie_length represent the storage device and
+      byte range within the file in which the error occurred;
+      ffie_errors represents the operation and type of error. The
+      use of device_error4 is described in Section 16.6 of
       <xref target='NFSv42' />.
     </t>
   </section>
