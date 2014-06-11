@@ -37,7 +37,7 @@
     </t>
   </section>
 
-  <section anchor='sec:sec_models' title="Security models">
+  <section anchor='sec:sec_models' title="Security Models">
     <t>
       With NFSv3 storage devices, the metadata server uses synthetic
       uids and gids for the data file, where the uid owner
