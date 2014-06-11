@@ -166,8 +166,8 @@ struct LAYOUTRETURN4args {
     <figure>
       <artwork>
 /// struct ff_layoutreturn {
-/// 	ff_ioerr		fflr_ioerr_report&lt;&gt;;
-/// 	ff_iostats		fflr_iostats_report&lt;&gt;;
+/// 	ff_ioerr4		fflr_ioerr_report&lt;&gt;;
+/// 	ff_iostats4		fflr_iostats_report&lt;&gt;;
 /// };
 ///
       </artwork>
