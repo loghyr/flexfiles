@@ -6,24 +6,16 @@
     The coupling of the metadata server with the storage devices
     can be either tight or loose. In a tight coupling, there is
     a control protocol present to manage security, LAYOUTCOMMITs,
-    etc. I.e., the servers are probably all provided by the same
-    vendor. With a loose coupling, the only control protocol might
-    be a version of NFS. As such, semantics for fencing,
-    LAYOUTCOMMITs, etc., MUST be defined.
+    etc.  With a loose coupling, the only control protocol might
+    be a version of NFS. As such, semantics for managing security,
+    state, and locking models MUST be defined.
   </t>
 
   <t>
     A file is split into metadata and data. The "metadata file" is
-    that part of the file stored on the metadata server. The "data file"
-    is that part of the file stored on the storage device. And the
-    "file" is the combination of the two.
-  </t>
-
-  <t>
-    Storage devices MAY be accessed using different versions of the
-    NFS protocol.  The NFS version and minor version define the
-    respective security, state, and locking models to be used, as
-    described below.
+    that part of the file stored on the metadata server. The "data
+    file" is that part of the file stored on the storage device.
+    And the "file" is the combination of the two.
   </t>
 
   <section anchor='sec:layoutcommit' title='LAYOUTCOMMIT'>
@@ -79,7 +71,7 @@
 
   <section title="State and Locking Models">
     <t>
-      Metadat file OPEN, LOCK, and DELEGATION operations are always
+      Metadata file OPEN, LOCK, and DELEGATION operations are always
       executed only against the metadata server.
     </t>
 
