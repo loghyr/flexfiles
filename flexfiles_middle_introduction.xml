@@ -137,6 +137,10 @@
           will accept any access from the client with that layout.
         </t>
 
+	<t hangText='rsize:'>
+	  is the data transfer buffer size used for reads.
+	</t>
+
         <t hangText='stateid:'>
           is a 128-bit quantity returned by a server that uniquely
           defines the open and locking states provided by the server
@@ -154,6 +158,10 @@
           is when the metadata server and the storage devices
           do have a control protocol present.
         </t>
+
+	<t hangText='wsize:'>
+	  is the data transfer buffer size used for writes.
+	</t>
       </list>
     </t>
   </section>

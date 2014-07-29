@@ -22,6 +22,8 @@
 /// 	multipath_list4	ffda_netaddrs;
 /// 	uint32_t		ffda_version;
 /// 	uint32_t		ffda_minorversion;
+/// 	uint32_t		ffda_rsize;
+/// 	uint32_t		ffda_wsize;
 /// 	bool			ffda_tightly_coupled;
 /// };
 ///
@@ -44,6 +46,14 @@
       equals 4 then the server MUST set ffda_minorversion to one of
       the NFSv4 minor version numbers and the client MUST access the
       storage device using NFSv4.
+    </t>
+
+    <t>
+      The ffda_rsize and ffda_wsize are used to communicate the maximum
+      rsize and wsize supported by the storage device. As the storage
+      device can have a different rsize or wsize than the metadata
+      server, the ffda_rsize and ffda_wsize allow the metadata server
+      to communicate that information on behalf of the storage device.
     </t>
 
     <t>
