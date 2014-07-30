@@ -56,8 +56,18 @@
 
     <figure>
       <artwork>
+/// struct ff_stripe4 {
+/// 	ff_mirror4		ffs_mirrors&lt;&gt;;
+/// };
+///
+      </artwork>
+    </figure>
+
+    <figure>
+      <artwork>
 /// struct ff_layout4 {
-/// 	ff_mirror4		ffl_mirrors&lt;&gt;;
+///     length4                 ffl_stripe_unit;
+///     ff_stripe4              ffl_stripes&lt;&gt;;
 /// };
 ///
       </artwork>
@@ -77,9 +87,45 @@
     </t>
 
     <t>
-      The ffl_mirrors field represents an array of state information
+      The ffl_stripe_unit field is the stripe unit size in use for
+      the current layout segment. The number of stripes is given
+      by the number of elements in ffl_stripes.
+    </t>
+
+    <t>
+      The ffl_stripes field is the array of mirrored storage devices
+      which provide the storage for the current stripe. I.e., as shown
+      in <xref target='fig:ff_layout' />, each i'th storage device
+      in ffl_stripes is part of the i'th mirror of the layout segment.
+    </t>
+
+    <figure anchor="fig:ff_layout">
+      <artwork>
+                   +-----------+
+                   |           |
+                   |           |
+                   |   Server  |
+                   |           |
+                   |           |
+                   +-----+-----+
+                         |
+            +------------+------------+
+            |                         |
+            |                         |
+       +-----------+            +-----------+
+       |+-----------+           |+-----------+
+       ||+-----------+          ||+-----------+
+       |||           |          |||           |
+       +||  Storage  |          +||  Storage  |
+        +|  Devices  |           +|  Devices  |
+         +-----------+            +-----------+
+      </artwork>
+    </figure>
+
+    <t>
+      The ffs_mirrors field represents an array of state information
       for each mirrored copy of the file. Each element is described
-      by a ff_mirror type.
+      by a ff_mirror4 type.
     </t>
 
     <t>
