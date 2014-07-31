@@ -4,12 +4,12 @@
 YEAR=`date +%Y`
 MONTH=`date +%B`
 DAY=`date +%d`
-PREVVERS=03
-VERS=04
+PREVVERS=00
+VERS=01
 
 XML2RFC=xml2rfc
 
-BASEDOC=draft-bhalevy-nfsv4-flex-files
+BASEDOC=draft-ietf-nfsv4-flex-files
 DOC_PREFIX=flexfiles
 
 autogen/%.xml : %.x
