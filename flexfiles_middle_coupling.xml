@@ -39,33 +39,34 @@
 
   <section anchor='sec:sec_models' title="Security Models">
     <t>
-      With NFSv3 storage devices, the metadata server uses synthetic
-      uids and gids for the data file, where the uid owner
-      of the data file is allowed read/write access and the
+      With loosely coupled storage devices, the metadata server
+      uses synthetic uids and gids for the data file, where the uid
+      owner of the data file is allowed read/write access and the
       gid owner is allowed read only access.  As part of the layout,
       the client is provided with the rpc credentials to be used
-      (see ffm_auth in  <xref target='ff_layout4' />) to access
-      the data file.  Fencing off clients is achieved by using SETATTR
-      by the server to change the uid and/or gid owners of the
-      data file to implicitly revoke the outstanding rpc
-      credentials.  Note: it is recommended to implement common
-      access control methods at the storage device filesystem exports
-      level to allow only the metadata server root (super user)
-      access to the storage device, and to set the owner of all
-      directories holding data files to the root user.  This
-      security method, when using weak auth flavors such as AUTH_SYS,
-      provides a practical model to enforce access control and fence
-      off cooperative clients, but it can not protect against
-      malicious clients; hence it provides a level of security
-      equivalent to NFSv3.
+      (see ffm_auth in  <xref target='ff_layout4' />) to access the
+      data file.  Fencing off clients is achieved by using SETATTR
+      by the server to change the uid and/or gid owners of the data
+      file to implicitly revoke the outstanding rpc credentials.
+      Note: it is recommended to implement common access control
+      methods at the storage device filesystem exports level to
+      allow only the metadata server root (super user) access to
+      the storage device, and to set the owner of all directories
+      holding data files to the root user.  This security method,
+      when using weak auth flavors such as AUTH_SYS, provides a
+      practical model to enforce access control and fence off
+      cooperative clients, but it can not protect against malicious
+      clients; hence it provides a level of security equivalent to
+      NFSv3.
     </t>
 
     <t>
-      With NFSv4.x storage devices, the metadata server sets the user
-      and group owners, mode bits, and ACL of the data file
-      to be the same as the User File. And the client must authenticate
-      with the storage device and go through the same authorization
-      process it would go through via the metadata server.
+      With tightly coupled storage devices, the metadata server
+      sets the user and group owners, mode bits, and ACL of the
+      data file to be the same as the metadata file. And the client
+      must authenticate with the storage device and go through the
+      same authorization process it would go through via the metadata
+      server.
     </t>
   </section>
 
