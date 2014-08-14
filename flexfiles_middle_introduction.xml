@@ -15,16 +15,6 @@
   </t>
 
   <t>
-    In contrast to the File Layout Type <xref target="RFC5661" />
-    that also uses NFSv4.1 to access the data server, the Flexible
-    File Layout Type defines a simple device information model
-    suitable for aggregating standalone NFS servers into a centrally
-    managed pNFS cluster. In particular, unlike the File Layout Type,
-    the Flexible File Layout Type does not provide striping of the
-    data file across multiple storage devices.
-  </t>
-
-  <t>
     To provide a global state model equivalent to that of the Files
     Layout Type, a back-end control protocol MAY be implemented between
     the metadata server and NFSv4.1 storage devices.  It is out
