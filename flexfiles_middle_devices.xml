@@ -84,7 +84,7 @@
 
     <t>
       To support storage device multipathing, ffda_netaddrs contains
-      an array of one more storage device network addresses.  This
+      an array of one or more storage device network addresses.  This
       array (data type multipath_list4) represents a list of storage
       device (each identified by a network address), with the
       possibility that some storage device will appear in the list
