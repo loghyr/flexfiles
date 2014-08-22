@@ -107,6 +107,14 @@
           the MDS is responsible for directory-based operations.
         </t>
 
+        <t hangText='Mirror:'>
+          is a copy of a file. While mirroring can be used
+          for backing up a file, the copies can be distrbuted
+          such that each remote site has a locally cached copy.
+          Note that if one copy of the mirror is updated,
+          then all copies must be updated.
+        </t>
+
         <t hangText='Object Layout Type:'>
           is a Layout Type in which the storage devices
           are accessed via the OSD protocol
