@@ -1,0 +1,95 @@
+<!-- Copyright (C) The IETF Trust (2014) -->
+<!-- Copyright (C) The Internet Society (2014) -->
+
+<section anchor="sec:mirror" title="Mirroring">
+  <t>
+    The Flexible File Layout Type has a simple model in place
+    for the mirroring of files. There is no assumption
+    that each copy of the mirror is stored identically on the
+    storage devices, i.e., one device might employ compression
+    or deduplication on the file. However, the over the wire
+    transfer of the file contents MUST appear identical. Note,
+    this is a construct of the selected XDR representation that
+    each mirrored copy of the file has the same striping pattern
+    (see <xref target='fig:ff_layout' />).
+  </t>
+
+  <t>
+    The metadata server is responsible for determining the number
+    of mirrored copies and the location of each mirror. While the
+    client may provide a hint to how many copies it wants (see
+    <xref target='sec:layout_hint' />), the metadata server can
+    ignore that hint and in any event, the client has no means to
+    dictate neither the storage device (which also means the coupling
+    and/or protocol levels to access the file) nor the location of
+    said storage device.
+  </t>
+
+  <section anchor="ss:select_mirror" title="Selecting a Mirror">
+    <t>
+      When the metadata server grants a layout to a client, it can
+      let the client know how fast it expects each mirror to be
+      once the request arrives at the storage devices via the
+      ffl_mirror_efficiency member.  While the algorithms to calculate
+      that value are left to the metadata server implementations,
+      factors that could contribute to that calculation include
+      speed of the storage device, physical memory available to the
+      device, operating system version, current load, etc.
+    </t>
+
+    <t>
+      However, what SHOULD not be involved in that calculation is
+      a perceived network distance between the client and the storage
+      device.  The client is better situated for making that
+      determination based on past interaction with the storage
+      device over the different available network intefaces bewteen
+      the two. I.e., the metadata server might not know about a
+      transient outage between the client and storage device because
+      it has no presence on the given subnet.
+    </t>
+
+    <t>
+      As such, it is the client which decides which mirror to access
+      for reading the file. The requirements for writing to a mirrored
+      file are presented below.
+    </t>
+  </section>
+
+  <section anchor="ss:write_mirror" title="Writing to Mirrors">
+    <t>
+      The client is responsible for updating all mirrored copies of the
+      file that it is given in the layout.  If all but one copy is updated
+      successfully and the last one provides an error, then the client
+      needs to return the layout to the metadata server with an error
+      indicating that the update failed to that storage device.
+    </t>
+
+    <t>
+      The metadata server is then responsible for determining if it wants
+      to remove the errant mirror from the layout, if the mirror has
+      recovered from some transient error, etc.  When the client tries
+      to get a new layout, the metadata server informs it of the decision
+      by the contents of the layout.  The client MUST not make any
+      assumptions that the contents of the previous layout will match
+      those of the new one.  If it has updates that were not committed,
+      it MUST resend those updates to all mirrors.
+    </t>
+  </section>
+
+  <section anchor="ss:resilvering" title="Metadata Server Resilvering of the File">
+    <t>
+      The metadata server may elect to create a new mirror of the
+      file at any time. This might be to resilver a copy on a storage
+      device which was down for servicing, to provide a copy of the
+      file on storage with different storage performance characteristics,
+      etc. As the client will not be aware of the new mirror and
+      the metadata server will not be aware of updates that the
+      client is making to the file, the metadata server MUST recall
+      the writable layout segment(s) that it is resilvering. If the
+      client issues a LAYOUTGET for a writable layout segment which
+      is in the process of being resilvered, then the metadata
+      server MUST deny that request with a NFS4ERR_LAYOUTTRYLATER.
+      The client can then perform the IO through the metadata server.
+    </t>
+  </section>
+</section>

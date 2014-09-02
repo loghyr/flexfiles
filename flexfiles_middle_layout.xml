@@ -67,6 +67,7 @@
       <artwork>
 /// struct ff_layout4 {
 ///     length4                 ffl_stripe_unit;
+///     uint32_t                ffl_mirror_efficiency&lt;&gt;;
 ///     ff_stripe4              ffl_stripes&lt;&gt;;
 /// };
 ///
@@ -90,6 +91,16 @@
       The ffl_stripe_unit field is the stripe unit size in use for
       the current layout segment. The number of stripes is given
       by the number of elements in ffl_stripes.
+    </t>
+
+    <t>
+      The ffl_mirror_efficiency field is the array which describes the
+      metadata server's evaluation as to the effectiveness of each
+      mirror. Note that this is per layout and not per device as
+      the metric may change due to perceived load, availability to
+      the metadata server, etc.  Higher values denote higher perceived
+      utility. The way the client can select the best mirror to
+      access is discussed in <xref target="ss:select_mirror" />.
     </t>
 
     <t>

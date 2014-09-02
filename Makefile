@@ -89,6 +89,7 @@ IDXMLSRC_BASE = \
 	${DOC_PREFIX}_middle_devices.xml \
 	${DOC_PREFIX}_middle_layout.xml \
 	${DOC_PREFIX}_middle_recover.xml \
+	${DOC_PREFIX}_middle_mirror.xml \
 	${DOC_PREFIX}_middle_return.xml \
 	${DOC_PREFIX}_middle_layouterror.xml \
 	${DOC_PREFIX}_middle_layoutstats.xml \

@@ -1,7 +1,7 @@
 <!-- Copyright (C) The IETF Trust (2014) -->
 <!-- Copyright (C) The Internet Society (2014) -->
 
-<section title="Flexible File Layout Type Creation Hint">
+<section anchor='sec:layout_hint' title="Flexible File Layout Type Creation Hint">
   <t>
     The layouthint4 type is defined in the
     <xref target="RFC5661" /> as follows:

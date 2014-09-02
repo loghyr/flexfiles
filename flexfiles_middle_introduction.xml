@@ -135,6 +135,12 @@
           will accept any access from the client with that layout.
         </t>
 
+	<t hangText='resilvering:'>
+	  is the act of rebuilding a mirrored copy of a file from
+          a known good copy of the file.  Note that this can also
+          be done to create a new mirrored copy of the file.
+	</t>
+
 	<t hangText='rsize:'>
 	  is the data transfer buffer size used for reads.
 	</t>
