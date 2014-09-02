@@ -1,0 +1,34 @@
+<!-- Copyright (C) The IETF Trust (2014) -->
+<!-- Copyright (C) The Internet Society (2014) -->
+
+<section title="Striping via Sparse Mapping" anchor="sec:sparseStriping">
+  <t>
+    While other Layout Types support both dense and sparse mapping
+    of logical offsets to phyisical offsets within a file (see for
+    example Section 13.4 of <xref target='RFC5661' />), the Flexible
+    File Layout Type only supports a sparse mapping.
+  </t>
+
+  <t>
+    With sparse mappings, the logical offset within a file (L)
+    is also the physical offset on the storage device. As detailed
+    in Section 13.4.4 of <xref target='RFC5661' />, this results
+    in holes across each storage device which does not contain
+    the current stripe index.
+  </t>
+
+  <figure>
+    <artwork>
+L: logical offset into the file
+
+W: stripe width
+    W = number of elements in ffl_stripes
+
+S: number of bytes in a stripe
+    S = W * ffl_stripe_unit
+
+N: stripe number
+    N = L / S
+    </artwork>
+  </figure>
+</section>
