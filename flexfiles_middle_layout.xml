@@ -139,10 +139,6 @@
       The ffs_mirrors field represents an array of state information
       for each mirrored copy of the file. Each element is described
       by a ff_mirror4 type.
-
-      <cref anchor='AI9 ' source='TH'>
-        Still need to describe SPARSE vs DENSE!
-      </cref>
     </t>
 
     <t>
