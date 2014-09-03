@@ -30,7 +30,7 @@
       When the metadata server grants a layout to a client, it can
       let the client know how fast it expects each mirror to be
       once the request arrives at the storage devices via the
-      ffl_mirror_efficiency member.  While the algorithms to calculate
+      ffds_efficiency member.  While the algorithms to calculate
       that value are left to the metadata server implementations,
       factors that could contribute to that calculation include
       speed of the storage device, physical memory available to the

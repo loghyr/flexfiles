@@ -22,7 +22,7 @@
 L: logical offset into the file
 
 W: stripe width
-    W = number of elements in ffl_stripes
+    W = number of elements in ffm_data_servers
 
 S: number of bytes in a stripe
     S = W * ffl_stripe_unit

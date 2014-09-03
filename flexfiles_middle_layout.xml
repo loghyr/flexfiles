@@ -44,11 +44,12 @@
   <section title="ff_layout4" anchor="ff_layout4">
     <figure>
       <artwork>
-/// struct ff_mirror4 {
-/// 	deviceid4		ffm_deviceid;
-/// 	nfs_fh4			ffm_fhandle;
-/// 	stateid4		ffm_stateid;
-/// 	opaque_auth		ffm_auth;
+/// struct ff_data_server4 {
+/// 	deviceid4		ffds_deviceid;
+/// 	nfs_fh4			ffds_fhandle;
+/// 	stateid4		ffds_stateid;
+/// 	opaque_auth		ffds_auth;
+///     uint32_t                ffds_efficiency;
 /// };
 ///
       </artwork>
@@ -56,8 +57,8 @@
 
     <figure>
       <artwork>
-/// struct ff_stripe4 {
-/// 	ff_mirror4		ffs_mirrors&lt;&gt;;
+/// struct ff_mirror4 {
+/// 	ff_data_server4		ffm_data_servers&lt;&gt;;
 /// };
 ///
       </artwork>
@@ -67,8 +68,7 @@
       <artwork>
 /// struct ff_layout4 {
 ///     length4                 ffl_stripe_unit;
-///     uint32_t                ffl_mirror_efficiency&lt;&gt;;
-///     ff_stripe4              ffl_stripes&lt;&gt;;
+///     ff_mirror4              ffl_mirrors&lt;&gt;;
 /// };
 ///
       </artwork>
@@ -90,26 +90,17 @@
     <t>
       The ffl_stripe_unit field is the stripe unit size in use for
       the current layout segment. The number of stripes is given
-      by the number of elements in ffl_stripes. The only supported
-      mapping scheme is sparse and is detailed in
-      <xref target='sec:sparseStriping' />.
+      inside each mirror by the number of elements in ffm_data_servers.
+      The only supported mapping scheme is sparse and is detailed in
+      <xref target='sec:sparseStriping' />. Note that there is an
+      assumption here that both the stripe unit size and the number of
+      of stripes is the same across all mirrors.
     </t>
 
     <t>
-      The ffl_mirror_efficiency field is the array which describes the
-      metadata server's evaluation as to the effectiveness of each
-      mirror. Note that this is per layout and not per device as
-      the metric may change due to perceived load, availability to
-      the metadata server, etc.  Higher values denote higher perceived
-      utility. The way the client can select the best mirror to
-      access is discussed in <xref target="ss:select_mirror" />.
-    </t>
-
-    <t>
-      The ffl_stripes field is the array of mirrored storage devices
-      which provide the storage for the current stripe. I.e., as shown
-      in <xref target='fig:ff_layout' />, each i'th storage device
-      in ffl_stripes is part of the i'th mirror of the layout segment.
+      The ffl_mirrors field is the array of mirrored storage devices
+      which provide the storage for the current stripe, see 
+      <xref target='fig:ff_layout' />.
     </t>
 
     <figure anchor="fig:ff_layout">
@@ -117,18 +108,20 @@
                    +-----------+
                    |           |
                    |           |
-                   |   Server  |
+                   |   File    |
                    |           |
                    |           |
                    +-----+-----+
                          |
             +------------+------------+
             |                         |
+       +----+-----+             +-----+----+
+       | Mirror 1 |             | Mirror 2 |
+       +----+-----+             +-----+----+
             |                         |
        +-----------+            +-----------+
        |+-----------+           |+-----------+
        ||+-----------+          ||+-----------+
-       |||           |          |||           |
        +||  Storage  |          +||  Storage  |
         +|  Devices  |           +|  Devices  |
          +-----------+            +-----------+
@@ -142,31 +135,41 @@
     </t>
 
     <t>
-      ffm_deviceid provides the deviceid of the storage device
+      ffds_deviceid provides the deviceid of the storage device
       holding the data file.
     </t>
 
     <t>
-      ffm_fhandle provides the filehandle of the data file on the
-      given storage device. For tight coupling, ffm_stateid provides
+      ffds_fhandle provides the filehandle of the data file on the
+      given storage device. For tight coupling, ffds_stateid provides
       the stateid to be used by the client to access the file. For
       loose coupling and a NFSv4 storage device, the client may use
       an anonymous stateid to perform I/O on the storage device as
       there is no use for the metadata server stateid (no control
       protocol). In such a scenario, the server MUST set the
-      ffm_stateid to be zero.
+      ffds_stateid to be zero.
     </t>
 
     <t>
-      For NFSv3 storage devices, ffm_auth provides the RPC credentials
+      For NFSv3 storage devices, ffds_auth provides the RPC credentials
       to be used by the client to access the data files.  For NFSv4.x
       storage devices, the server SHOULD use the AUTH_NONE flavor
       and a zero length opaque body to minimize the returned structure
-      length.  The client MUST ignore ffm_auth in this case.
+      length.  The client MUST ignore ffds_auth in this case.
 
       <cref anchor='AI6 ' source='TH'>
         Even for tightly coupled systems, that cannot be correct!
       </cref>
+    </t>
+
+    <t>
+      ffds_efficiency describes the metadata server's evaluation
+      as to the effectiveness of each mirror. Note that this is per
+      layout and not per device as the metric may change due to
+      perceived load, availability to the metadata server, etc.
+      Higher values denote higher perceived utility. The way the
+      client can select the best mirror to access is discussed in
+      <xref target="ss:select_mirror" />.
     </t>
   </section>
 </section>
