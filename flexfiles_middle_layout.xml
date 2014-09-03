@@ -46,10 +46,10 @@
       <artwork>
 /// struct ff_data_server4 {
 /// 	deviceid4		ffds_deviceid;
-/// 	nfs_fh4			ffds_fhandle;
-/// 	stateid4		ffds_stateid;
-/// 	opaque_auth		ffds_auth;
 ///     uint32_t                ffds_efficiency;
+/// 	stateid4		ffds_stateid;
+/// 	nfs_fh4			ffds_fhandle;
+/// 	opaque_auth		ffds_auth;
 /// };
 ///
       </artwork>
