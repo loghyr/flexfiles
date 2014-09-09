@@ -12,7 +12,7 @@
         LAYOUT4_NFSV4_1_FILES   = 1,
         LAYOUT4_OSD2_OBJECTS    = 2,
         LAYOUT4_BLOCK_VOLUME    = 3,
-        LAYOUT4_FLEX_FILES      = 4
+        LAYOUT4_FLEX_FILES      = 0x80000004
 [[RFC Editor: please modify the LAYOUT4_FLEX_FILES
   to be the layouttype assigned by IANA]]
     };
@@ -32,6 +32,13 @@
   </figure>
 
   <t>
+    <cref anchor='AI10 ' source='TH'>
+      Remember, using experimental version number to track changes
+      to the XDR via LAYOUT4_FLEX_FILES!
+    </cref>
+  </t>
+
+  <t>
     This document defines structure associated with the layouttype4
     value LAYOUT4_FLEX_FILES.  <xref target="RFC5661" /> specifies
     the loc_body structure as an XDR type "opaque".  The opaque
@@ -45,11 +52,11 @@
     <figure>
       <artwork>
 /// struct ff_data_server4 {
-/// 	deviceid4		ffds_deviceid;
+///     deviceid4               ffds_deviceid;
 ///     uint32_t                ffds_efficiency;
-/// 	stateid4		ffds_stateid;
-/// 	nfs_fh4			ffds_fhandle;
-/// 	opaque_auth		ffds_auth;
+///     stateid4                ffds_stateid;
+///     nfs_fh4                 ffds_fhandle;
+///     opaque_auth             ffds_auth;
 /// };
 ///
       </artwork>
@@ -58,7 +65,7 @@
     <figure>
       <artwork>
 /// struct ff_mirror4 {
-/// 	ff_data_server4		ffm_data_servers&lt;&gt;;
+///     ff_data_server4         ffm_data_servers&lt;&gt;;
 /// };
 ///
       </artwork>
