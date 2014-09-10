@@ -98,10 +98,12 @@
       The ffl_stripe_unit field is the stripe unit size in use for
       the current layout segment. The number of stripes is given
       inside each mirror by the number of elements in ffm_data_servers.
-      The only supported mapping scheme is sparse and is detailed in
-      <xref target='sec:sparseStriping' />. Note that there is an
-      assumption here that both the stripe unit size and the number of
-      of stripes is the same across all mirrors.
+      If the number of stripes is one, then the value for ffl_stripe_unit
+      MUST default to zero.  The only supported mapping scheme is
+      sparse and is detailed in <xref target='sec:sparseStriping' />.
+      Note that there is an assumption here that both the stripe
+      unit size and the number of of stripes is the same across all
+      mirrors.
     </t>
 
     <t>
