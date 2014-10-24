@@ -42,7 +42,7 @@
       a perceived network distance between the client and the storage
       device.  The client is better situated for making that
       determination based on past interaction with the storage
-      device over the different available network intefaces bewteen
+      device over the different available network interfaces between
       the two. I.e., the metadata server might not know about a
       transient outage between the client and storage device because
       it has no presence on the given subnet.

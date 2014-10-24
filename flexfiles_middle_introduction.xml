@@ -109,7 +109,7 @@
 
         <t hangText='Mirror:'>
           is a copy of a file. While mirroring can be used
-          for backing up a file, the copies can be distrbuted
+          for backing up a file, the copies can be distributed
           such that each remote site has a locally cached copy.
           Note that if one copy of the mirror is updated,
           then all copies must be updated.
