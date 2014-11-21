@@ -33,6 +33,11 @@
           <xref target='pNFSLayouts' />).
         </t>
 
+        <t hangText='Client-side Mirroring:'>
+          is when the client and not the server is responsible for
+          updating all of the mirrored copies of a file.
+        </t>
+
         <t hangText='data file:'>
           is that part of the file system object which describes
           the payload and not the object. E.g., it is the file
