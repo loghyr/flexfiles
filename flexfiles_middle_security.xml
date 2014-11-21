@@ -56,4 +56,42 @@
     prevent clients from getting an error on I/Os done after the
     client was fenced off.
   </t>
+
+  <section anchor="ss:security:krb5" title="Kerberized File Access">
+    <section anchor="ss:sec:krb5:lc" title="Loosely Coupled">
+      <t>
+        Under this coupling model, the principal used to
+        authenticate the metadata file is different than that used to
+        authenticate the data file. I.e., the synthetic principals
+        generated to control access to the data file could prove
+        to be difficult to manage.
+      </t>
+
+      <t>
+        While RPCSEC_GSS version 3 (RPCSEC_GSSv3)
+        <xref target='rpcsec_gssv3' /> could be used to authorize the client
+        to the storage device on behalf of the metadata server,
+        such a requirement exceeds the loose coupling model. I.e.,
+        each of the metadata server, storage device, and client would
+        have to implement RPCSEC_GSSv3.
+      </t>
+
+      <t>
+        In all, while either an elaborate schema could be used to automatically
+        authenticate principals or RPCSEC_GSSv3 aware clients, metadata
+        server, and storage devices could be deployed, if more
+        secure authentication is desired, tight coupling should be
+        considered as described in the next section.
+      </t>
+    </section>
+
+    <section anchor="ss:sec:krb5:tc" title="Tightly Coupled">
+      <t>
+        With tight coupling, the principal used to access the
+        metadata file is exactly the same as used to access the
+        data file. Thus there are no security issues related to
+        kerberization of a tightly coupled system.
+      </t>
+    </section>
+  </section>
 </section>
