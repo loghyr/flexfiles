@@ -32,13 +32,6 @@
   </figure>
 
   <t>
-    <cref anchor='AI10 ' source='TH'>
-      Remember, using experimental version number to track changes
-      to the XDR via LAYOUT4_FLEX_FILES!
-    </cref>
-  </t>
-
-  <t>
     This document defines structure associated with the layouttype4
     value LAYOUT4_FLEX_FILES.  <xref target="RFC5661" /> specifies
     the loc_body structure as an XDR type "opaque".  The opaque
@@ -160,15 +153,14 @@
     </t>
 
     <t>
-      For NFSv3 storage devices, ffds_auth provides the RPC credentials
-      to be used by the client to access the data files.  For NFSv4.x
-      storage devices, the server SHOULD use the AUTH_NONE flavor
-      and a zero length opaque body to minimize the returned structure
-      length.  The client MUST ignore ffds_auth in this case.
-
-      <cref anchor='AI6 ' source='TH'>
-        Even for tightly coupled systems, that cannot be correct!
-      </cref>
+      For loosely coupled storage devices, ffds_auth provides the
+      RPC credentials to be used by the client to access the data
+      files.  For tightly coupled storage devices, the server SHOULD
+      use the AUTH_NONE flavor and a zero length opaque body to
+      minimize the returned structure length.  The client MUST
+      ignore ffds_auth in this case. <cref anchor='AI11 ' source='TH'>
+      Which begs the question, does the client need to know the
+      coupling? And if so, is this the best way?</cref>
     </t>
 
     <t>
