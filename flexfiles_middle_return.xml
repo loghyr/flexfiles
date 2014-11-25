@@ -59,10 +59,10 @@ struct LAYOUTRETURN4args {
     <figure>
       <artwork>
 /// struct ff_ioerr4 {
-/// 	offset4			ffie_offset;
-/// 	length4			ffie_length;
-/// 	stateid4		ffie_stateid;
-/// 	device_error4	ffie_errors;
+///         offset4        ffie_offset;
+///         length4        ffie_length;
+///         stateid4       ffie_stateid;
+///         device_error4  ffie_errors;
 /// };
 ///
       </artwork>
@@ -99,17 +99,24 @@ struct LAYOUTRETURN4args {
     <figure>
       <artwork>
 /// struct ff_iostats4 {
-/// 	offset4			ffis_offset;
-/// 	length4			ffis_length;
-/// 	stateid4		ffis_stateid;
-/// 	uint32_t		ffis_duration;
-/// 	io_info4		ffis_read;
-/// 	io_info4		ffis_write;
-/// 	layoutupdate4	ffis_layoutupdate;
+///         offset4        ffis_offset;
+///         length4        ffis_length;
+///         stateid4       ffis_stateid;
+///         uint32_t       ffis_duration;
+///         io_info4       ffis_read;
+///         io_info4       ffis_write;
+///         deviceid4      ffis_deviceid;
+///         layoutupdate4  ffis_layoutupdate;
 /// };
 ///
       </artwork>
     </figure>
+
+    <t>
+      <cref anchor='AI12 ' source='TH'>
+        Need to get the mirror into the layoutupdate!
+      </cref>
+    </t>
 
     <t>
       Recall that <xref target='NFSv42' /> defines io_info4 as:
@@ -166,8 +173,8 @@ struct LAYOUTRETURN4args {
     <figure>
       <artwork>
 /// struct ff_layoutreturn {
-/// 	ff_ioerr4		fflr_ioerr_report&lt;&gt;;
-/// 	ff_iostats4		fflr_iostats_report&lt;&gt;;
+///         ff_ioerr4     fflr_ioerr_report&lt;&gt;;
+///         ff_iostats4   fflr_iostats_report&lt;&gt;;
 /// };
 ///
       </artwork>
