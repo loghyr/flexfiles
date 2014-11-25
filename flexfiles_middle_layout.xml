@@ -12,7 +12,7 @@
         LAYOUT4_NFSV4_1_FILES   = 1,
         LAYOUT4_OSD2_OBJECTS    = 2,
         LAYOUT4_BLOCK_VOLUME    = 3,
-        LAYOUT4_FLEX_FILES      = 0x80000005
+        LAYOUT4_FLEX_FILES      = 0x80000004
 [[RFC Editor: please modify the LAYOUT4_FLEX_FILES
   to be the layouttype assigned by IANA]]
     };
@@ -68,7 +68,6 @@
       <artwork>
 /// struct ff_layout4 {
 ///     length4                 ffl_stripe_unit;
-///     bool                    ffl_tightly_coupled;
 ///     ff_mirror4              ffl_mirrors&lt;&gt;;
 /// };
 ///
@@ -98,13 +97,6 @@
       Note that there is an assumption here that both the stripe
       unit size and the number of of stripes is the same across all
       mirrors.
-    </t>
-
-    <t>
-      The ffl_tightly_coupled field informs the client as to whether
-      the storage devices are tightly or loosely coupled. Either
-      all of the storage devices MUST be tightly coupled or
-      the ffl_tightly_coupled MUST be false.
     </t>
 
     <t>
@@ -165,7 +157,8 @@
       RPC credentials to be used by the client to access the data
       files.  For tightly coupled storage devices, the server SHOULD
       use the AUTH_NONE flavor and a zero length opaque body to
-      minimize the returned structure length.  I.e., if ffl_tightly_coupled
+      minimize the returned structure length.  I.e., if
+      ffda_tightly_coupled (see <xref target='ff_device_addr' />)
       is set, then the client MUST ignore ffds_auth in this case.
     </t>
 
