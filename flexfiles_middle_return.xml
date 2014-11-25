@@ -95,6 +95,36 @@ struct LAYOUTRETURN4args {
     </t>
   </section>
 
+  <section anchor="ff_io_latency" title="ff_io_latency">
+    <figure>
+      <artwork>
+/// struct ff_io_latency4 {
+///         nfstime4       ffil_min;
+///         nfstime4       ffil_max;
+///         nfstime4       ffil_avg;
+///         uint32_t       ffil_count;
+/// };
+///
+      </artwork>
+    </figure>
+  </section>
+
+  <section anchor="ff_layoutupdate" title="ff_layoutupdate">
+    <figure>
+      <artwork>
+/// struct ff_layoutupdate4 {
+///         netaddr4       ffl_offset;
+///         nfs_fh4        ffl_fhandle;
+///         ff_io_latency4 ffl_read;
+///         ff_io_latency4 ffl_write;
+///         uint32_t       ffl_queue_depth;
+///         bool           ffl_local;
+/// };
+///
+      </artwork>
+    </figure>
+  </section>
+
   <section anchor="ff_iostats" title="ff_iostats">
     <figure>
       <artwork>
