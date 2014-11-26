@@ -158,7 +158,7 @@
       files.  For tightly coupled storage devices, the server SHOULD
       use the AUTH_NONE flavor and a zero length opaque body to
       minimize the returned structure length.  I.e., if
-      ffda_tightly_coupled (see <xref target='ff_device_addr' />)
+      ffda_tightly_coupled (see <xref target='ff_device_addr4' />)
       is set, then the client MUST ignore ffds_auth in this case.
     </t>
 
@@ -170,6 +170,33 @@
       Higher values denote higher perceived utility. The way the
       client can select the best mirror to access is discussed in
       <xref target="ss:select_mirror" />.
+    </t>
+  </section>
+
+  <section title="Interactions Between Devices and Layouts" anchor="layout:inter">
+    <t>
+      In <xref target='RFC5661' />, the File Layout Type is defined such
+      that the relationship between multi-pathing and filehandles can
+      result in either 0, 1, or N filehandles (see Section 13.3).  Some
+      rationals for this are clustered servers which share the same
+      filehandle or allowing for multiple read-only copies of the file
+      on the same storage device.  In the Flexible File Layout Type,
+      there is only 1 filehandle, independent of the multi-pathing
+      being used.  If the metadata server wants to provide multiple
+      read-only copies of the same file on the same storage device,
+      then it should provide multiple ff_device_addr4, each as a mirror.
+      The client can then determine that since the ffds_fhandle
+      are different, then there a multiple copies of the file available.
+    </t>
+
+    <t>
+      If the metadata server wants to allow access to the file with
+      different versions and/or minor versions of NFS, then for each
+      allowed version and/or minor version, a new ff_device_addr4
+      must be defined.  The client should not assume any relationship
+      (or lack of relationship) between the filehandles presented
+      in ffds_fhandle. I.e., even if the filehandles are binary
+      equivalent for different versions, they may have varying semantics.
     </t>
   </section>
 </section>
