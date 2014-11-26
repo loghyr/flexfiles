@@ -48,7 +48,7 @@
 ///     deviceid4               ffds_deviceid;
 ///     uint32_t                ffds_efficiency;
 ///     stateid4                ffds_stateid;
-///     nfs_fh4                 ffds_fhandle;
+///     nfs_fh4                 ffds_fh_list&lt;&gt;;
 ///     opaque_auth             ffds_auth;
 /// };
 ///
@@ -142,8 +142,15 @@
     </t>
 
     <t>
-      ffds_fhandle provides the filehandle of the data file on the
-      given storage device. For tight coupling, ffds_stateid provides
+      ffds_fh_list is an array of data server filehandles for each
+      list of data servers in each element of the ffda_netaddrs
+      array (see <xref target='ff_device_addr' />).  The number
+      of elements in ffds_fh_list MUST be the number of elements
+      in ffda_netaddrs for the given storage device.
+    </t>
+
+    <t>
+      For tight coupling, ffds_stateid provides
       the stateid to be used by the client to access the file. For
       loose coupling and a NFSv4 storage device, the client may use
       an anonymous stateid to perform I/O on the storage device as
