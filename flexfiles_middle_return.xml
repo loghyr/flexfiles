@@ -52,9 +52,10 @@ struct LAYOUTRETURN4args {
     server as defined below.
   </t>
 
-  <section anchor="ff_ioerr4" title="ff_ioerr4">
-    <figure>
-      <artwork>
+  <section anchor="ss:return:errors" title="I/O Error Reporting">
+    <section anchor="ff_ioerr4" title="ff_ioerr4">
+      <figure>
+        <artwork>
 /// struct ff_ioerr4 {
 ///         offset4        ffie_offset;
 ///         length4        ffie_length;
@@ -62,39 +63,41 @@ struct LAYOUTRETURN4args {
 ///         device_error4  ffie_errors;
 /// };
 ///
-      </artwork>
-    </figure>
+        </artwork>
+      </figure>
 
-    <t>
-      Recall that <xref target='NFSv42' /> defines device_error4 as:
-    </t>
+      <t>
+        Recall that <xref target='NFSv42' /> defines device_error4 as:
+      </t>
 
-    <figure>
-      <artwork>
-   struct device_error4 {
-           deviceid4       de_deviceid;
-           nfsstat4        de_status;
-           nfs_opnum4      de_opnum;
-   };
-      </artwork>
-    </figure>
+      <figure>
+        <artwork>
+struct device_error4 {
+        deviceid4       de_deviceid;
+        nfsstat4        de_status;
+        nfs_opnum4      de_opnum;
+};
+        </artwork>
+      </figure>
 
-    <t>
-      The ff_ioerr4 structure is used to return error indications
-      for data files that generated errors during data transfers.
-      These are hints to the metadata server that there are problems
-      with that file.  For each error, ffie_errors.de_deviceid,
-      ffie_offset, and ffie_length represent the storage device and
-      byte range within the file in which the error occurred;
-      ffie_errors represents the operation and type of error. The
-      use of device_error4 is described in Section 16.6 of
-      <xref target='NFSv42' />.
-    </t>
+      <t>
+        The ff_ioerr4 structure is used to return error indications
+        for data files that generated errors during data transfers.
+        These are hints to the metadata server that there are problems
+        with that file.  For each error, ffie_errors.de_deviceid,
+        ffie_offset, and ffie_length represent the storage device and
+        byte range within the file in which the error occurred;
+        ffie_errors represents the operation and type of error. The
+        use of device_error4 is described in Section 16.6 of
+        <xref target='NFSv42' />.
+      </t>
+    </section>
   </section>
 
-  <section anchor="ff_io_latency4" title="ff_io_latency4">
-    <figure>
-      <artwork>
+  <section anchor='ss:return:stats' title='Layout Usage Statistics'>
+    <section anchor="ff_io_latency4" title="ff_io_latency4">
+      <figure>
+        <artwork>
 /// struct ff_io_latency4 {
 ///         nfstime4       ffil_min;
 ///         nfstime4       ffil_max;
@@ -102,13 +105,13 @@ struct LAYOUTRETURN4args {
 ///         uint32_t       ffil_count;
 /// };
 ///
-      </artwork>
-    </figure>
-  </section>
+        </artwork>
+      </figure>
+    </section>
 
-  <section anchor="ff_layoutupdate4" title="ff_layoutupdate4">
-    <figure>
-      <artwork>
+    <section anchor="ff_layoutupdate4" title="ff_layoutupdate4">
+      <figure>
+        <artwork>
 /// struct ff_layoutupdate4 {
 ///         netaddr4       ffl_addr;
 ///         nfs_fh4        ffl_fhandle;
@@ -119,13 +122,13 @@ struct LAYOUTRETURN4args {
 ///         bool           ffl_local;
 /// };
 ///
-      </artwork>
-    </figure>
-  </section>
+        </artwork>
+      </figure>
+    </section>
 
-  <section anchor="ff_iostats4" title="ff_iostats4">
-    <figure>
-      <artwork>
+    <section anchor="ff_iostats4" title="ff_iostats4">
+      <figure>
+        <artwork>
 /// struct ff_iostats4 {
 ///         offset4        ffis_offset;
 ///         length4        ffis_length;
@@ -136,71 +139,72 @@ struct LAYOUTRETURN4args {
 ///         layoutupdate4  ffis_layoutupdate;
 /// };
 ///
-      </artwork>
-    </figure>
+        </artwork>
+      </figure>
 
-    <t>
-      Recall that <xref target='NFSv42' /> defines io_info4 as:
-    </t>
+      <t>
+        Recall that <xref target='NFSv42' /> defines io_info4 as:
+      </t>
 
-    <figure>
-      <artwork>
+      <figure>
+        <artwork>
    struct io_info4 {
            uint32_t        ii_count;
            uint64_t        ii_bytes;
    };
-      </artwork>
-    </figure>
+        </artwork>
+      </figure>
 
-    <t>
-      With pNFS, the data transfers are performed directly between
-      the pNFS client and the storage devices.  Therefore, the
-      metadata server has no visibility to the I/O stream and cannot
-      use any statistical information about client I/O to optimize
-      data storage location.  ff_iostats4 MAY be used by the client
-      to report I/O statistics back to the metadata server upon
-      returning the layout.  Since it is infeasible for the client
-      to report every I/O that used the layout, the client MAY
-      identify "hot" byte ranges for which to report I/O statistics.
-      The definition and/or configuration mechanism of what is
-      considered "hot" and the size of the reported byte range is
-      out of the scope of this document.  It is suggested for client
-      implementation to provide reasonable default values and an
-      optional run-time management interface to control these
-      parameters.  For example, a client can define the default
-      byte range resolution to be 1 MB in size and the thresholds
-      for reporting to be 1 MB/second or 10 I/O operations per
-      second.  For each byte range, ffis_offset and ffis_length
-      represent the starting offset of the range and the range
-      length in bytes.  ffis_read.ii_count,
-      ffis_read.ii_bytes, ffis_write.ii_count, and ffis_write.ii_bytes
-      represent, respectively, the number of contiguous read and
-      write I/Os and the respective aggregate number of bytes
-      transferred within the reported byte range.
-    </t>
+      <t>
+        With pNFS, the data transfers are performed directly between
+        the pNFS client and the storage devices.  Therefore, the
+        metadata server has no visibility to the I/O stream and cannot
+        use any statistical information about client I/O to optimize
+        data storage location.  ff_iostats4 MAY be used by the client
+        to report I/O statistics back to the metadata server upon
+        returning the layout.  Since it is infeasible for the client
+        to report every I/O that used the layout, the client MAY
+        identify "hot" byte ranges for which to report I/O statistics.
+        The definition and/or configuration mechanism of what is
+        considered "hot" and the size of the reported byte range is
+        out of the scope of this document.  It is suggested for client
+        implementation to provide reasonable default values and an
+        optional run-time management interface to control these
+        parameters.  For example, a client can define the default
+        byte range resolution to be 1 MB in size and the thresholds
+        for reporting to be 1 MB/second or 10 I/O operations per
+        second.  For each byte range, ffis_offset and ffis_length
+        represent the starting offset of the range and the range
+        length in bytes.  ffis_read.ii_count,
+        ffis_read.ii_bytes, ffis_write.ii_count, and ffis_write.ii_bytes
+        represent, respectively, the number of contiguous read and
+        write I/Os and the respective aggregate number of bytes
+        transferred within the reported byte range.
+      </t>
 
-    <t>
-      <cref anchor='AI7 ' source='TH'>
-        Need to define whether we are using ffis_layoutupdate or not.
-      </cref>
-    </t>
+      <t>
+        <cref anchor='AI7 ' source='TH'>
+          Need to define whether we are using ffis_layoutupdate or not.
+        </cref>
+      </t>
 
-    <t>
-      <cref anchor='AI8 ' source='TH'>
-        Actually, ffl_duration might be what we plop down in there.
-        In any event, ffl_duration needs some work.
-      </cref>
-    </t>
+      <t>
+        <cref anchor='AI8 ' source='TH'>
+          Actually, ffl_duration might be what we plop down in there.
+          In any event, ffl_duration needs some work.
+        </cref>
+      </t>
 
-    <t>
-      The combination of ffis_deviceid and ffl_addr uniquely identify
-      both the storage path and the network route to it. Additionally,
-      the ffis_deviceid informs the metadata server as to the version
-      and/or minor version being used for I/O to the storage device.
-      Finally, the ffl_fhandle allows the metadata server to differentiate
-      between multiple read-only copies of the file on the same
-      storage device.
-    </t>
+      <t>
+        The combination of ffis_deviceid and ffl_addr uniquely identify
+        both the storage path and the network route to it. Additionally,
+        the ffis_deviceid informs the metadata server as to the version
+        and/or minor version being used for I/O to the storage device.
+        Finally, the ffl_fhandle allows the metadata server to differentiate
+        between multiple read-only copies of the file on the same
+        storage device.
+      </t>
+    </section>
   </section>
 
   <section anchor="ff_layoutreturn" title="ff_layoutreturn">
