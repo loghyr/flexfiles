@@ -91,6 +91,14 @@ struct device_error4 {
         use of device_error4 is described in Section 15.6 of
         <xref target='NFSv42' />.
       </t>
+
+      <t>
+        Even though the storage device might be accessed via NFSv3
+        and reports back NFSv3 errors to the client, the client is
+        responsible for mapping these to appropriate NFSv4 status
+        codes as de_status.  Likewise, the NFSv3 operations need
+        to be mapped to equivalent NFSv4 operations.
+      </t>
     </section>
   </section>
 
