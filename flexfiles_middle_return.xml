@@ -46,10 +46,10 @@ struct LAYOUTRETURN4args {
 
   <t>
     If the lora_layout_type layout type is LAYOUT4_FLEX_FILES, then
-    the lrf_body opaque value is defined by the ff_layoutreturn4
-    type.  The new type allows the client to report I/O
-    error information or layout usage statistics back to the metadata
-    server as defined below.
+    the lrf_body opaque value is defined by ff_layoutreturn4
+    (See <xref target='ff_layoutreturn4' />).  It
+    allows the client to report I/O error information or layout
+    usage statistics back to the metadata server as defined below.
   </t>
 
   <section anchor="ss:return:errors" title="I/O Error Reporting">
