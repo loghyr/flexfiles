@@ -43,6 +43,13 @@ struct  CB_RECALL_ANY4args      {
     </figure>
 
     <t>
+      <cref anchor='AI13 ' source='TH'>
+        No, 5661 does not define these above values. The ask here is
+        to create these and _add_ them to 5661.
+      </cref>
+    </t>
+
+    <t>
       Typically, CB_RECALL_ANY will be used to recall client state
       when the server needs to reclaim resources. The craa_type_mask
       bitmap specifies the type of resources that are recalled and
