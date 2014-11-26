@@ -6,8 +6,9 @@
     If the client is using NFSv4.2 to communicate with the
     metadata server, then instead of waiting for a LAYOUTRETURN
     to send error information to the metadata server (see
-    <xref target='ff_ioerr4' />), it can use LAYOUTERROR (see
-    Section 16.6 of <xref target='NFSv42' />)
-    to communicate that information.
+    <xref target='ss:return:errors' />), it can use LAYOUTERROR (see
+    Section 15.6 of <xref target='NFSv42' />)
+    to communicate that information. For the Flexible Files Layout Type,
+    this means that LAYOUTERROR4args is treated the same as ff_ioerr4.
   </t>
 </section>
