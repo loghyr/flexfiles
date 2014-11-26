@@ -176,12 +176,12 @@
   <section title="Interactions Between Devices and Layouts" anchor="layout:inter">
     <t>
       In <xref target='RFC5661' />, the File Layout Type is defined such
-      that the relationship between multi-pathing and filehandles can
+      that the relationship between multipathing and filehandles can
       result in either 0, 1, or N filehandles (see Section 13.3).  Some
       rationals for this are clustered servers which share the same
       filehandle or allowing for multiple read-only copies of the file
       on the same storage device.  In the Flexible File Layout Type,
-      there is only one filehandle, independent of the multi-pathing
+      there is only one filehandle, independent of the multipathing
       being used.  If the metadata server wants to provide multiple
       read-only copies of the same file on the same storage device,
       then it should provide multiple ff_device_addr4, each as a mirror.
