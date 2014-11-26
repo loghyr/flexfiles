@@ -17,7 +17,6 @@ struct layoutreturn_file4 {
         /* layouttype4 specific data */
         opaque          lrf_body&lt;&gt;;
 };
-
     </artwork>
   </figure>
 
@@ -29,7 +28,6 @@ union layoutreturn4 switch(layoutreturn_type4 lr_returntype) {
         default:
                 void;
 };
-
     </artwork>
   </figure>
 
@@ -43,7 +41,6 @@ struct LAYOUTRETURN4args {
         layoutiomode4           lora_iomode;
         layoutreturn4           lora_layoutreturn;
 };
-
     </artwork>
   </figure>
 
@@ -180,11 +177,15 @@ struct LAYOUTRETURN4args {
       represent, respectively, the number of contiguous read and
       write I/Os and the respective aggregate number of bytes
       transferred within the reported byte range.
+    </t>
 
+    <t>
       <cref anchor='AI7 ' source='TH'>
         Need to define whether we are using ffis_layoutupdate or not.
       </cref>
+    </t>
 
+    <t>
       <cref anchor='AI8 ' source='TH'>
         Actually, ffl_duration might be what we plop down in there.
         In any event, ffl_duration needs some work.
