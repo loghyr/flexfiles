@@ -6,7 +6,7 @@
     If the client is using NFSv4.2 to communicate with the
     metadata server, then instead of waiting for a LAYOUTRETURN
     to send error information to the metadata server (see
-    <xref target='ff_ioerr' />), it can use LAYOUTERROR (see
+    <xref target='ff_ioerr4' />), it can use LAYOUTERROR (see
     Section 16.6 of <xref target='NFSv42' />)
     to communicate that information.
   </t>

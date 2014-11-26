@@ -55,7 +55,7 @@ struct LAYOUTRETURN4args {
     server as defined below.
   </t>
 
-  <section anchor="ff_ioerr" title="ff_ioerr">
+  <section anchor="ff_ioerr4" title="ff_ioerr4">
     <figure>
       <artwork>
 /// struct ff_ioerr4 {
@@ -95,7 +95,7 @@ struct LAYOUTRETURN4args {
     </t>
   </section>
 
-  <section anchor="ff_io_latency" title="ff_io_latency">
+  <section anchor="ff_io_latency4" title="ff_io_latency4">
     <figure>
       <artwork>
 /// struct ff_io_latency4 {
@@ -109,7 +109,7 @@ struct LAYOUTRETURN4args {
     </figure>
   </section>
 
-  <section anchor="ff_layoutupdate" title="ff_layoutupdate">
+  <section anchor="ff_layoutupdate4" title="ff_layoutupdate4">
     <figure>
       <artwork>
 /// struct ff_layoutupdate4 {
@@ -126,7 +126,7 @@ struct LAYOUTRETURN4args {
     </figure>
   </section>
 
-  <section anchor="ff_iostats" title="ff_iostats">
+  <section anchor="ff_iostats4" title="ff_iostats4">
     <figure>
       <artwork>
 /// struct ff_iostats4 {
