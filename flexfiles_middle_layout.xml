@@ -103,7 +103,7 @@
       MUST default to zero.  The only supported mapping scheme is
       sparse and is detailed in <xref target='sec:sparseStriping' />.
       Note that there is an assumption here that both the stripe
-      unit size and the number of of stripes is the same across all
+      unit size and the number of stripes is the same across all
       mirrors.
     </t>
 
