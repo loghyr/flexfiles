@@ -148,10 +148,10 @@ struct device_error4 {
 
       <figure>
         <artwork>
-   struct io_info4 {
-           uint32_t        ii_count;
-           uint64_t        ii_bytes;
-   };
+struct io_info4 {
+        uint32_t        ii_count;
+        uint64_t        ii_bytes;
+};
         </artwork>
       </figure>
 
@@ -207,10 +207,10 @@ struct device_error4 {
     </section>
   </section>
 
-  <section anchor="ff_layoutreturn" title="ff_layoutreturn">
+  <section anchor="ff_layoutreturn4" title="ff_layoutreturn4">
     <figure>
       <artwork>
-/// struct ff_layoutreturn {
+/// struct ff_layoutreturn4 {
 ///         ff_ioerr4     fflr_ioerr_report&lt;&gt;;
 ///         ff_iostats4   fflr_iostats_report&lt;&gt;;
 /// };
