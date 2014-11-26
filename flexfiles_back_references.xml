@@ -147,9 +147,9 @@
           <organization abbrev='Primary Data' />
         </author>
 
-        <date month='April' year='2014' />
+        <date month='November' year='2014' />
       </front>
-      <seriesInfo name="draft-ietf-nfsv4-minorversion2-22" value="(Work In Progress)"/>
+      <seriesInfo name="draft-ietf-nfsv4-minorversion2-28" value="(Work In Progress)"/>
     </reference>
 
     <reference anchor='pNFSLayouts'>
@@ -158,11 +158,11 @@
         <author initials="T." surname="Haynes" fullname="T. Haynes">
           <organization>Primary Data</organization>
         </author>
-        <date year="2014" month="April" />
+        <date year="2014" month="October" />
       </front>
-      <seriesInfo name="draft-haynes-nfsv4-layout-types-02" value="(Work In Progress)"/>
+      <seriesInfo name="draft-ietf-nfsv4-layout-types-02" value="(Work In Progress)"/>
       <format type='TXT'
-        target='http://www.ietf.org/internet-drafts/draft-haynes-nfsv4-layout-types-02.txt' />
+        target='http://www.ietf.org/internet-drafts/draft-ietf-nfsv4-layout-types-02.txt' />
     </reference>
 </references>
 
