@@ -88,7 +88,7 @@ struct device_error4 {
         ffie_offset, and ffie_length represent the storage device and
         byte range within the file in which the error occurred;
         ffie_errors represents the operation and type of error. The
-        use of device_error4 is described in Section 16.6 of
+        use of device_error4 is described in Section 15.6 of
         <xref target='NFSv42' />.
       </t>
     </section>
