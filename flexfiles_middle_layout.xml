@@ -16,12 +16,20 @@
 [[RFC Editor: please modify the LAYOUT4_FLEX_FILES
   to be the layouttype assigned by IANA]]
     };
+    </artwork>
+  </figure>
    
+  <figure>
+    <artwork>
     struct layout_content4 {
         layouttype4             loc_type;
         opaque                  loc_body&lt;&gt;;
     };
+    </artwork>
+  </figure>
    
+  <figure>
+    <artwork>
     struct layout4 {
         offset4                 lo_offset;
         length4                 lo_length;
