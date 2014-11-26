@@ -118,6 +118,7 @@ struct LAYOUTRETURN4args {
 ///         ff_io_latency4 ffl_read;
 ///         ff_io_latency4 ffl_write;
 ///         uint32_t       ffl_queue_depth;
+///         uint32_t       ffl_duration;
 ///         bool           ffl_local;
 /// };
 ///
@@ -132,7 +133,6 @@ struct LAYOUTRETURN4args {
 ///         offset4        ffis_offset;
 ///         length4        ffis_length;
 ///         stateid4       ffis_stateid;
-///         uint32_t       ffis_duration;
 ///         io_info4       ffis_read;
 ///         io_info4       ffis_write;
 ///         deviceid4      ffis_deviceid;
@@ -181,8 +181,7 @@ struct LAYOUTRETURN4args {
       for reporting to be 1 MB/second or 10 I/O operations per
       second.  For each byte range, ffis_offset and ffis_length
       represent the starting offset of the range and the range
-      length in bytes.  ffis_duration represents the number of
-      seconds the reported burst of I/O lasted.  ffis_read.ii_count,
+      length in bytes.  ffis_read.ii_count,
       ffis_read.ii_bytes, ffis_write.ii_count, and ffis_write.ii_bytes
       represent, respectively, the number of contiguous read and
       write I/Os and the respective aggregate number of bytes
@@ -193,8 +192,8 @@ struct LAYOUTRETURN4args {
       </cref>
 
       <cref anchor='AI8 ' source='TH'>
-        Actually, ffis_duration might be what we plop down in there.
-        In any event, ffis_duration needs some work.
+        Actually, ffl_duration might be what we plop down in there.
+        In any event, ffl_duration needs some work.
       </cref>
     </t>
   </section>
