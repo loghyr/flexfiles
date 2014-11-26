@@ -181,7 +181,7 @@
       rationals for this are clustered servers which share the same
       filehandle or allowing for multiple read-only copies of the file
       on the same storage device.  In the Flexible File Layout Type,
-      there is only 1 filehandle, independent of the multi-pathing
+      there is only one filehandle, independent of the multi-pathing
       being used.  If the metadata server wants to provide multiple
       read-only copies of the same file on the same storage device,
       then it should provide multiple ff_device_addr4, each as a mirror.

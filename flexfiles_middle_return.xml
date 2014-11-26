@@ -1,7 +1,7 @@
 <!-- Copyright (C) The IETF Trust (2014) -->
 <!-- Copyright (C) The Internet Society (2014) -->
 
-<section title="Flexible Files Layout Type Return">
+<section anchor='sec:return' title="Flexible Files Layout Type Return">
   <t>
     layoutreturn_file4 is used in the LAYOUTRETURN operation
     to convey layout-type specific information to the server.
@@ -113,7 +113,7 @@ struct LAYOUTRETURN4args {
     <figure>
       <artwork>
 /// struct ff_layoutupdate4 {
-///         netaddr4       ffl_offset;
+///         netaddr4       ffl_addr;
 ///         nfs_fh4        ffl_fhandle;
 ///         ff_io_latency4 ffl_read;
 ///         ff_io_latency4 ffl_write;
@@ -141,12 +141,6 @@ struct LAYOUTRETURN4args {
 ///
       </artwork>
     </figure>
-
-    <t>
-      <cref anchor='AI12 ' source='TH'>
-        Need to get the mirror into the layoutupdate!
-      </cref>
-    </t>
 
     <t>
       Recall that <xref target='NFSv42' /> defines io_info4 as:
@@ -195,6 +189,16 @@ struct LAYOUTRETURN4args {
         Actually, ffl_duration might be what we plop down in there.
         In any event, ffl_duration needs some work.
       </cref>
+    </t>
+
+    <t>
+      The combination of ffis_deviceid and ffl_addr uniquely identify
+      both the storage path and the network route to it. Additionally,
+      the ffis_deviceid informs the metadata server as to the version
+      and/or minor version being used for I/O to the storage device.
+      Finally, the ffl_fhandle allows the metadata server to differentiate
+      between multiple read-only copies of the file on the same
+      storage device.
     </t>
   </section>
 
