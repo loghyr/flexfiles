@@ -115,6 +115,13 @@ struct device_error4 {
 ///
         </artwork>
       </figure>
+
+      <t>
+        When determining latencies, the client can collect the minimum
+        via ffil_min, the maximum via ffil_max, and the average via
+        ffil_avg. Further, ffil_count relates how many data points
+        were collected in the reported period.
+      </t>
     </section>
 
     <section anchor="ff_layoutupdate4" title="ff_layoutupdate4">
@@ -126,12 +133,26 @@ struct device_error4 {
 ///         ff_io_latency4 ffl_read;
 ///         ff_io_latency4 ffl_write;
 ///         uint32_t       ffl_queue_depth;
-///         uint32_t       ffl_duration;
+///         nfstime4       ffl_duration;
 ///         bool           ffl_local;
 /// };
 ///
         </artwork>
       </figure>
+
+      <t>
+        ffl_addr differentiates which network address the client connected
+        to on the storage device.  In the case of multipathing, ffl_fhandle 
+        indicates which read-only copy was selected. ffl_read and ffl_write
+        convey the latencies respectively for both read and write operations.
+        ffl_queue_depth can be used to indicate how long the I/O had to
+        wait on internal queues before being serviced. ffl_duration is used
+        to indicate the time period over which the statistics were collected.
+        ffl_local if true indicates that the I/O was serviced by the client's
+        cache. This flag allows the client to inform the metadata server
+        about "hot" access to a file it would not normally be allowed to
+        report on.
+      </t>
     </section>
 
     <section anchor="ff_iostats4" title="ff_iostats4">
@@ -188,19 +209,6 @@ struct io_info4 {
         represent, respectively, the number of contiguous read and
         write I/Os and the respective aggregate number of bytes
         transferred within the reported byte range.
-      </t>
-
-      <t>
-        <cref anchor='AI7 ' source='TH'>
-          Need to define whether we are using ffis_layoutupdate or not.
-        </cref>
-      </t>
-
-      <t>
-        <cref anchor='AI8 ' source='TH'>
-          Actually, ffl_duration might be what we plop down in there.
-          In any event, ffl_duration needs some work.
-        </cref>
       </t>
 
       <t>
