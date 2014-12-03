@@ -13,6 +13,10 @@
         Lev Solomonov.
   </t>
 
+  <t>
+    Idan Kedar caught a nasty bug in the interaction of client side mirroring
+    and the minor versioning of devices.
+  </t>
 </section>
 
 <section title="RFC Editor Notes">

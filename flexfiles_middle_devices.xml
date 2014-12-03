@@ -18,13 +18,22 @@
 
     <figure>
       <artwork>
+/// struct ff_device_versions4 {
+///         uint32_t        ffdv_version;
+///         uint32_t        ffdv_minorversion;
+///         uint32_t        ffdv_rsize;
+///         uint32_t        ffdv_wsize;
+///         bool            ffdv_tightly_coupled;
+/// };
+///
+      </artwork>
+    </figure>
+
+    <figure>
+      <artwork>
 /// struct ff_device_addr4 {
-///         multipath_list4 ffda_netaddrs;
-///         uint32_t        ffda_version;
-///         uint32_t        ffda_minorversion;
-///         uint32_t        ffda_rsize;
-///         uint32_t        ffda_wsize;
-///         bool            ffda_tightly_coupled;
+///         multipath_list4     ffda_netaddrs;
+///         ff_device_versions4 ffda_versions&lt;&gt;;
 /// };
 ///
       </artwork>
@@ -37,31 +46,44 @@
     </t>
 
     <t>
-      The ffda_version and ffda_minorversion represent the NFS
+      The ffda_versions array allows the metadata server to present
+      multiple NFS versions and/or minor versions to the client.
+      The ffdv_version and ffdv_minorversion represent the NFS
       protocol to be used to access the storage device.  This layout
-      specification defines the semantics for ffda_versions 3 and
-      4.  If ffda_version equals 3 then server MUST set ffda_minorversion
+      specification defines the semantics for ffdv_versions 3 and
+      4.  If ffdv_version equals 3 then server MUST set ffdv_minorversion
       to 0 and the client MUST access the storage device using the
-      NFSv3 protocol <xref target="RFC1813" />.  If ffda_version
-      equals 4 then the server MUST set ffda_minorversion to one of
+      NFSv3 protocol <xref target="RFC1813" />.  If ffdv_version
+      equals 4 then the server MUST set ffdv_minorversion to one of
       the NFSv4 minor version numbers and the client MUST access the
       storage device using NFSv4.
     </t>
 
     <t>
-      The ffda_rsize and ffda_wsize are used to communicate the maximum
+      Note that while the client might determine that it can not
+      use any of the configured ffdv_version or ffdv_minorversion,
+      when it gets the device list from the metadata server, there
+      is no way to indicate to the metadata server as to which device
+      it is version incompatible. If however the client waits until
+      it retrieves the layout from the metadata server, it can at
+      that time clearly identify the storage device in question
+      (see <xref target='layout:versioning' />).
+    </t>
+
+    <t>
+      The ffdv_rsize and ffdv_wsize are used to communicate the maximum
       rsize and wsize supported by the storage device. As the storage
       device can have a different rsize or wsize than the metadata
-      server, the ffda_rsize and ffda_wsize allow the metadata server
+      server, the ffdv_rsize and ffdv_wsize allow the metadata server
       to communicate that information on behalf of the storage device.
     </t>
 
     <t>
-      ffda_tightly_coupled informs the client as to whether the metadata
+      ffdv_tightly_coupled informs the client as to whether the metadata
       server is tightly coupled with the storage devices or not. Note
       that even if the data protocol is at least NFSv4.1, it may
       still be the case that there is no control protocol present. If
-      ffda_tightly_coupled is not set, then the client MUST commit writes
+      ffdv_tightly_coupled is not set, then the client MUST commit writes
       to the storage devices for the file before sending a LAYOUTCOMMIT
       to the metadata server. I.e., the writes MUST be committed by
       the client to stable storage via issuing WRITEs with stable_how

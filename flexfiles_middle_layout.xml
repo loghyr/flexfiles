@@ -56,7 +56,7 @@
 ///     deviceid4               ffds_deviceid;
 ///     uint32_t                ffds_efficiency;
 ///     stateid4                ffds_stateid;
-///     nfs_fh4                 ffds_fhandle;
+///     nfs_fh4                 ffds_fhandle&lt;&gt;;
 ///     opaque_auth             ffds_auth;
 /// };
 ///
@@ -150,8 +150,18 @@
     </t>
 
     <t>
-      ffds_fhandle provides the filehandle of the data file on the
-      given storage device.  For tight coupling, ffds_stateid provides
+      ffds_fhandle is an array of filehandle of the data file on
+      the given storage device.  Each element of the array corresponds
+      to each ffdv_version and ffdv_minorversion provided for the
+      device.  The array allows for server implementations which
+      have different filehandles for different version and minor
+      version combinations. See <xref target='layout:versioning' />
+      for how to handle versioning issues between the client
+      and storage devices.
+    </t>
+
+    <t>
+      For tight coupling, ffds_stateid provides
       the stateid to be used by the client to access the file. For
       loose coupling and a NFSv4 storage device, the client may use
       an anonymous stateid to perform I/O on the storage device as
@@ -166,7 +176,7 @@
       files.  For tightly coupled storage devices, the server SHOULD
       use the AUTH_NONE flavor and a zero length opaque body to
       minimize the returned structure length.  I.e., if
-      ffda_tightly_coupled (see <xref target='ff_device_addr4' />)
+      ffdv_tightly_coupled (see <xref target='ff_device_addr4' />)
       is set, then the client MUST ignore ffds_auth in this case.
     </t>
 
@@ -183,28 +193,51 @@
 
   <section title="Interactions Between Devices and Layouts" anchor="layout:inter">
     <t>
-      In <xref target='RFC5661' />, the File Layout Type is defined such
-      that the relationship between multipathing and filehandles can
-      result in either 0, 1, or N filehandles (see Section 13.3).  Some
-      rationals for this are clustered servers which share the same
-      filehandle or allowing for multiple read-only copies of the file
-      on the same storage device.  In the Flexible File Layout Type,
-      there is only one filehandle, independent of the multipathing
-      being used.  If the metadata server wants to provide multiple
-      read-only copies of the same file on the same storage device,
-      then it should provide multiple ff_device_addr4, each as a mirror.
-      The client can then determine that since the ffds_fhandle
-      are different, then there a multiple copies of the file available.
+      In <xref target='RFC5661' />, the File Layout Type is defined
+      such that the relationship between multipathing and filehandles
+      can result in either 0, 1, or N filehandles (see Section
+      13.3).  Some rationals for this are clustered servers which
+      share the same filehandle or allowing for multiple read-only
+      copies of the file on the same storage device.  In the Flexible
+      File Layout Type, while there is an array of filehandles,
+      they are independent of the multipathing being used.  If the
+      metadata server wants to provide multiple read-only copies
+      of the same file on the same storage device, then it should
+      provide multiple ff_device_addr4, each as a mirror.  The
+      client can then determine that since the ffds_fhandle are
+      different, then there a multiple copies of the file available.
+    </t>
+  </section>
+
+  <section title="Handling Version Errors" anchor="layout:versioning">
+    <t>
+      When the metadata server provides the ffda_versions array in
+      the ff_device_addr4 (see <xref target='ff_device_addr4' />),
+      the client is able to determine if it can not access a storage
+      device with any of the supplied ffdv_version and ffdv_minorversion
+      combinations. However, due to the limitations of reporting
+      errors in GETDEVICEINFO (see Section 18.40 in
+      <xref target='RFC5661' />, the client is not able to specify
+      which specific device it can not communicate with over one
+      of the provided ffdv_version and ffdv_minorversion combinations.
+      Using ff_ioerr4 (see <xref target='ff_ioerr4' /> inside either
+      the LAYOUTRETURN (see Section 18.44 of <xref target='RFC5661' />)
+      or the LAYOUTERROR (see Section 15.6 of <xref target='NFSv42' />
+      and <xref target='sec:layouterror' /> of this document), the
+      client can isolate the problematic storage device.
     </t>
 
     <t>
-      If the metadata server wants to allow access to the file with
-      different versions and/or minor versions of NFS, then for each
-      allowed version and/or minor version, a new ff_device_addr4
-      must be defined.  The client should not assume any relationship
-      (or lack of relationship) between the filehandles presented
-      in ffds_fhandle. I.e., even if the filehandles are binary
-      equivalent for different versions, they may have varying semantics.
+      The error code to return for LAYOUTRETURN and/or LAYOUTERROR
+      is NFS4ERR_MINOR_VERS_MISMATCH. It does not matter whether
+      the mismatch is a major version (e.g., client can use NFSv3 but not NFSv4)
+      or minor version (e.g., client can use NFSv4.1 but not NFSv4.2),
+      the error indicates that for all the supplied combinations for
+      ffdv_version and ffdv_minorversion, the client can not communicate
+      with the storage device. The client can retry the GETDEVICEINFO
+      to see if the metadata server can provide a different
+      combination or it can fall back to doing the I/O through the
+      metadata server.
     </t>
   </section>
 </section>
