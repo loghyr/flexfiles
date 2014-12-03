@@ -150,14 +150,16 @@
     </t>
 
     <t>
-      ffds_fhandle is an array of filehandle of the data file on
-      the given storage device.  Each element of the array corresponds
-      to each ffdv_version and ffdv_minorversion provided for the
-      device.  The array allows for server implementations which
-      have different filehandles for different version and minor
-      version combinations. See <xref target='layout:versioning' />
-      for how to handle versioning issues between the client
-      and storage devices.
+      ffds_fhandle is an array of filehandles of the data file
+      matching to the available NFS versions on the given storage
+      device.  There MUST be exactly as many elements in ffds_fhandle
+      as there are in ffda_versions. Each element of the array
+      corresponds to each ffdv_version and ffdv_minorversion provided
+      for the device.  The array allows for server implementations
+      which have different filehandles for different version and
+      minor version combinations. See <xref target='layout:versioning' />
+      for how to handle versioning issues between the client and
+      storage devices.
     </t>
 
     <t>
