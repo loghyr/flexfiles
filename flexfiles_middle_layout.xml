@@ -6,6 +6,10 @@
     The layout4 type is defined in <xref target="RFC5662" /> as follows:
   </t>
 
+  <t>
+    &lt;CODE BEGINS&gt;
+  </t>
+
   <figure>
     <artwork>
     enum layouttype4 {
@@ -40,6 +44,10 @@
   </figure>
 
   <t>
+    &lt;CODE ENDS&gt;
+  </t>
+
+  <t>
     This document defines structure associated with the layouttype4
     value LAYOUT4_FLEX_FILES.  <xref target="RFC5661" /> specifies
     the loc_body structure as an XDR type "opaque".  The opaque
@@ -50,6 +58,11 @@
   </t>
 
   <section title="ff_layout4" anchor="ff_layout4">
+
+    <t>
+      &lt;CODE BEGINS&gt;
+    </t>
+
     <figure>
       <artwork>
 /// struct ff_data_server4 {
@@ -81,6 +94,10 @@
 ///
       </artwork>
     </figure>
+
+    <t>
+      &lt;CODE ENDS&gt;
+    </t>
 
     <t>
       The ff_layout4 structure specifies a layout over a set of

@@ -16,6 +16,9 @@
       device_addr4 structure by a successful GETDEVICEINFO operation.
     </t>
 
+    <t>
+      &lt;CODE BEGINS&gt;
+    </t>
     <figure>
       <artwork>
 /// struct ff_device_versions4 {
@@ -38,6 +41,9 @@
 ///
       </artwork>
     </figure>
+    <t>
+      &lt;CODE ENDS&gt;
+    </t>
 
     <t>
       The ffda_netaddrs field is used to locate the storage device.

@@ -8,6 +8,10 @@
     It is defined in <xref target="RFC5661" /> as follows:
   </t>
 
+  <t>
+    &lt;CODE BEGINS&gt;
+  </t>
+
   <figure>
     <artwork>
 struct layoutreturn_file4 {
@@ -45,6 +49,10 @@ struct LAYOUTRETURN4args {
   </figure>
 
   <t>
+    &lt;CODE ENDS&gt;
+  </t>
+
+  <t>
     If the lora_layout_type layout type is LAYOUT4_FLEX_FILES, then
     the lrf_body opaque value is defined by ff_layoutreturn4
     (See <xref target='ff_layoutreturn4' />).  It
@@ -54,6 +62,10 @@ struct LAYOUTRETURN4args {
 
   <section anchor="ss:return:errors" title="I/O Error Reporting">
     <section anchor="ff_ioerr4" title="ff_ioerr4">
+      <t>
+        &lt;CODE BEGINS&gt;
+      </t>
+
       <figure>
         <artwork>
 /// struct ff_ioerr4 {
@@ -67,7 +79,15 @@ struct LAYOUTRETURN4args {
       </figure>
 
       <t>
+        &lt;CODE ENDS&gt;
+      </t>
+
+      <t>
         Recall that <xref target='NFSv42' /> defines device_error4 as:
+      </t>
+
+      <t>
+        &lt;CODE BEGINS&gt;
       </t>
 
       <figure>
@@ -79,6 +99,10 @@ struct device_error4 {
 };
         </artwork>
       </figure>
+
+      <t>
+        &lt;CODE ENDS&gt;
+      </t>
 
       <t>
         The ff_ioerr4 structure is used to return error indications
@@ -104,6 +128,10 @@ struct device_error4 {
 
   <section anchor='ss:return:stats' title='Layout Usage Statistics'>
     <section anchor="ff_io_latency4" title="ff_io_latency4">
+      <t>
+        &lt;CODE BEGINS&gt;
+      </t>
+
       <figure>
         <artwork>
 /// struct ff_io_latency4 {
@@ -117,6 +145,10 @@ struct device_error4 {
       </figure>
 
       <t>
+        &lt;CODE ENDS&gt;
+      </t>
+
+      <t>
         When determining latencies, the client can collect the minimum
         via ffil_min, the maximum via ffil_max, and the average via
         ffil_avg. Further, ffil_count relates how many data points
@@ -125,6 +157,10 @@ struct device_error4 {
     </section>
 
     <section anchor="ff_layoutupdate4" title="ff_layoutupdate4">
+      <t>
+        &lt;CODE BEGINS&gt;
+      </t>
+
       <figure>
         <artwork>
 /// struct ff_layoutupdate4 {
@@ -139,6 +175,10 @@ struct device_error4 {
 ///
         </artwork>
       </figure>
+
+      <t>
+        &lt;CODE ENDS&gt;
+      </t>
 
       <t>
         ffl_addr differentiates which network address the client connected
@@ -156,6 +196,10 @@ struct device_error4 {
     </section>
 
     <section anchor="ff_iostats4" title="ff_iostats4">
+      <t>
+        &lt;CODE BEGINS&gt;
+      </t>
+
       <figure>
         <artwork>
 /// struct ff_iostats4 {
@@ -172,7 +216,15 @@ struct device_error4 {
       </figure>
 
       <t>
+        &lt;CODE ENDS&gt;
+      </t>
+
+      <t>
         Recall that <xref target='NFSv42' /> defines io_info4 as:
+      </t>
+
+      <t>
+        &lt;CODE BEGINS&gt;
       </t>
 
       <figure>
@@ -183,6 +235,10 @@ struct io_info4 {
 };
         </artwork>
       </figure>
+
+      <t>
+        &lt;CODE ENDS&gt;
+      </t>
 
       <t>
         With pNFS, the data transfers are performed directly between
@@ -224,6 +280,10 @@ struct io_info4 {
   </section>
 
   <section anchor="ff_layoutreturn4" title="ff_layoutreturn4">
+    <t>
+      &lt;CODE BEGINS&gt;
+    </t>
+
     <figure>
       <artwork>
 /// struct ff_layoutreturn4 {
@@ -233,6 +293,10 @@ struct io_info4 {
 ///
       </artwork>
     </figure>
+
+    <t>
+      &lt;CODE ENDS&gt;
+    </t>
 
     <t>
       When data file I/O operations fail, fflr_ioerr_report&lt;&gt;

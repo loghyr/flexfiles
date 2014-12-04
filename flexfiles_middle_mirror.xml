@@ -53,7 +53,7 @@
     </t>
 
     <t>
-      However, what SHOULD not be involved in that calculation is
+      However, what should not be involved in that calculation is
       a perceived network distance between the client and the storage
       device.  The client is better situated for making that
       determination based on past interaction with the storage
@@ -84,7 +84,7 @@
       to remove the errant mirror from the layout, if the mirror has
       recovered from some transient error, etc.  When the client tries
       to get a new layout, the metadata server informs it of the decision
-      by the contents of the layout.  The client MUST not make any
+      by the contents of the layout.  The client MUST NOT make any
       assumptions that the contents of the previous layout will match
       those of the new one.  If it has updates that were not committed,
       it MUST resend those updates to all mirrors.

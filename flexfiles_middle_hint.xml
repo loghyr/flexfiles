@@ -7,6 +7,10 @@
     <xref target="RFC5661" /> as follows:
   </t>
 
+  <t>
+    &lt;CODE BEGINS&gt;
+  </t>
+
   <figure>
     <artwork>
 struct layouthint4 {
@@ -15,6 +19,9 @@ struct layouthint4 {
 };
     </artwork>
   </figure>
+  <t>
+    &lt;CODE ENDS&gt;
+  </t>
 
   <t>
     The layouthint4 structure is used by the client to pass a hint
@@ -25,6 +32,9 @@ struct layouthint4 {
   </t>
 
   <section anchor="ff_layouthint4" title="ff_layouthint4">
+    <t>
+      &lt;CODE BEGINS&gt;
+    </t>
     <figure>
       <artwork>
 /// union ff_mirrors_hint switch (bool ffmc_valid) {
@@ -45,6 +55,9 @@ struct layouthint4 {
 ///
       </artwork>
     </figure>
+    <t>
+      &lt;CODE ENDS&gt;
+    </t>
 
     <t>
       This type conveys hints for the desired data map.  All parameters

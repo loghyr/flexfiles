@@ -12,12 +12,20 @@
     XDR description of the Flexible File Layout Type:
   </t>
 
+  <t>
+    &lt;CODE BEGINS&gt;
+  </t>
+
   <figure>
     <artwork>
 #!/bin/sh
 grep '^ *///' $* | sed 's?^ */// ??' | sed 's?^ *///$??'
     </artwork>
   </figure>
+
+  <t>
+    &lt;CODE ENDS&gt;
+  </t>
 
   <t>
     That is, if the above script is stored in a file called "extract.sh", and
@@ -58,6 +66,11 @@ sh extract.sh &lt; spec.txt &gt; flex_files_prot.x
       These Code Components are licensed according to the terms of that
       document.
     </t>
+
+    <t>
+      &lt;CODE BEGINS&gt;
+    </t>
+
     <figure>
       <artwork>
 /// /*
@@ -116,5 +129,9 @@ sh extract.sh &lt; spec.txt &gt; flex_files_prot.x
 ///
       </artwork>
     </figure>
+
+    <t>
+      &lt;CODE ENDS&gt;
+    </t>
   </section>
 </section>
