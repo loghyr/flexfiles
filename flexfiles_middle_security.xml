@@ -90,7 +90,7 @@
         With tight coupling, the principal used to access the
         metadata file is exactly the same as used to access the
         data file. Thus there are no security issues related to
-        kerberization of a tightly coupled system.
+        using Kerberos with a tightly coupled system.
       </t>
     </section>
   </section>
