@@ -33,7 +33,7 @@
           <xref target='pNFSLayouts' />).
         </t>
 
-        <t hangText='Client-side Mirroring:'>
+        <t hangText='client-side mirroring:'>
           is when the client and not the server is responsible for
           updating all of the mirrored copies of a file.
         </t>
@@ -44,7 +44,7 @@
           contents.
         </t>
 
-        <t hangText='Data Server (DS):'>
+        <t hangText='data server (DS):'>
           is one of the pNFS servers which provide the contents of
           a file system object which is a regular file. Depending
           on the layout, there might be one or more data servers
@@ -88,7 +88,7 @@
           a layout stateid and a normal stateid.
         </t>
 
-        <t hangText='Layout Type:'>
+        <t hangText='layout type:'>
           describes both the storage protocol used to
           access the data and the aggregation scheme used to lays out
           the file data on the underlying storage devices.
@@ -105,14 +105,14 @@
           time since last modification, access, etc.
         </t>
 
-        <t hangText='Metadata Server (MDS):'>
+        <t hangText='metadata server (MDS):'>
           is the pNFS server which provides metadata information
           for a file system object. It also is responsible for
           generating layouts for file system objects. Note that
           the MDS is responsible for directory-based operations.
         </t>
 
-        <t hangText='Mirror:'>
+        <t hangText='mirror:'>
           is a copy of a file. While mirroring can be used
           for backing up a file, the copies can be distributed
           such that each remote site has a locally cached copy.
