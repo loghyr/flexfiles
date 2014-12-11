@@ -203,13 +203,13 @@ struct device_error4 {
       <figure>
         <artwork>
 /// struct ff_iostats4 {
-///         offset4        ffis_offset;
-///         length4        ffis_length;
-///         stateid4       ffis_stateid;
-///         io_info4       ffis_read;
-///         io_info4       ffis_write;
-///         deviceid4      ffis_deviceid;
-///         layoutupdate4  ffis_layoutupdate;
+///         offset4           ffis_offset;
+///         length4           ffis_length;
+///         stateid4          ffis_stateid;
+///         io_info4          ffis_read;
+///         io_info4          ffis_write;
+///         deviceid4         ffis_deviceid;
+///         ff_layoutupdate4  ffis_layoutupdate;
 /// };
 ///
         </artwork>
