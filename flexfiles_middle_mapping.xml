@@ -4,7 +4,7 @@
 <section title="Striping via Sparse Mapping" anchor="sec:sparseStriping">
   <t>
     While other Layout Types support both dense and sparse mapping
-    of logical offsets to phyisical offsets within a file (see for
+    of logical offsets to physical offsets within a file (see for
     example Section 13.4 of <xref target='RFC5661' />), the Flexible
     File Layout Type only supports a sparse mapping.
   </t>
