@@ -224,7 +224,7 @@
       of the same file on the same storage device, then it should
       provide multiple ff_device_addr4, each as a mirror.  The
       client can then determine that since the ffds_fh_vers are
-      different, then there multiple copies of the file available.
+      different, then there are multiple copies of the file available.
     </t>
   </section>
 
