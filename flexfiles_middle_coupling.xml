@@ -44,7 +44,7 @@
       owner of the data file is allowed read/write access and the
       gid owner is allowed read only access.  As part of the layout,
       the client is provided with the rpc credentials to be used
-      (see ffm_auth in  <xref target='ff_layout4' />) to access the
+      (see ffds_auth in  <xref target='ff_layout4' />) to access the
       data file.  Fencing off clients is achieved by using SETATTR
       by the server to change the uid and/or gid owners of the data
       file to implicitly revoke the outstanding rpc credentials.
