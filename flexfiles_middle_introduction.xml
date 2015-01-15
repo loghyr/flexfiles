@@ -45,7 +45,7 @@
         </t>
 
         <t hangText='data server (DS):'>
-          is one of the pNFS servers which provide the contents of
+          is one of the pNFS servers which provides the contents of
           a file system object which is a regular file. Depending
           on the layout, there might be one or more data servers
           over which the data is striped. Note that while the
@@ -90,7 +90,7 @@
 
         <t hangText='layout type:'>
           describes both the storage protocol used to
-          access the data and the aggregation scheme used to lays out
+          access the data and the aggregation scheme used to lay out
           the file data on the underlying storage devices.
         </t>
 
