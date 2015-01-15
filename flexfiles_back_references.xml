@@ -136,23 +136,6 @@
     <seriesInfo name="RFC" value="5662"/>
   </reference>
 
-  <reference anchor='RFC5664'>
-    <front>
-      <title>Object-Based Parallel NFS (pNFS) Operations</title>
-      <author initials="B." surname="Halevy" fullname="Benny Halevy" role="editor">
-        <organization abbrev="Panasas">Panasas, Inc.</organization>
-      </author>
-      <author initials="B." surname="Welch" fullname="Brent Welch" role="editor">
-        <organization abbrev="Panasas">Panasas, Inc.</organization>
-      </author>
-      <author initials="J." surname="Zelenka" fullname="Jim Zelenka" role="editor">
-        <organization abbrev="Panasas">Panasas, Inc.</organization>
-      </author>
-      <date month="January" year="2010"/>
-    </front>
-    <seriesInfo name="RFC" value="5664"/>
-  </reference>
-
     <reference anchor='NFSv42'>
       <front>
         <title>NFS Version 4 Minor Version 2</title>
@@ -181,17 +164,6 @@
 </references>
 
 <references title="Informative References">
-
-     <reference anchor="ANSI400-2004">
-       <front>
-         <title>
-           ANSI INCITS 400-2004, Information Technology - SCSI Object-Based Storage Device Commands (OSD)
-         </title>
-         <author role="editor" initials="R." surname="Weber" fullname="R. Weber">
-         </author>
-         <date year="2004" month="December"/>
-       </front>
-     </reference>
 
     <reference anchor='rpcsec_gssv3'>
       <front>

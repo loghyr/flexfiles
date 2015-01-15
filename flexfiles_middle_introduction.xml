@@ -120,13 +120,6 @@
           then all copies must be updated.
         </t>
 
-        <t hangText='Object Layout Type:'>
-          is a Layout Type in which the storage devices
-          are accessed via the OSD protocol
-          <xref target='ANSI400-2004' />. It is
-          defined in <xref target='RFC5664' />.
-        </t>
-
         <t hangText='recalling a layout:'>
           is when the metadata server uses a back channel to inform
           the client that the layout is to be returned in a graceful
