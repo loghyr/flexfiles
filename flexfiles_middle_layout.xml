@@ -200,6 +200,42 @@
     </t>
 
     <t>
+      Note that opaque_auth is defined in Section 8.2 of
+      <xref target='RFC5531' /> and is for reference:
+    </t>
+
+    <t>
+      &lt;CODE BEGINS&gt;
+    </t>
+
+    <figure>
+      <artwork>
+    enum auth_flavor {
+       AUTH_NONE       = 0,
+       AUTH_SYS        = 1,
+       AUTH_SHORT      = 2,
+       AUTH_DH         = 3,
+       RPCSEC_GSS      = 6
+       /* and more to be defined */
+    };
+      </artwork>
+    </figure>
+
+    <figure>
+      <artwork>
+    struct opaque_auth {
+        auth_flavor  flavor;
+        opaque       body&lt;400&gt;;
+    };
+      </artwork>
+    </figure>
+
+    <t>
+      &lt;CODE ENDS&gt;
+    </t>
+
+
+    <t>
       ffds_efficiency describes the metadata server's evaluation
       as to the effectiveness of each mirror. Note that this is per
       layout and not per device as the metric may change due to
