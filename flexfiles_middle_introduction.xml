@@ -63,8 +63,7 @@
 
         <t hangText='File Layout Type:'>
           is a Layout Type in which the storage devices
-          are accessed via the NFSv4.1 protocol. It is
-          defined in Section 13 of <xref target='RFC5661' />.
+          are accessed via the NFS protocol.
         </t>
 
         <t hangText='layout:'>
