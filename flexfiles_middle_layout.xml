@@ -202,6 +202,20 @@
     </t>
 
     <t>
+      The allowed values for both ffds_user and ffds_group are
+      specified in Section 5.9 of <xref target='RFC5661' />.  For
+      NFSv3 compatibility, user and group strings that consist of
+      decimal numeric values with no leading zeros can be given a
+      special interpretation by clients and servers that choose to
+      provide such support.  The receiver may treat such a user or
+      group string as representing the same user as would be
+      represented by an NFSv3 uid or gid having the corresponding
+      numeric value. Note that if using Kerberos for security,
+      the expectation is that these values will be a name@domain
+      string.
+    </t>
+
+    <t>
       ffds_efficiency describes the metadata server's evaluation
       as to the effectiveness of each mirror. Note that this is per
       layout and not per device as the metric may change due to
