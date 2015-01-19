@@ -42,12 +42,16 @@
       With loosely coupled storage devices, the metadata server
       uses synthetic uids and gids for the data file, where the uid
       owner of the data file is allowed read/write access and the
-      gid owner is allowed read only access.  As part of the layout,
-      the client is provided with the rpc credentials to be used
-      (see ffds_auth in  <xref target='ff_layout4' />) to access the
-      data file.  Fencing off clients is achieved by using SETATTR
-      by the server to change the uid and/or gid owners of the data
-      file to implicitly revoke the outstanding rpc credentials.
+      gid owner is allowed read only access.  As part of the layout
+      (see ffds_user and ffds_group in  <xref target='ff_layout4' />),
+      the client is provided with the user and group to be used in
+      the RPC credentials needed to access the data file.  Fencing
+      off clients is achieved by using SETATTR by the server to
+      change the uid and/or gid owners of the data file to implicitly
+      revoke the outstanding rpc credentials.
+    </t>
+
+    <t>
       Note: it is recommended to implement common access control
       methods at the storage device filesystem exports level to
       allow only the metadata server root (super user) access to

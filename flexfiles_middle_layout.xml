@@ -70,7 +70,8 @@
 ///     uint32_t                ffds_efficiency;
 ///     stateid4                ffds_stateid;
 ///     nfs_fh4                 ffds_fh_vers&lt;&gt;;
-///     opaque_auth             ffds_auth;
+///     fattr4_owner            ffds_user;
+///     fattr4_owner_group      ffds_group;
 /// };
 ///
       </artwork>
@@ -190,50 +191,15 @@
     </t>
 
     <t>
-      For loosely coupled storage devices, ffds_auth provides the
-      RPC credentials to be used by the client to access the data
-      files.  For tightly coupled storage devices, the server SHOULD
-      use the AUTH_NONE flavor and a zero length opaque body to
-      minimize the returned structure length.  I.e., if
-      ffdv_tightly_coupled (see <xref target='ff_device_addr4' />)
-      is set, then the client MUST ignore ffds_auth in this case.
+      For loosely coupled storage devices, ffds_user and ffds_group
+      provide the synthetic user and group to be used in the RPC
+      credentials that the client presents to the storage device
+      to access the data files.  For tightly coupled storage devices,
+      the user and group on the storage device will be the same as
+      on the metadata server.  I.e., if ffdv_tightly_coupled (see
+      <xref target='ff_device_addr4' />) is set, then the client
+      MUST ignore both ffds_user and ffds_group.
     </t>
-
-    <t>
-      Note that opaque_auth is defined in Section 8.2 of
-      <xref target='RFC5531' /> and is for reference:
-    </t>
-
-    <t>
-      &lt;CODE BEGINS&gt;
-    </t>
-
-    <figure>
-      <artwork>
-    enum auth_flavor {
-       AUTH_NONE       = 0,
-       AUTH_SYS        = 1,
-       AUTH_SHORT      = 2,
-       AUTH_DH         = 3,
-       RPCSEC_GSS      = 6
-       /* and more to be defined */
-    };
-      </artwork>
-    </figure>
-
-    <figure>
-      <artwork>
-    struct opaque_auth {
-        auth_flavor  flavor;
-        opaque       body&lt;400&gt;;
-    };
-      </artwork>
-    </figure>
-
-    <t>
-      &lt;CODE ENDS&gt;
-    </t>
-
 
     <t>
       ffds_efficiency describes the metadata server's evaluation
