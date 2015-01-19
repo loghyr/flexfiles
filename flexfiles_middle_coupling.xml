@@ -49,7 +49,16 @@
       credentials needed to access the data file.  Fencing
       off clients is achieved by using SETATTR by the server to
       change the uid and/or gid owners of the data file to implicitly
-      revoke the outstanding rpc credentials.
+      revoke the outstanding RPC credentials.
+    </t>
+
+    <t>
+      With this loosely coupled model, the metadata server is 
+      not able to fence off a single client, it forced to fence
+      off all clients. However, as the other clients react to
+      the fencing, returning their layouts and trying to get
+      new ones, the metadata server can hand out a new uid and
+      gid to allow access.
     </t>
 
     <t>
@@ -73,6 +82,40 @@
       same authorization process it would go through via the metadata
       server.
     </t>
+
+    <section title='Implementation Notes for Synthetic uids/gids'>
+      <t>
+        The selection method for the synthetic uids and gids to
+        be used for fencing in loosely coupled storage devices
+        is strictly an implementation issue. An implementation
+        might allow an administrator to restrict a range of such
+        ids in the name servers.  She might also be able to
+        choose an id that would never be used to grant acccess.
+        Then when the metadata server had a request to access
+        a file, a SETATTR would be sent to the storage device
+        to set the owner and group of the data file. The user
+        and group might be selected in a round robin fashion
+        from the range of available ids.
+      </t>
+
+      <t>
+        Those ids would be sent back as ffds_user and ffds_group
+        to the client. And it would present them as the RPC
+        credentials to the storage device. When the client was
+        done accessing the file and the metadata server knew
+        that no other client was accessing the file, it could
+        reset the owner and group to restrict access to the
+        data file.
+      </t>
+
+      <t>
+        When the metadata server wanted to fence off a client,
+        it would change the synthetic uid and/or gid to
+        the restricted ids. Note that using a restricted id
+        ensures that there is a change of owner and at least
+        one id available that never gets allowed access.
+      </t>
+    </section>
   </section>
 
   <section title="State and Locking Models">
