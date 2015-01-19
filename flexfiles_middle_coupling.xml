@@ -45,7 +45,8 @@
       gid owner is allowed read only access.  As part of the layout
       (see ffds_user and ffds_group in  <xref target='ff_layout4' />),
       the client is provided with the user and group to be used in
-      the RPC credentials needed to access the data file.  Fencing
+      the Remote Procedure Call (RPC) <xref target='RFC5531' />
+      credentials needed to access the data file.  Fencing
       off clients is achieved by using SETATTR by the server to
       change the uid and/or gid owners of the data file to implicitly
       revoke the outstanding rpc credentials.
