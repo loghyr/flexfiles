@@ -14,8 +14,29 @@
   </t>
 
   <t>
+    Those who provided miscellaneous comments to the final drafts of this
+    document include:
+        Anand Ganesh,
+        Robert Wipfel,
+        Gobikrishnan Sundharraj,
+        and
+        Trond Myklebust.
+  </t>
+
+  <t>
     Idan Kedar caught a nasty bug in the interaction of client side mirroring
     and the minor versioning of devices.
+  </t>
+
+  <t>
+    Dave Noveck provided a comprehensive review of the document during the
+    working group last call.
+  </t>
+
+  <t>
+    Olga Kornievskaia lead the charge against the use of a credential
+    versus a principal in the fencing approach. Andy Adamson and Benjamin Kaduk
+    helped to sharpen the focus.
   </t>
 </section>
 
