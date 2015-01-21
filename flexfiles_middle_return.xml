@@ -72,7 +72,7 @@ struct LAYOUTRETURN4args {
 ///         offset4        ffie_offset;
 ///         length4        ffie_length;
 ///         stateid4       ffie_stateid;
-///         device_error4  ffie_errors<>;
+///         device_error4  ffie_errors&lt;&gt;;
 /// };
 ///
         </artwork>
