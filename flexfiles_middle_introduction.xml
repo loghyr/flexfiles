@@ -49,7 +49,7 @@
           a file system object which is a regular file. Depending
           on the layout, there might be one or more data servers
           over which the data is striped. Note that while the
-          metadata server is strictly accessed over the NFSv4.1
+          metadata server is strictly accessed over the NFSv4.1+
           protocol, depending on the Layout Type, the data server
           could be accessed via any protocol that meets the pNFS
           requirements.
@@ -171,7 +171,7 @@
     title="Difference Between a Data Server and a Storage Device">
     <t>
       We defined a data server as a pNFS server, which implies that it
-      can utilize the NFSv4.1 protocol to communicate with the client.
+      can utilize the NFSv4.1+ protocol to communicate with the client.
       As such, only the File Layout Type would currently meet this
       requirement. The more generic concept is a storage device, which
       can use any protocol to communicate with the client. The requirements

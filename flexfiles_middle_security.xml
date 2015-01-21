@@ -16,15 +16,15 @@
 
 <section anchor="sec:security" title="Security Considerations">
   <t>
-    The pNFS extension partitions the NFSv4 file system protocol
+    The pNFS extension partitions the NFSv4.1+ file system protocol
     into two parts, the control path and the data path (storage
     protocol).  The control path contains all the new operations
     described by this extension; all existing NFSv4 security
     mechanisms and features apply to the control path.  The combination
     of components in a pNFS system is required to preserve the
-    security properties of NFSv4 with respect to an entity accessing
+    security properties of NFSv4.1+ with respect to an entity accessing
     data via a client, including security countermeasures to defend
-    against threats that NFSv4 provides defenses for in environments
+    against threats that NFSv4.1+ provides defenses for in environments
     where these threats are considered significant.
   </t>
 
@@ -43,7 +43,7 @@
     and ACCESS calls to the metadata server, similar to having NFSv4
     data delegations.  If access is allowed, the client uses the
     corresponding (READ or RW) credentials to perform the I/O
-    operations at the data files storage devices.  When the metadata
+    operations at the data file's storage devices.  When the metadata
     server receives a request to change a file's permissions or
     ACL, it SHOULD recall all layouts for that file and it MUST
     fence off the clients holding outstanding layouts for the

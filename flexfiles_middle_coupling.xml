@@ -125,8 +125,8 @@
     </t>
 
     <t>
-      With NFSv4 storage devices, the metadata server, in response to
-      the state changing operation, executes them against the respective
+      The metadata server responds to state changing operations by
+      executing them against the respective
       data files on the storage devices.  It then sends the storage
       device open stateid as part of the layout (see the ffm_stateid
       in <xref target='ff_layout4' />) and it is then used by the client
@@ -134,13 +134,13 @@
     </t>
 
     <t>
-      Standalone NFSv4.1 storage devices that do not return the
+      Standalone NFSv4.1+ storage devices that do not return the
       EXCHGID4_FLAG_USE_PNFS_DS flag to EXCHANGE_ID are used the same
       way as NFSv4 storage devices.
     </t>
 
     <t>
-      NFSv4.1 clustered storage devices that do identify themselves
+      NFSv4.1+ clustered storage devices that do identify themselves
       with the EXCHGID4_FLAG_USE_PNFS_DS flag to EXCHANGE_ID use a
       back-end control protocol as described in
       <xref target="RFC5661" /> to implement a global stateid
