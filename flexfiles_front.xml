@@ -47,9 +47,8 @@
         is defined in this document as an extension to pNFS to allow
         the use of storage devices in a fashion such that they
         require only a quite limited degree of interaction with the
-        metadata server, using already existing protocols. In
-        addition, client side mirroring is also added to provide
-        replication of files.
+        metadata server, using already existing protocols.  Client
+        side mirroring is also added to provide replication of files.
       </t>
     </abstract>
 </front>
