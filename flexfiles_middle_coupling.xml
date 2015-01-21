@@ -11,13 +11,6 @@
     state, and locking models MUST be defined.
   </t>
 
-  <t>
-    A file is split into metadata and data. The "metadata file" is
-    that part of the file stored on the metadata server. The "data
-    file" is that part of the file stored on the storage device.
-    And the "file" is the combination of the two.
-  </t>
-
   <section anchor='sec:layoutcommit' title='LAYOUTCOMMIT'>
     <t>
       With a tightly coupled system, when the metadata server
