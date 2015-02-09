@@ -4,13 +4,14 @@
 <section anchor="sec:mirror" title="Mirroring">
   <t>
     The Flexible File Layout Type has a simple model in place
-    for the mirroring of files. There is no assumption
+    for the mirroring of the file data constrained by a layout
+    segment. There is no assumption
     that each copy of the mirror is stored identically on the
     storage devices, i.e., one device might employ compression
-    or deduplication on the file. However, the over the wire
+    or deduplication on the data. However, the over the wire
     transfer of the file contents MUST appear identical. Note,
     this is a construct of the selected XDR representation that
-    each mirrored copy of the file has the same striping pattern
+    each mirrored copy of the layout segment has the same striping pattern
     (see <xref target='fig:ff_layout' />).
   </t>
 
@@ -21,18 +22,18 @@
     <xref target='sec:layout_hint' />), the metadata server can
     ignore that hint and in any event, the client has no means to
     dictate neither the storage device (which also means the coupling
-    and/or protocol levels to access the file) nor the location of
+    and/or protocol levels to access the layout segments) nor the location of
     said storage device.
   </t>
 
   <t>
-    The updating of mirrored files is done via client-side mirroring.
+    The updating of mirrored layout segments is done via client-side mirroring.
     With this approach, the client is responsible for making sure
-    modifications get to all copies of the file it is informed
-    of via the layout. If a file is being resilvered to a storage
+    modifications get to all copies of the layout segments it is informed
+    of via the layout. If a layout segments is being resilvered to a storage
     device, that mirrored copy will not be in the layout. Thus the
     metadata server MUST update that copy until the client is presented
-    it in a layout. Also, if the client is writing to the file
+    it in a layout. Also, if the client is writing to the layout segments
     via the metadata server, e.g., using an earlier version
     of the protocol, then the metadata server MUST update all copies
     of the mirror. As seen in <xref target='ss:resilvering' />,
@@ -66,14 +67,14 @@
     <t>
       As such, it is the client which decides which mirror to access
       for reading the file. The requirements for writing to a mirrored
-      file are presented below.
+      layout segments are presented below.
     </t>
   </section>
 
   <section anchor="ss:write_mirror" title="Writing to Mirrors">
     <t>
       The client is responsible for updating all mirrored copies of the
-      file that it is given in the layout.  If all but one copy is updated
+      layout segments that it is given in the layout.  If all but one copy is updated
       successfully and the last one provides an error, then the client
       needs to return the layout to the metadata server with an error
       indicating that the update failed to that storage device.
@@ -94,12 +95,12 @@
   <section anchor="ss:resilvering" title="Metadata Server Resilvering of the File">
     <t>
       The metadata server may elect to create a new mirror of the
-      file at any time. This might be to resilver a copy on a storage
+      layout segments at any time. This might be to resilver a copy on a storage
       device which was down for servicing, to provide a copy of the
-      file on storage with different storage performance characteristics,
+      layout segments on storage with different storage performance characteristics,
       etc. As the client will not be aware of the new mirror and
       the metadata server will not be aware of updates that the
-      client is making to the file, the metadata server MUST recall
+      client is making to the layout segments, the metadata server MUST recall
       the writable layout segment(s) that it is resilvering. If the
       client issues a LAYOUTGET for a writable layout segment which
       is in the process of being resilvered, then the metadata

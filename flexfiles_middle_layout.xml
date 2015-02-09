@@ -102,8 +102,13 @@
 
     <t>
       The ff_layout4 structure specifies a layout over a set of
-      mirrored copies of the data file.  This mirroring protects
-      against loss of data files.
+      mirrored copies of that portion of the data file described in
+      the current layout segment.  This mirroring protects
+      against loss of data in layout segments. Note that while not
+      explicitly shown in the above XDR, each layout4 element returned
+      in the logr_layout array of LAYOUTGET4res (see Section 18.43.1
+      of <xref target='RFC5661' />) descibes a layout segment. Hence
+      each ff_layout4 also descibes a layout segment.
     </t>
 
     <t>
@@ -158,7 +163,7 @@
 
     <t>
       The ffs_mirrors field represents an array of state information
-      for each mirrored copy of the file. Each element is described
+      for each mirrored copy of the current layout segment. Each element is described
       by a ff_mirror4 type.
     </t>
 
@@ -240,7 +245,8 @@
       of the same file on the same storage device, then it should
       provide multiple ff_device_addr4, each as a mirror.  The
       client can then determine that since the ffds_fh_vers are
-      different, then there are multiple copies of the file available.
+      different, then there are multiple copies of the file for
+      the current layout segment available.
     </t>
   </section>
 

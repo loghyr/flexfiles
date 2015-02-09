@@ -35,7 +35,7 @@
 
         <t hangText='client-side mirroring:'>
           is when the client and not the server is responsible for
-          updating all of the mirrored copies of a file.
+          updating all of the mirrored copies of a layout segment.
         </t>
 
         <t hangText='data file:'>
@@ -120,8 +120,8 @@
         </t>
 
         <t hangText='mirror:'>
-          is a copy of a file. While mirroring can be used
-          for backing up a file, the copies can be distributed
+          is a copy of a layout segment. While mirroring can be used
+          for backing up a layout segment, the copies can be distributed
           such that each remote site has a locally cached copy.
           Note that if one copy of the mirror is updated,
           then all copies must be updated.
@@ -141,9 +141,9 @@
         </t>
 
         <t hangText='resilvering:'>
-          is the act of rebuilding a mirrored copy of a file from
-          a known good copy of the file.  Note that this can also
-          be done to create a new mirrored copy of the file.
+          is the act of rebuilding a mirrored copy of a layout segment from
+          a known good copy of the layout segment.  Note that this can also
+          be done to create a new mirrored copy of the layout segment.
         </t>
 
         <t hangText='rsize:'>
