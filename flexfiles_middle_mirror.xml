@@ -26,18 +26,18 @@
   </t>
 
   <t>
-     The updating of mirrored files is done via client-side mirroring.
-     With this approach, the client is responsible for making sure
-     modifications get to all copies of the file it is informed
-     of via the layout. If a file is being resilvered to a storage
-     device, that mirrored copy will not be in the layout. Thus the
-     metadata server MUST update that copy until the client is presented
-     it in a layout. Also, if the client is writing to the file
-     via the metadata server, e.g., using an earlier version
-     of the protocol, then the metadata server MUST update all copies
-     of the mirror. As seen in <xref target='ss:resilvering' />,
-     during the resilvering, the layout is recalled, and the client
-     has to make modifications via the metadata server.
+    The updating of mirrored files is done via client-side mirroring.
+    With this approach, the client is responsible for making sure
+    modifications get to all copies of the file it is informed
+    of via the layout. If a file is being resilvered to a storage
+    device, that mirrored copy will not be in the layout. Thus the
+    metadata server MUST update that copy until the client is presented
+    it in a layout. Also, if the client is writing to the file
+    via the metadata server, e.g., using an earlier version
+    of the protocol, then the metadata server MUST update all copies
+    of the mirror. As seen in <xref target='ss:resilvering' />,
+    during the resilvering, the layout is recalled, and the client
+    has to make modifications via the metadata server.
   </t>
 
   <section anchor="ss:select_mirror" title="Selecting a Mirror">
