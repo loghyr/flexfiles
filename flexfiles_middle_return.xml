@@ -267,9 +267,7 @@ struct io_info4 {
 
       <t>
         The combination of ffis_deviceid and ffl_addr uniquely identify
-        both the storage path and the network route to it. Additionally,
-        the ffis_deviceid informs the metadata server as to the version
-        and/or minor version being used for I/O to the storage device.
+        both the storage path and the network route to it. 
         Finally, the ffl_fhandle allows the metadata server to differentiate
         between multiple read-only copies of the file on the same
         storage device.
