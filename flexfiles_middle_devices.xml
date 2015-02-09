@@ -4,7 +4,7 @@
 <section title="Device Addressing and Discovery">
   <t>
     Data operations to a storage device require the client to know the
-    network address of the storage device.  The NFSv4.1 GETDEVICEINFO
+    network address of the storage device.  The NFSv4.1+ GETDEVICEINFO
     operation (Section 18.40 of <xref target="RFC5661" />) is
     used by the client to retrieve that information.
   </t>

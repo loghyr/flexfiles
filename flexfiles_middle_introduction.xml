@@ -17,7 +17,7 @@
   <t>
     To provide a global state model equivalent to that of the Files
     Layout Type, a back-end control protocol MAY be implemented between
-    the metadata server and NFSv4.1 storage devices.  It is out
+    the metadata server and NFSv4.1+ storage devices.  It is out
     of scope for this document to specify the wire protocol of such a
     protocol, yet the requirements for the protocol are specified in <xref
     target="RFC5661" /> and clarified in <xref target='pNFSLayouts' />.
