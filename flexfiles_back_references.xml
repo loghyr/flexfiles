@@ -57,36 +57,26 @@
     <seriesInfo name='RFC' value='1813' />
   </reference>
 
-  <reference anchor='RFC3530'>
+  <reference anchor='RFCNFSv4'>
     <front>
-      <title>Network File System (NFS) version 4 Protocol</title>
-      <author initials="S." surname="Shepler" fullname="S. Shepler">
-        <organization>Sun Microsystems, Inc.</organization>
+      <title>NFS Version 4 Protocol</title>
+
+      <author initials='T' surname='Haynes' fullname='Thomas Haynes'>
+        <organization abbrev='Editors' />
       </author>
-      <author initials="B." surname="Callaghan" fullname="B. Callaghan">
-        <organization>Sun Microsystems, Inc.</organization>
+      <author initials='D' surname='Noveck' fullname='David Noveck'>
+        <organization abbrev='Editors' />
       </author>
-      <author initials="D." surname="Robinson" fullname="D. Robinson">
-        <organization>Sun Microsystems, Inc.</organization>
-      </author>
-      <author initials="R." surname="Thurlow" fullname="R. Thurlow">
-        <organization>Sun Microsystems, Inc.</organization>
-      </author>
-      <author initials="C." surname="Beame" fullname="C. Beame">
-        <organization>Hummingbird, Ltd.</organization>
-      </author>
-      <author initials="M." surname="Eisler" fullname="M. Eisler">
-        <organization>NetApp</organization>
-      </author>
-      <author initials="D." surname="Noveck" fullname="D. Noveck">
-        <organization>NetApp</organization>
-      </author>
-      <date year="2003" month="April"/>
+
+      <date month='Dec' day='4' year='2014' />
+
     </front>
-    <seriesInfo name="RFC" value="3530"/>
-    <format type="TXT" octets="600988"
-      target="ftp://ftp.isi.edu/in-notes/rfc3530.txt"/>
+
+    <seriesInfo name='Internet-Draft' value='draft-ietf-nfsv4-rfc3530bis-35' />
+    <format type='TXT'
+        target='http://www.ietf.org/internet-drafts/draft-ietf-nfsv4-rfc3530bis-35.txt' />
   </reference>
+
 
     <reference anchor='RFC5531'>
       <front>

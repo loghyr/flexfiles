@@ -9,8 +9,8 @@
     storage systems and methods of arranging data on storage devices.
     This document defines the Flexible File Layout Type used with
     file-based data servers that are accessed using the Network File
-    System (NFS) protocols: NFSv3 <xref target="RFC1813" />, NFSv4 <xref
-    target="RFC3530" />, NFSv4.1 <xref target="RFC5661" />, and NFSv4.2
+    System (NFS) protocols: NFSv3 <xref target="RFC1813" />, NFSv4.0 <xref
+    target="RFCNFSv4" />, NFSv4.1 <xref target="RFC5661" />, and NFSv4.2
     <xref target="NFSv42" />.
   </t>
 
