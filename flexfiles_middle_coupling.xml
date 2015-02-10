@@ -127,7 +127,7 @@
       </figure>
 
       <t>
-	Perhaps it is assigned some random synthetic uid/gid to
+	It may be assigned some random synthetic uid/gid to
 	deny access:
       </t>
 
@@ -159,7 +159,7 @@
 
       <t>
 	The client is thus solely responsible for enforcing file
-	permissions in a loosely-coupled model.  To allow loghyr
+	permissions in a loosely coupled model.  To allow loghyr
 	write access, it will send an RPC to the storage device
 	with a credential of 1066:1067.  To allow garbo read access,
 	it will send an RPC to the storage device with a credential
