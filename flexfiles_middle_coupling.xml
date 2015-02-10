@@ -109,6 +109,73 @@
         one id available that never gets allowed access.
       </t>
     </section>
+
+    <section title='Example of using Synthetic uids/gids'>
+      <t>
+	The user loghyr creates a file "ompha.c" on the metadata
+	server and it creates a corresponding data file on the
+	storage device.
+      </t>
+
+      <t>
+        The metadata server entry may look like:
+      </t>
+
+      <figure>
+        <artwork>
+-rw-r--r--    1 loghyr  staff    1697 Dec  4 11:31 ompha.c
+        </artwork>
+      </figure>
+
+      <t>
+	Perhaps it is assigned some random synthetic uid/gid to
+	deny access:
+      </t>
+
+      <figure>
+        <artwork>
+-rw-r-----    1 19452   28418    1697 Dec  4 11:31 data_ompha.c
+        </artwork>
+      </figure>
+
+      <t>
+	When the file is opened on a client, since the layout knows
+	nothing about the user (and does not care), whether loghyr
+	or garbo opens the file does not matter. The owner and group
+	are modified and those values are returned.
+      </t>
+
+      <figure>
+        <artwork>
+-rw-r-----    1 1066    1067     1697 Dec  4 11:31 data_ompha.c
+        </artwork>
+      </figure>
+
+      <t>
+	The set of synthetic gids on the storage device
+	should be selected such that there is no mapping in any of
+	the name services used by the storage device. I.e., each
+	group should have no members.
+      </t>
+
+      <t>
+	The client is thus solely responsible for enforcing file
+	permissions in a loosely-coupled model.  To allow loghyr
+	write access, it will send an RPC to the storage device
+	with a credential of 1066:1067.  To allow garbo read access,
+	it will send an RPC to the storage device with a credential
+	of 1067:1067 (Note the value of the uid does not matter as
+	long as it is not the synthetic uid granted it when getting
+	the layout.).
+      </t>
+
+      <t>
+	If the layout segment has an iomode of LAYOUTIOMODE4_READ, then
+	the metadata server should return a synthetic uid that is
+	not set on the storage device. Only the synthetic gid would
+	be valid.
+      </t>
+    </section>
   </section>
 
   <section title="State and Locking Models">
