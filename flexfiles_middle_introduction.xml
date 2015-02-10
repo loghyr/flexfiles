@@ -122,7 +122,7 @@
         <t hangText='mirror:'>
           is a copy of a layout segment. While mirroring can be used
           for backing up a layout segment, the copies can be distributed
-          such that each remote site has a locally cached copy.
+          such that each remote site has a locally available copy.
           Note that if one copy of the mirror is updated,
           then all copies must be updated.
         </t>
