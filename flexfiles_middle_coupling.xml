@@ -127,8 +127,8 @@
       </figure>
 
       <t>
-	It may be assigned some random synthetic uid/gid to
-	deny access:
+	On the storage device, it may be assigned some
+        random synthetic uid/gid to deny access:
       </t>
 
       <figure>
@@ -158,21 +158,31 @@
       </t>
 
       <t>
+	If the layout segment has an iomode of LAYOUTIOMODE4_READ, then
+	the metadata server should return a synthetic uid that is
+	not set on the storage device. Only the synthetic gid would
+	be valid.
+      </t>
+
+      <t>
 	The client is thus solely responsible for enforcing file
 	permissions in a loosely coupled model.  To allow loghyr
 	write access, it will send an RPC to the storage device
 	with a credential of 1066:1067.  To allow garbo read access,
 	it will send an RPC to the storage device with a credential
-	of 1067:1067 (Note the value of the uid does not matter as
+	of 1067:1067. The value of the uid does not matter as
 	long as it is not the synthetic uid granted it when getting
-	the layout.).
+	the layout.
       </t>
 
       <t>
-	If the layout segment has an iomode of LAYOUTIOMODE4_READ, then
-	the metadata server should return a synthetic uid that is
-	not set on the storage device. Only the synthetic gid would
-	be valid.
+        While pushing the enforcement of permission checking onto
+        the client may seem to weaken security, the client may already
+        be responsible for enforcing permissions before modificaations
+        are sent to a server. With cached writes, the client is
+        always responsible for tracking who is modifying a file and
+        making sure to not coalesce requests from multiple users
+        into one request.
       </t>
     </section>
   </section>
