@@ -19,8 +19,8 @@
       Layout Type MUST be met (see Section 12.5.4 of
       <xref target='RFC5661' />). With a loosely coupled
       system, a LAYOUTCOMMIT to the metadata server MUST
-      be proceeded with a COMMIT to the storage device. I.e.,
-      it is the responsibility of the client to make sure
+      be proceeded with a COMMIT to the storage device.
+      It is the responsibility of the client to make sure
       the data file is stable before the metadata server
       begins to query the storage devices about the
       changes to the file.  Note that if the client has
@@ -37,12 +37,12 @@
       owner of the data file is allowed read/write access and the
       gid owner is allowed read only access.  As part of the layout
       (see ffds_user and ffds_group in  <xref target='ff_layout4' />),
-      the client is provided with the user and group to be used in
-      the Remote Procedure Call (RPC) <xref target='RFC5531' />
-      credentials needed to access the data file.  Fencing
-      off clients is achieved by using SETATTR by the server to
-      change the uid and/or gid owners of the data file to implicitly
-      revoke the outstanding RPC credentials.
+      the client is provided with the user and group to be
+      used in the Remote Procedure Call (RPC) <xref target='RFC5531' />
+      credentials needed to access the data file.  Fencing off
+      of clients is achieved by the metadata server changing the
+      synthetic uid and/or gid owners of the data file on the storage
+      device to implicitly revoke the outstanding RPC credentials.
     </t>
 
     <t>
@@ -56,15 +56,14 @@
 
     <t>
       Note: it is recommended to implement common access control
-      methods at the storage device filesystem exports level to
+      methods at the storage device filesystem to
       allow only the metadata server root (super user) access to
       the storage device, and to set the owner of all directories
-      holding data files to the root user.  This security method,
-      when using weak auth flavors such as AUTH_SYS, provides a
-      practical model to enforce access control and fence off
+      holding data files to the root user.  This approach
+      provides a practical model to enforce access control and fence off
       cooperative clients, but it can not protect against malicious
       clients; hence it provides a level of security equivalent to
-      NFSv3.
+      AUTH_SYS.
     </t>
 
     <t>
