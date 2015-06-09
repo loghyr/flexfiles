@@ -135,10 +135,13 @@ struct device_error4 {
       <figure>
         <artwork>
 /// struct ff_io_latency4 {
-///         nfstime4       ffil_min;
-///         nfstime4       ffil_max;
-///         nfstime4       ffil_avg;
-///         uint32_t       ffil_count;
+///         uint64_t       ffil_ops_requested;
+///         uint64_t       ffil_bytes_requested;
+///         uint64_t       ffil_ops_completed;
+///         uint64_t       ffil_bytes_completed;
+///         uint64_t       ffil_ops_not_delivered;
+///         nfstime4       ffil_total_busy_time;
+///         nfstime4       ffil_aggregate_completion_time;
 /// };
 ///
         </artwork>
