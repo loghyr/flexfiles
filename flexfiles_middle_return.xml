@@ -139,7 +139,7 @@ struct device_error4 {
 ///         uint64_t       ffil_bytes_requested;
 ///         uint64_t       ffil_ops_completed;
 ///         uint64_t       ffil_bytes_completed;
-///         uint64_t       ffil_ops_not_delivered;
+///         uint64_t       ffil_bytes_not_delivered;
 ///         nfstime4       ffil_total_busy_time;
 ///         nfstime4       ffil_aggregate_completion_time;
 /// };
