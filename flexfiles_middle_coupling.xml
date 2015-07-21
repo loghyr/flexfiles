@@ -178,7 +178,7 @@
       <t>
         While pushing the enforcement of permission checking onto
         the client may seem to weaken security, the client may already
-        be responsible for enforcing permissions before modificaations
+        be responsible for enforcing permissions before modifications
         are sent to a server. With cached writes, the client is
         always responsible for tracking who is modifying a file and
         making sure to not coalesce requests from multiple users
