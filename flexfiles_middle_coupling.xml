@@ -204,14 +204,16 @@
     </t>
 
     <t>
-      Standalone NFSv4.1+ storage devices that do not return the
-      EXCHGID4_FLAG_USE_PNFS_DS flag to EXCHANGE_ID are used the same
+      NFSv4.1+ storage devices that do not return the
+      EXCHGID4_FLAG_USE_PNFS_DS flag set to EXCHANGE_ID are indicating that
+      they are loosely coupled. As such, they are treated the same
       way as NFSv4 storage devices.
     </t>
 
     <t>
-      NFSv4.1+ clustered storage devices that do identify themselves
-      with the EXCHGID4_FLAG_USE_PNFS_DS flag to EXCHANGE_ID use a
+      NFSv4.1+ storage devices that do identify themselves
+      with the EXCHGID4_FLAG_USE_PNFS_DS flag set to EXCHANGE_ID are
+      stongly coupled. They will be using a
       back-end control protocol as described in
       <xref target="RFC5661" /> to implement a global stateid
       model as defined there.
