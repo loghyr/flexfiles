@@ -14,19 +14,18 @@
   <section anchor='sec:layoutcommit' title='LAYOUTCOMMIT'>
     <t>
       With a tightly coupled system, when the metadata server
-      receives a LAYOUTCOMMIT (see Section 18.42 of
-      <xref target='RFC5661' />), the semantics of the File
-      Layout Type MUST be met (see Section 12.5.4 of
-      <xref target='RFC5661' />). With a loosely coupled
-      system, a LAYOUTCOMMIT to the metadata server MUST
-      be preceded with a COMMIT to the storage device.
-      It is the responsibility of the client to make sure
-      the data file is stable before the metadata server
-      begins to query the storage devices about the
-      changes to the file.  Note that if the client has
-      not done a COMMIT to the storage device, then the
-      LAYOUTCOMMIT might not be synchronized to the last
-      WRITE operation to the storage device.
+      receives a LAYOUTCOMMIT (see Section 18.42 of <xref
+      target='RFC5661' />), the semantics of the File Layout Type
+      MUST be met (see Section 12.5.4 of <xref target='RFC5661' />).
+      It is the responsibility of the client to make sure the
+      data file is stable before the metadata server begins to query
+      the storage devices about the changes to the file.  With a
+      loosely coupled system, if any WRITE to a storage device did
+      not result with stable_how equal to FILE_SYNC, a LAYOUTCOMMIT
+      to the metadata server MUST be preceded with a COMMIT to the
+      storage device.  Note that if the client has not done a COMMIT
+      to the storage device, then the LAYOUTCOMMIT might not be
+      synchronized to the last WRITE operation to the storage device.
     </t>
   </section>
 
