@@ -46,7 +46,7 @@
 
     <t>
       With this loosely coupled model, the metadata server is 
-      not able to fence off a single client, it forced to fence
+      not able to fence off a single client, it is forced to fence
       off all clients. However, as the other clients react to
       the fencing, returning their layouts and trying to get
       new ones, the metadata server can hand out a new uid and
