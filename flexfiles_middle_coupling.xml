@@ -19,7 +19,7 @@
       Layout Type MUST be met (see Section 12.5.4 of
       <xref target='RFC5661' />). With a loosely coupled
       system, a LAYOUTCOMMIT to the metadata server MUST
-      be proceeded with a COMMIT to the storage device.
+      be preceded with a COMMIT to the storage device.
       It is the responsibility of the client to make sure
       the data file is stable before the metadata server
       begins to query the storage devices about the
