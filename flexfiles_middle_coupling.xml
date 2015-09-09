@@ -78,9 +78,11 @@
       <t>
         The selection method for the synthetic uids and gids to
         be used for fencing in loosely coupled storage devices
-        is strictly an implementation issue. An implementation
-        might allow an administrator to restrict a range of such
-        ids in the name servers.  She might also be able to
+        is strictly an implementation issue. I.e.,
+        an administrator might restrict a range of such
+        ids available to the Lightweight Directory
+        Access Protocol (LDAP) 'uid' field <xref target='RFC4519' />.
+        She might also be able to
         choose an id that would never be used to grant acccess.
         Then when the metadata server had a request to access
         a file, a SETATTR would be sent to the storage device
