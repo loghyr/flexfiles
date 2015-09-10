@@ -173,7 +173,7 @@ struct device_error4 {
       </t>
 
       <t>
-        Note that LAYOUTSTATS are cummulative, i.e., not reset
+        Note that LAYOUTSTATS are cumulative, i.e., not reset
         each time the operation is sent. 
         If two RPC calls originating from the same NFS client are
         processed at the same time by the metdata server, then the call
