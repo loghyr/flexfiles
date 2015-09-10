@@ -175,8 +175,9 @@ struct device_error4 {
       <t>
         Note that LAYOUTSTATS are cumulative, i.e., not reset
         each time the operation is sent. 
-        If two RPC calls originating from the same NFS client are
-        processed at the same time by the metadata server, then the call
+        If two LAYOUTSTATS ops for the same file, layout stateid,
+        and originating from the same NFS client are
+        processed at the same time by the metadata server, then the one
         containing the larger values contains the most recent time
         series data.
       </t>
