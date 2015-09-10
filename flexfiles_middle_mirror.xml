@@ -30,7 +30,7 @@
     The updating of mirrored layout segments is done via client-side mirroring.
     With this approach, the client is responsible for making sure
     modifications get to all copies of the layout segments it is informed
-    of via the layout. If a layout segments is being resilvered to a storage
+    of via the layout. If a layout segment is being resilvered to a storage
     device, that mirrored copy will not be in the layout. Thus the
     metadata server MUST update that copy until the client is presented
     it in a layout. Also, if the client is writing to the layout segments
