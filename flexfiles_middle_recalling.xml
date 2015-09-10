@@ -1,9 +1,11 @@
 <!-- Copyright (C) The IETF Trust (2014) -->
 <!-- Copyright (C) The Internet Society (2014) -->
 
-<section title="Recalling Layouts">
+<section title="Recalling a Layout">
   <t>
-    The Flexible File Layout Type metadata server should
+    While Section 12.5.5 of <xref target="RFC5661" /> discusses 
+    layout type independent reasons for recalling a layout,
+    the Flexible File Layout Type metadata server should
     recall outstanding layouts in the following cases:
 
     <list style='symbols'>
@@ -18,6 +20,11 @@
 
       <t>
         When there are sharing conflicts.
+      </t>
+
+      <t>
+        When a file is being resilvered, either due to being repaired after
+        a write error or to load balance.
       </t>
     </list>
   </t>
