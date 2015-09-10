@@ -6,7 +6,7 @@
     If the client is using NFSv4.2 to communicate with the
     metadata server, then instead of waiting for a LAYOUTRETURN
     to send I/O statistics to the metadata server (see
-    <xref target='ss:return:stats' />), it can use LAYOUTSTATS (see
+    <xref target='ss:return:stats' />), it MAY use LAYOUTSTATS (see
     Section 15.7 of <xref target='NFSv42' />)
     to communicate that information. For the Flexible Files Layout Type,
     this means that LAYOUTSTATS4args.lsa_layoutupdate is overloaded

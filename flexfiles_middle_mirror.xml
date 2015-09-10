@@ -43,7 +43,7 @@
 
   <section anchor="ss:select_mirror" title="Selecting a Mirror">
     <t>
-      When the metadata server grants a layout to a client, it can
+      When the metadata server grants a layout to a client, it MAY
       let the client know how fast it expects each mirror to be
       once the request arrives at the storage devices via the
       ffds_efficiency member.  While the algorithms to calculate
@@ -80,7 +80,7 @@
       last one provides an error, then the client needs to return
       the layout to the metadata server with an error indicating
       that the update failed to that storage device.  If the client
-      is updating the mirrors serially, then it can stop at the
+      is updating the mirrors serially, then it SHOULD stop at the
       first error encountered and report that to the metadata server.
       If the client is updating the mirrors in parallel, then it
       SHOULD wait until all storage devices respond such that it
