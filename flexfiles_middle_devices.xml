@@ -57,8 +57,9 @@
       The ffdv_version and ffdv_minorversion represent the NFS
       protocol to be used to access the storage device.  This layout
       specification defines the semantics for ffdv_versions 3 and
-      4.  If ffdv_version equals 3 then server MUST set ffdv_minorversion
-      to 0 and the client MUST access the storage device using the
+      4.  If ffdv_version equals 3 then the server MUST set ffdv_minorversion
+      to 0 and ffdv_tightly_coupled to false.  The client MUST
+      then access the storage device using the
       NFSv3 protocol <xref target="RFC1813" />.  If ffdv_version
       equals 4 then the server MUST set ffdv_minorversion to one of
       the NFSv4 minor version numbers and the client MUST access the
