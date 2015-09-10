@@ -73,11 +73,18 @@
 
   <section anchor="ss:write_mirror" title="Writing to Mirrors">
     <t>
-      The client is responsible for updating all mirrored copies of the
-      layout segments that it is given in the layout.  If all but one copy is updated
-      successfully and the last one provides an error, then the client
-      needs to return the layout to the metadata server with an error
-      indicating that the update failed to that storage device.
+      The client is responsible for updating all mirrored copies
+      of the layout segments that it is given in the layout.  A
+      single failed update is suffcient to fail the entire operation.
+      I.e., if all but one copy is updated successfully and the
+      last one provides an error, then the client needs to return
+      the layout to the metadata server with an error indicating
+      that the update failed to that storage device.  If the client
+      is updating the mirrors serially, then it can stop at the
+      first error encountered and report that to the metadata server.
+      If the client is updating the mirrors in parallel, then it
+      SHOULD wait until all storage devices respond such that it
+      can report all errors encountered during the update.
     </t>
 
     <t>
