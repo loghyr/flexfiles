@@ -37,6 +37,11 @@
     versus a principal in the fencing approach. Andy Adamson and Benjamin Kaduk
     helped to sharpen the focus.
   </t>
+
+  <t>
+    Tigran Mkrtchyan provided the use case for not allowing the client to
+    proxy the IO through the data server.
+  </t>
 </section>
 
 <section title="RFC Editor Notes">
