@@ -53,7 +53,7 @@
 
     <t>
       The ffda_versions array allows the metadata server to present
-      multiple NFS versions and/or minor versions to the client.
+      choices as to NFS version, minor version, and coupling strength to the client.
       The ffdv_version and ffdv_minorversion represent the NFS
       protocol to be used to access the storage device.  This layout
       specification defines the semantics for ffdv_versions 3 and
@@ -67,11 +67,12 @@
     </t>
 
     <t>
-      Note that while the client might determine that it can not
-      use any of the configured ffdv_version or ffdv_minorversion,
+      Note that while the client might determine that it cannot
+      use any of the configured combinations of ffdv_version, ffdv_minorversion,
+      and ffdv_tightly_coupled,
       when it gets the device list from the metadata server, there
       is no way to indicate to the metadata server as to which device
-      it is version incompatible. If however the client waits until
+      it is version incompatible. If however, the client waits until
       it retrieves the layout from the metadata server, it can at
       that time clearly identify the storage device in question
       (see <xref target='layout:versioning' />).
@@ -89,7 +90,7 @@
       ffdv_tightly_coupled informs the client as to whether the metadata
       server is tightly coupled with the storage devices or not. Note
       that even if the data protocol is at least NFSv4.1, it may
-      still be the case that there is no control protocol present. If
+      still be the case that there is loose coupling is in effect. If
       ffdv_tightly_coupled is not set, then the client MUST commit writes
       to the storage devices for the file before sending a LAYOUTCOMMIT
       to the metadata server. I.e., the writes MUST be committed by
@@ -104,7 +105,7 @@
       The Flexible File Layout Type supports multipathing to multiple
       storage device addresses.  Storage device level multipathing is
       used for bandwidth scaling via trunking and for higher
-      availability of use in the case of a storage device failure.
+      availability of use in the event of a storage device failure.
       Multipathing allows the client to switch to another storage
       device address which may be that of another storage device that
       is exporting the same data stripe unit, without having to
@@ -123,9 +124,9 @@
     <t>
       The client is free to use any of the network addresses as a
       destination to send storage device requests.  If some network
-      addresses are less optimal paths to the data than others,
+      addresses are less desirable paths to the data than others,
       then the MDS SHOULD NOT include those network addresses in
-      ffda_netaddrs.  If less optimal network addresses exist to
+      ffda_netaddrs.  If less desirable network addresses exist to
       provide failover, the RECOMMENDED method to offer the addresses
       is to provide them in a replacement device-ID-to-device-address
       mapping, or a replacement device ID.  When a client finds no
@@ -146,7 +147,7 @@
     <t>
       Generally, if two network addresses appear in ffda_netaddrs, they
       will designate the same storage device.  When the storage device
-      is accessed over NFSv4.1 or higher minor version the two storage
+      is accessed over NFSv4.1 or a higher minor version, the two storage
       device addresses will support the implementation of client ID or
       session trunking (the latter is RECOMMENDED) as defined in <xref
       target="RFC5661" />.  The two storage device addresses will share
