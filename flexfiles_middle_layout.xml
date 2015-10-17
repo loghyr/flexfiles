@@ -52,9 +52,9 @@
     value LAYOUT4_FLEX_FILES.  <xref target="RFC5661" /> specifies
     the loc_body structure as an XDR type "opaque".  The opaque
     layout is uninterpreted by the generic pNFS client layers, but
-    obviously must be interpreted by the Flexible File Layout Type
+    is interpreted by the Flexible File Layout Type
     implementation.  This section defines the structure of this
-    opaque value, ff_layout4.
+    otherwise opaque value, ff_layout4.
   </t>
 
   <section title="ff_layout4" anchor="ff_layout4">
@@ -191,12 +191,13 @@
       matching to the available NFS versions on the given storage
       device.  There MUST be exactly as many elements in ffds_fh_vers
       as there are in ffda_versions. Each element of the array
-      corresponds to each ffdv_version and ffdv_minorversion provided
+      corresponds to a particular combination of ffdv_version,
+      ffdv_minorversion, and ffdv_tightly_coupled provided
       for the device.  The array allows for server implementations
-      which have different filehandles for different version and
-      minor version combinations. See <xref target='layout:versioning' />
-      for how to handle versioning issues between the client and
-      storage devices.
+      which have different filehandles for different combinations of
+      version, minor version, and coupling strength. See
+      <xref target='layout:versioning' /> for how to handle
+      versioning issues between the client and storage devices.
     </t>
 
     <t>
@@ -206,7 +207,7 @@
       an anonymous stateid to perform I/O on the storage device as
       there is no use for the metadata server stateid (no control
       protocol). In such a scenario, the server MUST set the
-      ffds_stateid to be zero.
+      ffds_stateid to be the anonymous stateid.
     </t>
 
     <t>
@@ -298,8 +299,9 @@
       When the metadata server provides the ffda_versions array in
       the ff_device_addr4 (see <xref target='ff_device_addr4' />),
       the client is able to determine if it can not access a storage
-      device with any of the supplied ffdv_version and ffdv_minorversion
-      combinations. However, due to the limitations of reporting
+      device with any of the supplied combinations of ffdv_version,
+      ffdv_minorversion, and ffdv_tightly_coupled. However, due
+      to the limitations of reporting
       errors in GETDEVICEINFO (see Section 18.40 in
       <xref target='RFC5661' />, the client is not able to specify
       which specific device it can not communicate with over one
