@@ -207,16 +207,16 @@ struct device_error4 {
       </t>
 
       <t>
-	ffl_addr differentiates which network address the client
-	connected to on the storage device.  In the case of
-	multipathing, ffl_fhandle indicates which read-only copy
-	was selected. ffl_read and ffl_write convey the latencies
-	respectively for both read and write operations.  ffl_duration
-	is used to indicate the time period over which the statistics
-	were collected.  ffl_local if true indicates that the I/O
-	was serviced by the client's cache. This flag allows the
-	client to inform the metadata server about "hot" access to
-	a file it would not normally be allowed to report on.
+        ffl_addr differentiates which network address the client
+        connected to on the storage device.  In the case of
+        multipathing, ffl_fhandle indicates which read-only copy
+        was selected. ffl_read and ffl_write convey the latencies
+        respectively for both read and write operations.  ffl_duration
+        is used to indicate the time period over which the statistics
+        were collected.  ffl_local if true indicates that the I/O
+        was serviced by the client's cache. This flag allows the
+        client to inform the metadata server about "hot" access to
+        a file it would not normally be allowed to report on.
       </t>
     </section>
 

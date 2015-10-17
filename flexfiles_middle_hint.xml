@@ -14,8 +14,8 @@
   <figure>
     <artwork>
 struct layouthint4 {
-    layouttype4           loh_type;
-    opaque                loh_body&lt;&gt;;
+    layouttype4        loh_type;
+    opaque             loh_body&lt;&gt;;
 };
     </artwork>
   </figure>
@@ -38,10 +38,10 @@ struct layouthint4 {
     <figure>
       <artwork>
 /// union ff_mirrors_hint switch (bool ffmc_valid) {
-/// 	case TRUE:
-/// 		uint32_t	ffmc_mirrors;
-/// 	case FALSE:
-/// 		void;
+///     case TRUE:
+///         uint32_t    ffmc_mirrors;
+///     case FALSE:
+///         void;
 /// };
 ///
       </artwork>
@@ -50,7 +50,7 @@ struct layouthint4 {
     <figure>
       <artwork>
 /// struct ff_layouthint4 {
-/// 	ff_mirrors_hint	fflh_mirrors_hint;
+///     ff_mirrors_hint    fflh_mirrors_hint;
 /// };
 ///
       </artwork>
