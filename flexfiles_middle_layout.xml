@@ -252,8 +252,8 @@
       FF_FLAGS_NO_LAYOUTCOMMIT can be set to indicate that the client
       is not required to send LAYOUTCOMMIT to the metadata server.
       FF_FLAGS_NO_IO_THRU_MDS can be set to indicate that the client
-      MUST not send IO operations to the metadata server. I.e., even if
-      a storage device is partitioned from the client, the client MUST
+      SHOULD not send IO operations to the metadata server. I.e., even if
+      a storage device is partitioned from the client, the client SHOULD
       not try to proxy the IO through the metadata server.
     </t>
 
