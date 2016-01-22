@@ -257,20 +257,47 @@
       not try to proxy the IO through the metadata server.
     </t>
 
+    <section title="Error codes from LAYOUTGET" anchor="layout:get">
+      <t>
+        <xref target="RFC5661" /> provides little guidance as to how
+        the client is to proceed with a LAYOUTEGT which returns an
+        error of either NFS4ERR_LAYOUTTRYLATER, NFS4ERR_LAYOUTUNAVAILABLE,
+        and NFS4ERR_DELAY.
+
+        <list style='hanging'>
+          <t hangText='NFS4ERR_LAYOUTUNAVAILABLE:'>
+            there is no layout available and the IO is to go to
+            the metadata server. Note that it is possible to
+            have had a layout before a recall and not after.
+          </t>
+
+          <t hangText='NFS4ERR_LAYOUTTRYLATER:'>
+            there is some issue preventing the layout from being
+            granted. If the client already has an appropriate
+            layout, it SHOULD continue with IO to the storage
+            devices.
+          </t>
+
+          <t hangText='NFS4ERR_DELAY:'>
+            there is some issue preventing the layout from being
+            granted. If the client already has an appropriate
+            layout, it SHOULD not continue with IO to the storage
+            devices.
+          </t>
+      </t>
+    </section>
+
     <section title="Client Interactions with FF_FLAGS_NO_IO_THRU_MDS" anchor="layout:no_io">
       <t>
         If the client does not ask for a layout for a file, then the
         IO will go through the metadata server.  Thus, even if the metadata
         server sets the FF_FLAGS_NO_IO_THRU_MDS flag, it can recall the
         layout and either not set the flag on the new layout or not
-        provide a layout.  Also, when a client encounters an error with
+        provide a layout.  When a client encounters an error with
         a storage device, it typically returns the layout to the metadata
-        server and requests a new layout. If the response is NFS4ERR_LAYOUTTRYLATER,
-        the client knows it is supposed to wait on the IO until it gets
-        a successful reply from the metatdata server. If the response is
-        NFS4ERR_LAYOUTUNAVAILABLE, the client is being informed that
-        there is no longer a layout for the file and it should proceed
-        with IO to the metadata server.
+        server and requests a new layout. The client's IO would then
+        proceed according to the status codes as outlined
+        in <xref target="layout:get" />.
       </t>
     </section>
   </section>
