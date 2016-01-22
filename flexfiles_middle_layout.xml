@@ -105,6 +105,7 @@
 ///     length4                 ffl_stripe_unit;
 ///     ff_mirror4              ffl_mirrors&lt;&gt;;
 ///     ff_flags4               ffl_flags;
+///     uint32_t                ffl_stats_collect_hint;
 /// };
 ///
       </artwork>
@@ -148,6 +149,12 @@
       The ffl_mirrors field is the array of mirrored storage devices
       which provide the storage for the current stripe, see 
       <xref target='fig:ff_layout' />.
+    </t>
+
+    <t>
+      The ffl_stats_collect_hint field provides a hint to the client
+      on how often the server wants it to report LAYOUTSTATS for
+      a file. The time is in seconds.
     </t>
 
     <figure anchor="fig:ff_layout">
