@@ -291,6 +291,7 @@
             layout, it SHOULD not continue with IO to the storage
             devices.
           </t>
+	</list>
       </t>
     </section>
 
