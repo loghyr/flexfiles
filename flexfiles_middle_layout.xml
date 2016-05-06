@@ -67,6 +67,7 @@
       <artwork>
 /// const FF_FLAGS_NO_LAYOUTCOMMIT   = 0x00000001;
 /// const FF_FLAGS_NO_IO_THRU_MDS    = 0x00000002;
+/// const FF_FLAGS_NO_READ_IO        = 0x00000004;
       </artwork>
     </figure>
 
@@ -256,12 +257,24 @@
       ffl_flags is a bitmap that allows the metadata server to inform
       the client of particular conditions that may result from the more
       or less tight coupling of the storage devices.
-      FF_FLAGS_NO_LAYOUTCOMMIT can be set to indicate that the client
-      is not required to send LAYOUTCOMMIT to the metadata server.
-      FF_FLAGS_NO_IO_THRU_MDS can be set to indicate that the client
-      SHOULD not send IO operations to the metadata server. I.e., even if
-      a storage device is partitioned from the client, the client SHOULD
-      not try to proxy the IO through the metadata server.
+      <list style='hanging'>
+        <t hangText='FF_FLAGS_NO_LAYOUTCOMMIT:'>
+          can be set to indicate that the client is not required to
+          send LAYOUTCOMMIT to the metadata server.
+        </t>
+        <t hangText='FF_FLAGS_NO_IO_THRU_MDS :'>
+          can be set to indicate that the client SHOULD not send IO
+          operations to the metadata server. I.e., even if a storage
+          device is partitioned from the client, the client SHOULD
+          not try to proxy the IO through the metadata server.
+        </t>
+        <t hangText='FF_FLAGS_NO_READ_IO:'>
+          can be set to indicate that the client SHOULD not send
+          READ requests with the layouts of iomode LAYOUTIOMODE4_RW.
+          Instead, it should request a layout of iomode
+          LAYOUTIOMODE4_READ from the metadata server.
+        </t>
+      </list>
     </t>
 
     <section title="Error codes from LAYOUTGET" anchor="layout:get">
