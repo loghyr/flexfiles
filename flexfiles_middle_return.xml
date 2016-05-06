@@ -83,7 +83,7 @@ struct LAYOUTRETURN4args {
       </t>
 
       <t>
-        Recall that <xref target='NFSv42' /> defines device_error4 as:
+        Recall that <xref target='RFC7862' /> defines device_error4 as:
       </t>
 
       <t>
@@ -113,7 +113,7 @@ struct device_error4 {
         byte range within the file in which the error occurred;
         ffie_errors represents the operation and type of error. The
         use of device_error4 is described in Section 15.6 of
-        <xref target='NFSv42' />.
+        <xref target='RFC7862' />.
       </t>
 
       <t>
@@ -245,7 +245,7 @@ struct device_error4 {
       </t>
 
       <t>
-        Recall that <xref target='NFSv42' /> defines io_info4 as:
+        Recall that <xref target='RFC7862' /> defines io_info4 as:
       </t>
 
       <t>

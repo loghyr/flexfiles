@@ -343,7 +343,7 @@
       of the provided ffdv_version and ffdv_minorversion combinations.
       Using ff_ioerr4 (see <xref target='ff_ioerr4' /> inside either
       the LAYOUTRETURN (see Section 18.44 of <xref target='RFC5661' />)
-      or the LAYOUTERROR (see Section 15.6 of <xref target='NFSv42' />
+      or the LAYOUTERROR (see Section 15.6 of <xref target='RFC7862' />
       and <xref target='sec:layouterror' /> of this document), the
       client can isolate the problematic storage device.
     </t>

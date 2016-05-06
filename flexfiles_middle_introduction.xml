@@ -11,7 +11,7 @@
     file-based data servers that are accessed using the Network File
     System (NFS) protocols: NFSv3 <xref target="RFC1813" />, NFSv4.0 <xref
     target="RFC7530" />, NFSv4.1 <xref target="RFC5661" />, and NFSv4.2
-    <xref target="NFSv42" />.
+    <xref target="RFC7862" />.
   </t>
 
   <t>

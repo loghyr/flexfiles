@@ -121,7 +121,7 @@
           target="ftp://ftp.isi.edu/in-notes/rfc7530.txt"/>
     </reference>
 
-    <reference anchor='NFSv42'>
+    <reference anchor='RFC7862'>
       <front>
         <title>NFS Version 4 Minor Version 2</title>
 
@@ -129,9 +129,11 @@
           <organization abbrev='Primary Data' />
         </author>
 
-        <date month='November' year='2014' />
+        <date month='May' year='2016' />
       </front>
-      <seriesInfo name="draft-ietf-nfsv4-minorversion2-28" value="(Work In Progress)"/>
+        <seriesInfo name="RFC" value="7862"/>
+        <format type="TXT" octets="724613"
+          target="ftp://ftp.isi.edu/in-notes/rfc7862.txt"/>
     </reference>
 
     <reference anchor='pNFSLayouts'>
