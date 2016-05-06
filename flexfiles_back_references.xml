@@ -57,27 +57,6 @@
     <seriesInfo name='RFC' value='1813' />
   </reference>
 
-  <reference anchor='RFCNFSv4'>
-    <front>
-      <title>NFS Version 4 Protocol</title>
-
-      <author initials='T' surname='Haynes' fullname='Thomas Haynes'>
-        <organization abbrev='Editors' />
-      </author>
-      <author initials='D' surname='Noveck' fullname='David Noveck'>
-        <organization abbrev='Editors' />
-      </author>
-
-      <date month='Dec' day='4' year='2014' />
-
-    </front>
-
-    <seriesInfo name='Internet-Draft' value='draft-ietf-nfsv4-rfc3530bis-35' />
-    <format type='TXT'
-        target='http://www.ietf.org/internet-drafts/draft-ietf-nfsv4-rfc3530bis-35.txt' />
-  </reference>
-
-
     <reference anchor='RFC5531'>
       <front>
   <title abbrev='Remote Procedure Call Protocol Version 2'>RPC:
@@ -125,6 +104,22 @@
     </front>
     <seriesInfo name="RFC" value="5662"/>
   </reference>
+
+    <reference anchor='RFC7530'>
+      <front>
+        <title>Network File System (NFS) version 4 Protocol</title>
+        <author initials="T." surname="Haynes" fullname="T. Haynes">
+          <organization>Primary Data, Inc.</organization>
+        </author>
+        <author initials="D." surname="Noveck" fullname="D. Noveck">
+          <organization></organization>
+        </author>
+        <date year="2015" month="March" />
+      </front>
+        <seriesInfo name="RFC" value="7530"/>
+        <format type="TXT" octets="724613"
+          target="ftp://ftp.isi.edu/in-notes/rfc7530.txt"/>
+    </reference>
 
     <reference anchor='NFSv42'>
       <front>
