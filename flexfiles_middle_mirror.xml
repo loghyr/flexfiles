@@ -3,7 +3,7 @@
 
 <section anchor="sec:mirror" title="Mirroring">
   <t>
-    The Flexible File Layout Type has a simple model in place
+    The flexible file layout type has a simple model in place
     for the mirroring of the file data constrained by a layout
     segment. There is no assumption
     that each copy of the mirror is stored identically on the

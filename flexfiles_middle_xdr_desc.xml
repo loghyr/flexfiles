@@ -4,12 +4,12 @@
 <section anchor="xdr_desc" title="XDR Description of the Flexible File Layout Type">
   <t>
     This document contains the external data representation (XDR)
-    <xref target='RFC4506' /> description of the Flexible File
-    Layout Type.  The XDR description is embedded in this
+    <xref target='RFC4506' /> description of the flexible file
+    layout type.  The XDR description is embedded in this
     document in a way that makes it simple for the reader to extract
     into a ready-to-compile form.  The reader can feed this document
     into the following shell script to produce the machine readable
-    XDR description of the Flexible File Layout Type:
+    XDR description of the flexible file layout type:
   </t>
 
   <t>

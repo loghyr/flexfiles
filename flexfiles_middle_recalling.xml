@@ -5,7 +5,7 @@
   <t>
     While Section 12.5.5 of <xref target="RFC5661" /> discusses 
     layout type independent reasons for recalling a layout,
-    the Flexible File Layout Type metadata server should
+    the flexible file layout type metadata server should
     recall outstanding layouts in the following cases:
 
     <list style='symbols'>
@@ -69,8 +69,8 @@ struct  CB_RECALL_ANY4args      {
       when the server needs to reclaim resources. The craa_type_mask
       bitmap specifies the type of resources that are recalled and
       the craa_layouts_to_keep value specifies how many of the
-      recalled Flexible File Layouts the client is allowed to keep.
-      The Flexible File Layout Type mask flags are defined as
+      recalled flexible file layouts the client is allowed to keep.
+      The flexible file layout type mask flags are defined as
       follows:
     </t>
 

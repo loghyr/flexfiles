@@ -8,7 +8,7 @@
     to send I/O statistics to the metadata server (see
     <xref target='ss:return:stats' />), it MAY use LAYOUTSTATS (see
     Section 15.7 of <xref target='NFSv42' />)
-    to communicate that information. For the Flexible Files Layout Type,
+    to communicate that information. For the flexible files layout type,
     this means that LAYOUTSTATS4args.lsa_layoutupdate is overloaded
     with the same contents as in ffis_layoutupdate.
   </t>

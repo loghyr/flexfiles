@@ -15,7 +15,7 @@
     <t>
       With a tightly coupled system, when the metadata server
       receives a LAYOUTCOMMIT (see Section 18.42 of <xref
-      target='RFC5661' />), the semantics of the File Layout Type
+      target='RFC5661' />), the semantics of the file layout type
       MUST be met (see Section 12.5.4 of <xref target='RFC5661' />).
       It is the responsibility of the client to make sure the
       data file is stable before the metadata server begins to query

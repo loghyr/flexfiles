@@ -8,7 +8,7 @@
     to send error information to the metadata server (see
     <xref target='ss:return:errors' />), it MAY use LAYOUTERROR (see
     Section 15.6 of <xref target='NFSv42' />)
-    to communicate that information. For the Flexible Files Layout Type,
+    to communicate that information. For the flexible files layout type,
     this means that LAYOUTERROR4args is treated the same as ff_ioerr4.
   </t>
 </section>

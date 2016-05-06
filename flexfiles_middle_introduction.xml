@@ -4,10 +4,10 @@
 <section anchor="sec:intro" title="Introduction">
   <t>
     In the parallel Network File System (pNFS), the metadata server
-    returns Layout Type structures that describe where file data
-    is located.  There are different Layout Types for different
+    returns layout type structures that describe where file data
+    is located.  There are different layout types for different
     storage systems and methods of arranging data on storage devices.
-    This document defines the Flexible File Layout Type used with
+    This document defines the flexible file layout type used with
     file-based data servers that are accessed using the Network File
     System (NFS) protocols: NFSv3 <xref target="RFC1813" />, NFSv4.0 <xref
     target="RFCNFSv4" />, NFSv4.1 <xref target="RFC5661" />, and NFSv4.2
@@ -15,8 +15,8 @@
   </t>
 
   <t>
-    To provide a global state model equivalent to that of the Files
-    Layout Type, a back-end control protocol MAY be implemented between
+    To provide a global state model equivalent to that of the files
+    layout type, a back-end control protocol MAY be implemented between
     the metadata server and NFSv4.1+ storage devices.  It is out
     of scope for this document to specify the wire protocol of such a
     protocol, yet the requirements for the protocol are specified in <xref
@@ -50,7 +50,7 @@
           on the layout, there might be one or more data servers
           over which the data is striped. Note that while the
           metadata server is strictly accessed over the NFSv4.1+
-          protocol, depending on the Layout Type, the data server
+          protocol, depending on the layout type, the data server
           could be accessed via any protocol that meets the pNFS
           requirements.
         </t>
@@ -61,8 +61,8 @@
           file.
         </t>
 
-        <t hangText='File Layout Type:'>
-          is a Layout Type in which the storage devices
+        <t hangText='file layout type:'>
+          is a layout type in which the storage devices
           are accessed via the NFS protocol.
         </t>
 
@@ -89,7 +89,7 @@
         <t hangText='layout stateid:'>
           is a 128-bit quantity returned by a server that
           uniquely defines the layout state provided by the server
-          for a specific layout that describes a Layout Type and
+          for a specific layout that describes a layout type and
           file (see Section 12.5.2 of <xref target='RFC5661' />).
           Further, Section 12.5.3 describes the difference between
           a layout stateid and a normal stateid.
@@ -180,14 +180,14 @@
     <t>
       We defined a data server as a pNFS server, which implies that it
       can utilize the NFSv4.1+ protocol to communicate with the client.
-      As such, only the File Layout Type would currently meet this
+      As such, only the file layout type would currently meet this
       requirement. The more generic concept is a storage device, which
       can use any protocol to communicate with the client. The requirements
       for a storage device to act together with the metadata server
-      to provide data to a client are that there is a Layout Type
+      to provide data to a client are that there is a layout type
       specification for the given protocol and that the metadata server
       has granted a layout to the client. Note that nothing precludes
-      there being multiple supported Layout Types (i.e., protocols)
+      there being multiple supported layout types (i.e., protocols)
       between a metadata server, storage devices, and client.
     </t>
 
