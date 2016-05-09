@@ -262,7 +262,7 @@
           can be set to indicate that the client is not required to
           send LAYOUTCOMMIT to the metadata server.
         </t>
-        <t hangText='FF_FLAGS_NO_IO_THRU_MDS :'>
+        <t hangText='FF_FLAGS_NO_IO_THRU_MDS:'>
           can be set to indicate that the client SHOULD not send IO
           operations to the metadata server. I.e., even if a storage
           device is partitioned from the client, the client SHOULD
