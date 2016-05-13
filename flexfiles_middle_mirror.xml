@@ -75,7 +75,7 @@
     <t>
       The client is responsible for updating all mirrored copies
       of the layout segments that it is given in the layout.  A
-      single failed update is suffcient to fail the entire operation.
+      single failed update is sufficient to fail the entire operation.
       I.e., if all but one copy is updated successfully and the
       last one provides an error, then the client needs to return
       the layout to the metadata server with an error indicating

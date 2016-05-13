@@ -123,8 +123,8 @@
       against loss of data in layout segments. Note that while not
       explicitly shown in the above XDR, each layout4 element returned
       in the logr_layout array of LAYOUTGET4res (see Section 18.43.1
-      of <xref target='RFC5661' />) descibes a layout segment. Hence
-      each ff_layout4 also descibes a layout segment.
+      of <xref target='RFC5661' />) describes a layout segment. Hence
+      each ff_layout4 also describes a layout segment.
     </t>
 
     <t>
