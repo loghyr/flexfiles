@@ -77,8 +77,8 @@
       of the layout segments that it is given in the layout.  A
       single failed update is sufficient to fail the entire operation.
       I.e., if all but one copy is updated successfully and the
-      last one provides an error, then the client needs to return
-      the layout to the metadata server with an error indicating
+      last one provides an error, then the client needs to inform
+      the metadata server about the error via either LAYOUTRETURN or LAYOUTERROR
       that the update failed to that storage device.  If the client
       is updating the mirrors serially, then it SHOULD stop at the
       first error encountered and report that to the metadata server.
@@ -96,6 +96,28 @@
       assumptions that the contents of the previous layout will match
       those of the new one.  If it has updates that were not committed,
       it MUST resend those updates to all mirrors.
+    </t>
+
+    <t>
+      There is no provision in the protocol for the metadata server to
+      directly determine that the client has or has not recovered from
+      an error. I.e., assume that the storage device was network partitioned
+      from the client and all of the copies are successfully updated
+      after the error was reported. There is no mechanism for the client
+      to report that fact and the metadata server is forced to repair
+      the file across the mirror.
+    </t>
+
+    <t>
+      If the client supports NFSv4.2, it can use LAYOUTERROR and
+      LAYOUTRETURN to provide hints to the metadata server about the
+      recovery efforts. A LAYOUTERROR on a file is for a non-fatal
+      error. A subsequent LAYOUTRETURN without a ff_ioerr4 indicates that
+      the client successfully replayed the I/O to all mirrors. Any
+      LAYOUTRETURN with a ff_ioerr4 is an error that the metadata server
+      needs to repair. The client MUST be prepared for the LAYOUTERROR
+      to trigger a CB_LAYOUTRECALL if the metadata server determines it
+      needs to start repairing the file.
     </t>
   </section>
 
