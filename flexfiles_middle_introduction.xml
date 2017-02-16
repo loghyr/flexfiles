@@ -18,7 +18,7 @@
     To provide a global state model equivalent to that of the files
     layout type, a back-end control protocol MAY be implemented between
     the metadata server and NFSv4.1+ storage devices.  It is out
-    of scope for this document to specify the wire protocol of such a
+    of scope for this document to specify such a
     protocol, yet the requirements for the protocol are specified in <xref
     target="RFC5661" /> and clarified in <xref target='pNFSLayouts' />.
   </t>
@@ -39,9 +39,8 @@
         </t>
 
         <t hangText='data file:'>
-          is that part of the file system object which describes
-          the payload and not the object. E.g., it is the file
-          contents.
+          is that part of the file system object which contains
+          the content.
         </t>
 
         <t hangText='data server (DS):'>
@@ -63,7 +62,8 @@
 
         <t hangText='file layout type:'>
           is a layout type in which the storage devices
-          are accessed via the NFS protocol.
+          are accessed via the NFS protocol (see Section 13
+          of <xref target='RFC5661' />).
         </t>
 
         <t hangText='layout:'>
@@ -91,7 +91,8 @@
           uniquely defines the layout state provided by the server
           for a specific layout that describes a layout type and
           file (see Section 12.5.2 of <xref target='RFC5661' />).
-          Further, Section 12.5.3 describes the difference between
+          Further, Section 12.5.3 of <xref target='RFC5661' />
+          describes the difference between
           a layout stateid and a normal stateid.
         </t>
 
@@ -108,7 +109,7 @@
 
         <t hangText='metadata file:'>
           is that part of the file system object which describes
-          the object and not the payload. E.g., it could be the
+          the object and not the content. E.g., it could be the
           time since last modification, access, etc.
         </t>
 
@@ -120,9 +121,7 @@
         </t>
 
         <t hangText='mirror:'>
-          is a copy of a layout segment. While mirroring can be used
-          for backing up a layout segment, the copies can be distributed
-          such that each remote site has a locally available copy.
+          is a copy of a layout segment. 
           Note that if one copy of the mirror is updated,
           then all copies must be updated.
         </t>
@@ -130,7 +129,7 @@
         <t hangText='recalling a layout:'>
           is when the metadata server uses a back channel to inform
           the client that the layout is to be returned in a graceful
-          manner. Note that the client could be able to flush any
+          manner. Note that the client has the opportunity to flush any
           writes, etc., before replying to the metadata server.
         </t>
 
