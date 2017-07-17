@@ -7,12 +7,12 @@
     for the mirroring of the file data constrained by a layout
     segment. There is no assumption
     that each copy of the mirror is stored identically on the
-    storage devices, i.e., one device might employ compression
-    or deduplication on the data. However, the over the wire
-    transfer of the file contents MUST appear identical. Note,
-    this is a construct of the selected XDR representation that
-    each mirrored copy of the layout segment has the same striping pattern
-    (see <xref target='fig:ff_layout' />).
+    storage devices.  For example, one device might employ compression or
+    deduplication on the data. However, the over the wire transfer of
+    the file contents MUST appear identical. Note, this is a constraint
+    of the selected XDR representation in which each mirrored copy of
+    the layout segment has the same striping pattern (see <xref
+    target='fig:ff_layout' />).
   </t>
 
   <t>
@@ -29,13 +29,12 @@
   <t>
     The updating of mirrored layout segments is done via client-side mirroring.
     With this approach, the client is responsible for making sure
-    modifications get to all copies of the layout segments it is informed
+    modifications are made on all copies of the layout segments it is informed
     of via the layout. If a layout segment is being resilvered to a storage
     device, that mirrored copy will not be in the layout. Thus the
     metadata server MUST update that copy until the client is presented
-    it in a layout. Also, if the client is writing to the layout segments
-    via the metadata server, e.g., using an earlier version
-    of the protocol, then the metadata server MUST update all copies
+    it in a layout. If the client is writing to the layout segments
+    via the metadata server, then the metadata server MUST update all copies
     of the mirror. As seen in <xref target='ss:resilvering' />,
     during the resilvering, the layout is recalled, and the client
     has to make modifications via the metadata server.
@@ -124,17 +123,17 @@
   <section anchor="ss:resilvering" title="Metadata Server Resilvering of the File">
     <t>
       The metadata server may elect to create a new mirror of the
-      layout segments at any time. This might be to resilver a copy on a storage
-      device which was down for servicing, to provide a copy of the
-      layout segments on storage with different storage performance characteristics,
-      etc. As the client will not be aware of the new mirror and
-      the metadata server will not be aware of updates that the
-      client is making to the layout segments, the metadata server MUST recall
-      the writable layout segment(s) that it is resilvering. If the
-      client issues a LAYOUTGET for a writable layout segment which
-      is in the process of being resilvered, then the metadata
-      server MUST deny that request with a NFS4ERR_LAYOUTTRYLATER.
-      The client can then perform the I/O through the metadata server.
+      layout segments at any time. This might be to resilver a copy on a
+      storage device which was down for servicing, to provide a copy of
+      the layout segments on storage with different storage performance
+      characteristics, etc. As the client will not be aware of the new
+      mirror and the metadata server will not be aware of updates that the
+      client is making to the layout segments, the metadata server MUST
+      recall the writable layout segment(s) that it is resilvering. If
+      the client issues a LAYOUTGET for a writable layout segment which
+      is in the process of being resilvered, then the metadata server
+      MUST deny that request with a NFS4ERR_LAYOUTTRYLATER.  The client
+      can then perform the I/O through the metadata server.
     </t>
   </section>
 </section>
