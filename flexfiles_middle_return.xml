@@ -5,12 +5,32 @@
   <t>
     layoutreturn_file4 is used in the LAYOUTRETURN operation
     to convey layout-type specific information to the server.
-    It is defined in <xref target="RFC5661" /> as follows:
+    It is defined in Section 18.44.1 of <xref target="RFC5661" />
+    as follows:
   </t>
 
   <t>
     &lt;CODE BEGINS&gt;
   </t>
+
+  <figure>
+    <artwork>
+   /* Constants used for LAYOUTRETURN and CB_LAYOUTRECALL */
+   const LAYOUT4_RET_REC_FILE      = 1;
+   const LAYOUT4_RET_REC_FSID      = 2;
+   const LAYOUT4_RET_REC_ALL       = 3;
+    </artwork>
+  </figure>
+
+  <figure>
+    <artwork>
+   enum layoutreturn_type4 {
+           LAYOUTRETURN4_FILE = LAYOUT4_RET_REC_FILE,
+           LAYOUTRETURN4_FSID = LAYOUT4_RET_REC_FSID,
+           LAYOUTRETURN4_ALL  = LAYOUT4_RET_REC_ALL
+   };
+    </artwork>
+  </figure>
 
   <figure>
     <artwork>
@@ -53,7 +73,8 @@ struct LAYOUTRETURN4args {
   </t>
 
   <t>
-    If the lora_layout_type layout type is LAYOUT4_FLEX_FILES, then
+    If the lora_layout_type layout type is LAYOUT4_FLEX_FILES and the
+    lr_returntype is LAYOUTRETURN4_FILE, then
     the lrf_body opaque value is defined by ff_layoutreturn4
     (See <xref target='ff_layoutreturn4' />).  It
     allows the client to report I/O error information or layout
