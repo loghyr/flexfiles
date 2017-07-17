@@ -1,7 +1,7 @@
 <!-- Copyright (C) The IETF Trust (2014) -->
 <!-- Copyright (C) The Internet Society (2014) -->
 
-<section title="Flexible File Layout type" anchor="sec:flexLayout">
+<section title="Flexible File Layout Type" anchor="sec:flexLayout">
   <t>
     The layout4 type is defined in <xref target="RFC5662" /> as follows:
   </t>
@@ -274,11 +274,12 @@
           can be set to indicate that the client is not required to
           send LAYOUTCOMMIT to the metadata server.
         </t>
-        <t hangText='FF_FLAGS_NO_IO_THRU_MDS:'>
+        <t hangText='F_FLAGS_NO_IO_THRU_MDS:'>
           can be set to indicate that the client SHOULD not send IO
-          operations to the metadata server. I.e., even if a storage
-          device is partitioned from the client, the client SHOULD
-          not try to proxy the IO through the metadata server.
+          operations to the metadata server. I.e., even if the client
+          could determine that there was a network diconnect to a storage
+          device, the client SHOULD not try to proxy the IO through the
+          metadata server.
         </t>
         <t hangText='FF_FLAGS_NO_READ_IO:'>
           can be set to indicate that the client SHOULD not send
@@ -289,12 +290,12 @@
       </list>
     </t>
 
-    <section title="Error codes from LAYOUTGET" anchor="layout:get">
+    <section title="Error Codes from LAYOUTGET" anchor="layout:get">
       <t>
         <xref target="RFC5661" /> provides little guidance as to how
         the client is to proceed with a LAYOUTEGT which returns an
         error of either NFS4ERR_LAYOUTTRYLATER, NFS4ERR_LAYOUTUNAVAILABLE,
-        and NFS4ERR_DELAY.
+        and NFS4ERR_DELAY. Within the context of this document:
 
         <list style='hanging'>
           <t hangText='NFS4ERR_LAYOUTUNAVAILABLE:'>
@@ -306,17 +307,17 @@
           <t hangText='NFS4ERR_LAYOUTTRYLATER:'>
             there is some issue preventing the layout from being
             granted. If the client already has an appropriate
-            layout, it SHOULD continue with IO to the storage
+            layout, it should continue with IO to the storage
             devices.
           </t>
 
           <t hangText='NFS4ERR_DELAY:'>
             there is some issue preventing the layout from being
             granted. If the client already has an appropriate
-            layout, it SHOULD not continue with IO to the storage
+            layout, it should not continue with IO to the storage
             devices.
           </t>
-	</list>
+	      </list>
       </t>
     </section>
 
