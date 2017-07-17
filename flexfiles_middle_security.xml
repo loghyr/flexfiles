@@ -30,31 +30,32 @@
 
   <t>
     The metadata server enforces the file access-control policy at
-    LAYOUTGET time.  The client should use suitable authorization
-    credentials for getting the layout for the requested iomode
-    (READ or RW) and the server verifies the permissions and ACL
-    for these credentials, possibly returning NFS4ERR_ACCESS if the
-    client is not allowed the requested iomode.  If the LAYOUTGET
-    operation succeeds the client receives, as part of the layout,
-    a set of credentials allowing it I/O access to the specified
-    data files corresponding to the requested iomode.  When the client
-    acts on I/O operations on behalf of its local users, it MUST
-    authenticate and authorize the user by issuing respective OPEN
-    and ACCESS calls to the metadata server, similar to having NFSv4
-    data delegations.  If access is allowed, the client uses the
-    corresponding (READ or RW) credentials to perform the I/O
-    operations at the data file's storage devices.  When the metadata
-    server receives a request to change a file's permissions or
-    ACL, it SHOULD recall all layouts for that file and it MUST
-    fence off the clients holding outstanding layouts for the
-    respective file by implicitly invalidating the outstanding
-    credentials on all data files comprising before committing
-    to the new permissions and ACL.  Doing this will ensure that
-    clients re-authorize their layouts according to the modified
-    permissions and ACL by requesting new layouts.  Recalling the
-    layouts in this case is courtesy of the server intended to
-    prevent clients from getting an error on I/Os done after the
-    client was fenced off.
+    LAYOUTGET time.  The client should use RPC authorization credentials
+    (uid/gid for AUTH_SYS or tickets for Kerberos) for getting the
+    layout for the requested iomode (READ or RW) and the server verifies
+    the permissions and ACL for these credentials, possibly returning
+    NFS4ERR_ACCESS if the client is not allowed the requested iomode.
+    If the LAYOUTGET operation succeeds the client receives, as part
+    of the layout, a set of credentials allowing it I/O access to the
+    specified data files corresponding to the requested iomode.  When the
+    client acts on I/O operations on behalf of its local users, it MUST
+    authenticate and authorize the user by issuing respective OPEN and
+    ACCESS calls to the metadata server, similar to having NFSv4 data
+    delegations.
+
+  <t>
+    If access is allowed, the client uses the corresponding (READ or RW)
+    credentials to perform the I/O operations at the data file's storage
+    devices.  When the metadata server receives a request to change a
+    file's permissions or ACL, it SHOULD recall all layouts for that file
+    and then MUST fence off any clients still holding outstanding layouts
+    for the respective files by implicitly invalidating the previously
+    distributed credential on all data file comprising the file in
+    question.  It is REQUIRED that this be done before committing to the
+    new permissions and/or ACL.  By requesting new layouts, the clients
+    will reauthorize access against the modified access control metadata.
+    Recalling the layouts in this case is intended to prevent clients
+    from getting an error on I/Os done after the client was fenced off.
   </t>
 
   <section anchor="ss:security:krb5" title="Kerberized File Access">
