@@ -26,15 +26,13 @@
   </t>
 
   <t>
-    Although it MAY be acceptable for the client to propagate a
-    corresponding error to the application that initiated the I/O
-    operation and drop any unwritten data, the client SHOULD attempt
-    to retry the original I/O operation by requesting a new layout
-    using LAYOUTGET and retry the I/O operation(s) using the new
-    layout, or the client MAY just retry the I/O operation(s) using
-    regular NFS READ or WRITE operations via the metadata server.
-    The client SHOULD attempt to retrieve a new layout and retry
-    the I/O operation using the storage device first and only if the
-    error persists, retry the I/O operation via the metadata server.
+    Although the client implementation has the option  to propagate
+    a corresponding error to the application that initiated the I/O
+    operation and drop any unwritten data, the client should attempt to
+    retry the original I/O operation by either requesting a new layout or
+    sending the I/O via regular NFSv4.1+ READ or WRITE operations to the
+    metadata server.  The client SHOULD attempt to retrieve a new layout
+    and retry the I/O operation using the storage device first and only if
+    the error persists, retry the I/O operation via the metadata server.
   </t>
 </section>
