@@ -284,24 +284,24 @@
       </t>
 
       <t>
-        All IO operations to the storage device are done using the
+        All I/O operations to the storage device are done using the
         anonymous stateid.  Thus the storage device has no information
         about the openowner and lockowner responsible for issuing a
-        particular IO operation.  As a result:
+        particular I/O operation.  As a result:
 
         <list style='symbols'>
           <t>
             Mandatory byte-range locking cannot be supported because
-            the storage device has no way of distinguishing IO
+            the storage device has no way of distinguishing I/O
             done on behalf of the lock owner from those done by others.
           </t>
 
           <t>
             Enforcement of share reservations is the responsibility of
-            the client.   Even though IO is done using the anonymous
+            the client.   Even though I/O is done using the anonymous
             stateid, the client must ensure that it has a valid stateid
-            associated with the openowner, that allows the IO being done
-            before issuing the IO.
+            associated with the openowner, that allows the I/O being done
+            before issuing the I/O.
           </t>
         </list>
       </t>
@@ -358,7 +358,7 @@
             metadata server.  As in the case of OPENs, the stateids
             associated with byte-range locks, are assigned by the
             metadata server and are available for use on the metadata
-            server.  Because IO operations are allowed to present lock
+            server.  Because I/O operations are allowed to present lock
             stateids, the metadata server needs the ability to make the
             storage device aware of the association between the
             metadata-sever-chosen stateid and the corresponding open
@@ -376,16 +376,16 @@
             storage device aware of the association between the
             metadata-sever-chosen stateid and the client, openowner,
             and lock (i.e., lockowner, byte-range, lock-type) that it
-            represents.  Because IO operations are allowed to present
+            represents.  Because I/O operations are allowed to present
             lock stateids, this information needs to be propagated to all
-            storage devices to which IO might be directed rather than
+            storage devices to which I/O might be directed rather than
             only to daya storage device that contain the locked region.
           </t>
 
           <t>
             Delegations are assigned by the metadata server which
             initiates recalls when conflicting OPENs are processed.
-            Because IO operations are allowed to present delegation
+            Because I/O operations are allowed to present delegation
             stateids, the metadata server requires the ability to make
             the storage device aware of the association between
             the metadata-server-chosen stateid and the filehandle

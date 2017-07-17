@@ -40,7 +40,7 @@
 
   <t>
     Tigran Mkrtchyan provided the use case for not allowing the client to
-    proxy the IO through the data server.
+    proxy the I/O through the data server.
   </t>
 </section>
 
