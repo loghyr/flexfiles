@@ -219,6 +219,18 @@
     </t>
 
     <t>
+
+      This specification of the ffds_stateid is mostly broken for
+      the tightly coupled model. There needs to exist a one to one
+      mapping from ffds_stateid to ffds_fh_vers - each open file on the
+      storage device might need an open stateid.  As there are established
+      loosely coupled implementations of this version of the protocol,
+      the only viable approach for a tightly coupled implementation
+      would be to use an anonymous stateid for the ffds_stateid.
+      Fixing this issue will require a new version of the protocol.
+    </t>
+
+    <t>
       For loosely coupled storage devices, ffds_user and ffds_group
       provide the synthetic user and group to be used in the RPC
       credentials that the client presents to the storage device
