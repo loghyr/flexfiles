@@ -42,6 +42,7 @@
     authenticate and authorize the user by issuing respective OPEN and
     ACCESS calls to the metadata server, similar to having NFSv4 data
     delegations.
+  </t>
 
   <t>
     If access is allowed, the client uses the corresponding (READ or RW)
