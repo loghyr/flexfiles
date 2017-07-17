@@ -34,7 +34,7 @@
     </t>
   </section>
 
-  <section anchor='sec:sec_models' title="Fencing Clients from the Data Server">
+  <section anchor='sec:sec_models' title="Fencing Clients from the Data Storage Device">
     <t>
       With loosely coupled storage devices, the metadata server
       uses synthetic uids and gids for the data file, where the uid
@@ -76,7 +76,12 @@
       data file to be the same as the metadata file. And the client
       must authenticate with the storage device and go through the
       same authorization process it would go through via the metadata
-      server.
+      server.  In the case of tight coupling, fencing is the
+      responsibility of the control protocol and is not described in
+      detail here.  However, implementations of the tight coupling locking
+      model (see <xref target='locking' />), will need a way to prevent
+      access by certain clients to specific files by invalidating the
+      corresponding stateids on the data storage device.
     </t>
 
     <section title='Implementation Notes for Synthetic uids/gids'>
@@ -193,7 +198,7 @@
     </section>
   </section>
 
-  <section title="State and Locking Models">
+  <section anchor="locking" title="State and Locking Models">
     <t>
       Metadata file OPEN, LOCK, and DELEGATION operations are always
       executed only against the metadata server.
