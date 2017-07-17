@@ -61,12 +61,14 @@
   <section anchor="ss:security:krb5" title="Kerberized File Access">
     <section anchor="ss:sec:krb5:lc" title="Loosely Coupled">
       <t>
-        While RPCSEC_GSS version 3 (RPCSEC_GSSv3)
+        RPCSEC_GSS version 3 (RPCSEC_GSSv3)
         <xref target='rpcsec_gssv3' /> could be used to authorize the client
-        to the storage device on behalf of the metadata server,
-        such a requirement exceeds the loose coupling model. I.e.,
-        each of the metadata server, storage device, and client would
-        have to implement RPCSEC_GSSv3.
+
+        to the storage device on behalf of the metadata server.
+        This would require that each of the metadata server, storage
+        device, and client would have to implement RPCSEC_GSSv3. The
+        second requirement does not match the intent of the loosely
+        coupled model that the storage device need not be modified.
       </t>
 
       <t>
@@ -86,7 +88,7 @@
       <t>
         With tight coupling, the principal used to access the
         metadata file is exactly the same as used to access the
-        data file. Thus there are no security issues related to
+        data file. As a result there are no security issues related to
         using Kerberos with a tightly coupled system.
       </t>
     </section>
