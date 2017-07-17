@@ -79,6 +79,10 @@ struct LAYOUTRETURN4args {
     (See <xref target='ff_layoutreturn4' />).  It
     allows the client to report I/O error information or layout
     usage statistics back to the metadata server as defined below.
+    Note that while the data strucures are built on concepts introduced
+    in NFSv4.2, the effective discriminated union (lora_layout_type
+    combined with ff_layoutreturn4) allows for a NFSv4.1 metadata
+    server to utilize the data.
   </t>
 
   <section anchor="ss:return:errors" title="I/O Error Reporting">
@@ -287,34 +291,40 @@ struct io_info4 {
       </t>
 
       <t>
-        With pNFS, the data transfers are performed directly between
-        the pNFS client and the storage devices.  Therefore, the
-        metadata server has no visibility to the I/O stream and cannot
-        use any statistical information about client I/O to optimize
-        data storage location.  ff_iostats4 MAY be used by the client
-        to report I/O statistics back to the metadata server upon
-        returning the layout.  Since it is infeasible for the client
-        to report every I/O that used the layout, the client MAY
-        identify "hot" byte ranges for which to report I/O statistics.
-        The definition and/or configuration mechanism of what is
-        considered "hot" and the size of the reported byte range is
-        out of the scope of this document.  It is suggested for client
-        implementation to provide reasonable default values and an
-        optional run-time management interface to control these
-        parameters.  For example, a client can define the default
-        byte range resolution to be 1 MB in size and the thresholds
-        for reporting to be 1 MB/second or 10 I/O operations per
-        second.  For each byte range, ffis_offset and ffis_length
-        represent the starting offset of the range and the range
-        length in bytes.  ffis_read.ii_count,
-        ffis_read.ii_bytes, ffis_write.ii_count, and ffis_write.ii_bytes
-        represent, respectively, the number of contiguous read and
-        write I/Os and the respective aggregate number of bytes
-        transferred within the reported byte range.
+        With pNFS, data transfers are performed directly between the
+        pNFS client and the storage devices.  Therefore, the metadata
+        server has no direct knowledge to the I/O operations being done
+        and thus can not create on its own statistical information about
+        client I/O to optimize data storage location.  ff_iostats4 MAY be
+        used by the client to report I/O statistics back to the metadata
+        server upon returning the layout.
       </t>
 
       <t>
-        The combination of ffis_deviceid and ffl_addr uniquely identify
+        Since it is not feasible for the client to report every I/O
+        that used the layout, the client MAY identify "hot" byte ranges
+        for which to report I/O statistics.  The definition and/or
+        configuration mechanism of what is considered "hot" and the size
+        of the reported byte range is out of the scope of this document.
+        It is suggested for client implementation to provide reasonable
+        default values and an optional run-time management interface
+        to control these parameters.  For example, a client can define
+        the default byte range resolution to be 1 MB in size and the
+        thresholds for reporting to be 1 MB/second or 10 I/O operations
+        per second.
+      </t>
+
+      <t>
+        For each byte range, ffis_offset and ffis_length represent the
+        starting offset of the range and the range length in bytes.
+        ffis_read.ii_count, ffis_read.ii_bytes, ffis_write.ii_count,
+        and ffis_write.ii_bytes represent, respectively, the number
+        of contiguous read and write I/Os and the respective aggregate
+        number of bytes transferred within the reported byte range.
+      </t>
+
+      <t>
+        The combination of ffis_deviceid and ffl_addr uniquely identifies
         both the storage path and the network route to it. 
         Finally, the ffl_fhandle allows the metadata server to differentiate
         between multiple read-only copies of the file on the same
