@@ -34,7 +34,7 @@
     </t>
   </section>
 
-  <section anchor='sec:sec_models' title="Fencing Clients from the Data Storage Device">
+  <section anchor='sec:sec_models' title="Fencing Clients from the Storage Device">
     <t>
       With loosely coupled storage devices, the metadata server
       uses synthetic uids and gids for the data file, where the uid
