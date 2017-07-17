@@ -13,10 +13,13 @@
 
   <section anchor='sec:layoutcommit' title='LAYOUTCOMMIT'>
     <t>
-      With a tightly coupled system, when the metadata server
-      receives a LAYOUTCOMMIT (see Section 18.42 of <xref
-      target='RFC5661' />), the semantics of the file layout type
-      MUST be met (see Section 12.5.4 of <xref target='RFC5661' />).
+
+      When tightly coupled storage devices are used, the metadata server
+      has the responsibility, upon receiving a LAYOUTCOMMIT (see Section
+      18.42 of <xref target='RFC5661' />), of ensuring that the semantics
+      of pNFS are respected (see Section 12.5.4 of <xref target='RFC5661' />).
+      These do not include a requirement that data written to data
+      storage device be stable upon completion of the LAYOUTCOMMIT.
       It is the responsibility of the client to make sure the
       data file is stable before the metadata server begins to query
       the storage devices about the changes to the file.  With a
