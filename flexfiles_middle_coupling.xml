@@ -118,6 +118,15 @@
         ensures that there is a change of owner and at least
         one id available that never gets allowed access.
       </t>
+
+      <t>
+        Under an AUTH_SYS security model, synthetic uids and gids of 0
+        SHOULD be avoided. These typically either grant super access to
+        files on a storage device or are mapped to an anonymous id.
+        In the first case, even if the data file is fenced, the client
+        might still be able to access the file. In the second case,
+        multiple ids might be mapped to the anonymous ids.
+      </t>
     </section>
 
     <section title='Example of using Synthetic uids/gids'>
