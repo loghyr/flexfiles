@@ -34,7 +34,11 @@
     <t>
       The metadata server can use the CB_RECALL_ANY callback operation
       to notify the client to return some or all of its layouts.
-      The <xref target="RFC5661" /> defines the following types:
+      <xref target="RFC5661" /> defines the allowed types, but makes
+      no provision to expand them.  It does hint that "storage protocols"
+      can expand the range, but does not define such a process. If
+      we put the values under IANA control, then we could define the
+      following types:
     </t>
 
     <t>
@@ -56,13 +60,6 @@ struct  CB_RECALL_ANY4args      {
 
     <t>
       &lt;CODE ENDS&gt;
-    </t>
-
-    <t>
-      <cref anchor='AI13 ' source='TH'>
-        No, 5661 does not define these above values. The ask here is
-        to create these and _add_ them to 5661.
-      </cref>
     </t>
 
     <t>
