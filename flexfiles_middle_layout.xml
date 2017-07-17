@@ -220,7 +220,7 @@
 
     <t>
       This specification of the ffds_stateid is mostly broken for
-      the tightly coupled model. There needs to exist a one to one
+      the tightly coupled model.  There needs to exist a one to one
       mapping from ffds_stateid to ffds_fh_vers - each open file on the
       storage device might need an open stateid.  As there are established
       loosely coupled implementations of this version of the protocol,
@@ -228,6 +228,17 @@
       would be to either use an anonymous stateid for the ffds_stateid
       or restrict the size of the ffds_fh_vers to be one.  Fixing this
       issue will require a new version of the protocol.
+    </t>
+
+    <t>
+      <cref anchor='AI14 ' source='TH'>
+        One reviewer points out
+        for loosely coupled, we can use the anon stateid and for
+        tightly coupled we can use the "global stateid". These make
+        it appear that the bug in the spec was actually a feature.
+        The intent here is to own up to the bug and shipping code.
+        Can it be said nicer?
+      </cref>
     </t>
 
     <t>

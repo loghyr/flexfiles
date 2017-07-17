@@ -19,12 +19,13 @@
       </t>
 
       <t>
-        When there are sharing conflicts.
+        When existing layouts are inconsistent with the need to enforce
+        locking constraints.
       </t>
 
       <t>
-        When a file is being resilvered, either due to being repaired after
-        a write error or to load balance.
+        When existing layouts are inconsistent with the requirements
+        regarding resilvering as described in <xref target="ss:resilvering" />.
       </t>
     </list>
   </t>
