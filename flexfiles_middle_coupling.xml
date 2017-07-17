@@ -81,7 +81,7 @@
       detail here.  However, implementations of the tight coupling locking
       model (see <xref target='locking' />), will need a way to prevent
       access by certain clients to specific files by invalidating the
-      corresponding stateids on the data storage device.
+      corresponding stateids on the storage device.
     </t>
 
     <section title='Implementation Notes for Synthetic uids/gids'>
@@ -209,33 +209,222 @@
 
   <section anchor="locking" title="State and Locking Models">
     <t>
-      Metadata file OPEN, LOCK, and DELEGATION operations are always
-      executed only against the metadata server.
+      The choice of locking models is governed by the following rules:
+
+      <list style='symbols'>
+        <t>
+          Storage devices implementing the NFSv3 and NFSv4.0 protocols
+          are always treated as loosely coupled.
+        </t>
+
+        <t>
+          NFSv4.1+ storage devices that do not return the
+          EXCHGID4_FLAG_USE_PNFS_DS flag set to EXCHANGE_ID are indicating
+          that they are to be treated as loosely coupled.  From the
+          locking viewpoint they are treated in the same way as NFSv4.0
+          storage devices.
+        </t>
+
+        <t>
+          NFSv4.1+ storage devices that do identify themselves with the
+          EXCHGID4_FLAG_USE_PNFS_DS flag set to EXCHANGE_ID are considered
+          strongly coupled.  They would use a back-end control protocol
+          to implement the global stateid model as described in
+          <xref target="RFC5661" />.
+        </t>
+      </list>
     </t>
 
-    <t>
-      The metadata server responds to state changing operations by
-      executing them against the respective
-      data files on the storage devices.  It then sends the storage
-      device open stateid as part of the layout (see the ffm_stateid
-      in <xref target='ff_layout4' />) and it is then used by the client
-      for executing READ/WRITE operations against the storage device.
-    </t>
+    <section title='Loosely Coupled Locking Model'>
+      <t>
+        When locking-related operations are requested, they are primarily
+        dealt with by the metadata server, which generates the appropriate
+        stateids.  When an NFSv4 version is used as the data access
+        protocol, the metadata server may make stateid-related requests
+        of the storage devices.  However, it is not required to
+        do so and the resulting stateids are known only to the metadata
+        server and the storage device.
+      </t>
 
-    <t>
-      NFSv4.1+ storage devices that do not return the
-      EXCHGID4_FLAG_USE_PNFS_DS flag set to EXCHANGE_ID are indicating that
-      they are loosely coupled. As such, they are treated the same
-      way as NFSv4 storage devices.
-    </t>
+      <t>
+        Given this basic structure, locking-related operations are
+        handled as follows:
 
-    <t>
-      NFSv4.1+ storage devices that do identify themselves
-      with the EXCHGID4_FLAG_USE_PNFS_DS flag set to EXCHANGE_ID are
-      stongly coupled. They will be using a
-      back-end control protocol as described in
-      <xref target="RFC5661" /> to implement a global stateid
-      model as defined there.
-    </t>
+        <list style='symbols'>
+          <t>
+            OPENs are dealt with by the metadata server.  Stateids are
+            selected by the metadata server and associated with the client
+            id describing the client's connection to the metadata server.
+            The metadata server may need to interact with the storage
+            device to locate the file to be opened, but no locking-related
+            functionality need be used on the storage device.
+            <vspace blankLines="1" />
+            OPEN_DOWNGRADE and CLOSE only require local execution on
+            the metadata sever.
+          </t>
+
+          <t>
+            Advisory byte-range locks can be implemented locally on
+            the metadata server.  As in the case of OPENs, the stateids
+            associated with byte-range locks are assigned by the metadata
+            server and only used on the metadata server.
+          </t>
+
+          <t>
+            Delegations are assigned by the metadata server which
+            initiates recalls when conflicting OPENs are processed.
+            No storage device involvement is required.
+          </t>
+
+          <t>
+            TEST_STATEID and FREE_STATEID are processed locally on the
+            metadata server, without storage device involvement.
+          </t>
+        </list>
+      </t>
+
+      <t>
+        All IO operations to the storage device are done using the
+        anonymous stateid.  Thus the storage device has no information
+        about the openowner and lockowner responsible for issuing a
+        particular IO operation.  As a result:
+
+        <list style='symbols'>
+          <t>
+            Mandatory byte-range locking cannot be supported because
+            the storage device has no way of distinguishing IO
+            done on behalf of the lock owner from those done by others.
+          </t>
+
+          <t>
+            Enforcement of share reservations is the responsibility of
+            the client.   Even though IO is done using the anonymous
+            stateid, the client must ensure that it has a valid stateid
+            associated with the openowner, that allows the IO being done
+            before issuing the IO.
+          </t>
+        </list>
+      </t>
+
+      <t>
+        In the event that a stateid is revoked, the metadata server is
+        responsible for preventing client access, since it
+        has no way of being sure that the client is aware that
+        the stateid in question has been revoked.
+      </t>
+
+      <t>
+        As the client never receives a stateid generated by a
+        storage device, there is no client lease on the storage device
+        and no prospect of lease expiration, even when access is via NFSv4
+        protocols.  Clients will have leases on the metadata server.
+        In dealing with lease expiration, the metadata server may need
+        to use fencing to prevent revoked stateids from being relied
+        upon by a client unaware of the fact that they have been revoked.
+      </t>
+    </section>
+
+    <section title='Tighly Coupled Locking Model'>
+      <t>
+        When locking-related operations are requested, they are primarily
+        dealt with by the metadata server, which generates the appropriate
+        stateids.  These stateids must be made known to the storage
+        device using control protocol facilities, the details of which
+        are not discussed in this document.
+      </t>
+
+      <t>
+        Given this basic structure, locking-related operations are
+        handled as follows:
+
+        <list style='symbols'>
+          <t>
+            OPENs are dealt with primarily on the metadata server.
+            Stateids are selected by the metadata server and associated
+            with the client id describing the client's connection to
+            the metadata server.  The metadata server needs to interact
+            with the storage device to locate the file to be opened,
+            and to make the storage device aware of the association
+            between the metadata-sever-chosen stateid and the client
+            and openowner that it represents.
+            <vspace blankLines="1" />
+            OPEN_DOWNGRADE and CLOSE are executed initially on the
+            metadata server but the state change made must be propagated
+            to the storage device.
+          </t>
+
+          <t>
+            Advisory byte-range locks can be implemented locally on the
+            metadata server.  As in the case of OPENs, the stateids
+            associated with byte-range locks, are assigned by the
+            metadata server and are available for use on the metadata
+            server.  Because IO operations are allowed to present lock
+            stateids, the metadata server needs the ability to make the
+            storage device aware of the association between the
+            metadata-sever-chosen stateid and the corresponding open
+            stateid it is associated with.
+          </t>
+
+          <t>
+            Mandatory byte-range locks can be supported when both
+            the metadata server and the storage devices have
+            the appropriate support.  As in the case of advisory
+            byte-range locks, these are assigned by the metadata
+            server and are available for use on the metadata server.
+            To enable mandatory lock enforcement on the storage
+            device, the metadata server needs the ability to make the
+            storage device aware of the association between the
+            metadata-sever-chosen stateid and the client, openowner,
+            and lock (i.e., lockowner, byte-range, lock-type) that it
+            represents.  Because IO operations are allowed to present
+            lock stateids, this information needs to be propagated to all
+            storage devices to which IO might be directed rather than
+            only to daya storage device that contain the locked region.
+          </t>
+
+          <t>
+            Delegations are assigned by the metadata server which
+            initiates recalls when conflicting OPENs are processed.
+            Because IO operations are allowed to present delegation
+            stateids, the metadata server requires the ability to make
+            the storage device aware of the association between
+            the metadata-server-chosen stateid and the filehandle
+            and delegation type it represents, and to break such an
+            association.
+          </t>
+
+          <t>
+            TEST_STATEID is processed locally on the metadata server,
+            without storage device involvement.
+          </t>
+
+          <t>
+            FREE_STATEID is processed on the metadata server but the
+            metadata server requires the ability to propagate the request
+            to the corresponding storage devices.
+          </t>
+        </list>
+      </t>
+
+      <t>
+        Because the client will possess and use stateids valid on the
+        storage device, there will be a client lease on the storage
+        device and the possibility of lease expiration does exist.
+        The best approach for the storage device is to retain these locks
+        as a courtesy.  However, if it does not do so, control protocol
+        facilities need to provide the means to synchronize lock state
+        between the metadata server and storage device.
+      </t>
+
+      <t>
+        Clients will also have leases on the metadata server, which
+        are subject to expiration.  In dealing with lease expiration,
+        the metadata server would be expected to use control protocol
+        facilities enabling it to invalidate revoked stateids on
+        the storage device.  In the event the client is not
+        responsive, the metadata server may need to use fencing to prevent
+        revoked stateids from being acted upon by the storage device.
+      </t>
+    </section>
   </section>
 </section>
