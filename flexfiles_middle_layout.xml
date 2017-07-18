@@ -68,6 +68,7 @@
 /// const FF_FLAGS_NO_LAYOUTCOMMIT   = 0x00000001;
 /// const FF_FLAGS_NO_IO_THRU_MDS    = 0x00000002;
 /// const FF_FLAGS_NO_READ_IO        = 0x00000004;
+/// const FF_FLAGS_WRITE_ONE_MIRROR  = 0x00000008;
       </artwork>
     </figure>
 
@@ -185,8 +186,8 @@
 
     <t>
       The ffs_mirrors field represents an array of state information
-      for each mirrored copy of the current layout segment. Each element is described
-      by a ff_mirror4 type.
+      for each mirrored copy of the current layout segment. Each
+      element is described by a ff_mirror4 type.
     </t>
 
     <t>
@@ -297,6 +298,10 @@
           READ requests with the layouts of iomode LAYOUTIOMODE4_RW.
           Instead, it should request a layout of iomode
           LAYOUTIOMODE4_READ from the metadata server.
+        </t>
+        <t hangText='FF_FLAGS_WRITE_ONE_MIRROR:'>
+          can be set to indicate that the client only needs to update
+          one of the mirrors (see <xref target="ss:write_mirror" />.
         </t>
       </list>
     </t>
