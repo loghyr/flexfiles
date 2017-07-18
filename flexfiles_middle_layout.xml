@@ -301,7 +301,7 @@
         </t>
         <t hangText='FF_FLAGS_WRITE_ONE_MIRROR:'>
           can be set to indicate that the client only needs to update
-          one of the mirrors (see <xref target="ss:write_mirror" />.
+          one of the mirrors (see <xref target="ss:write_mirror" />).
         </t>
       </list>
     </t>
