@@ -3,9 +3,51 @@
 
 <section anchor="sec:iana" title="IANA Considerations">
   <t>
-    As described in <xref target="RFC5661" />,
-    new layout type numbers have been assigned by IANA.
+    <xref target="RFC5661" /> introduced a registry for
+    "pNFS Layout Types Registry" and as such,
+    new layout type numbers need to be assigned by IANA.
     This document defines the protocol associated with the existing
-    layout type number, LAYOUT4_FLEX_FILES.
+    layout type number, LAYOUT4_FLEX_FILES (see <xref target='layoutlist' />).
   </t>
+
+  <texttable title="Layout Type Assignments" anchor="layoutlist">
+    <ttcol>Layout Type Name</ttcol>
+    <ttcol>Value</ttcol>
+    <ttcol>RFC</ttcol>
+    <ttcol>How</ttcol>
+    <ttcol>Minor Versions</ttcol>
+    <c>LAYOUT4_FLEX_FILES</c> <c>0x4</c> <c>RFCTDB</c> <c>L</c> <c>1</c>
+  </texttable>
+
+  <t>
+    <xref target="RFC5661" /> also introduced a registry called
+    "NFSv4 Recallable Object Types Registry". This document
+    defines new recallable objects for RCA4_TYPE_MASK_FF_LAYOUT_MIN
+    and RCA4_TYPE_MASK_FF_LAYOUT_MAX (see <xref target='recalllist' />).
+  </t>
+
+  <texttable title="Recallable Object Type Assignments" anchor="recalllist">
+    <ttcol>Recallable Object Type Name</ttcol>
+    <ttcol>Value</ttcol>
+    <ttcol>RFC</ttcol>
+    <ttcol>How</ttcol>
+    <ttcol>Minor Versions</ttcol>
+    <c>RCA4_TYPE_MASK_FF_LAYOUT_MIN</c> <c>16</c> <c>RFCTDB</c> <c>L</c> <c>1</c>
+    <c>RCA4_TYPE_MASK_FF_LAYOUT_MAX</c> <c>17</c> <c>RFCTDB</c> <c>L</c> <c>1</c>
+  </texttable>
+
+  <t>
+    Note, <xref target="RFC5661" /> should have also defined (see <xref target='recalllist_missing' />):
+  </t>
+
+  <texttable title="Recallable Object Type Assignments" anchor="recalllist_missing">
+    <ttcol>Recallable Object Type Name</ttcol>
+    <ttcol>Value</ttcol>
+    <ttcol>RFC</ttcol>
+    <ttcol>How</ttcol>
+    <ttcol>Minor Versions</ttcol>
+    <c>RCA4_TYPE_MASK_OTHER_LAYOUT_MIN</c> <c>12</c> <c><xref target="RFC5661" /></c> <c>L</c> <c>1</c>
+    <c>RCA4_TYPE_MASK_OTHER_LAYOUT_MAX</c> <c>15</c> <c><xref target="RFC5661" /></c> <c>L</c> <c>1</c>
+  </texttable>
+
 </section>

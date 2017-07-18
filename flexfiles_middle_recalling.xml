@@ -34,11 +34,8 @@
     <t>
       The metadata server can use the CB_RECALL_ANY callback operation
       to notify the client to return some or all of its layouts.
-      <xref target="RFC5661" /> defines the allowed types, but makes
-      no provision to expand them.  It does hint that "storage protocols"
-      can expand the range, but does not define such a process. If
-      we put the values under IANA control, then we could define the
-      following types:
+      Section 22.3 of <xref target="RFC5661" /> defines the allowed
+      types of the "NFSv4 Recallable Object Types Registry".
     </t>
 
     <t>
@@ -47,10 +44,15 @@
 
     <figure>
       <artwork>
-const RCA4_TYPE_MASK_FF_LAYOUT_MIN     = -2;
-const RCA4_TYPE_MASK_FF_LAYOUT_MAX     = -1;
+/// const RCA4_TYPE_MASK_FF_LAYOUT_MIN     = 16;
+/// const RCA4_TYPE_MASK_FF_LAYOUT_MAX     = 17;
 [[RFC Editor: please insert assigned constants]]
+///
+      </artwork>
+    </figure>
 
+    <figure>
+      <artwork>
 struct  CB_RECALL_ANY4args      {
     uint32_t        craa_layouts_to_keep;
     bitmap4         craa_type_mask;
