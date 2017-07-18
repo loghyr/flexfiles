@@ -78,7 +78,7 @@
       server.  In the case of tight coupling, fencing is the
       responsibility of the control protocol and is not described in
       detail here.  However, implementations of the tight coupling locking
-      model (see <xref target='locking' />), will need a way to prevent
+      model (see <xref target='ss:locking' />), will need a way to prevent
       access by certain clients to specific files by invalidating the
       corresponding stateids on the storage device.
     </t>
@@ -206,7 +206,7 @@
     </section>
   </section>
 
-  <section anchor="locking" title="State and Locking Models">
+  <section anchor="ss:locking" title="State and Locking Models">
     <t>
       The choice of locking models is governed by the following rules:
 

@@ -20,7 +20,7 @@
         Gobikrishnan Sundharraj,
         Trond Myklebust,
         and
-        Rick Macklem .
+        Rick Macklem.
   </t>
 
   <t>
@@ -30,7 +30,7 @@
 
   <t>
     Dave Noveck provided comprehensive reviews of the document during the
-    working group last calls.
+    working group last calls. He also rewrote <xref target="ss:locking" />.
   </t>
 
   <t>
@@ -42,6 +42,10 @@
   <t>
     Tigran Mkrtchyan provided the use case for not allowing the client to
     proxy the I/O through the data server.
+  </t>
+
+  <t>
+    Rick Macklem provided the use case for only writing to a single mirror.
   </t>
 </section>
 
