@@ -73,67 +73,116 @@
   </section>
 
   <section anchor="ss:write_mirror" title="Writing to Mirrors">
-    <t>
-      If the FF_FLAGS_WRITE_ONE_MIRROR flag in ffl_flags is set, the
-      client only needs to update one of the copies of the layout segment.
-      For this case, the storage device MUST ensure that all copies of
-      the mirror are updated when any one of the mirrors is updated.
-      All mirrors must be updated before the storage device sends a
-      successful reply for the write, but the data does not need to be
-      on stable storage until the associated COMMIT has been done by
-      the client.  The client may choose any one of the mirrors and may
-      use ffds_efficiency in the same manner as for reading when making
-      this choice.
-    </t>
+    <section title="Single Storage Device Updates Mirrors">
+      <t>
+        If the FF_FLAGS_WRITE_ONE_MIRROR flag in ffl_flags is set,
+        the client only needs to update one of the copies of the layout
+        segment.  For this case, the storage device MUST ensure that all
+        copies of the mirror are updated when any one of the mirrors is
+        updated.  If the storage device gets an error when updating one
+        of the mirrors, then it MUST inform the client that the original
+        WRITE had an error. The client then MUST inform the metadata
+        server (see <xref target="ss:write_errors" />. The client's
+        responsibility with resepect to COMMIT is explained in <xref
+        target="ss:write_commits" />. The client may choose any one of
+        the mirrors and may use ffds_efficiency in the same manner as
+        for reading when making this choice.
+      </t>
+    </section>
 
-    <t>
-      If the FF_FLAGS_WRITE_ONE_MIRROR flag in ffl_flags is not set,
-      the client is responsible for updating all mirrored copies
-      of the layout segments that it is given in the layout.  A single
-      failed update is sufficient to fail the entire operation.  If all
-      but one copy is updated successfully and the last one provides an
-      error, then the client needs to inform the metadata server about the
-      error via either LAYOUTRETURN or LAYOUTERROR that the update failed
-      to that storage device.  If the client is updating the mirrors
-      serially, then it SHOULD stop at the first error encountered and
-      report that to the metadata server.  If the client is updating
-      the mirrors in parallel, then it SHOULD wait until all storage
-      devices respond such that it can report all errors encountered
-      during the update.
-    </t>
+    <section title="Single Storage Device Updates Mirrors">
+      <t>
+        If the FF_FLAGS_WRITE_ONE_MIRROR flag in ffl_flags is not set,
+        the client is responsible for updating all mirrored copies
+        of the layout segments that it is given in the layout.  A single
+        failed update is sufficient to fail the entire operation.  If all
+        but one copy is updated successfully and the last one provides an
+        error, then the client needs to inform the metadata server about the
+        error via either LAYOUTRETURN or LAYOUTERROR that the update failed
+        to that storage device.  If the client is updating the mirrors
+        serially, then it SHOULD stop at the first error encountered and
+        report that to the metadata server.  If the client is updating
+        the mirrors in parallel, then it SHOULD wait until all storage
+        devices respond such that it can report all errors encountered
+        during the update.
+      </t>
+    </section>
 
-    <t>
-      The metadata server is then responsible for determining if it wants
-      to remove the errant mirror from the layout, if the mirror has
-      recovered from some transient error, etc.  When the client tries
-      to get a new layout, the metadata server informs it of the decision
-      by the contents of the layout.  The client MUST NOT make any
-      assumptions that the contents of the previous layout will match
-      those of the new one.  If it has updates that were not committed
-      to all mirrors, then it MUST resend those updates to all mirrors.
-    </t>
+    <section anchor="ss:write_errors" title="Handling Write Errors">
+      <t>
+        When the client reports a write error to the metadata server,
+        the metadata server is responsible for determining if it wants
+        to remove the errant mirror from the layout, if the mirror
+        has recovered from some transient error, etc.  When the client
+        tries to get a new layout, the metadata server informs it of the
+        decision by the contents of the layout.  The client MUST NOT
+        make any assumptions that the contents of the previous layout
+        will match those of the new one.  If it has updates that were
+        not committed to all mirrors, then it MUST resend those updates
+        to all mirrors.
+      </t>
 
-    <t>
-      There is no provision in the protocol for the metadata server to
-      directly determine that the client has or has not recovered from
-      an error. I.e., assume that the storage device was network partitioned
-      from the client and all of the copies are successfully updated
-      after the error was reported. There is no mechanism for the client
-      to report that fact and the metadata server is forced to repair
-      the file across the mirror.
-    </t>
+      <t>
+        There is no provision in the protocol for the metadata server to
+        directly determine that the client has or has not recovered from
+        an error. I.e., assume that the storage device was network partitioned
+        from the client and all of the copies are successfully updated
+        after the error was reported. There is no mechanism for the client
+        to report that fact and the metadata server is forced to repair
+        the file across the mirror.
+      </t>
 
-    <t>
-      If the client supports NFSv4.2, it can use LAYOUTERROR and
-      LAYOUTRETURN to provide hints to the metadata server about the
-      recovery efforts. A LAYOUTERROR on a file is for a non-fatal
-      error. A subsequent LAYOUTRETURN without a ff_ioerr4 indicates that
-      the client successfully replayed the I/O to all mirrors. Any
-      LAYOUTRETURN with a ff_ioerr4 is an error that the metadata server
-      needs to repair. The client MUST be prepared for the LAYOUTERROR
-      to trigger a CB_LAYOUTRECALL if the metadata server determines it
-      needs to start repairing the file.
-    </t>
+      <t>
+        If the client supports NFSv4.2, it can use LAYOUTERROR and
+        LAYOUTRETURN to provide hints to the metadata server about the
+        recovery efforts. A LAYOUTERROR on a file is for a non-fatal
+        error. A subsequent LAYOUTRETURN without a ff_ioerr4 indicates that
+        the client successfully replayed the I/O to all mirrors. Any
+        LAYOUTRETURN with a ff_ioerr4 is an error that the metadata server
+        needs to repair. The client MUST be prepared for the LAYOUTERROR
+        to trigger a CB_LAYOUTRECALL if the metadata server determines it
+        needs to start repairing the file.
+      </t>
+    </section>
+
+    <section anchor='ss:write_commits' title="Handling Write COMMITs">
+      <t>
+        When stable writes are done to the metadata server or to a single
+        replica (if allowed by the use of FF_FLAGS_WRITE_ONE_MIRROR ),
+        it is the responsibility of the receiving node to propagate the
+        written data stably, before replying to the client.
+      </t>
+
+      <t>
+        In the corresponding cases in which unstable writes are done,
+        the receiving node does not have any such obligation, although
+        it may choose to asynchronously propagate the updates.  However,
+        once a COMMIT is replied to, all replicas must reflect the writes
+        that have been done, and these data must have been committed to
+        stable storage on all replicas.
+      </t>
+
+      <t>
+        In order to avoid situations in which stale data is read from
+        replicas to which writes have not been propagated:
+
+        <list style='symbols'>
+          <t>
+            A client which has outstanding unstable writes made to single
+            node (metadata server or storage device) MUST do all reads
+            from that same node.
+          </t>
+
+          <t>
+            When writes are flushed to the server, for example to implement,
+            close-to-open semantics, a COMMIT must be done by the client
+            to ensure that up-to-date written data will be available
+            irrespective of the particular replica read.
+          </t>
+        </list>
+      </t>
+    </section>
+
   </section>
 
   <section anchor="ss:resilvering" title="Metadata Server Resilvering of the File">
