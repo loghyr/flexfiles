@@ -13,24 +13,23 @@
 
   <section anchor='sec:layoutcommit' title='LAYOUTCOMMIT'>
     <t>
-      When tightly coupled storage devices are used, the metadata server
-      has the responsibility, upon receiving a LAYOUTCOMMIT (see Section
-      18.42 of <xref target='RFC5661' />), of ensuring that the semantics
-      of pNFS are respected (see Section 12.5.4 of <xref target='RFC5661' />).
-      These do not include a requirement that data written to data
-      storage device be stable upon completion of the LAYOUTCOMMIT.
+      The metadata server has the responsibility, upon receiving
+      a LAYOUTCOMMIT (see Section 18.42 of <xref target='RFC5661' />), 
+      of ensuring that the semantics of pNFS are respected (see
+      Section 12.5.4 of <xref target='RFC5661' />).  These do include
+      a requirement that data written to data storage device be stable
+      before the occurance of the LAYOUTCOMMIT.
     </t>
 
     <t>
-      In the case of loosely coupled storage devices, it is the
-      responsibility of the client to make sure the data file is stable
-      before the metadata server begins to query the storage devices about
-      the changes to the file. If any WRITE to a storage device did not
-      result with stable_how equal to FILE_SYNC, a LAYOUTCOMMIT to the
-      metadata server MUST be preceded by a COMMIT to the storage devices
-      written to.  Note that if the client has not done a COMMIT to the
-      storage device, then the LAYOUTCOMMIT might not be synchronized
-      to the last WRITE operation to the storage device.
+      It is the responsibility of the client to make sure the data
+      file is stable before the metadata server begins to query the
+      storage devices about the changes to the file. If any WRITE to a
+      storage device did not result with stable_how equal to FILE_SYNC,
+      a LAYOUTCOMMIT to the metadata server MUST be preceded by a COMMIT
+      to the storage devices written to.  Note that if the client has not
+      done a COMMIT to the storage device, then the LAYOUTCOMMIT might not
+      be synchronized to the last WRITE operation to the storage device.
     </t>
   </section>
 
