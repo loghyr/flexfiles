@@ -16,7 +16,7 @@
     <ttcol>RFC</ttcol>
     <ttcol>How</ttcol>
     <ttcol>Minor Versions</ttcol>
-    <c>LAYOUT4_FLEX_FILES</c> <c>0x4</c> <c>RFCTDB</c> <c>L</c> <c>1</c>
+    <c>LAYOUT4_FLEX_FILES</c> <c>0x4</c> <c>RFCTBD10</c> <c>L</c> <c>1</c>
   </texttable>
 
   <t>
@@ -32,8 +32,8 @@
     <ttcol>RFC</ttcol>
     <ttcol>How</ttcol>
     <ttcol>Minor Versions</ttcol>
-    <c>RCA4_TYPE_MASK_FF_LAYOUT_MIN</c> <c>16</c> <c>RFCTDB</c> <c>L</c> <c>1</c>
-    <c>RCA4_TYPE_MASK_FF_LAYOUT_MAX</c> <c>17</c> <c>RFCTDB</c> <c>L</c> <c>1</c>
+    <c>RCA4_TYPE_MASK_FF_LAYOUT_MIN</c> <c>16</c> <c>RFCTBD10</c> <c>L</c> <c>1</c>
+    <c>RCA4_TYPE_MASK_FF_LAYOUT_MAX</c> <c>17</c> <c>RFCTBD10</c> <c>L</c> <c>1</c>
   </texttable>
 
   <t>
