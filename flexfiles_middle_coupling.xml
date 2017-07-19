@@ -83,6 +83,16 @@
       corresponding stateids on the storage device.
     </t>
 
+    <t>
+      The client need not know the model used between the metadata
+      server and the storage device. It need only react consistently
+      to any errors in interacting with the storage device. It should
+      both return the layout and error to the metadata server and ask for
+      a new layout. At that point, the metadata server can either
+      hand out a new layout, hand out no layout (forcing the I/O through
+      it), or deny the client further access to the file.
+    </t>
+
     <section title='Implementation Notes for Synthetic uids/gids'>
       <t>
         The selection method for the synthetic uids and gids to
