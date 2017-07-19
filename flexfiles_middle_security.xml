@@ -63,7 +63,7 @@
     <section anchor="ss:sec:krb5:lc" title="Loosely Coupled">
       <t>
         RPCSEC_GSS version 3 (RPCSEC_GSSv3)
-        <xref target='rpcsec_gssv3' /> could be used to authorize the client
+        <xref target='RFC7861' /> could be used to authorize the client
 
         to the storage device on behalf of the metadata server.
         This would require that each of the metadata server, storage

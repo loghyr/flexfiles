@@ -166,7 +166,7 @@
     <seriesInfo name="DOI" value="10.17487/RFC4519"/>
   </reference>
 
-    <reference anchor='rpcsec_gssv3'>
+    <reference anchor='RFC7861'>
       <front>
         <title>Remote Procedure Call (RPC) Security Version 3</title>
         <author initials="W." surname="Adamson" fullname="W. Adamson">
@@ -175,10 +175,10 @@
         <author initials="N." surname="Williams" fullname="N. Williams">
           <organization>Cryptonector</organization>
         </author>
-        <date year="2014" month="November"/>
+        <date year="2016" month="November"/>
       </front>
       <format type="TXT"
-              target="http://tools.ietf.org/id/draft-ietf-nfsv4-rpcsec-gssv3-09.txt"/>
+              target="https://www.rfc-editor.org/rfc/rfc7861.txt"/>
     </reference>
 
 </references>
