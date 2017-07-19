@@ -18,7 +18,7 @@
       of ensuring that the semantics of pNFS are respected (see
       Section 12.5.4 of <xref target='RFC5661' />).  These do include
       a requirement that data written to data storage device be stable
-      before the occurance of the LAYOUTCOMMIT.
+      before the occurrence of the LAYOUTCOMMIT.
     </t>
 
     <t>
