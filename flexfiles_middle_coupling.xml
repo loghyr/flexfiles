@@ -13,12 +13,13 @@
 
   <section anchor='sec:layoutcommit' title='LAYOUTCOMMIT'>
     <t>
-      The metadata server has the responsibility, upon receiving
-      a LAYOUTCOMMIT (see Section 18.42 of <xref target='RFC5661' />), 
-      of ensuring that the semantics of pNFS are respected (see
-      Section 12.5.4 of <xref target='RFC5661' />).  These do include
-      a requirement that data written to data storage device be stable
-      before the occurrence of the LAYOUTCOMMIT.
+      Regardless of the coupling model, the metadata server has the
+      responsibility, upon receiving a LAYOUTCOMMIT (see Section
+      18.42 of <xref target='RFC5661' />), of ensuring that the
+      semantics of pNFS are respected (see Section 12.5.4 of <xref
+      target='RFC5661' />).  These do include a requirement that
+      data written to data storage device be stable before the
+      occurrence of the LAYOUTCOMMIT.
     </t>
 
     <t>
@@ -45,7 +46,9 @@
       credentials needed to access the data file.  Fencing off
       of clients is achieved by the metadata server changing the
       synthetic uid and/or gid owners of the data file on the storage
-      device to implicitly revoke the outstanding RPC credentials.
+      device to implicitly revoke the outstanding RPC credentials. A
+      client presenting the wrong credential for the deisred access
+      will get a NFS4ERR_ACCESS error.
     </t>
 
     <t>
@@ -80,7 +83,8 @@
       detail here.  However, implementations of the tight coupling locking
       model (see <xref target='ss:locking' />), will need a way to prevent
       access by certain clients to specific files by invalidating the
-      corresponding stateids on the storage device.
+      corresponding stateids on the storage device. In such a scenario,
+      the client will be given an error of NFS4ERR_BAD_STATEID.
     </t>
 
     <t>
