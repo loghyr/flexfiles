@@ -79,7 +79,7 @@ struct LAYOUTRETURN4args {
     (See <xref target='ff_layoutreturn4' />).  It
     allows the client to report I/O error information or layout
     usage statistics back to the metadata server as defined below.
-    Note that while the data strucures are built on concepts introduced
+    Note that while the data structures are built on concepts introduced
     in NFSv4.2, the effective discriminated union (lora_layout_type
     combined with ff_layoutreturn4) allows for a NFSv4.1 metadata
     server to utilize the data.
