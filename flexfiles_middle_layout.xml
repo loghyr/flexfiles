@@ -220,26 +220,26 @@
     </t>
 
     <t>
-      This specification of the ffds_stateid is mostly broken for
-      the tightly coupled model.  There needs to exist a one to one
-      mapping from ffds_stateid to ffds_fh_vers - each open file on the
-      storage device might need an open stateid.  As there are established
-      loosely coupled implementations of this version of the protocol,
-      the only viable approaches for a tightly coupled implementation
-      would be to either use an anonymous stateid for the ffds_stateid
-      or restrict the size of the ffds_fh_vers to be one.  Fixing this
-      issue will require a new version of the protocol.
-    </t>
+      This specification of the ffds_stateid restricts both models
+      for NFSv4.x storage protocols:
 
-    <t>
-      <cref anchor='AI14 ' source='TH'>
-        One reviewer points out
-        for loosely coupled, we can use the anon stateid and for
-        tightly coupled we can use the "global stateid". These make
-        it appear that the bug in the spec was actually a feature.
-        The intent here is to own up to the bug and shipping code.
-        Can it be said nicer?
-      </cref>
+      <list style='hanging'>
+        <t hangText='loosely couple:'>
+          the stateid has to be an anonymous stateid,
+        </t>
+
+        <t hangText='tightly couple:'>
+          the stateid has to be a global stateid.
+        </t>
+      </list>
+
+      These stem from a mismatch of ffds_stateid being a singleton
+      and ffds_fh_vers being an array - each open file on the storage
+      device might need an open stateid.  As there are established
+      loosely coupled implementations of this version of the protocol,
+      it can not be fixed. If an implementation needs a different
+      statedid per file handle, then this issue will require a new
+      version of the protocol.
     </t>
 
     <t>
