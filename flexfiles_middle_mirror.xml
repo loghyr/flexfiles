@@ -21,8 +21,8 @@
     client may provide a hint to how many copies it wants (see
     <xref target='sec:layout_hint' />), the metadata server can
     ignore that hint and in any event, the client has no means to
-    dictate neither the storage device (which also means the coupling
-    and/or protocol levels to access the layout segments) nor the location of
+    dictate either the storage device (which also means the coupling
+    and/or protocol levels to access the layout segments) or the location of
     said storage device.
   </t>
 
@@ -35,7 +35,7 @@
     the metadata server MUST update that copy until the client is
     presented it in a layout. If the FF_FLAGS_WRITE_ONE_MIRROR is set in
     ffl_flags, the client need only update one of the mirrors (see <xref
-    target="ss:write_mirror" />. If the client is writing to the layout
+    target="ss:write_mirror" />). If the client is writing to the layout
     segments via the metadata server, then the metadata server MUST update
     all copies of the mirror. As seen in <xref target='ss:resilvering' />,
     during the resilvering, the layout is recalled, and the client
@@ -67,7 +67,7 @@
 
     <t>
       As such, it is the client which decides which mirror to access
-      for reading the file. The requirements for writing to a mirrored
+      for reading the file. The requirements for writing to mirrored
       layout segments are presented below.
     </t>
   </section>
@@ -82,7 +82,7 @@
         updated.  If the storage device gets an error when updating one
         of the mirrors, then it MUST inform the client that the original
         WRITE had an error. The client then MUST inform the metadata
-        server (see <xref target="ss:write_errors" />. The client's
+        server (see <xref target="ss:write_errors" />). The client's
         responsibility with resepect to COMMIT is explained in <xref
         target="ss:write_commits" />. The client may choose any one of
         the mirrors and may use ffds_efficiency in the same manner as
@@ -158,7 +158,7 @@
         the receiving node does not have any such obligation, although
         it may choose to asynchronously propagate the updates.  However,
         once a COMMIT is replied to, all replicas must reflect the writes
-        that have been done, and these data must have been committed to
+        that have been done, and this data must have been committed to
         stable storage on all replicas.
       </t>
 

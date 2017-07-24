@@ -64,7 +64,6 @@
       <t>
         RPCSEC_GSS version 3 (RPCSEC_GSSv3)
         <xref target='RFC7861' /> could be used to authorize the client
-
         to the storage device on behalf of the metadata server.
         This would require that each of the metadata server, storage
         device, and client would have to implement RPCSEC_GSSv3. The
@@ -81,7 +80,7 @@
         metadata server would generate the ticket granting tickets
         and provide them to the client. Fencing would then be
         controlled either by expiring the ticket or by modifying the
-        syntethic uid or gid on the data file.
+        synthetic uid or gid on the data file.
       </t>
     </section>
 
