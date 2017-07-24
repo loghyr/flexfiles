@@ -48,7 +48,7 @@
   </t>
 
   <t>
-    This document defines structure associated with the layouttype4
+    This document defines structures associated with the layouttype4
     value LAYOUT4_FLEX_FILES.  <xref target="RFC5661" /> specifies
     the loc_body structure as an XDR type "opaque".  The opaque
     layout is uninterpreted by the generic pNFS client layers, but
@@ -238,7 +238,7 @@
       device might need an open stateid.  As there are established
       loosely coupled implementations of this version of the protocol,
       it can not be fixed. If an implementation needs a different
-      statedid per file handle, then this issue will require a new
+      stateid per file handle, then this issue will require a new
       version of the protocol.
     </t>
 
@@ -309,7 +309,7 @@
     <section title="Error Codes from LAYOUTGET" anchor="layout:get">
       <t>
         <xref target="RFC5661" /> provides little guidance as to how
-        the client is to proceed with a LAYOUTEGT which returns an
+        the client is to proceed with a LAYOUTGET which returns an
         error of either NFS4ERR_LAYOUTTRYLATER, NFS4ERR_LAYOUTUNAVAILABLE,
         and NFS4ERR_DELAY. Within the context of this document:
 

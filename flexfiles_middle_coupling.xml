@@ -47,7 +47,7 @@
       of clients is achieved by the metadata server changing the
       synthetic uid and/or gid owners of the data file on the storage
       device to implicitly revoke the outstanding RPC credentials. A
-      client presenting the wrong credential for the deisred access
+      client presenting the wrong credential for the desired access
       will get a NFS4ERR_ACCESS error.
     </t>
 
