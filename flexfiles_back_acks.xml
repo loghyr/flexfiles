@@ -34,9 +34,14 @@
   </t>
 
   <t>
-    Olga Kornievskaiaa made a convincing case against the use of a credential
-    versus a principal in the fencing approach. Andy Adamson and Benjamin Kaduk
-    helped to sharpen the focus.
+    Olga Kornievskaia made a convincing case against the use of a
+    credential versus a principal in the fencing approach. Andy Adamson
+    and Benjamin Kaduk helped to sharpen the focus.
+  </t>
+
+  <t>
+    Benjamin Kaduk and Olga Kornievskaia also helped provide
+    concrete scenarios for loosely coupled security mechanisms.
   </t>
 
   <t>
