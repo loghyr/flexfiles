@@ -193,7 +193,7 @@ struct device_error4 {
         ffil_bytes_not_delivered is used to track the aggregate
         number of bytes requested by not fulfilled due to error
         conditions. ffil_total_busy_time is the aggregate time spent
-        with outstanding RPC calls, ffil_aggregate_completion_time is
+        with outstanding RPC calls. ffil_aggregate_completion_time is
         the sum of all round trip times for completed RPC calls.
       </t>
 
