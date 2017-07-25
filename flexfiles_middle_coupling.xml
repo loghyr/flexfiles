@@ -392,7 +392,7 @@
             represents.  Because I/O operations are allowed to present
             lock stateids, this information needs to be propagated to all
             storage devices to which I/O might be directed rather than
-            only to daya storage device that contain the locked region.
+            only to storage device that contain the locked region.
           </t>
 
           <t>
