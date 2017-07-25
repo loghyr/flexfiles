@@ -198,6 +198,15 @@ struct device_error4 {
       </t>
 
       <t>
+        In Section 3.3.1 of <xref target='RFC5661' />, the nfstime4 is
+        defined as the number of seconds and nanoseconds since midnight
+        or zero hour January 1, 1970 Coordinated Universal Time (UTC).
+        The use of nfstime4 in ff_io_latency4 is to store elapsed time
+        since the start of the reported period. In other words, these
+        are to be decoded as duration and not as a date and time.
+      </t>
+
+      <t>
         Note that LAYOUTSTATS are cumulative, i.e., not reset each time
         the operation is sent.  If two LAYOUTSTATS ops for the same
         file, layout stateid, and originating from the same NFS client
