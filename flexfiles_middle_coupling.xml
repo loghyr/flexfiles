@@ -106,7 +106,7 @@
         ids available to the Lightweight Directory
         Access Protocol (LDAP) 'uid' field <xref target='RFC4519' />.
         She might also be able to
-        choose an id that would never be used to grant acccess.
+        choose an id that would never be used to grant access.
         Then when the metadata server had a request to access
         a file, a SETATTR would be sent to the storage device
         to set the owner and group of the data file. The user
@@ -273,7 +273,7 @@
             functionality need be used on the storage device.
             <vspace blankLines="1" />
             OPEN_DOWNGRADE and CLOSE only require local execution on
-            the metadata sever.
+            the metadata server.
           </t>
 
           <t>
@@ -337,7 +337,7 @@
       </t>
     </section>
 
-    <section title='Tighly Coupled Locking Model'>
+    <section title='Tightly Coupled Locking Model'>
       <t>
         When locking-related operations are requested, they are primarily
         dealt with by the metadata server, which generates the appropriate
@@ -358,7 +358,7 @@
             the metadata server.  The metadata server needs to interact
             with the storage device to locate the file to be opened,
             and to make the storage device aware of the association
-            between the metadata-sever-chosen stateid and the client
+            between the metadata-server-chosen stateid and the client
             and openowner that it represents.
             <vspace blankLines="1" />
             OPEN_DOWNGRADE and CLOSE are executed initially on the
@@ -374,7 +374,7 @@
             server.  Because I/O operations are allowed to present lock
             stateids, the metadata server needs the ability to make the
             storage device aware of the association between the
-            metadata-sever-chosen stateid and the corresponding open
+            metadata-server-chosen stateid and the corresponding open
             stateid it is associated with.
           </t>
 
@@ -387,7 +387,7 @@
             To enable mandatory lock enforcement on the storage
             device, the metadata server needs the ability to make the
             storage device aware of the association between the
-            metadata-sever-chosen stateid and the client, openowner,
+            metadata-server-chosen stateid and the client, openowner,
             and lock (i.e., lockowner, byte-range, lock-type) that it
             represents.  Because I/O operations are allowed to present
             lock stateids, this information needs to be propagated to all

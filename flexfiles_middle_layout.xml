@@ -289,7 +289,7 @@
         <t hangText='F_FLAGS_NO_IO_THRU_MDS:'>
           can be set to indicate that the client should not send I/O
           operations to the metadata server. I.e., even if the client
-          could determine that there was a network diconnect to a storage
+          could determine that there was a network disconnect to a storage
           device, the client should not try to proxy the I/O through the
           metadata server.
         </t>

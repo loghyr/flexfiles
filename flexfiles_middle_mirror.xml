@@ -83,7 +83,7 @@
         of the mirrors, then it MUST inform the client that the original
         WRITE had an error. The client then MUST inform the metadata
         server (see <xref target="ss:write_errors" />). The client's
-        responsibility with resepect to COMMIT is explained in <xref
+        responsibility with respect to COMMIT is explained in <xref
         target="ss:write_commits" />. The client may choose any one of
         the mirrors and may use ffds_efficiency in the same manner as
         for reading when making this choice.
