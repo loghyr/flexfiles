@@ -177,33 +177,32 @@ struct device_error4 {
       </t>
 
       <t>
-        Both operation counts and bytes transferred are kept
-        in the ff_io_latency4. READ operations are used
-        for read latencies. Both WRITE and COMMIT operations
-        are used for write latencies. "Requested" counters track
-        what the client is attempting to do and "completed"
-        counters track what was done. Note that there is no
-        requirement that the client only report completed
-        results that have matching requested results from
-        the reported period.
+        Both operation counts and bytes transferred are kept in
+        the ff_io_latency4. As seen in ff_layoutupdate4 (See <xref
+        target='ff_layoutupdate4' />) read and write operations are
+        aggregated separately.  READ operations are used for the
+        ff_io_latency4 ffl_read. Both WRITE and COMMIT operations are
+        used for the ff_io_latency4 ffl_write. "Requested" counters track
+        what the client is attempting to do and "completed" counters
+        track what was done. There is no requirement that the
+        client only report completed results that have matching requested
+        results from the reported period.
       </t>
 
       <t>
-        ffil_bytes_not_delivered is used to track the
-        aggregate number of bytes requested by not fulfilled
-        due to error conditions. ffil_total_busy_time
-        is the aggregate time spent with outstanding
-        RPC calls, ffil_aggregate_completion_time is the
-        sum of all latencies for completed RPC calls.
+        ffil_bytes_not_delivered is used to track the aggregate
+        number of bytes requested by not fulfilled due to error
+        conditions. ffil_total_busy_time is the aggregate time spent
+        with outstanding RPC calls, ffil_aggregate_completion_time is
+        the sum of all round trip times for completed RPC calls.
       </t>
 
       <t>
-        Note that LAYOUTSTATS are cumulative, i.e., not reset
-        each time the operation is sent. 
-        If two LAYOUTSTATS ops for the same file, layout stateid,
-        and originating from the same NFS client are
-        processed at the same time by the metadata server, then the one
-        containing the larger values contains the most recent time
+        Note that LAYOUTSTATS are cumulative, i.e., not reset each time
+        the operation is sent.  If two LAYOUTSTATS ops for the same
+        file, layout stateid, and originating from the same NFS client
+        are processed at the same time by the metadata server, then the
+        one containing the larger values contains the most recent time
         series data.
       </t>
     </section>
