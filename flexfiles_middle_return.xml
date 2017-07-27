@@ -201,9 +201,10 @@ struct device_error4 {
         In Section 3.3.1 of <xref target='RFC5661' />, the nfstime4 is
         defined as the number of seconds and nanoseconds since midnight
         or zero hour January 1, 1970 Coordinated Universal Time (UTC).
-        The use of nfstime4 in ff_io_latency4 is to store elapsed time
-        since the start of the reported period. In other words, these
-        are to be decoded as duration and not as a date and time.
+        The use of nfstime4 in ff_io_latency4 is to store time since
+        the start of the first I/O from the client after receiving the
+        layout. In other words, these are to be decoded as duration and
+        not as a date and time.
       </t>
 
       <t>
