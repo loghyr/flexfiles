@@ -66,10 +66,12 @@
         could be used to authorize the client to the storage device on
         behalf of the metadata server.  This would require that each of
         the metadata server, storage device, and client would have to
-        implement RPCSEC_GSSv3. The second requirement does not match
+        implement RPCSEC_GSSv3 via an RPC-application-defined
+        structured privilege assertion in a manner described in Section 4.9.1
+        of <xref target='RFC7862' />. These requirements do not match
         the intent of the loosely coupled model that the storage device
-        need not be modified. (Note that this does not preclude
-        the use of RPCSEC_GSSv3 in a loosely coupled model.)
+        need not be modified. (Note that this does not preclude the use
+        of RPCSEC_GSSv3 in a loosely coupled model.)
       </t>
 
       <t>
@@ -97,15 +99,6 @@
             an out-of-band scheme between the client and metadata server.
           </t>
         </list>
-      </t>
-
-      <t>
-        <cref anchor='AI15 ' source='TH'>
-          Editorial Note: I have *SHOULD* and not *MUST* because there
-          might be some limit on the number of outstanding credentials
-          due to either the number of files or the number of client. Feel
-          free to correct me.
-        </cref>
       </t>
 
       <t>
