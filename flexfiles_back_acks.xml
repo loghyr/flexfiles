@@ -42,7 +42,9 @@
 
   <t>
     Benjamin Kaduk and Olga Kornievskaia also helped provide
-    concrete scenarios for loosely coupled security mechanisms.
+    concrete scenarios for loosely coupled security mechanisms. And in
+    the end, Olga proved that as defined, the loosely coupled model
+    would not work with RPCSEC_GSS.
   </t>
 
   <t>
