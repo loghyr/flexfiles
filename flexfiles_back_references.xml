@@ -142,11 +142,11 @@
         <author initials="T." surname="Haynes" fullname="T. Haynes">
           <organization>Primary Data</organization>
         </author>
-        <date year="2016" month="January" />
+        <date year="2017" month="July" />
       </front>
-      <seriesInfo name="draft-ietf-nfsv4-layout-types-04" value="(Work In Progress)"/>
+      <seriesInfo name="draft-ietf-nfsv4-layout-types-05" value="(Work In Progress)"/>
       <format type='TXT'
-        target='http://www.ietf.org/internet-drafts/draft-ietf-nfsv4-layout-types-04.txt' />
+        target='http://www.ietf.org/internet-drafts/draft-ietf-nfsv4-layout-types-05.txt' />
     </reference>
 
     <reference anchor='RFC4121'>
