@@ -19,7 +19,7 @@
     layout type, a back-end control protocol might be implemented between
     the metadata server and NFSv4.1+ storage devices.  This document
     does not provide a standard's track control protocol. An
-    implemementation can either define its own mechanism or it
+    implementation can either define its own mechanism or it
     could define a control protocol in a standard's track document.
     The requirements for the a control protocol are specified in <xref
     target="RFC5661" /> and clarified in <xref target='pNFSLayouts' />.
