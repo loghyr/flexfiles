@@ -84,7 +84,7 @@
 
         <t hangText='layout segment:'>
           is a sub-division of a layout.  That sub-division
-          might be by the iomode (see Sections 3.3.20 and 12.2.9  of
+          might be by the layout iomode (see Sections 3.3.20 and 12.2.9  of
           <xref target='RFC5661' />), a striping pattern (see Section
           13.3 of <xref target='RFC5661' />), or requested
           byte range.
