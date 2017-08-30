@@ -29,27 +29,28 @@
     <t>
       <list style='hanging'>
         <t hangText='control communication requirements:'>
-          defines for a layout type the details regarding
+          are for a layout type the details regarding
           information on layouts, stateids, file metadata, and file
           data which must be  communicated between the metadata
           server and the storage devices.
         </t>
 
         <t hangText='control protocol:'>
-          defines a particular mechanism that an implementation of a
+          is the particular mechanism that an implementation of a
           layout type would use to meet the control communication
           requirement for that layout type.  This need not be a
           protocol as normally understood.  In some cases the same
-          protocol may be used as a control protocol and data access
+          protocol may be used as a control protocol and storage
           protocol.
         </t>
 
         <t hangText='client-side mirroring:'>
-          is when the client and not the server is responsible for
-          updating all of the mirrored copies of a layout segment.
+          is a feature in which the client and not the server is
+          responsible for updating all of the mirrored copies of a
+          layout segment.
         </t>
 
-        <t hangText='data file:'>
+        <t hangText='(file) data:'>
           is that part of the file system object which contains
           the content.
         </t>
@@ -59,9 +60,9 @@
         </t>
 
         <t hangText='fencing:'>
-          is when the metadata server prevents the storage devices
-          from processing I/O from a specific client to a specific
-          file.
+          is the process by which the metadata server prevents the
+          storage devices from processing I/O from a specific client to
+          a specific file.
         </t>
 
         <t hangText='file layout type:'>
@@ -71,19 +72,18 @@
         </t>
 
         <t hangText='layout:'>
-          informs a client of which storage devices it needs to
-          communicate with (and over which protocol) to perform I/O
-          on a file. The layout might also provide some hints about
-          how the storage is physically organized.
+           is the information a client uses to access file data on a
+           storage device. This information will include specification
+           of the protocol (layout type) and the identity of the storage
+           devices to be used.
         </t>
 
         <t hangText='layout iomode:'>
-          describes whether the layout granted to the client is for
-          read or read/write I/O.
+          is a grant of either read or read/write I/O to the client.
         </t>
 
         <t hangText='layout segment:'>
-          describes a sub-division of a layout.  That sub-division
+          is a sub-division of a layout.  That sub-division
           might be by the iomode (see Sections 3.3.20 and 12.2.9  of
           <xref target='RFC5661' />), a striping pattern (see Section
           13.3 of <xref target='RFC5661' />), or requested
@@ -95,33 +95,33 @@
           uniquely defines the layout state provided by the server
           for a specific layout that describes a layout type and
           file (see Section 12.5.2 of <xref target='RFC5661' />).
-          Further, Section 12.5.3 of <xref target='RFC5661' />
-          describes the difference between
-          a layout stateid and a normal stateid.
+          Further, Section 12.5.3 describes differences in handling
+          between layout stateids and other stateid types.
         </t>
 
         <t hangText='layout type:'>
-          describes both the storage protocol used to
+          is a specification of both the storage protocol used to
           access the data and the aggregation scheme used to lay out
           the file data on the underlying storage devices.
         </t>
 
         <t hangText='loose coupling:'>
-          is when the metadata server and the storage devices
-          do not have a control protocol present.
+          is when the control protocol is a storage protocol.
         </t>
 
-        <t hangText='metadata file:'>
+        <t hangText='(file) metadata:'>
           is that part of the file system object which describes
           the object and not the content. E.g., it could be the
           time since last modification, access, etc.
         </t>
 
         <t hangText='metadata server (MDS):'>
-          is the pNFS server which provides metadata information
-          for a file system object. It also is responsible for
-          generating layouts for file system objects. Note that
-          the MDS is responsible for directory-based operations.
+          is the pNFS server which provides metadata information for a file
+          system object. It also is responsible for generating, recalling,
+          and revoking layouts for file system objects, for performing
+          directory operations, and for performing I/O operations to
+          regular files when the clients direct these to the metadata
+          server itself.
         </t>
 
         <t hangText='mirror:'>
@@ -161,15 +161,23 @@
         </t>
 
         <t hangText='storage device:'>
-          designates the target to which clients may direct I/O requests
-          when they hold an appropriate layout.  See Section 2.1 of
-          <xref target='pNFSLayouts' /> for further discussion of
-          the difference between a data store and a storage device.
+          is the target to which clients may direct I/O requests when
+          they hold an appropriate layout.  See Section 2.1 of <xref
+          target='pNFSLayouts' /> for further discussion of the difference
+          between a data store and a storage device.
+        </t>
+
+        <t hangText='storage protocol:'>
+          is the protocol used by clients to do I/O operations to the
+          storage device.  Each layout type specifies the set of storage
+          protocols.
         </t>
 
         <t hangText='tight coupling:'>
-          is when the metadata server and the storage devices
-          do have a control protocol present.
+          is an arrangement in which the control protocol is one
+          designed specifically for that purpose.  It may be either a
+          proprietary protocol, adapted specifically to a a particular
+          metadata server, or one based on a standards-track document. 
         </t>
 
         <t hangText='wsize:'>
