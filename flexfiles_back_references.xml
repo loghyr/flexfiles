@@ -121,6 +121,21 @@
           target="ftp://ftp.isi.edu/in-notes/rfc7530.txt"/>
     </reference>
 
+    <reference anchor='RFC7861'>
+      <front>
+        <title>Remote Procedure Call (RPC) Security Version 3</title>
+        <author initials="W." surname="Adamson" fullname="W. Adamson">
+          <organization>NetApp</organization>
+        </author>
+        <author initials="N." surname="Williams" fullname="N. Williams">
+          <organization>Cryptonector</organization>
+        </author>
+        <date year="2016" month="November"/>
+      </front>
+      <format type="TXT"
+              target="https://www.rfc-editor.org/rfc/rfc7861.txt"/>
+    </reference>
+
     <reference anchor='RFC7862'>
       <front>
         <title>NFS Version 4 Minor Version 2</title>
@@ -142,11 +157,11 @@
         <author initials="T." surname="Haynes" fullname="T. Haynes">
           <organization>Primary Data</organization>
         </author>
-        <date year="2017" month="July" />
+        <date year="2017" month="August" />
       </front>
-      <seriesInfo name="draft-ietf-nfsv4-layout-types-05" value="(Work In Progress)"/>
+      <seriesInfo name="draft-ietf-nfsv4-layout-types-07" value="(Work In Progress)"/>
       <format type='TXT'
-        target='http://www.ietf.org/internet-drafts/draft-ietf-nfsv4-layout-types-05.txt' />
+        target='http://www.ietf.org/internet-drafts/draft-ietf-nfsv4-layout-types-07.txt' />
     </reference>
 
     <reference anchor='RFC4121'>
@@ -192,20 +207,5 @@
     <seriesInfo name="RFC" value="4519"/>
     <seriesInfo name="DOI" value="10.17487/RFC4519"/>
   </reference>
-
-    <reference anchor='RFC7861'>
-      <front>
-        <title>Remote Procedure Call (RPC) Security Version 3</title>
-        <author initials="W." surname="Adamson" fullname="W. Adamson">
-          <organization>NetApp</organization>
-        </author>
-        <author initials="N." surname="Williams" fullname="N. Williams">
-          <organization>Cryptonector</organization>
-        </author>
-        <date year="2016" month="November"/>
-      </front>
-      <format type="TXT"
-              target="https://www.rfc-editor.org/rfc/rfc7861.txt"/>
-    </reference>
 
 </references>
