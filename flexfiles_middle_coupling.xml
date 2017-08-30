@@ -3,12 +3,27 @@
 
 <section title="Coupling of Storage Devices">
   <t>
-    The coupling of the metadata server with the storage devices
-    can be either tight or loose. In a tight coupling, there is
-    a control protocol present to manage security, LAYOUTCOMMITs,
-    etc.  With a loose coupling, the only control protocol might
-    be a version of NFS. As such, semantics for managing security,
-    state, and locking models MUST be defined.
+    A server implementation may choose either a loose or tight coupling
+    model between the metadata server and the storage devices.
+    To implement the tight coupling model, a control protocol has to be
+    defined. As the flex file layout imposes no special requirements
+    on the client, the control protocol will need to provide:
+
+    <list style='format (%d)'>
+      <t>
+        for the management of both security and LAYOUTCOMMITs, and,
+      </t>
+
+      <t>
+        a global stateid model and management of these stateids.
+      </t>
+    </list>
+
+    When implementing the loose coupling model, the only control protocol
+    will be a version of NFS, with no ability to provide a global stateid
+    model or to prevent clients from using layouts inappropriately. To
+    enable client use in that environment, this document will specify
+    how security, state, and locking are to be managed.
   </t>
 
   <section anchor='sec:layoutcommit' title='LAYOUTCOMMIT'>
@@ -16,8 +31,8 @@
       Regardless of the coupling model, the metadata server has the
       responsibility, upon receiving a LAYOUTCOMMIT (see Section
       18.42 of <xref target='RFC5661' />), of ensuring that the
-      semantics of pNFS are respected (see Section 12.5.4 of <xref
-      target='RFC5661' />).  These do include a requirement that
+      semantics of pNFS are respected (see Section 3.1 of <xref
+      target='pNFSLayouts' />).  These do include a requirement that
       data written to data storage device be stable before the
       occurrence of the LAYOUTCOMMIT.
     </t>
@@ -222,7 +237,10 @@
 
   <section anchor="ss:locking" title="State and Locking Models">
     <t>
-      The choice of locking models is governed by the following rules:
+      An implementation can always be deployed as a loosely
+      coupled model. There is however no way for a storage
+      device to indicate over a NFS protocol that it can
+      definitively participate in a tightly coupled model:
 
       <list style='symbols'>
         <t>
@@ -240,12 +258,16 @@
 
         <t>
           NFSv4.1+ storage devices that do identify themselves with the
-          EXCHGID4_FLAG_USE_PNFS_DS flag set to EXCHANGE_ID are considered
-          tightly coupled.  They would use a back-end control protocol
+          EXCHGID4_FLAG_USE_PNFS_DS flag set to EXCHANGE_ID can potentially
+          be tightly coupled.  They would use a back-end control protocol
           to implement the global stateid model as described in
           <xref target="RFC5661" />.
         </t>
       </list>
+
+      A storage device would have to either be discovered or
+      advertised over the control protocol to enable a tight
+      coupling model.
     </t>
 
     <section title='Loosely Coupled Locking Model'>
