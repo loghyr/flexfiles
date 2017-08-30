@@ -12,7 +12,7 @@
   <section title="ff_device_addr4" anchor="ff_device_addr4">
     <t>
       The ff_device_addr4 data structure is returned by the server
-      as the storage protocol specific opaque field da_addr_body in the
+      as the layout type specific opaque field da_addr_body in the
       device_addr4 structure by a successful GETDEVICEINFO operation.
     </t>
 
