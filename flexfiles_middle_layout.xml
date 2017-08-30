@@ -345,16 +345,9 @@
       <t>
         Even if the metadata server provides the FF_FLAGS_NO_IO_THRU_MDS,
         flag, the client can still perform I/O to the metadata server. The
-        flag is at best a hint.  The flag is indicating to the client
-        that the metadata server most likely wants to separate the
-        metadata I/O from the data I/O to increase the performance of
-        the metadata operations.  If the metadata server detects that
-        the client is performing I/O against it despite the use of the
-        FF_FLAGS_NO_IO_THRU_MDS flag, it can recall the layout and either
-        not set the flag on the new layout or not provide a layout (perhaps
-        the intent was for the server to temporarily prevent data I/O
-        to meet some goal).  The client's I/O would then proceed according
-        to the status codes as outlined in <xref target="layout:get" />.
+        flag functions as a hint.  The flag indicates to the client that
+        the metadata server prefers to separate the metadata I/O from
+        the data I/O, most likely for peformance reasons.
       </t>
     </section>
   </section>
