@@ -118,14 +118,15 @@
     </t>
 
     <t>
-      The ff_layout4 structure specifies a layout over a set of
-      mirrored copies of that portion of the data file described in
-      the current layout segment.  This mirroring protects
+      The ff_layout4 structure specifies a layout in that portion of the
+      data file described in the current layout segment. It is either
+      a single instance or a set of mirrored copies of that portion
+      of the data file.  When  mirroring is in effect, it protects
       against loss of data in layout segments. Note that while not
       explicitly shown in the above XDR, each layout4 element returned
-      in the logr_layout array of LAYOUTGET4res (see Section 18.43.1
-      of <xref target='RFC5661' />) describes a layout segment. Hence
-      each ff_layout4 also describes a layout segment.
+      in the logr_layout array of LAYOUTGET4res (see Section 18.43.1 of
+      <xref target='RFC5661' />) describes a layout segment. Hence each
+      ff_layout4 also describes a layout segment.
     </t>
 
     <t>
@@ -210,13 +211,13 @@
     </t>
 
     <t>
-      For tight coupling, ffds_stateid provides
-      the stateid to be used by the client to access the file. For
-      loose coupling and a NFSv4 storage device, the client may use
-      an anonymous stateid to perform I/O on the storage device as
-      there is no use for the metadata server stateid (no control
-      protocol). In such a scenario, the server MUST set the
-      ffds_stateid to be the anonymous stateid.
+      For tight coupling, ffds_stateid provides the stateid to be used
+      by the client to access the file. For loose coupling and a NFSv4
+      storage device, the client will have to use an anonymous stateid
+      to perform I/O on the storage device.  With no control protocol,
+      the metadata server stateid can not be used to provide a global
+      stateid model.  Thus the server MUST set the ffds_stateid to be
+      the anonymous stateid.
     </t>
 
     <t>
@@ -233,13 +234,16 @@
         </t>
       </list>
 
-      These stem from a mismatch of ffds_stateid being a singleton
-      and ffds_fh_vers being an array - each open file on the storage
-      device might need an open stateid.  As there are established
-      loosely coupled implementations of this version of the protocol,
-      it can not be fixed. If an implementation needs a different
-      stateid per file handle, then this issue will require a new
-      version of the protocol.
+
+      A number of issues stem from a mismatch between the fact that
+      ffds_stateid is defined as a single item while ffds_fh_vers is
+      defined as an array.  It is possible for each open file on the
+      storage device to require its own open stateid.  Because there are
+      established loosely coupled implementations of the version of the
+      protocol described in this document, such potential issues have
+      not been addressed here.  It is possible for future layout types
+      to be defined that address these issues, should it become important
+      to provide multiple stateids for the same underlying file.
     </t>
 
     <t>
