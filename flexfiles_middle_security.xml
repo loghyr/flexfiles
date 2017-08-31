@@ -5,7 +5,7 @@
   <t>
     In cases where clients are uncommunicative and their lease has
     expired or when clients fail to return recalled layouts within
-    a lease period, at the least the server MAY revoke client layouts
+    a lease period, the server MAY revoke client layouts
     and reassign these resources to
     other clients (see Section 12.5.5 in <xref target='RFC5661' />).
     To avoid data corruption, the metadata server MUST fence
@@ -16,10 +16,10 @@
 
 <section anchor="sec:security" title="Security Considerations">
   <t>
-    The pNFS extension partitions the NFSv4.1+ file system protocol
+    The pNFS feature partitions the NFSv4.1+ file system protocol
     into two parts, the control path and the data path (storage
     protocol).  The control path contains all the new operations
-    described by this extension; all existing NFSv4 security mechanisms
+    described by this feature; all existing NFSv4 security mechanisms
     and features apply to the control path (see Sections 1.7.1 and 2.2.1
     of <xref target='RFC5661' />).  The combination of components in
     a pNFS system is required to preserve the security properties of
@@ -27,6 +27,14 @@
     including security countermeasures to defend against threats that
     NFSv4.1+ provides defenses for in environments where these threats
     are considered significant.
+  </t>
+
+  <t>
+    The metadata server is primarily responsible for securing the
+    data path. It has to authenticate the client access and
+    provide appropriate credentials to the client to access
+    data files on the storage device. Finally, it is responsible
+    for revoking access for a client to the storage device.
   </t>
 
   <t>
@@ -60,18 +68,34 @@
   </t>
 
   <section anchor="ss:security:krb5" title="RPCSEC_GSS and Security Services">
+
+    <t>
+      Because of the special use of principals within the loose coupling
+      model, the issues are different depending on the coupling model.
+    </t>
+
     <section anchor="ss:sec:krb5:lc" title="Loosely Coupled">
       <t>
         RPCSEC_GSS version 3 (RPCSEC_GSSv3) <xref target='RFC7861' />
-        could be used to authorize the client to the storage device on
-        behalf of the metadata server.  This would require that each of
-        the metadata server, storage device, and client would have to
-        implement RPCSEC_GSSv3 via an RPC-application-defined
-        structured privilege assertion in a manner described in Section 4.9.1
-        of <xref target='RFC7862' />. These requirements do not match
-        the intent of the loosely coupled model that the storage device
-        need not be modified. (Note that this does not preclude the use
-        of RPCSEC_GSSv3 in a loosely coupled model.)
+        contains facilities that would allow it to be used to authorize
+        the client to the storage device on behalf of the metadata server.
+        Doing so  would require that each of the metadata server, storage
+        device, and client would need to implement RPCSEC_GSSv3 using
+        an RPC-application-defined structured privilege assertion in a
+        manner described in Section 4.9.1 of <xref target='RFC7862' />.
+        The specifics necessary to do so are not described in this
+        document.  This is principally because any such specification
+        would require extensive implementation work on a wide range of
+        storage devices, which would be unlikely to result in a widely
+        usable specification for a considerable time.
+      </t>
+
+      <t>
+        As a result, the layout type described in this document will
+        not provide support for use of RPCSEC_GSS together with the
+        loosely coupled model.  However, future layout types could be
+        specified which would allow such support, either through the use
+        of RPCSEC_GSSv3, or in other ways.
       </t>
     </section>
 
