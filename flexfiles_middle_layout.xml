@@ -352,6 +352,13 @@
     </section>
   </section>
 
+  <section title="LAYOUTCOMMIT">
+    <t>
+      The flex file layout does not use lou_body. If lou_type is
+      LAYOUT4_FLEX_FILES, the lou_body field MUST have a zero length.
+    </t>
+  </section>
+
   <section title="Interactions Between Devices and Layouts" anchor="layout:inter">
     <t>
       In <xref target='RFC5661' />, the file layout type is defined
