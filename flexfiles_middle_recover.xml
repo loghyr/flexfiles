@@ -18,7 +18,7 @@
   </t>
 
   <t>
-    The metadata server SHOULD recall any outstanding layouts to
+    The metadata server MUST recall any outstanding layouts to
     allow it exclusive write access to the stripes being recovered
     and to prevent other clients from hitting the same error
     condition.  In these cases, the server MUST complete recovery
