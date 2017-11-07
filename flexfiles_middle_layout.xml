@@ -364,7 +364,7 @@
       In <xref target='RFC5661' />, the file layout type is defined
       such that the relationship between multipathing and filehandles
       can result in either 0, 1, or N filehandles (see Section
-      13.3).  Some rationals for this are clustered servers which
+      13.3).  Some rationales for this are clustered servers which
       share the same filehandle or allowing for multiple read-only
       copies of the file on the same storage device.  In the flexible
       file layout type, while there is an array of filehandles,
