@@ -125,7 +125,7 @@
       The client is free to use any of the network addresses as a
       destination to send storage device requests.  If some network
       addresses are less desirable paths to the data than others,
-      then the MDS SHOULD NOT include those network addresses in
+      then the metadata server SHOULD NOT include those network addresses in
       ffda_netaddrs.  If less desirable network addresses exist to
       provide failover, the RECOMMENDED method to offer the addresses
       is to provide them in a replacement device-ID-to-device-address
@@ -133,12 +133,12 @@
       response from the storage device using all addresses available
       in ffda_netaddrs, it SHOULD send a GETDEVICEINFO to attempt
       to replace the existing device-ID-to-device-address mappings.
-      If the MDS detects that all network paths represented by
-      ffda_netaddrs are unavailable, the MDS SHOULD send a
+      If the metadata server detects that all network paths represented by
+      ffda_netaddrs are unavailable, the metadata server SHOULD send a
       CB_NOTIFY_DEVICEID (if the client has indicated it wants
       device ID notifications for changed device IDs) to change the
       device-ID-to-device-address mappings to the available addresses.
-      If the device ID itself will be replaced, the MDS SHOULD
+      If the device ID itself will be replaced, the metadata server SHOULD
       recall all layouts with the device ID, and thus force the
       client to get new layouts and device ID mappings via LAYOUTGET
       and GETDEVICEINFO.
