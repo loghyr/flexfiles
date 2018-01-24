@@ -25,6 +25,28 @@
     target="RFC5661" /> and clarified in <xref target='pNFSLayouts' />.
   </t>
 
+  <t>
+    The control protocol described in this document is based on NFS.
+    The storage devices are configured such that the metadata server
+    has full access rights to the data file system and then the
+    metadata server uses synthetic ids to control client access to
+    individual files.
+  </t>
+
+  <t>
+    In traditional mirroring of data, the server is responsible
+    for replicating, validating, and repairing copies of the data
+    file.  With client-side mirroring, the metadata server provides
+    a layout which presents the available mirrors to the client.
+    It is then the client which picks a mirror to read from and
+    ensures that all writes go to all mirrors. Only if all mirrors
+    are successfully updated, does the client consider the
+    write transaction to have succeeded. In case of error,
+    the client can use the LAYOUTERROR operation to inform
+    the metadata server, which is then responsible for the
+    reoairing of the mirrored copies of the file.
+  </t>
+
   <section anchor='sec:defs' title='Definitions'>
     <t>
       <list style='hanging'>
