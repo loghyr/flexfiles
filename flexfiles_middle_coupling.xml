@@ -191,15 +191,23 @@
       </figure>
 
       <t>
-        When the file is opened on a client, since the layout knows
-        nothing about the user (and does not care), whether loghyr
-        or garbo opens the file does not matter. The owner and group
-        are modified and those values are returned.
+        When the file is opened on a client and accessed, it will try to get a
+        layout for the data file. Since the layout knows nothing
+        about the user (and does not care), whether the user loghyr or
+        garbo opens the file does not matter.  The client has to present
+        an uid of 19452 to get write permission. If it presents any other
+        value for the uid, then it must give a gid of 28418 to get read
+        access.
+      </t>
+
+      <t>
+        Further, if the metadata server decides to fence the file, it may
+        change the uid and gid as such:
       </t>
 
       <figure>
         <artwork>
--rw-r-----    1 1066    1067     1697 Dec  4 11:31 data_ompha.c
+-rw-r-----    1 19453   28419    1697 Dec  4 11:31 data_ompha.c
         </artwork>
       </figure>
 
