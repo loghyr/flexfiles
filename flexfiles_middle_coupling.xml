@@ -81,7 +81,7 @@
     </t>
 
     <t>
-      Note: it is recommended to implement common access control
+      Note: it is RECOMMENDED to implement common access control
       methods at the storage device filesystem to
       allow only the metadata server root (super user) access to
       the storage device, and to set the owner of all directories
@@ -181,7 +181,7 @@
 
       <t>
         On the storage device, it may be assigned some
-        random synthetic uid/gid to deny access:
+        unpredictable synthetic uid/gid to deny access:
       </t>
 
       <figure>
@@ -191,18 +191,20 @@
       </figure>
 
       <t>
-        When the file is opened on a client and accessed, it will try to get a
-        layout for the data file. Since the layout knows nothing
-        about the user (and does not care), whether the user loghyr or
-        garbo opens the file does not matter.  The client has to present
-        an uid of 19452 to get write permission. If it presents any other
-        value for the uid, then it must give a gid of 28418 to get read
-        access.
+        When the file is opened on a client and accessed, it will try to
+        get a layout for the data file. Since the layout knows nothing
+        about the user (and does not care), whether the user loghyr
+        or garbo opens the file does not matter.  The client has to
+        present an uid of 19452 to get write permission. If it presents
+        any other value for the uid, then it must give a gid of 28418
+        to get read access.
       </t>
 
       <t>
-        Further, if the metadata server decides to fence the file, it may
-        change the uid and gid as such:
+        Further, if the metadata server decides to fence the file, it
+        should change the uid and/or gid such that these values neither
+        match earlier values for that file nor match a predictable change
+        based on an earlier fencing.
       </t>
 
       <figure>
