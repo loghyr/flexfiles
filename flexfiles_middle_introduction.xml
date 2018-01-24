@@ -44,7 +44,7 @@
     write transaction to have succeeded. In case of error,
     the client can use the LAYOUTERROR operation to inform
     the metadata server, which is then responsible for the
-    reoairing of the mirrored copies of the file.
+    repairing of the mirrored copies of the file.
   </t>
 
   <section anchor='sec:defs' title='Definitions'>
