@@ -90,7 +90,7 @@
       </t>
     </section>
 
-    <section title="Single Storage Device Updates Mirrors">
+    <section title="Client Updates All Mirrors">
       <t>
         If the FF_FLAGS_WRITE_ONE_MIRROR flag in ffl_flags is not set,
         the client is responsible for updating all mirrored copies
