@@ -4,7 +4,10 @@
 <section title="Coupling of Storage Devices">
   <t>
     A server implementation may choose either a loose or tight coupling
-    model between the metadata server and the storage devices.
+    model between the metadata server and the storage devices. 
+    <xref target='pNFSLayouts' /> describes the general problems
+    facing pNFS implementations.  This document details how
+    the new Flexible File Layout Type addresses these issues.
     To implement the tight coupling model, a control protocol has to be
     defined. As the flex file layout imposes no special requirements
     on the client, the control protocol will need to provide:
