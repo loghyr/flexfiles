@@ -53,6 +53,37 @@
   </t>
 
   <t>
+    The combination of file handle, synthetic uid, and gid in the layout
+    are the way that the metadata server enforces access control to the
+    data server. The directory namespace on the storage device SHOULD
+    only be accessible to the metadata server and not the clients. In
+    that case, the client only has access to file handles of file objects
+    and not directory objects. Thus, given a file handle in a layout, it
+    is not possible to guess the parent directory file handle. Further,
+    as the data file permissions only allow the given synthetic uid
+    read/write permission and the given synthetic gid read permission,
+    knowing the synthetic ids of one file does not necessarily allow
+    access to any other data file on the storage device.
+  </t>
+
+  <t>
+    The metadata server can also deny access at any time by fencing
+    the data file, which means changing the synthetic ids. In turn,
+    that forces the client to return its current layout and get a new
+    layout if it wants to continue IO to the data file.
+  </t>
+
+  <t>
+    If the configuration of the storage device is such that clients can
+    access the directory namespace, then the access control degrades to
+    that of a typical NFS server with exports with a security flavor of
+    AUTH_SYS.  Any client which is allowed access can forge credentials to
+    access any data file. The caveat is that the rogue client might have
+    no knowledge of the data file’s type or position in the metadata
+    directory namespace.
+  </t>
+
+  <t>
     If access is allowed, the client uses the corresponding (READ or RW)
     credentials to perform the I/O operations at the data file's storage
     devices.  When the metadata server receives a request to change a
