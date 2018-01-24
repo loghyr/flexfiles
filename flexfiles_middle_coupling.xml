@@ -54,19 +54,21 @@
 
   <section anchor='sec:sec_models' title="Fencing Clients from the Storage Device">
     <t>
-      With loosely coupled storage devices, the metadata server
-      uses synthetic uids and gids for the data file, where the uid
-      owner of the data file is allowed read/write access and the
-      gid owner is allowed read only access.  As part of the layout
-      (see ffds_user and ffds_group in  <xref target='ff_layout4' />),
-      the client is provided with the user and group to be
-      used in the Remote Procedure Call (RPC) <xref target='RFC5531' />
-      credentials needed to access the data file.  Fencing off
-      of clients is achieved by the metadata server changing the
-      synthetic uid and/or gid owners of the data file on the storage
-      device to implicitly revoke the outstanding RPC credentials. A
-      client presenting the wrong credential for the desired access
-      will get a NFS4ERR_ACCESS error.
+
+      With loosely coupled storage devices, the metadata server uses
+      synthetic uids (user ids) and gids (group ids) for the data file,
+      where the uid owner of the data file is allowed read/write access
+      and the gid owner is allowed read only access.  As part of the
+      layout (see ffds_user and ffds_group in  <xref target='ff_layout4' />),
+      the client is provided with the user and group to be used in
+      the Remote Procedure Call (RPC) <xref target='RFC5531' />
+      credentials needed to access the data file.  Fencing off of
+      clients is achieved by the metadata server changing the synthetic
+      uid and/or gid owners of the data file on the storage device
+      to implicitly revoke the outstanding RPC credentials. A client
+      presenting the wrong credential for the desired access will get
+      a NFS4ERR_ACCESS error.
+
     </t>
 
     <t>

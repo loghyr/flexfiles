@@ -93,6 +93,11 @@
           of <xref target='RFC5661' />).
         </t>
 
+        <t hangText='gid:'>
+          is the group id, a numeric value which identifies to which group
+          a file belongs.
+        </t>
+
         <t hangText='layout:'>
            is the information a client uses to access file data on a
            storage device. This information will include specification
@@ -200,6 +205,11 @@
           designed specifically for that purpose.  It may be either a
           proprietary protocol, adapted specifically to a a particular
           metadata server, or one based on a standards-track document. 
+        </t>
+
+        <t hangText='uid:'>
+          is the used id, a numeric value which identifies which
+          user owns a file.
         </t>
 
         <t hangText='wsize:'>
