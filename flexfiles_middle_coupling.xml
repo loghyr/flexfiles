@@ -81,18 +81,19 @@
     </t>
 
     <t>
-      It is RECOMMENDED to implement common access control methods
-      at the storage device filesystem to allow only the metadata server
+      It is RECOMMENDED to implement common access control methods at
+      the storage device filesystem to allow only the metadata server
       root (super user) access to the storage device, and to set the
       owner of all directories holding data files to the root user.
       This approach provides a practical model to enforce access control
       and fence off cooperative clients, but it can not protect against
       malicious clients; hence it provides a level of security equivalent
-      to AUTH_SYS.  Communications between the metadata server and file
-      server SHOULD be secure from eavesdroppers and man-in-the-middle
-      protocol tampering. The security measure could be due to physical
-      security (e.g., the servers are co-located in a physically secure
-      area), from encrypted communications, or some other technique.
+      to AUTH_SYS.   It is RECOMMENDED that the communication between the
+      metadata server and storage device be secure from eavesdroppers and
+      man-in-the-middle protocol tampering. The security measure could
+      be due to physical security (e.g., the servers are co-located in
+      a physically secure area), from encrypted communications, or some
+      other technique.
     </t>
 
     <t>
