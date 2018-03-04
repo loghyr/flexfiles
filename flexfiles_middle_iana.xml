@@ -36,18 +36,4 @@
     <c>RCA4_TYPE_MASK_FF_LAYOUT_MAX</c> <c>17</c> <c>RFCTBD10</c> <c>L</c> <c>1</c>
   </texttable>
 
-  <t>
-    Note, <xref target="RFC5661" /> should have also defined (see <xref target='recalllist_missing' />):
-  </t>
-
-  <texttable title="Recallable Object Type Assignments" anchor="recalllist_missing">
-    <ttcol>Recallable Object Type Name</ttcol>
-    <ttcol>Value</ttcol>
-    <ttcol>RFC</ttcol>
-    <ttcol>How</ttcol>
-    <ttcol>Minor Versions</ttcol>
-    <c>RCA4_TYPE_MASK_OTHER_LAYOUT_MIN</c> <c>12</c> <c><xref target="RFC5661" /></c> <c>L</c> <c>1</c>
-    <c>RCA4_TYPE_MASK_OTHER_LAYOUT_MAX</c> <c>15</c> <c><xref target="RFC5661" /></c> <c>L</c> <c>1</c>
-  </texttable>
-
 </section>
