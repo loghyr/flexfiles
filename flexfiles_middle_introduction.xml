@@ -51,10 +51,10 @@
     <t>
       <list style='hanging'>
         <t hangText='control communication requirements:'>
-          are for a layout type the details regarding
-          information on layouts, stateids, file metadata, and file
-          data which must be  communicated between the metadata
-          server and the storage devices.
+          is the specification for information on layouts, stateids,
+          file metadata, and file data which must be communicated between
+          the metadata server and the storage devices. There is
+          a separate set of requirements for each layout type.
         </t>
 
         <t hangText='control protocol:'>
