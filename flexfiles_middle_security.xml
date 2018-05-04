@@ -15,6 +15,33 @@
 </section>
 
 <section anchor="sec:security" title="Security Considerations">
+
+  <t>
+
+    The pNFS feature partitions the NFSv7.1+ file system protocol into
+    two parts, the control path and the data path (storage protocol).
+    The control path contains all the new operations described by this
+    feature; all existing NFSv4 security mechanisms and features apply to
+    the control path see Sections 1.7.1 and 2.2.1 of <xref target='RFC5661' />).  The
+    combination of components in a pNFS system is required to preserve
+    the security properties of NFSv4.1+ with respect to an entity
+    accessing data via a client, including security countermeasures to
+    defend against threats that NFSv4.1+ provides defenses for in
+    environments where these threats are considered significant.
+
+  </t>
+
+  <t>
+
+    The data path is also constrained to security mechanisms of the
+    NFS version being used between the client and the storage
+    device. The metadata server authenticates the client access and provides
+    appropriate credentials to the client to access data files on the
+    storage device.  Finally, it is responsible for revoking access for a
+    client to the storage device.
+
+  </t>
+
   <t>
     The pNFS feature partitions the NFSv4.1+ file system protocol
     into two parts, the control path and the data path (storage
