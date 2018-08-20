@@ -16,54 +16,51 @@
 
 <section anchor="sec:security" title="Security Considerations">
   <t>
-    The pNFS feature partitions the NFSv4.1+ file system protocol
-    into two parts, the control path and the data path (storage
-    protocol).  The control path contains all the new operations
-    described by this feature; all existing NFSv4 security mechanisms
-    and features apply to the control path (see Sections 1.7.1 and 2.2.1
-    of <xref target='RFC5661' />).  The combination of components in
-    a pNFS system is required to preserve the security properties of
-    NFSv4.1+ with respect to an entity accessing data via a client,
-    including security countermeasures to defend against threats that
-    NFSv4.1+ provides defenses for in environments where these threats
-    are considered significant.
-  </t>
-
-  <t>
-    The metadata server is primarily responsible for securing the
-    data path. It has to authenticate the client access and
-    provide appropriate credentials to the client to access
-    data files on the storage device. Finally, it is responsible
-    for revoking access for a client to the storage device.
+    The combination of components in a pNFS system is required to
+    preserve the security properties of NFSv4.1+ with respect to an
+    entity accessing data via a client.  The pNFS feature partitions the
+    NFSv4.1+ file system protocol into two parts, the control
+    protocol and the data protocol.  As the control protocol in
+    this document is NFS, the security properties are equivalent
+    to that version of NFS.  The Flexible File Layout further divides
+    the data protocol into metadata and data paths.  The security
+    properties of the metadata path are equivalent to those of
+    NFSv4.1x (see Sections 1.7.1 and 2.2.1 of <xref target='RFC5661' />).
+    And the security properties of the data path are equivalent
+    to those of the version of NFS used to access the storage device,
+    with the provision that the metadata server is responsible for
+    authenticating client access to the data file.  The metadata
+    server provides appropriate credentials to the client to access
+    data files on the storage device.  It is also responsible for
+    revoking access for a client to the storage device.
   </t>
 
   <t>
     The metadata server enforces the file access-control policy at
-    LAYOUTGET time.  The client should use RPC authorization credentials
-    for getting the layout for the requested iomode (READ or RW) and
-    the server verifies the permissions and ACL for these credentials,
-    possibly returning NFS4ERR_ACCESS if the client is not allowed the
-    requested iomode.  If the LAYOUTGET operation succeeds the client
-    receives, as part of the layout, a set of credentials allowing
-    it I/O access to the specified data files corresponding to the
-    requested iomode.  When the client acts on I/O operations on behalf
-    of its local users, it MUST authenticate and authorize the user by
-    issuing respective OPEN and ACCESS calls to the metadata server,
-    similar to having NFSv4 data delegations.
+    LAYOUTGET time.  The client should use RPC authorization
+    credentials for getting the layout for the requested iomode
+    (READ or RW) and the server verifies the permissions and ACL
+    for these credentials, possibly returning NFS4ERR_ACCESS if the
+    client is not allowed the requested iomode.  If the LAYOUTGET
+    operation succeeds the client receives, as part of the layout,
+    a set of credentials allowing it I/O access to the specified
+    data files corresponding to the requested iomode.  When the
+    client acts on I/O operations on behalf of its local users, it
+    MUST authenticate and authorize the user by issuing respective
+    OPEN and ACCESS calls to the metadata server, similar to having
+    NFSv4 data delegations.
   </t>
 
   <t>
     The combination of file handle, synthetic uid, and gid in the layout
-    are the way that the metadata server enforces access control to the
-    data server. The directory namespace on the storage device SHOULD
-    only be accessible to the metadata server and not the clients. In
-    that case, the client only has access to file handles of file objects
-    and not directory objects. Thus, given a file handle in a layout, it
-    is not possible to guess the parent directory file handle. Further,
-    as the data file permissions only allow the given synthetic uid
-    read/write permission and the given synthetic gid read permission,
-    knowing the synthetic ids of one file does not necessarily allow
-    access to any other data file on the storage device.
+    are the way that the metadata server enforces access control to
+    the data server.  The client only has access to file handles of
+    file objects and not directory objects. Thus, given a file handle
+    in a layout, it is not possible to guess the parent directory file
+    handle. Further, as the data file permissions only allow the given
+    synthetic uid read/write permission and the given synthetic gid
+    read permission, knowing the synthetic ids of one file does not
+    necessarily allow access to any other data file on the storage device.
   </t>
 
   <t>
@@ -71,16 +68,6 @@
     the data file, which means changing the synthetic ids. In turn,
     that forces the client to return its current layout and get a new
     layout if it wants to continue IO to the data file.
-  </t>
-
-  <t>
-    If the configuration of the storage device is such that clients can
-    access the directory namespace, then the access control degrades to
-    that of a typical NFS server with exports with a security flavor of
-    AUTH_SYS.  Any client which is allowed access can forge credentials to
-    access any data file. The caveat is that the rogue client might have
-    no knowledge of the data file’s type or position in the metadata
-    directory namespace.
   </t>
 
   <t>
